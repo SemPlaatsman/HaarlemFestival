@@ -33,8 +33,8 @@
                     require __DIR__.'/private/controllers/QrGeneratorcontroller.php';
                     $controller = new QrGeneratorcontroller();
                 case 'pdf':
-                    require __DIR__.'/private/controllers/PDFGenerator.php';
-                    $controller = new PDFGenerator();
+                    require __DIR__.'/private/controllers/pdfcontroller.php';
+                    $controller = new pdfcontroller();
     
                 break;
                 case '401':

@@ -1,5 +1,10 @@
 <?php
-require_once '../vendor/autoload.php';
-$mpdf = new \Mpdf\Mpdf();
-$mpdf->WriteHTML('<h1>Hello world!</h1>');
-$mpdf->Output();
+class pdfcontroller{
+    function __construct(){
+        require_once __DIR__.'/PDFGenerator.php';
+       
+        $pdfGenerator = new PDFGenerator();
+        $html = file_get_contents(__DIR__.'/../../public/views/pdfView/pdfView.php');
+        $pdfGenerator->generate($html);
+    }
+}
