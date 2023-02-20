@@ -1,3 +1,10 @@
+/*const contentEditableDiv = document.getElementById("content");
+const bodyMarkupInput = document.getElementById("body_markup_input");
+
+contentEditableDiv.addEventListener("input", function () {
+    bodyMarkupInput.value = contentEditableDiv.innerHTML;
+});
+
 CKEDITOR.replace("content", {
     toolbar: [
         {
@@ -29,4 +36,4 @@ if (xhr.status === 200) {
         console.log("Request failed.  Returned status of " + xhr.status);
         }
     };
-xhr.send();
+xhr.send();*/
