@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 :root {
     --primary-a: #E86F52;
     --secondary-a: #F3A261;
@@ -108,4 +110,50 @@
 
 .bg-secondary-b {
     background-color: var(--secondary-b);
+}
+
+.text-primary-a { 
+    color: var(--primary-a);
+}
+
+.text-secondary-a {
+    color: var(--secondary-a);
+}
+
+.text-tetiare-a {
+    color: var(--tetiare-a);
+}
+
+.text-primary-b {
+    color: var(--primary-b);
+}
+
+.text-secondary-b {
+    color: var(--secondary-b);
+}
+
+/* <--- COMPONENTS ---> */
+
+.navbar {
+    font-family: DrukTrial;
+}
+
+.navbar .nav-item > .nav-link {
+    color: var(--tetiare-a);
+}
+
+.navbar .nav-item > .active {
+    color: var(--primary-b)
+}
+
+.navbar .navbar-nav {
+    margin-right: 185px;
+}
+
+.footer-title {
+    font-family: DrukTrial;
+}
+
+.footer-text {
+    font-family: Roboto;
 }

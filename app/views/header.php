@@ -8,24 +8,24 @@
     <link rel="stylesheet" href="css/main.css">
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg sticky-top bg-primary-a">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-          <img src="img/png/haarlem-brand.png" alt="haarlem-brand" width="209" height="61">
+        <a class="navbar-brand ms-2" href="/">
+          <img src="img/png/haarlem-brand.png" alt="haarlem-brand" width="185" height="54">
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler border-0 p-0 me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon fs-1"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+        <div class="collapse navbar-collapse" id="navbarMain">
+          <ul class="navbar-nav fs-1 w-100 d-flex justify-content-center">
+            <li class="nav-item mx-5">
+              <a class="nav-link active" href="#">HOME</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Features</a>
+            <li class="nav-item mx-5">
+              <a class="nav-link" href="#">YUMMY!</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Pricing</a>
+            <li class="nav-item mx-5">
+              <a class="nav-link" href="#">DANCE!</a>
             </li>
           </ul>
         </div>
