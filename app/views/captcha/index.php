@@ -1,5 +1,5 @@
 <?php 
-require_once ("../private/config.php");
+require_once ("/config.php");
 $Config = new Config();
 ?>
 

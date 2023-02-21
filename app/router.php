@@ -7,13 +7,13 @@
             switch($uri) {
                 case '':
                 case 'login':
-                    require_once __DIR__ . '/controllers/logincontroller.php';
+                    require_once __DIR__.'/controllers/logincontroller.php';
                     $controller = new LoginController();
                     $controller->index();
                     break;
         
                 case 'home':
-                    require_once __DIR__ . '/controllers/homecontroller.php';
+                    require_once __DIR__.'/controllers/homecontroller.php';
                     $controller = new HomeController();
                     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $controller->updateContent();
@@ -23,35 +23,35 @@
                     break;
         
                 case 'captcha': 
-                    require_once __DIR__.'/private/controllers/captchacontroller.php';
+                    require_once __DIR__.'/controllers/captchacontroller.php';
                     $controller = new captchacontroller();
                     $controller->index();
                     break;
 
                 case 'validate/Hcaptcha':
-                    require_once __DIR__.'/private/controllers/validatecontroller.php';
+                    require_once __DIR__.'/controllers/validatecontroller.php';
                     $controller = new validateController();
                     $controller->Hcaptcha();
                     break;
 
                 case 'validate/Gcaptcha':
-                    require_once __DIR__.'/private/controllers/validatecontroller.php';
+                    require_once __DIR__.'/controllers/validatecontroller.php';
                     $controller = new validateController();
                     $controller->Gcaptcha();
                     break;
 
                  case 'qr':
-                    require_once __DIR__. '/private/controllers/QrGeneratorScanner.php';
+                    require_once __DIR__. '/controllers/QrGeneratorScanner.php';
                     $controller = new QrGeneratorScanner();
                     break;
 
                 case 'qr/generate':
-                    require_once __DIR__.'/private/controllers/QrGeneratorcontroller.php';
+                    require_once __DIR__.'/controllers/QrGeneratorcontroller.php';
                     $controller = new QrGeneratorcontroller();
                     $controller->generateQR();
 
                 case 'pdf':
-                    require_once __DIR__.'/private/controllers/pdfcontroller.php';
+                    require_once __DIR__.'/controllers/pdfcontroller.php';
                     $controller = new pdfcontroller();
                     break;
 
@@ -71,9 +71,9 @@
             }
         }
         private function stripParameters($uri) {
-            // if(str_contains($uri, '?')) {
-            //     $uri = substr($uri, 0, strpos($uri, '?'));
-            // }
+           // if(str_contains($uri, '?')) {
+           //     $uri = substr($uri, 0, strpos($uri, '?'));
+           // }
             
             if(strpos($uri, '?') !== false) {
                 $uri = substr($uri, 0, strpos($uri, '?'));
