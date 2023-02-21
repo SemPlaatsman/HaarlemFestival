@@ -13,28 +13,37 @@ class HomeController extends Controller
 
     public function index()
     {
-        $pages = $this->pageService->getContent();
-        foreach ($pages as &$encodedPage) {
-            $encodedPage->setBody_markup(htmlspecialchars_decode($encodedPage->getBody_markup()));
+        try {
+            $pages = $this->pageService->getContent();
+            foreach ($pages as &$encodedPage) {
+                $encodedPage->setBody_markup(htmlspecialchars_decode($encodedPage->getBody_markup()));
+            }
+            $this->displayView($pages);
+        } catch (Exception $e) {
+            echo 'Error: ' . $e->getMessage();
         }
-
-        $this->displayView($pages);
     }
 
     public function updateContent()
     {
-        $id = htmlspecialchars($_POST['id']);
-        $new_body_markup = htmlspecialchars($_POST['body_markup']);
+        try {
+            $id = htmlspecialchars($_POST['id']);
+            $new_body_markup = htmlspecialchars($_POST['body_markup']);
 
-        $result = $this->pageService->updateContent($id, $new_body_markup);
+            $result = $this->pageService->updateContent($id, $new_body_markup);
 
-        if ($result) {
-            // return succes response 
-            echo 'Update complete';
-        } else {
-            // return failed response
-            echo 'Something went wrong with the update';
+            if ($result) {
+                // return succes response 
+                echo 'Update complete';
+            } else {
+                // return failed response
+                echo 'Something went wrong with the update';
+            }
+        } catch (Exception $e) {
+            // Handle the exception here
+            echo 'An error occurred: ' . $e->getMessage();
         }
     }
+
 }
 ?>
