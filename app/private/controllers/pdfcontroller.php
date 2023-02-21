@@ -12,6 +12,6 @@ class pdfcontroller{
         $imgsrc  = "/generate?data=test";
         include(__DIR__.'/../../public/views/pdfView/pdfView.php');
         $html = ob_get_clean(); //Get the content of the buffer and clean it
-        // $pdfGenerator->generate($html);
+        $pdfGenerator->generate($html);
     }
 }
