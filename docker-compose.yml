@@ -13,6 +13,18 @@ services:
             dockerfile: PHP.Dockerfile
         volumes:
             - ./app:/app
+        stdin_open: true
+        tty: true
+        command: >
+                bash -c "
+                cd /app &&
+                chmod u+rw  /var/cache &&
+                composer install &&
+                php-fpm"
+
+                 
+     
+        
     mysql:
         image: mariadb:latest
         environment:

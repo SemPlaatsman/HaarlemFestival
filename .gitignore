@@ -8,3 +8,7 @@
 /httpRequests/
 
 config/
+
+#composer 
+app/vendor/
+/vendor
