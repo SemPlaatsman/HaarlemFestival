@@ -21,7 +21,7 @@
         <img class="d-block mx-auto mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
         <h1 class="display-5 fw-bold">Centered hero</h1>
         <div class="col-lg-6 mx-auto">
-            <?php foreach ($pages as $page) { ?>
+            <?php foreach ($model as $page) { ?>
                 <p class="lead mb-4">
                     <?= $page->getBody_markup(); ?>
                 </p>
