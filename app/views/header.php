@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/main.css">
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg sticky-top bg-primary-a">
+    <nav class="navbar navbar-expand-lg sticky-top bg-primary-a p-0">
       <div class="container-fluid">
         <a class="navbar-brand ms-2" href="/">
           <img src="img/png/haarlem-brand.png" alt="haarlem-brand" width="185" height="54">
