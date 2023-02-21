@@ -1,6 +1,6 @@
 <?php
 
-class captchacontroller{
+class CaptchaController{
 
     public function index(){
 

@@ -1,5 +1,5 @@
 <?php
-    class QrGeneratorScanner{
+    class QrGeneratorScanner {
 
         function __construct(){
             require_once'views/scanGenerate/scanGenerate.php';

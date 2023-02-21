@@ -1,5 +1,5 @@
 <?php
-class pdfcontroller{
+class PDFController {
     function __construct(){
         require_once __DIR__.'/PDFGenerator.php';
        
