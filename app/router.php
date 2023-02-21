@@ -5,7 +5,23 @@
             $uri = $this->stripParameters($uri);
 
             switch($uri) {
-               
+                case '':
+                    case 'login':
+                        require_once __DIR__ . '/controllers/logincontroller.php';
+                        $controller = new LoginController();
+                        $controller->index();
+                        break;
+        
+                    case 'home':
+                        require_once __DIR__ . '/controllers/homecontroller.php';
+                        $controller = new HomeController();
+                        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                            $controller->updateContent();
+                        } else {
+                            $controller->index();
+                        }
+                        break;
+        
                 case 'captcha': 
                     require __DIR__.'/private/controllers/captchacontroller.php';
                     $controller = new captchacontroller();
@@ -63,3 +79,4 @@
             return $uri;
         }
     }
+

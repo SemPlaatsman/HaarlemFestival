@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+:root {
+    --primary-a: #E86F52;
+    --secondary-a: #F3A261;
+    --tetiare-a: #E9C46B;
+    --primary-b: #264653;
+    --secondary-b: #2A9D8E;
+}
+
+@font-face {
+    font-family: DrukTrial;
+    font-style: normal;
+    font-weight: normal;
+    src: url("/font/Druk-Medium-Trial.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: DrukTrial-Italic;
+    font-style: italic;
+    font-weight: normal;
+    src: url("/font/Druk-MediumItalic-Trial.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: DrukTrial-Bold;
+    font-style: normal;
+    font-weight: bold;
+    src: url("/font/Druk-Bold-Trial.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: DrukTrial-BoldItalic;
+    font-style: italic;
+    font-weight: bold;
+    src: url("/font/Druk-BoldItalic-Trial.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: DrukTrial-Heavy;
+    font-style: normal;
+    font-weight: bolder;
+    src: url("/font/Druk-Heavy-Trial.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: DrukTrial-HeavyItalic;
+    font-style: italic;
+    font-weight: bolder;
+    src: url("/font/Druk-HeavyItalic-Trial.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: DrukTrial-Super;
+    font-style: normal;
+    font-weight: bolder; /* most bold */
+    src: url("/font/Druk-Super-Trial.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: DrukTrial-SuperItalic;
+    font-style: italic;
+    font-weight: bolder; /* most bold */
+    src: url("/font/Druk-SuperItalic-Trial.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: DrukTextTrial;
+    font-style: normal;
+    font-weight: normal;
+    src: url("/font/DrukText-Medium-Trial.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: DrukTextTrial-Italic;
+    font-style: italic;
+    font-weight: normal;
+    src: url("/font/DrukText-MediumItalic-Trial.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: DrukTextTrial-Bold;
+    font-style: normal;
+    font-weight: bold;
+    src: url("/font/DrukText-Bold-Trial.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: DrukTextTrial-Super;
+    font-style: normal;
+    font-weight: bolder; /* most bold */
+    src: url("/font/DrukText-Super-Trial.ttf") format("truetype");
+}
+
+.bg-primary-a { 
+    background-color: var(--primary-a);
+}
+
+.bg-secondary-a {
+    background-color: var(--secondary-a);
+}
+
+.bg-tetiare-a {
+    background-color: var(--tetiare-a);
+}
+
+.bg-primary-b {
+    background-color: var(--primary-b);
+}
+
+.bg-secondary-b {
+    background-color: var(--secondary-b);
+}
+
+.text-primary-a { 
+    color: var(--primary-a);
+}
+
+.text-secondary-a {
+    color: var(--secondary-a);
+}
+
+.text-tetiare-a {
+    color: var(--tetiare-a);
+}
+
+.text-primary-b {
+    color: var(--primary-b);
+}
+
+.text-secondary-b {
+    color: var(--secondary-b);
+}
+
+/* <--- COMPONENTS ---> */
+
+.navbar {
+    font-family: DrukTrial;
+}
+
+.navbar .nav-item > .nav-link {
+    color: var(--tetiare-a);
+}
+
+.navbar .nav-item > .active {
+    color: var(--primary-b)
+}
+
+.navbar .navbar-nav {
+    margin-right: 185px;
+}
+
+.footer-title {
+    font-family: DrukTrial;
+}
+
+.footer-text {
+    font-family: Roboto;
+}
