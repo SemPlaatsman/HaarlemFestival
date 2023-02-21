@@ -4,7 +4,14 @@ class pdfcontroller{
         require_once __DIR__.'/PDFGenerator.php';
        
         $pdfGenerator = new PDFGenerator();
-        $html = file_get_contents(__DIR__.'/../../public/views/pdfView/pdfView.php');
-        $pdfGenerator->generate($html);
+        ob_start(); //Init the output buffering
+        $owner = "owner";
+        $event = "history";
+        $date = "2020-12-12";
+        $where = "here";
+        $imgsrc  = "/generate?data=test";
+        include(__DIR__.'/../../public/views/pdfView/pdfView.php');
+        $html = ob_get_clean(); //Get the content of the buffer and clean it
+        // $pdfGenerator->generate($html);
     }
 }

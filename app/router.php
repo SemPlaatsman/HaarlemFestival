@@ -5,11 +5,10 @@
             $uri = $this->stripParameters($uri);
 
             switch($uri) {
-                case '': 
-                case 'home': 
-                case 'home/index': 
-                    require __DIR__.'/private/controllers/homecontroller.php';
-                    $controller = new HomeController();
+               
+                case 'captcha': 
+                    require __DIR__.'/private/controllers/captchacontroller.php';
+                    $controller = new captchacontroller();
                     $controller->index();
                     break;
                 case 'validate/Hcaptcha':
@@ -32,6 +31,7 @@
                 case 'qr/generate':
                     require __DIR__.'/private/controllers/QrGeneratorcontroller.php';
                     $controller = new QrGeneratorcontroller();
+                    $controller->generateQR();
                 case 'pdf':
                     require __DIR__.'/private/controllers/pdfcontroller.php';
                     $controller = new pdfcontroller();
