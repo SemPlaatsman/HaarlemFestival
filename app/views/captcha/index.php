@@ -1,6 +1,5 @@
 <?php 
-require_once ("../private/config.php");
-$Config = new Config();
+require_once (__DIR__."/../../dbconfig.php");
 ?>
 
 <h1>hcaptcha script</h1>
@@ -23,7 +22,7 @@ $Config = new Config();
 
 <button class="g-recaptcha" 
         data-sitekey="<?php
-        print_r($Config->reCAPTCHASiteKeyV3);
+        print_r($reCAPTCHASiteKeyV3);
         ?>" 
         data-callback='onSubmit' 
         data-action='submit'>Submit</button>

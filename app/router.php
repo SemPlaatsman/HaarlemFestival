@@ -23,36 +23,41 @@
                         break;
         
                 case 'captcha': 
-                    require __DIR__.'/private/controllers/captchacontroller.php';
+                    require __DIR__.'/controllers/captchacontroller.php';
                     $controller = new captchacontroller();
                     $controller->index();
                     break;
                 case 'validate/Hcaptcha':
-                    require __DIR__.'/private/controllers/validatecontroller.php';
+                    require __DIR__.'/controllers/validatecontroller.php';
                     $controller = new validateController();
                     $controller->Hcaptcha();
                     
                     break;
                 case 'validate/Gcaptcha':
-                        require __DIR__.'/private/controllers/validatecontroller.php';
+                        require __DIR__.'/controllers/validatecontroller.php';
                         $controller = new validateController();
                         $controller->Gcaptcha();
 
                  break;
                  case 'qr':
-                    require __DIR__. '/private/controllers/QrGeneratorScanner.php';
+                    require __DIR__. '/controllers/QrGeneratorScanner.php';
                     $controller = new QrGeneratorScanner();
 
                 break;
                 case 'qr/generate':
-                    require __DIR__.'/private/controllers/QrGeneratorcontroller.php';
+                    require __DIR__.'/controllers/QrGeneratorcontroller.php';
                     $controller = new QrGeneratorcontroller();
                     $controller->generateQR();
                 case 'pdf':
-                    require __DIR__.'/private/controllers/pdfcontroller.php';
+                    require __DIR__.'/controllers/pdfcontroller.php';
                     $controller = new pdfcontroller();
     
                 break;
+                case 'test':
+                    require __DIR__.'/controllers/artistManagementController.php';
+                    $controller = new ArtistManagementController();
+                break;
+
                 case '401':
                 http_response_code(401);
                 break;

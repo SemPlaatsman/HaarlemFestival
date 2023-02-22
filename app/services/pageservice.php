@@ -23,5 +23,6 @@ class PageService
 
         return $repository->getContent();
     }
+    
 }
 ?>

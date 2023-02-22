@@ -1,13 +1,11 @@
 <?php
-require_once (__DIR__."/../config.php");
-
 class validateController{
-        
 
         function Hcaptcha(){
-                $config = new Config();
+            require_once __DIR__ . '/../dbconfig.php';
+
             $data = array(
-                'secret' => $config->hCaptchaSecret,
+                'secret' => $hCaptchaSecret,
                 'response' => $_POST['h-captcha-response']
             );
             $verify = curl_init();
@@ -29,9 +27,11 @@ class validateController{
 
 
         function Gcaptcha(){
-            $config = new Config();
+            require_once __DIR__ . '/../dbconfig.php';
+
+
             $data = array(
-                'secret' => $config->reCAPTCHASecretV3,
+                'secret' => $reCAPTCHASecretV3,
                 'response' => $_POST['g-recaptcha-response']
             );
             $verify = curl_init();
