@@ -53,6 +53,14 @@
                     $controller = new pdfcontroller();
     
                 break;
+                case 'api':
+                    require __DIR__.'/apiControllers/apiController.php';
+                    $api = new api();
+                   
+                break;
+
+
+
                 case 'test':
                     require __DIR__.'/controllers/artistManagementController.php';
                     $controller = new ArtistManagementController();
