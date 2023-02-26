@@ -14,14 +14,30 @@ class ArtistService
     function getArtists() : array 
     {
         $repository = new ArtistRepository();
-        if($repository->getAll()){
+        if(!$repository->getAll()){
             echo "null";
         }
-        else{
-            echo "not null";
-        }
+   
 
         return $repository->getAll();
+    }
+
+    function createArtist(Artist $artist) : bool
+    {
+        $repository = new ArtistRepository();
+        return $repository->insert($artist->name);
+    }
+
+    function updateArtist(Artist $artist) : bool
+    {
+        $repository = new ArtistRepository();
+        return $repository->update($artist->id, $artist->name);
+    }
+
+    function deleteArtist(int $id) : bool
+    {
+        $repository = new ArtistRepository();
+        return $repository->delete($id);
     }
     
 

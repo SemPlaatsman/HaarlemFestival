@@ -5,23 +5,23 @@ class ArtistRepository extends Repository {
     
 
 
-    public function insert(string $name) {
+    public function insert(string $name):bool {
         $stmnt = $this -> connection -> prepare("INSERT INTO artists (name) VALUES (:name)");
         $stmnt -> bindParam(':name', $name, PDO::PARAM_STR);
-        $stmnt -> execute();
+        return $stmnt -> execute();
     }
 
-    public function update(int $id, string $name) {
+    public function update(int $id, string $name) :bool {
         $stmnt = $this -> connection -> prepare("UPDATE artists SET name = :name WHERE id = :id");
         $stmnt -> bindParam(':id', $id, PDO::PARAM_INT);
         $stmnt -> bindParam(':name', $name, PDO::PARAM_STR);
-        $stmnt -> execute();
+       return  $stmnt -> execute();
     }
 
-    public function delete(int $id) {
+    public function delete(int $id) : bool {
         $stmnt = $this -> connection -> prepare("DELETE FROM artists WHERE id = :id");
         $stmnt -> bindParam(':id', $id, PDO::PARAM_INT);
-        $stmnt -> execute();
+        return $stmnt -> execute();
     }
 
     public function get(int $id) : Artist {

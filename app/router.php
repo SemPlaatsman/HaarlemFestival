@@ -56,6 +56,7 @@
                 case 'test':
                     require __DIR__.'/controllers/artistManagementController.php';
                     $controller = new ArtistManagementController();
+                    $controller->index();
                 break;
 
                 case '401':
