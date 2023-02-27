@@ -1,0 +1,4 @@
+you can put small helper functions in this file that speed up code
+like functions that make repititive tasks easier.
+
+https://code.tutsplus.com/tutorials/increase-productivity-by-creating-php-helper-functions--net-12715
