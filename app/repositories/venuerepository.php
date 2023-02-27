@@ -8,6 +8,23 @@ class VenueRepository extends Repository
     {
         try {
             // Read all venues
+            $venues = array();
+            $stmt = $this->connection->prepare("SELECT * FROM Venue");
+
+            $stmt->execute();
+
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ($result as $row) {
+                $venue = new Venue();
+                $venue->setId($row['id']);
+                $venue->setName($row['name']);
+                $venue->setDate($row['date']);
+                $venue->setAddress($row['address']);
+                $venue->setSeats($row['seats']);
+                array_push($venues, $venue);
+            }
+            return $venues;
         } catch (PDOException $e) {
             return false;
         }

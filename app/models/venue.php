@@ -1,6 +1,6 @@
 <?php
 
-class Page
+class Venue
 {
     private int $id;
     private string $name;
@@ -9,12 +9,38 @@ class Page
     private int $seats;
 
     /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
      * @param int $id 
      * @return self
      */
     public function setId(int $id): self
     {
         $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name 
+     * @return self
+     */
+    public function setName(string $name): self
+    {
+        $this->name = $name;
         return $this;
     }
 
@@ -70,14 +96,6 @@ class Page
     {
         $this->address = $address;
         return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getId(): int
-    {
-        return $this->id;
     }
 }
 ?>
