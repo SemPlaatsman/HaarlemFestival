@@ -288,6 +288,20 @@ p {
     font-family: Roboto;
 }
 
+.btn {
+    font-family: DrukText;
+}
+
+.btn.btn-tetiare-a {
+    background-color: var(--tetiare-a);
+    color: var(--primary-b);
+}
+
+.btn.btn-primary-b {
+    background-color: var(--primary-b);
+    color: var(--tetiare-a);
+}
+
 /* <--- STANDARD COMPONENTS ---> */
 
 .navbar {
@@ -302,8 +316,9 @@ p {
     color: var(--primary-b)
 }
 
-.navbar .navbar-nav {
-    margin-right: 185px;
+.authBtn {
+    min-width: 185px;
+    width: 185px;
 }
 
 .footer-title {
