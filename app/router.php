@@ -4,12 +4,18 @@
         {
             $uri = $this->stripParameters($uri);
 
+            (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
             switch($uri) {
                 case '':
                 case 'login':
                     require_once __DIR__.'/controllers/logincontroller.php';
                     $controller = new LoginController();
                     $controller->index();
+                    break;
+                
+                case 'logout':
+                    unset($_SESSION['user']);
+                    header('Location: ' . $_SERVER['HTTP_REFERER']);
                     break;
         
                 case 'home':
