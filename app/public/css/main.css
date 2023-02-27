@@ -6,110 +6,159 @@
     --tetiare-a: #E9C46B;
     --primary-b: #264653;
     --secondary-b: #2A9D8E;
+    --acid-yellow: #A2FD2D;
+    --light-purple: #B960FF;
+    --dark-purple: #9847D9;
+    --dance-gradient: linear-gradient(90deg, rgba(185,96,255,1) 0%, rgba(162,253,45,1) 100%);
+    --teyler-primary-a: #D75745;
+    --teyler-primary-b: #5BC0EB;
+    --teyler-secondary-b: #235789;
 }
 
 @font-face {
-    font-family: DrukTrial;
+    font-family: Druk;
     font-style: normal;
     font-weight: normal;
     src: url("/font/Druk-Medium-Trial.ttf") format('truetype');
 }
 
 @font-face {
-    font-family: DrukTrial-Italic;
+    font-family: Druk-Italic;
     font-style: italic;
     font-weight: normal;
     src: url("/font/Druk-MediumItalic-Trial.ttf") format("truetype");
 }
 
 @font-face {
-    font-family: DrukTrial-Bold;
+    font-family: Druk-Bold;
     font-style: normal;
     font-weight: bold;
     src: url("/font/Druk-Bold-Trial.ttf") format("truetype");
 }
 
 @font-face {
-    font-family: DrukTrial-BoldItalic;
+    font-family: Druk-BoldItalic;
     font-style: italic;
     font-weight: bold;
     src: url("/font/Druk-BoldItalic-Trial.ttf") format("truetype");
 }
 
 @font-face {
-    font-family: DrukTrial-Heavy;
+    font-family: Druk-Heavy;
     font-style: normal;
     font-weight: bolder;
     src: url("/font/Druk-Heavy-Trial.ttf") format("truetype");
 }
 
 @font-face {
-    font-family: DrukTrial-HeavyItalic;
+    font-family: Druk-HeavyItalic;
     font-style: italic;
     font-weight: bolder;
     src: url("/font/Druk-HeavyItalic-Trial.ttf") format("truetype");
 }
 
 @font-face {
-    font-family: DrukTrial-Super;
+    font-family: Druk-Super;
     font-style: normal;
     font-weight: bolder; /* most bold */
     src: url("/font/Druk-Super-Trial.ttf") format("truetype");
 }
 
 @font-face {
-    font-family: DrukTrial-SuperItalic;
+    font-family: Druk-SuperItalic;
     font-style: italic;
     font-weight: bolder; /* most bold */
     src: url("/font/Druk-SuperItalic-Trial.ttf") format("truetype");
 }
 
 @font-face {
-    font-family: DrukTextTrial;
+    font-family: DrukText;
     font-style: normal;
     font-weight: normal;
     src: url("/font/DrukText-Medium-Trial.ttf") format("truetype");
 }
 
 @font-face {
-    font-family: DrukTextTrial-Italic;
+    font-family: DrukText-Italic;
     font-style: italic;
     font-weight: normal;
     src: url("/font/DrukText-MediumItalic-Trial.ttf") format("truetype");
 }
 
 @font-face {
-    font-family: DrukTextTrial-Bold;
+    font-family: DrukText-Bold;
     font-style: normal;
     font-weight: bold;
     src: url("/font/DrukText-Bold-Trial.ttf") format("truetype");
 }
 
 @font-face {
-    font-family: DrukTextTrial-Super;
+    font-family: DrukText-Super;
     font-style: normal;
     font-weight: bolder; /* most bold */
     src: url("/font/DrukText-Super-Trial.ttf") format("truetype");
 }
 
+@font-face {
+    font-family: Kaph;
+    font-style: normal;
+    font-weight: normal;
+    src: url("/font/Kaph-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: Kaph-Italic;
+    font-style: italic;
+    font-weight: normal;
+    src: url("/font/Kaph-Italic.ttf") format("truetype");
+}
+
 .bg-primary-a { 
-    background-color: var(--primary-a);
+    background: var(--primary-a);
 }
 
 .bg-secondary-a {
-    background-color: var(--secondary-a);
+    background: var(--secondary-a);
 }
 
 .bg-tetiare-a {
-    background-color: var(--tetiare-a);
+    background: var(--tetiare-a);
 }
 
 .bg-primary-b {
-    background-color: var(--primary-b);
+    background: var(--primary-b);
 }
 
 .bg-secondary-b {
-    background-color: var(--secondary-b);
+    background: var(--secondary-b);
+}
+
+.bg-acid-yellow {
+    background: var(--acid-yellow);
+}
+
+.bg-light-purple {
+    background: var(--light-purple);
+}
+
+.bg-dark-purple {
+    background: var(--dark-purple);
+}
+
+.bg-dance-gradient {
+    background: var(--dance-gradient);
+}
+
+.bg-teyler-primary-a {
+    background: var(--teyler-primary-a);
+}
+
+.bg-teyler-primary-b {
+    background: var(--teyler-primary-b);
+}
+
+.bg-teyler-secondary-b {
+    background: var(--teyler-secondary-b);
 }
 
 .text-primary-a { 
@@ -132,10 +181,131 @@
     color: var(--secondary-b);
 }
 
-/* <--- COMPONENTS ---> */
+.text-acid-yellow {
+    color: var(--acid-yellow);
+}
+
+.text-light-purple {
+    color: var(--light-purple);
+}
+
+.text-dark-purple {
+    color: var(--dark-purple);
+}
+
+.text-dance-gradient {
+    background: var(--dance-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.text-dance-banner {
+    color: var(--light-purple);
+    text-shadow: -3px -3px 0px var(--acid-yellow);
+}
+
+.text-teyler-primary-a {
+    color: var(--teyler-primary-a);
+}
+
+.text-teyler-primary-b {
+    color: var(--teyler-primary-b);
+}
+
+.text-teyler-secondary-b {
+    color: var(--teyler-secondary-b);
+}
+
+.font-druk {
+    font-family: Druk;
+}
+
+.font-druk-italic {
+    font-family: Druk-Italic;
+}
+
+.font-druk-bold {
+    font-family: Druk-Bold;
+}
+
+.font-druk-italic-bold, .font-druk-bold-italic {
+    font-family: Druk-BoldItalic;
+}
+
+.font-druk-heavy {
+    font-family: Druk-Heavy;
+}
+
+.font-druk-heavy-italic, .font-druk-italic-heavy {
+    font-family: Druk-HeavyItalic;
+}
+
+.font-druk-super {
+    font-family: Druk-Super;
+}
+
+.font-druk-super-italic, .font-druk-italic-super {
+    font-family: Druk-SuperItalic;
+}
+
+.font-druktext {
+    font-family: DrukText;
+}
+
+.font-druktext-italic {
+    font-family: DrukText-Italic;
+}
+
+.font-druktext-bold {
+    font-family: DrukText-Bold;
+}
+
+.font-druktext-super {
+    font-family: DrukText-Super;
+}
+
+.font-kaph {
+    font-family: Kaph;
+}
+
+.font-kaph-italic {
+    font-family: Kaph-Italic;
+}
+
+.font-roboto {
+    font-family: Roboto;
+}
+
+h1, h2 {
+    font-family: Druk;
+}
+
+h3, h4, h5, h6 {
+    font-family: DrukText;
+}
+
+p {
+    font-family: Roboto;
+}
+
+.btn {
+    font-family: DrukText;
+}
+
+.btn.btn-tetiare-a {
+    background-color: var(--tetiare-a);
+    color: var(--primary-b);
+}
+
+.btn.btn-primary-b {
+    background-color: var(--primary-b);
+    color: var(--tetiare-a);
+}
+
+/* <--- STANDARD COMPONENTS ---> */
 
 .navbar {
-    font-family: DrukTrial;
+    font-family: Druk;
 }
 
 .navbar .nav-item > .nav-link {
@@ -146,14 +316,27 @@
     color: var(--primary-b)
 }
 
-.navbar .navbar-nav {
-    margin-right: 185px;
+.authBtn {
+    min-width: 185px;
+    width: 185px;
 }
 
 .footer-title {
-    font-family: DrukTrial;
+    font-family: Druk;
 }
 
 .footer-text {
     font-family: Roboto;
+}
+
+.footer-input {
+    min-height: 40px;
+    height: 50px;
+    max-height: 50px;
+}
+
+@media only screen and (max-width: 631px){
+    .footer-input {
+        height: 40px;
+    }
 }
