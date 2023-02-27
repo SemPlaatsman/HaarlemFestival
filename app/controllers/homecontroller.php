@@ -2,8 +2,7 @@
 require_once __DIR__ . '/controller.php';
 require_once __DIR__ . '/../services/pageservice.php';
 
-class HomeController extends Controller
-{
+class HomeController extends Controller {
     private $pageService;
 
     function __construct()
