@@ -57,9 +57,23 @@
                     $controller->generateQR();
 
                 case 'pdf':
-                    require_once __DIR__.'/controllers/pdfcontroller.php';
+                    require __DIR__.'/controllers/pdfcontroller.php';
                     $controller = new pdfcontroller();
-                    break;
+    
+                break;
+                case 'api':
+                    require __DIR__.'/apiControllers/apiController.php';
+                    $api = new api();
+                   
+                break;
+
+
+
+                case 'test':
+                    require __DIR__.'/controllers/artistManagementController.php';
+                    $controller = new ArtistManagementController();
+                    $controller->index();
+                break;
 
                 case '401':
                     http_response_code(401);
