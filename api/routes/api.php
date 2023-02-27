@@ -29,8 +29,13 @@ class api
                 switch ($this->url[1]) {
                     case 'artists':
                         require_once  __DIR__ . '/../controllers/artistsController.php';
+                        $this->requesthelper->retrieveJson();
+                        $jsonBody = new stdClass;
 
-                        $this->executeRequest(new artistController(), $this->url[2] ?? null);
+                        if (!$this->executeRequest(new artistController(), $this->url[2] ?? null,$jsonBody)){
+                            $this->errorhelper->error404();
+
+                        };
                         
                     break;
 
@@ -51,7 +56,7 @@ class api
 
 
     //maybe move this to a helper class
-    private function executeRequest(Object $resource,int $id = null)
+    private function executeRequest(Object $resource,int $id = null ,Object $jsonData): bool
     {
         
 
@@ -59,7 +64,6 @@ class api
         if (!$this->requesthelper->checkMethodExists($resource)) {
             $this->errorhelper->error404();
         }
-      
-        return $this->requesthelper->handleRequest($resource,$id );
+        return $this->requesthelper->handleRequest($resource,$id,$jsonData);
     }
 }

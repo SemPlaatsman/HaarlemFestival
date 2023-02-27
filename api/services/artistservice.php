@@ -7,8 +7,12 @@ class ArtistService
     function getArtist(int $id) : Artist
     {
         $repository = new ArtistRepository();
-    
-        return $repository->get($id);
+        try {
+            $artist = $repository->get($id);
+        } catch (Exception $e) {
+            $artist = new Artist();
+        } 
+        return $artist;
     }
     
     function getArtists() : array 
