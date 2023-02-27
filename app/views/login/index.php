@@ -6,7 +6,7 @@
             <h1 class="text-center text-primary-b display-2">LOGIN</h1>
             <fieldset class="form-group p-2">
                 <label class="text-primary-b fs-5" for="usernameField">Username:</label>
-                <input class="w-100" id="usernameField" type="text" name="username" />
+                <input class="w-100" id="usernameField" type="text" name="username" value="<?= $_POST['username'] ?? "" ?>" />
             </fieldset>
             <fieldset class="form-group p-2">
                 <label class="text-primary-b fs-5" for="passwordField">Password:</label>
@@ -14,7 +14,7 @@
             </fieldset>
             <hr class="invisible">
             <hr class="custom-hr bg-black opacity-100">
-            <input class="btn btn-primary-b fs-3" type="submit" value="LOGIN" name="submit" />
+            <input class="btn btn-primary-b fs-3 <?= (isset($_POST['username']) && isset($_POST['password'])) ? "is-invalid" : "" ?>" type="submit" value="LOGIN" name="submit" />
             <p class="text-center invalid-feedback text-light fs-6 p-1 my-0 mt-3 bg-danger rounded">Invalid username/password combination!</p>
         </form>
     </section>
