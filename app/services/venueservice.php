@@ -10,11 +10,11 @@ class VenueService
         return $repository->getVenue();
     }
 
-    public function insertVenue(int $id, string $name, DateTime $date, string $address, int $seats)
+    public function insertVenue(string $name, DateTime $date, string $address, int $seats)
     {
         $repository = new VenueRepository();
 
-        return $repository->insertVenue($id, $name, $date, $address, $seats);
+        return $repository->insertVenue($name, $date, $address, $seats);
     }
 
     public function updateVenue(int $id, string $name, DateTime $date, string $address, int $seats)
@@ -24,11 +24,11 @@ class VenueService
         return $repository->updateVenue($id, $name, $date, $address, $seats);
     }
 
-    public function deleteVenue(int $id, string $name, DateTime $date, string $address, int $seats)
+    public function deleteVenue(int $id)
     {
         $repository = new VenueRepository();
 
-        return $repository->deleteVenue($id, $name, $date, $address, $seats);
+        return $repository->deleteVenue($id);
     }
 
 }
