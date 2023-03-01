@@ -28,7 +28,7 @@ class RequestHelper{
             break;
         }
     }
-    public function handleRequest($controller, $id = null, $jsonData): bool {
+    public function handleRequest($controller,  Object $jsonData=null, $id = null): bool {
         $requestMethod = $this->getRequestMethod();
     
         switch ($requestMethod) {
@@ -37,11 +37,17 @@ class RequestHelper{
                 break;
     
             case 'POST':
-               return $controller->create($id, $jsonData);
+                if($jsonData !=null){
+                    return $controller->create($id, $jsonData);
+                }
+                return false;
                 break;
     
             case 'PUT':
+                if($jsonData !=null){
                 return $controller->update($id, $jsonData);
+                }
+                return false;
                 break;
     
             case 'DELETE':
@@ -49,7 +55,7 @@ class RequestHelper{
                 break;
     
             default:
-
+                return false;
             break;
         }
     }

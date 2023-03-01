@@ -19,23 +19,31 @@ class ArtistService
     {
         $repository = new ArtistRepository();
         if(!$repository->getAll()){
-            echo "null";
+            
+            return array();
         }
    
 
         return $repository->getAll();
     }
 
-    function createArtist(Artist $artist) : bool
+    function createArtist(Artist $artist) : Artist
     {
         $repository = new ArtistRepository();
-        return $repository->insert($artist->name);
+        $id = $repository->insert($artist->name);
+        return $this->getArtist($id);
     }
 
-    function updateArtist(Artist $artist) : bool
+    function updateArtist(int $id, Artist $updatedArtist) : Artist
     {
         $repository = new ArtistRepository();
-        return $repository->update($artist->id, $artist->name);
+         $returnedID = $repository->update($id, $updatedArtist->name);
+        $retrievedArtist = $this->getArtist($id);
+        if($updatedArtist->name == $retrievedArtist->name){
+            return $retrievedArtist;
+        }
+
+        return null;
     }
 
     function deleteArtist(int $id) : bool

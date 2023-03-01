@@ -7,7 +7,8 @@ class JsonHelper
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode($data);
     }
-    public static function retrieveJson() : object
+    // public static function retrieveJson() : object
+    public static function retrieveJson()
     {
         $json = file_get_contents('php://input');
         if($json == null){
