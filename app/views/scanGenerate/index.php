@@ -14,7 +14,7 @@
 
 
 <script src="https://unpkg.com/qrcode-decoder@0.3.1/dist/index.min.js"></script>
-<script src="views/scanGenerate/scan.js"></script>
+<script src="/js/scan.js"></script>
 <img id="qr" src="/qr/generate?data=a" width="150" height="150"></img>
 
 <!-- <iframe id="qr" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=yeetus" width="150" height="150"></iframe> -->
