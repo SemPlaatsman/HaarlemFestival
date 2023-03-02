@@ -1,6 +1,6 @@
 <?php
 require_once "../lib/phpqrcode/qrlib.php";
-require_once (__DIR__."/../config.php");
+require_once (__DIR__."/../dbconfig.php");
 
 class QrGeneratorcontroller {
 
