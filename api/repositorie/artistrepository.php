@@ -5,23 +5,27 @@ class ArtistRepository extends Repository {
     
 
 
-    public function insert(string $name):bool {
-        $stmnt = $this -> connection -> prepare("INSERT INTO artists (name) VALUES (:name)");
+    public function insert(string $name):int {
+        $stmnt = $this -> connection -> prepare("INSERT INTO `artist` (name) VALUES (:name)");
         $stmnt -> bindParam(':name', $name, PDO::PARAM_STR);
-        return $stmnt -> execute();
+        $stmnt -> execute();
+        return $this->connection-> lastInsertId();
     }
 
-    public function update(int $id, string $name) :bool {
-        $stmnt = $this -> connection -> prepare("UPDATE artists SET name = :name WHERE id = :id");
+    public function update(int $id, string $name) :int {
+        $stmnt = $this -> connection -> prepare("UPDATE `artist` SET name = :name WHERE id = :id");
         $stmnt -> bindParam(':id', $id, PDO::PARAM_INT);
         $stmnt -> bindParam(':name', $name, PDO::PARAM_STR);
-       return  $stmnt -> execute();
+        $stmnt -> execute();
+        return $this->connection-> lastInsertId();
     }
 
-    public function delete(int $id) : bool {
-        $stmnt = $this -> connection -> prepare("DELETE FROM artists WHERE id = :id");
+    public function delete(int $id) : int {
+        $stmnt = $this -> connection -> prepare("DELETE FROM `artists` WHERE id = :id");
         $stmnt -> bindParam(':id', $id, PDO::PARAM_INT);
-        return $stmnt -> execute();
+        $stmnt -> execute();
+        return $this->connection-> lastInsertId();
+
     }
 
     public function get(int $id) : Artist {
@@ -30,6 +34,9 @@ class ArtistRepository extends Repository {
         $stmnt -> setFetchMode(PDO::FETCH_CLASS, 'Artist');
         $stmnt -> execute();
         $artist = $stmnt -> fetch();
+        if ($artist === false) {
+            throw new Exception('Artist not found');
+        }
         return $artist;
     }
     public function getAll():array  {
