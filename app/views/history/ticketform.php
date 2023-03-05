@@ -59,22 +59,21 @@ if(isset($_POST['submit'])) {
 
   try {
       //Server settings
-      $mail->SMTPDebug = 2;                                        // Enable verbose debug output
-      $mail->isSMTP();                                             // Set mailer to use SMTP
-      $mail->Host       = 'smtp-relay.sendinblue.com';                        // Specify main and backup SMTP servers
-      $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-      $mail->Username   = 'janjaapvanlaar@gmail.com';                   // SMTP username
-      $mail->Password   = 'V5JKvcpqUnz0GX6W';                     // SMTP password
-      $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
-      $mail->Port       = 587;                                    // TCP port to connect to
+      $mail->isSMTP();                                             
+      $mail->Host       = 'smtp-relay.sendinblue.com';                        
+      $mail->SMTPAuth   = true;                                   
+      $mail->Username   = 'janjaapvanlaar@gmail.com';                   
+      $mail->Password   = 'V5JKvcpqUnz0GX6W';                     
+      $mail->SMTPSecure = 'tls';                                  
+      $mail->Port       = 587;                                    
 
       //Recipients
       $mail->setFrom('691510@student.inholland.nl', 'Your Name');
-      $mail->addAddress('janjaap.vanlaar2001@gmail.com', 'Recipient Name');     // Add a recipient
+      $mail->addAddress('janjaap.vanlaar2001@gmail.com', 'Recipient Name');     
       $mail->addReplyTo('691510@student.inholland.nl', 'Your Name');
 
       // Content
-      $mail->isHTML(true);                                  // Set email format to HTML
+      $mail->isHTML(true);                                  
       $mail->Subject = 'Testing PHPMailer';
       $mail->Body    = 'Hello, this is a test email sent from PHPMailer.';
 
