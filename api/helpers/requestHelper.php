@@ -28,28 +28,34 @@ class RequestHelper{
             break;
         }
     }
-    public function handleRequest($controller, $id = null) {
+    public function handleRequest($controller,  Object $jsonData=null, $id = null): bool {
         $requestMethod = $this->getRequestMethod();
     
         switch ($requestMethod) {
             case 'GET':
-                $controller->get($id);
+                return $controller->get($id);
                 break;
     
             case 'POST':
-                $controller->create($id);
+                if($jsonData !=null){
+                    return $controller->create($id, $jsonData);
+                }
+                return false;
                 break;
     
             case 'PUT':
-                $controller->update($id);
+                if($jsonData !=null){
+                return $controller->update($id, $jsonData);
+                }
+                return false;
                 break;
     
             case 'DELETE':
-                $controller->delete($id);
+                return $controller->delete($id);
                 break;
     
             default:
-
+                return false;
             break;
         }
     }
