@@ -8,7 +8,7 @@ class PageRepository extends Repository
     {
         try {
             $pages = array();
-            $stmt = $this->connection->prepare("SELECT * FROM pages");
+            $stmt = $this->connection->prepare("SELECT * FROM `Pages`");
 
             $stmt->execute();
 
@@ -30,7 +30,7 @@ class PageRepository extends Repository
     public function insertContent(int $id, string $url, string $body_markup)
     {
         try {
-            $stmt = $this->connection->prepare("INSERT INTO pages (url, body_markup) VALUES ( :url, :body_markup)");
+            $stmt = $this->connection->prepare("INSERT INTO `Pages` (url, body_markup) VALUES ( :url, :body_markup)");
 
             // Bind the parameters
             $stmt->bindParam(':url', $url, PDO::PARAM_STR);
@@ -47,7 +47,7 @@ class PageRepository extends Repository
     public function updateContent(int $id, string $body_markup)
     {
         try {
-            $stmt = $this->connection->prepare("UPDATE pages SET body_markup = :body_markup WHERE id = :id");
+            $stmt = $this->connection->prepare("UPDATE `Pages` SET body_markup = :body_markup WHERE id = :id");
 
             // Bind the parameters
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
