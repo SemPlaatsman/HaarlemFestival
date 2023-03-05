@@ -176,6 +176,18 @@ CREATE TABLE `Venue` (
   `seats` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `Event`
+--
+
+CREATE TABLE `Event` (
+  `id` int(11) NOT NULL,
+  `name` int(11) NOT NULL,
+  `date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Indexen voor geëxporteerde tabellen
 --
@@ -255,6 +267,12 @@ ALTER TABLE `Venue`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexen voor tabel `Event`
+--
+ALTER TABLE `Event`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT voor geëxporteerde tabellen
 --
 
@@ -322,6 +340,12 @@ ALTER TABLE `Users`
 -- AUTO_INCREMENT voor een tabel `Venue`
 --
 ALTER TABLE `Venue`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT voor een tabel `Event`
+--
+ALTER TABLE `Event`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
