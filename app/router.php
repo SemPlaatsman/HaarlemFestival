@@ -34,18 +34,23 @@ class router
                 $controller = new AdminOverviewController();
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     // Check if this is an update request
-                    if (isset($_POST['_method']) && $_POST['_method'] === 'PUT') {
+                    if (isset($_POST['_valueMethod']) && $_POST['_valueMethod'] === 'PUT') {
                         $controller->updateVenue();
-                    } else if (isset($_POST['_method']) && $_POST['_method'] === 'DELETE') {
+                    } else if (isset($_POST['_valueMethod']) && $_POST['_valueMethod'] === 'DELETE') {
                         $controller->deleteVenue();
-                    } else {
+                    } else if (isset($_POST['_valueMethod']) && $_POST['_valueMethod'] === 'CREATE') {
                         $controller->insertVenue();
+                    } else if (isset($_POST['_eventMethod']) && $_POST['_eventMethod'] === 'PUT') {
+                        $controller->updateEvent();
+                    } else if (isset($_POST['_eventMethod']) && $_POST['_eventMethod'] === 'DELETE') {
+                        $controller->deleteEvent();
+                    } else if (isset($_POST['_eventMethod']) && $_POST['_eventMethod'] === 'CREATE') {
+                        $controller->insertEvent();
                     }
                 } else {
                     $controller->index();
                 }
                 break;
-
 
             case 'captcha':
                 require_once __DIR__ . '/controllers/captchacontroller.php';
