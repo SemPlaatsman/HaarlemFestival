@@ -15,7 +15,7 @@ class LoginRepository extends Repository {
      * @return ?User
      */
     public function validateUser(string $email, string $password) : ?User {
-        $query = $this->connection->prepare("SELECT id, email, password, is_admin, name FROM Users WHERE email=:email");
+        $query = $this->connection->prepare("SELECT id, email, password, is_admin, name FROM users WHERE email=:email");
         $query->bindParam(":email", $email);
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC)[0] ?? null;
