@@ -28,6 +28,12 @@ class router
                     $controller->index();
                 }
                 break;
+            
+            case 'cart':
+                require_once __DIR__ . '/controllers/cartcontroller.php';
+                $controller = new CartController();
+                $controller->index();
+                break;
 
             case 'adminoverview':
                 require_once __DIR__ . '/controllers/adminoverviewcontroller.php';
@@ -83,13 +89,12 @@ class router
             case 'pdf':
                 require __DIR__ . '/controllers/pdfcontroller.php';
                 $controller = new pdfcontroller();
-
                 break;
+
             case 'api':
-                require __DIR__ . '/apiControllers/apiController.php';
-                $api = new api();
-
-                break;
+                // require __DIR__ . '/apiControllers/apiController.php';
+                // $api = new api();
+                // break;
 
 
 
@@ -126,3 +131,5 @@ class router
         return $uri;
     }
 }
+
+?>
