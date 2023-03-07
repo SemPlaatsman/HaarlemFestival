@@ -7,20 +7,21 @@ include __DIR__ . '/../header.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/adminoverview.css">
     <title>Admin Overview</title>
 </head>
 
 <body>
+    <h1>Venues</h1>
     <table>
         <thead>
-            <h1>Veneus</h1>
             <tr>
                 <th>ID</th>
                 <th>Name</th>
                 <th>Date</th>
                 <th>Address</th>
                 <th>Seats</th>
-                <th></th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -41,82 +42,52 @@ include __DIR__ . '/../header.php';
                     <td>
                         <?= $venue->getSeats() ?>
                     </td>
+                    <td>
+                        <form method="post" action="/adminoverview">
+                            <input type="hidden" name="id" value="<?= $venue->getId() ?>">
+                            <input type="hidden" name="_valueMethod" value="DELETE">
+                            <input type="submit" value="Delete">
+                        </form>
+                    </td>
                 </tr>
             <?php endforeach; ?>
-            <!-- Insert form (design will be changed later)-->
-            <form method="post" action="/adminoverview">
-                <tr>
-                    <td>
-                    </td>
-                    <td>
-                        <input type="text" id="name" name="name" required><br><br>
-                    </td>
-                    <td>
-                        <input type="datetime-local" id="date" name="date" step="1" required><br><br>
-                    </td>
-                    <td>
-                        <input type="text" id="address" name="address" required><br><br>
-                    </td>
-                    <td>
-                        <input type="number" id="seats" name="seats" required><br><br>
-                    </td>
+            <!-- Insert form -->
+            <tr>
+                <form method="post" action="/adminoverview">
+                    <td></td>
+                    <td><input type="text" id="name" name="name" required></td>
+                    <td><input type="datetime-local" id="date" name="date" step="1" required></td>
+                    <td><input type="text" id="address" name="address" required></td>
+                    <td><input type="number" id="seats" name="seats" required></td>
                     <td>
                         <input type="hidden" name="_valueMethod" value="CREATE">
                         <input type="submit" value="Insert">
                     </td>
-                </tr>
-            </form>
-            <!-- Update form (design will be changed later)-->
-            <form method="post" action="/adminoverview">
-                <tr>
-                    <td>
-                        <input type="number" id="id" name="id"><br><br>
-                    </td>
-                    <td>
-                        <input type="text" id="name" name="name" required><br><br>
-                    </td>
-                    <td>
-                        <input type="datetime-local" id="date" name="date" step="1" required><br><br>
-                    </td>
-                    <td>
-                        <input type="text" id="address" name="address" required><br><br>
-                    </td>
-                    <td>
-                        <input type="number" id="seats" name="seats" required><br><br>
-                    </td>
+                </form>
+            </tr>
+            <tr>
+                <form method="post" action="/adminoverview">
+                    <td><input type="number" id="id" name="id"></td>
+                    <td><input type="text" id="name" name="name" required></td>
+                    <td><input type="datetime-local" id="date" name="date" step="1" required></td>
+                    <td><input type="text" id="address" name="address" required></td>
+                    <td><input type="number" id="seats" name="seats" required></td>
                     <td>
                         <input type="hidden" name="_valueMethod" value="PUT">
-                        <input type="submit" value="Update">
+                        <input type="submit" value="Edit">
                     </td>
-                </tr>
-            </form>
-            <!-- Delete form (design will be changed later)-->
-            <form method="post" action="/adminoverview">
-                <tr>
-                    <td>
-                        <input type="number" id="id" name="id"><br><br>
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <input type="hidden" name="_valueMethod" value="DELETE">
-                        <input type="submit" value="Delete">
-                    </td>
-                </tr>
-            </form>
-
+                </form>
+            </tr>
         </tbody>
     </table>
+    <h1>Events</h1>
     <table>
         <thead>
-            <h1>Events</h1>
             <tr>
                 <th>ID</th>
                 <th>Name</th>
                 <th>Date</th>
-                <th></th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -131,59 +102,38 @@ include __DIR__ . '/../header.php';
                     <td>
                         <?= $event->getDate()->format('Y-m-d H:i:s') ?>
                     </td>
+                    <td>
+                        <form method="post" action="/adminoverview">
+                            <input type="hidden" name="id" value="<?= $event->getId() ?>">
+                            <input type="hidden" name="_eventMethod" value="DELETE">
+                            <input type="submit" value="Delete">
+                        </form>
+                    </td>
                 </tr>
             <?php endforeach; ?>
-            <!-- Insert form (design will be changed later)-->
-            <form method="post" action="/adminoverview">
-                <tr>
-                    <td>
-                    </td>
-                    <td>
-                        <input type="text" id="name" name="name" required><br><br>
-                    </td>
-                    <td>
-                        <input type="datetime-local" id="date" name="date" step="1" required><br><br>
-                    </td>
+            <!-- Insert form -->
+            <tr>
+                <form method="post" action="/adminoverview">
+                    <td></td>
+                    <td><input type="text" id="name" name="name" required></td>
+                    <td><input type="datetime-local" id="date" name="date" step="1" required></td>
                     <td>
                         <input type="hidden" name="_eventMethod" value="CREATE">
                         <input type="submit" value="Insert">
                     </td>
-                </tr>
-            </form>
-            <!-- Update form (design will be changed later)-->
-            <form method="post" action="/adminoverview">
-                <tr>
-                    <td>
-                        <input type="number" id="id" name="id"><br><br>
-                    </td>
-                    <td>
-                        <input type="text" id="name" name="name" required><br><br>
-                    </td>
-                    <td>
-                        <input type="datetime-local" id="date" name="date" step="1" required><br><br>
-                    </td>
+                </form>
+            </tr>
+            <tr>
+                <form method="post" action="/adminoverview">
+                    <td><input type="number" id="id" name="id"></td>
+                    <td><input type="text" id="name" name="name" required></td>
+                    <td><input type="datetime-local" id="date" name="date" step="1" required></td>
                     <td>
                         <input type="hidden" name="_eventMethod" value="PUT">
                         <input type="submit" value="Update">
                     </td>
-                </tr>
-            </form>
-            <!-- Delete form (design will be changed later)-->
-            <form method="post" action="/adminoverview">
-                <tr>
-                    <td>
-                        <input type="number" id="id" name="id"><br><br>
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <input type="hidden" name="_eventMethod" value="DELETE">
-                        <input type="submit" value="Delete">
-                    </td>
-                </tr>
-            </form>
+                </form>
+            </tr>
         </tbody>
     </table>
 </body>
