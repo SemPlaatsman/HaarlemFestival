@@ -3,13 +3,13 @@ class User {
     private int $id;
     private string $email;
     private bool $isAdmin = false;
-    private string $username;
+    private string $name;
 
-    function __construct(int $id = null, string $email = null, bool $isAdmin = null, string $username = null) {
+    function __construct(int $id = null, string $email = null, bool $isAdmin = null, string $name = null) {
         $this->id = $id;
         $this->email = $email;
         $this->isAdmin = $isAdmin;
-        $this->username = $username;
+        $this->name = $name;
     }
 
     /**
@@ -43,13 +43,13 @@ class User {
     }
 
     /**
-     * Get the value of username
+     * Get the value of name
      *
      * @return string
      */
-    public function getUsername(): string
+    public function getName(): string
     {
-        return $this->username;
+        return $this->name;
     }
 }
 ?>
