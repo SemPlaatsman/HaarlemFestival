@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../repositorie/artistrepository.php';
+require_once __DIR__ . '/../repositories/artistrepository.php';
 
 class ArtistService
 {
