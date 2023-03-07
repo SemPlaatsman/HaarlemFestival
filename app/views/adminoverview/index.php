@@ -19,7 +19,7 @@ include __DIR__ . '/../header.php';
                 <th>ID</th>
                 <th>Name</th>
                 <th>Date</th>
-                <th>Address</th>
+                <th>Location</th>
                 <th>Seats</th>
                 <th>Action</th>
             </tr>
@@ -37,7 +37,7 @@ include __DIR__ . '/../header.php';
                         <?= $venue->getDate()->format('Y-m-d H:i:s') ?>
                     </td>
                     <td>
-                        <?= $venue->getAddress() ?>
+                        <?= $venue->getLocation() ?>
                     </td>
                     <td>
                         <?= $venue->getSeats() ?>
@@ -57,7 +57,7 @@ include __DIR__ . '/../header.php';
                     <td></td>
                     <td><input type="text" id="name" name="name" required></td>
                     <td><input type="datetime-local" id="date" name="date" step="1" required></td>
-                    <td><input type="text" id="address" name="address" required></td>
+                    <td><input type="text" id="location" name="location" required></td>
                     <td><input type="number" id="seats" name="seats" required></td>
                     <td>
                         <input type="hidden" name="_valueMethod" value="CREATE">
@@ -70,7 +70,7 @@ include __DIR__ . '/../header.php';
                     <td><input type="number" id="id" name="id"></td>
                     <td><input type="text" id="name" name="name" required></td>
                     <td><input type="datetime-local" id="date" name="date" step="1" required></td>
-                    <td><input type="text" id="address" name="address" required></td>
+                    <td><input type="text" id="location" name="location" required></td>
                     <td><input type="number" id="seats" name="seats" required></td>
                     <td>
                         <input type="hidden" name="_valueMethod" value="PUT">
