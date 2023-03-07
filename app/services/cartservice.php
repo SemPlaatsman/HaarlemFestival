@@ -7,5 +7,9 @@ class CartService {
     function __construct() {
         $this->cartRepository = new CartRepository();
     }
+
+    public function getCart(int $userId) {
+        $this->cartRepository->getCart($userId);
+    }
 }
 ?>
