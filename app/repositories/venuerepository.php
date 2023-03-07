@@ -21,7 +21,7 @@ class VenueRepository extends Repository
                 $venue->setName($row['name']);
                 $date = DateTime::createFromFormat('Y-m-d H:i:s', $row['date']);
                 $venue->setDate($date);
-                $venue->setAddress($row['address']);
+                $venue->setLocation($row['location']);
                 $venue->setSeats($row['seats']);
                 array_push($venues, $venue);
             }
@@ -31,18 +31,18 @@ class VenueRepository extends Repository
         }
     }
 
-    public function insertVenue(string $name, DateTime $date, string $address, int $seats)
+    public function insertVenue(string $name, DateTime $date, string $location, int $seats)
     {
         try {
             // Create a venue
-            $stmt = $this->connection->prepare("INSERT INTO Venue (name, date, address, seats) VALUES ( :name, :date, :address, :seats)");
+            $stmt = $this->connection->prepare("INSERT INTO Venue (name, date, location, seats) VALUES ( :name, :date, :location, :seats)");
 
 
             // Bind the parameters
             $formattedDate = $date->format('Y-m-d H:i:s');
             $stmt->bindParam(':name', $name, PDO::PARAM_STR);
             $stmt->bindParam(':date', $formattedDate, PDO::PARAM_STR);
-            $stmt->bindParam(':address', $address, PDO::PARAM_STR);
+            $stmt->bindParam(':location', $location, PDO::PARAM_STR);
             $stmt->bindParam(':seats', $seats, PDO::PARAM_INT);
 
             $stmt->execute();
@@ -63,7 +63,7 @@ class VenueRepository extends Repository
             $formattedDate = $date->format('Y-m-d H:i:s');
             $stmt->bindParam(':name', $name, PDO::PARAM_STR);
             $stmt->bindParam(':date', $formattedDate, PDO::PARAM_STR);
-            $stmt->bindParam(':address', $address, PDO::PARAM_STR);
+            $stmt->bindParam(':location', $address, PDO::PARAM_STR);
             $stmt->bindParam(':seats', $seats, PDO::PARAM_INT);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 

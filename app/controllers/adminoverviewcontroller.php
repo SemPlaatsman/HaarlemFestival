@@ -35,10 +35,10 @@ class AdminOverviewController extends Controller
             $name = htmlspecialchars($_POST['name']);
             $dateStr = htmlspecialchars($_POST['date']);
             $date = DateTime::createFromFormat('Y-m-d\TH:i:s', $dateStr);
-            $address = htmlspecialchars($_POST['address']);
+            $location = htmlspecialchars($_POST['location']);
             $seats = htmlspecialchars($_POST['seats']);
 
-            $result = $this->venueService->insertVenue($name, $date, $address, $seats);
+            $result = $this->venueService->insertVenue($name, $date, $location, $seats);
 
             if ($result) {
                 // return success response
@@ -59,10 +59,10 @@ class AdminOverviewController extends Controller
             $name = htmlspecialchars($_POST['name']);
             $dateStr = htmlspecialchars($_POST['date']);
             $date = DateTime::createFromFormat('Y-m-d\TH:i:s', $dateStr);
-            $address = htmlspecialchars($_POST['address']);
+            $location = htmlspecialchars($_POST['location']);
             $seats = htmlspecialchars($_POST['seats']);
 
-            $result = $this->venueService->updateVenue($id, $name, $date, $address, $seats);
+            $result = $this->venueService->updateVenue($id, $name, $date, $location, $seats);
 
             if ($result) {
                 // return succes response

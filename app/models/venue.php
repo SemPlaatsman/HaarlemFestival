@@ -5,7 +5,7 @@ class Venue
     private int $id;
     private string $name;
     private DateTime $date;
-    private string $address;
+    private string $location;
     private int $seats;
 
     /**
@@ -83,18 +83,18 @@ class Venue
     /**
      * @return string
      */
-    public function getAddress(): string
+    public function getLocation(): string
     {
-        return $this->address;
+        return $this->location;
     }
 
     /**
-     * @param string $address 
+     * @param string $location 
      * @return self
      */
-    public function setAddress(string $address): self
+    public function setLocation(string $location): self
     {
-        $this->address = $address;
+        $this->location = $location;
         return $this;
     }
 }
