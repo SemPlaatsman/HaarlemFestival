@@ -28,7 +28,7 @@ class ArtistService
             $artists = $this->repository->getAll();
             return $artists ?? [];
         } catch (Exception $e) {
-            throw new ServiceException("An error occurred while retrieving the list of artists.", 500, $e);
+            throw new ServiceException("An error occurred while retrieving the list of artists.".$e->getMessage(), 500);
         }
     }
 

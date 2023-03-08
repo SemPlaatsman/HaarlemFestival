@@ -36,10 +36,10 @@ class api
 
                         $jsonBody =  $this->jsonhelper->retrieveJson();
 
-                        if (!$this->executeRequest(new artistController(), $this->url[2] ?? null,$jsonBody)){
-                            $this->errorhelper->error400();
+                        
+                        $this->executeRequest(new artistController(), $this->url[2] ?? null,$jsonBody);
 
-                        };
+                        
                         
                     break;
 
