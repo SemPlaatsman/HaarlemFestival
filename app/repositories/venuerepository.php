@@ -9,7 +9,7 @@ class VenueRepository extends Repository
         try {
             // Read all venues
             $venues = array();
-            $stmt = $this->connection->prepare("SELECT * FROM Venue");
+            $stmt = $this->connection->prepare("SELECT * FROM venue");
 
             $stmt->execute();
 
@@ -35,7 +35,7 @@ class VenueRepository extends Repository
     {
         try {
             // Create a venue
-            $stmt = $this->connection->prepare("INSERT INTO Venue (name, date, location, seats) VALUES ( :name, :date, :location, :seats)");
+            $stmt = $this->connection->prepare("INSERT INTO venue (name, date, location, seats) VALUES ( :name, :date, :location, :seats)");
 
 
             // Bind the parameters
@@ -53,17 +53,17 @@ class VenueRepository extends Repository
         }
     }
 
-    public function updateVenue(int $id, string $name, DateTime $date, string $address, int $seats)
+    public function updateVenue(int $id, string $name, DateTime $date, string $location, int $seats)
     {
         try {
             // Update a venue
-            $stmt = $this->connection->prepare("UPDATE Venue SET name=:name, date=:date, address=:address, seats=:seats WHERE id=:id");
+            $stmt = $this->connection->prepare("UPDATE venue SET name=:name, date=:date, location=:location, seats=:seats WHERE id=:id");
 
             // Bind the parameters
             $formattedDate = $date->format('Y-m-d H:i:s');
             $stmt->bindParam(':name', $name, PDO::PARAM_STR);
             $stmt->bindParam(':date', $formattedDate, PDO::PARAM_STR);
-            $stmt->bindParam(':location', $address, PDO::PARAM_STR);
+            $stmt->bindParam(':location', $location, PDO::PARAM_STR);
             $stmt->bindParam(':seats', $seats, PDO::PARAM_INT);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 
@@ -78,7 +78,7 @@ class VenueRepository extends Repository
     public function deleteVenue(int $id)
     {
         try {
-            $stmt = $this->connection->prepare("DELETE FROM Venue WHERE id=:id");
+            $stmt = $this->connection->prepare("DELETE FROM venue WHERE id=:id");
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
             return true;

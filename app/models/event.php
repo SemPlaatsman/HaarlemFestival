@@ -4,7 +4,8 @@ class Event
 {
     private int $id;
     private string $name;
-    private DateTime $date;
+    private DateTime $start_date;
+    private DateTime $end_date;
 
     /**
      * @return int
@@ -45,18 +46,36 @@ class Event
     /**
      * @return DateTime
      */
-    public function getDate(): DateTime
+    public function getStart_date(): DateTime
     {
-        return $this->date;
+        return $this->start_date;
     }
 
     /**
-     * @param DateTime $date 
+     * @param DateTime $start_date 
      * @return self
      */
-    public function setDate(DateTime $date): self
+    public function setStart_date(DateTime $start_date): self
     {
-        $this->date = $date;
+        $this->start_date = $start_date;
+        return $this;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getEnd_date(): DateTime
+    {
+        return $this->end_date;
+    }
+
+    /**
+     * @param DateTime $end_date 
+     * @return self
+     */
+    public function setEnd_date(DateTime $end_date): self
+    {
+        $this->end_date = $end_date;
         return $this;
     }
 }
