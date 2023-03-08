@@ -86,7 +86,8 @@ include __DIR__ . '/../header.php';
             <tr>
                 <th>ID</th>
                 <th>Name</th>
-                <th>Date</th>
+                <th>Start date</th>
+                <th>End date</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -100,7 +101,10 @@ include __DIR__ . '/../header.php';
                         <?= $event->getName() ?>
                     </td>
                     <td>
-                        <?= $event->getDate()->format('Y-m-d H:i:s') ?>
+                        <?= $event->getStart_date()->format('Y-m-d') ?>
+                    </td>
+                    <td>
+                        <?= $event->getEnd_date()->format('Y-m-d') ?>
                     </td>
                     <td>
                         <form method="post" action="/adminoverview">
@@ -116,7 +120,8 @@ include __DIR__ . '/../header.php';
                 <form method="post" action="/adminoverview">
                     <td></td>
                     <td><input type="text" id="name" name="name" required></td>
-                    <td><input type="datetime-local" id="date" name="date" step="1" required></td>
+                    <td><input type="date" id="start_date" name="start_date" required></td>
+                    <td><input type="date" id="start_date" name="end_date" required></td>
                     <td>
                         <input type="hidden" name="_eventMethod" value="CREATE">
                         <input type="submit" value="Insert">
@@ -127,10 +132,11 @@ include __DIR__ . '/../header.php';
                 <form method="post" action="/adminoverview">
                     <td><input type="number" id="id" name="id"></td>
                     <td><input type="text" id="name" name="name" required></td>
-                    <td><input type="datetime-local" id="date" name="date" step="1" required></td>
+                    <td><input type="date" id="start_date" name="start_date" required></td>
+                    <td><input type="date" id="end_date" name="end_date" required></td>
                     <td>
                         <input type="hidden" name="_eventMethod" value="PUT">
-                        <input type="submit" value="Update">
+                        <input type="submit" value="Edit">
                     </td>
                 </form>
             </tr>

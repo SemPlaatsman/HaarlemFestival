@@ -99,10 +99,14 @@ class AdminOverviewController extends Controller
     {
         try {
             $name = htmlspecialchars($_POST['name']);
-            $dateStr = htmlspecialchars($_POST['date']);
-            $date = DateTime::createFromFormat('Y-m-d\TH:i:s', $dateStr);
 
-            $result = $this->eventService->insertEvent($name, $date);
+            $dateStrStart = htmlspecialchars($_POST['start_date']);
+            $dateStart = DateTime::createFromFormat('Y-m-d', $dateStrStart);
+
+            $dateStrEnd = htmlspecialchars($_POST['end_date']);
+            $dateEnd = DateTime::createFromFormat('Y-m-d', $dateStrEnd);
+
+            $result = $this->eventService->insertEvent($name, $dateStart, $dateEnd);
 
             if ($result) {
                 // return success response
@@ -121,10 +125,14 @@ class AdminOverviewController extends Controller
         try {
             $id = htmlspecialchars($_POST['id']);
             $name = htmlspecialchars($_POST['name']);
-            $dateStr = htmlspecialchars($_POST['date']);
-            $date = DateTime::createFromFormat('Y-m-d\TH:i:s', $dateStr);
 
-            $result = $this->eventService->updateEvent($id, $name, $date);
+            $dateStrStart = htmlspecialchars($_POST['start_date']);
+            $dateStart = DateTime::createFromFormat('Y-m-d', $dateStrStart);
+
+            $dateStrEnd = htmlspecialchars($_POST['end_date']);
+            $dateEnd = DateTime::createFromFormat('Y-m-d', $dateStrEnd);
+
+            $result = $this->eventService->updateEvent($id, $name, $dateStart, $dateEnd);
 
             if ($result) {
                 // return succes response
