@@ -3,34 +3,37 @@ require_once __DIR__ . '/../repository/artistrepository.php';
 
 class ArtistService
 {
- 
-    function getArtist(int $id) : Artist
+    private $repository;
+
+    function __construct()
     {
-        $repository = new ArtistRepository();
+        $this->repository = new ArtistRepository();
+    }
+ 
+    function getArtist(int $id) : ?Artist
+    {        
         try {
-            $artist = $repository->get($id);
+            $artist = $this->repository->get($id);
         } catch (Exception $e) {
-            $artist = new Artist();
+            throw new ServiceException('Error getting artist: ' . $e->getMessage(), 404);
         } 
         return $artist;
     }
     
     function getArtists() : array 
     {
-        $repository = new ArtistRepository();
-        if(!$repository->getAll()){
-            
-            return array();
+       
+        try {
+            $artists = $this->repository->getAll();
+            return $artists ?? [];
+        } catch (Exception $e) {
+            throw new ServiceException("An error occurred while retrieving the list of artists.", 500, $e);
         }
-   
-
-        return $repository->getAll();
     }
 
     function createArtist(Artist $artist) : Artist
     {
-        $repository = new ArtistRepository();
-        $id = $repository->insert($artist->name);
+        $id = $this->repository->insert($artist->name);
         return $this->getArtist($id);
     }
 
@@ -48,8 +51,7 @@ class ArtistService
 
     function deleteArtist(int $id) : bool
     {
-        $repository = new ArtistRepository();
-        return $repository->delete($id);
+        return $this->repository->delete($id);
     }
     
 
