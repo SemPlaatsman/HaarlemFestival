@@ -78,6 +78,8 @@ class ArtistController
             if (is_null($this->service->updateArtist($id, $artist))) {
                 return false;
             }
+
+            $this->jsonHelper->printJsonSingle($artist);
             return true;
         } catch (ServiceException $e) {
             http_response_code($e->getHttpCode());
@@ -93,7 +95,7 @@ class ArtistController
 
 
 
-    //maybe put this in the artist model
+    // maybe put this in the artist model
     private function  MakeArtist(Object $data, int $id = null): Artist
     {
         $artist = new Artist();

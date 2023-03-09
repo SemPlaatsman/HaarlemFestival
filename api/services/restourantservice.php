@@ -3,41 +3,43 @@ require_once __DIR__ . '/../repository/restourantrepository.php';
 require_once __DIR__ . '/../models/restourant.php';
 class RestourantService{
 
+    private $repository;
 
-    function getRestourant(int $id) : Restourant
+    function __construct()
     {
-        $repository = new RestourantRepository();
+        $this->repository = new RestourantRepository();
+    }
+
+    function getRestourant(int $id) : ?Restourant
+    {
         try {
-            $Restourant = $repository->get($id);
+            $Restourant = $this->repository->get($id);
         } catch (Exception $e) {
-            $Restourant = new Restourant();
+            throw new ServiceException('Error getting restourant: ' . $e->getMessage(), 404);
         } 
         return $Restourant;
     }
     
     function getRestourants() : array 
     {
-        $repository = new RestourantRepository();
-        if(!$repository->getAll()){
-            
-            return array();
-        }
-   
+        try{
 
-        return $repository->getAll();
+        $Restourants = $this->repository->getAll();
+        return $Restourants ?? [];
+        }catch(Exception $e){
+            throw new ServiceException("An error occurred while retrieving the list of restourants.".$e->getMessage(), 500);
+        }
     }
 
     function createRestourant(Restourant $Restourant) : Restourant
     {
-        $repository = new RestourantRepository();
-        $id = $repository->insert($Restourant->name, $Restourant->seats);
+        $id = $this->repository->insert($Restourant->name, $Restourant->seats);
         return $this->getRestourant($id);
     }
 
     function updateRestourant(int $id, Restourant $updatedRestourant) : Restourant
     {
         $repository = new RestourantRepository();
-        $returnedID = $repository->update($id, $updatedRestourant->name, $updatedRestourant->seats);
         $retrievedRestourant = $this->getRestourant($id);
         if($updatedRestourant->name == $retrievedRestourant->name){
             return $retrievedRestourant;
