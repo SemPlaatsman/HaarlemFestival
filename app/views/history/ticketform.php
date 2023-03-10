@@ -68,9 +68,9 @@ if(isset($_POST['submit'])) {
       $mail->Port       = 587;                                    
 
       //Recipients
-      $mail->setFrom('691510@student.inholland.nl', 'Your Name');
+      $mail->setFrom('Haarlem@festival.nl', 'Haarlem festival');
       $mail->addAddress('janjaap.vanlaar2001@gmail.com', 'Recipient Name');     
-      $mail->addReplyTo('691510@student.inholland.nl', 'Your Name');
+      $mail->addReplyTo('Haarlem@organisation.festival.nl', 'Haarlem festival organisation');
 
       // Content
       $mail->isHTML(true);                                  
@@ -78,7 +78,6 @@ if(isset($_POST['submit'])) {
       $mail->Body    = 'Hello, this is a test email sent from PHPMailer.';
 
       $mail->send();
-      echo 'Message has been sent';
   } catch (Exception $e) {
       echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
   }
