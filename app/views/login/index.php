@@ -14,8 +14,8 @@
             </fieldset>
             <hr class="invisible">
             <hr class="custom-hr bg-black opacity-100">
-            <input class="btn btn-primary-b fs-3 <?= (isset($_POST['username']) && isset($_POST['password'])) ? "is-invalid" : "" ?>" type="submit" value="LOGIN" name="submit" />
-            <p class="text-center invalid-feedback text-light fs-6 p-1 my-0 mt-3 bg-danger rounded">Invalid username/password combination!</p>
+            <input class="btn btn-primary-b fs-3 <?= (isset($_POST['email']) && isset($_POST['password'])) ? "is-invalid" : "" ?>" type="submit" value="LOGIN" name="submit" />
+            <p class="text-center invalid-feedback text-light fs-6 p-1 my-0 mt-3 bg-danger rounded">Invalid email/password combination!</p>
         </form>
     </section>
 <?php

@@ -161,6 +161,62 @@
     background: var(--teyler-secondary-b);
 }
 
+.border-primary-a {
+    border-color: var(--primary-a);
+}
+
+.border-secondary-a {
+    border-color: var(--secondary-a);
+}
+
+.border-tetiare-a {
+    border-color: var(--tetiare-a);
+}
+
+.border-primary-b {
+    border-color: var(--primary-b);
+}
+
+.border-secondary-b {
+    border-color: var(--secondary-b);
+}
+
+.border-acid-yellow {
+    border-color: var(--acid-yellow);
+}
+
+.border-light-purple {
+    border-color: var(--light-purple);
+}
+
+.border-dark-purple {
+    border-color: var(--dark-purple);
+}
+
+.border-dance-gradient {
+    border-color: var(--dance-gradient);
+}
+
+.border-teyler-primary-a {
+    border-color: var(--teyler-primary-a);
+}
+
+.border-teyler-primary-b {
+    border-color: var(--teyler-primary-b);
+}
+
+.border-teyler-secondary-b {
+    border-color: var(--teyler-secondary-b);
+}
+
+.border- {
+    border-color: var(--);
+}
+
+.border- {
+    border-color: var(--);
+}
+
 .text-primary-a { 
     color: var(--primary-a);
 }

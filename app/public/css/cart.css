@@ -1,0 +1,11 @@
+.main-container {
+    background-color: var(--tetiare-a);
+}
+
+.cart-header {
+    font-size: 48pt;
+    border-bottom: 4px solid var(--primary-b); 
+    line-height: 0.1em;
+    margin-top: 50px;
+    margin-bottom: 25px;
+}
