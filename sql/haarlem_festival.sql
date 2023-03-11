@@ -3,13 +3,13 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Mar 07, 2023 at 06:34 PM
+-- Generation Time: Mar 11, 2023 at 06:30 PM
 -- Server version: 10.10.3-MariaDB-1:10.10.3+maria~ubu2204
 -- PHP Version: 8.1.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "+01:00";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -112,7 +112,8 @@ CREATE TABLE `item` (
 INSERT INTO `item` (`id`, `order_id`, `event_id`, `total_price`, `VAT`, `QR_Code`) VALUES
 (1, 1, 1, 40.00, 9, ''),
 (2, 1, 2, 220.00, 9, ''),
-(3, 1, 3, 77.50, 9, '');
+(3, 1, 3, 77.50, 9, ''),
+(4, 1, 1, 20.00, 9, '');
 
 -- --------------------------------------------------------
 
@@ -222,7 +223,8 @@ CREATE TABLE `reservation` (
 --
 
 INSERT INTO `reservation` (`id`, `restaurant_id`, `item_id`, `nr_of_adults`, `nr_of_kids`, `datetime`) VALUES
-(1, 1, 1, 2, 2, '2023-03-15 18:00:00');
+(1, 1, 1, 2, 2, '2023-03-15 18:00:00'),
+(2, 2, 4, 2, 0, '2023-03-25 19:00:00');
 
 -- --------------------------------------------------------
 
@@ -458,7 +460,7 @@ ALTER TABLE `history_tours`
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `opening_hours`
@@ -488,7 +490,7 @@ ALTER TABLE `performance`
 -- AUTO_INCREMENT for table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `restaurant`
