@@ -9,3 +9,11 @@
     margin-top: 50px;
     margin-bottom: 25px;
 }
+
+.cart-header > .hr-background {
+    padding: 0 10px;
+}
+
+table tbody tr {
+    cursor: pointer;
+}

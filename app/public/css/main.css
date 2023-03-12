@@ -209,14 +209,6 @@
     border-color: var(--teyler-secondary-b);
 }
 
-.border- {
-    border-color: var(--);
-}
-
-.border- {
-    border-color: var(--);
-}
-
 .text-primary-a { 
     color: var(--primary-a);
 }
@@ -348,14 +340,52 @@ p {
     font-family: DrukText;
 }
 
+/* Custom buttons based on the design provided in the following CodePen: https://codepen.io/ondrejsvestka/pen/NjxgVR */
+
 .btn.btn-tetiare-a {
     background-color: var(--tetiare-a);
+    border-color: var(--tetiare-a);
     color: var(--primary-b);
+    border-radius: 0;
+}
+
+.btn.btn-tetiare-a:hover,
+.btn.btn-tetiare-a:active,
+.btn.btn-tetiare-a:focus,
+.btn.btn-tetiare-a:active {
+    background-color: #E9C46BD0;
+    border-color: #E9C46BD0;
+    color: var(--primary-b);
+}
+
+.btn.btn-tetiare-a:hover.btn-bg-same,
+.btn.btn-tetiare-a:active.btn-bg-same,
+.btn.btn-tetiare-a:focus.btn-bg-same,
+.btn.btn-tetiare-a:active.btn-bg-same {
+    color: #264653D0;
 }
 
 .btn.btn-primary-b {
     background-color: var(--primary-b);
+    border-color: var(--primary-b);
     color: var(--tetiare-a);
+    border-radius: 0;
+}
+
+.btn.btn-primary-b:hover,
+.btn.btn-primary-b:active,
+.btn.btn-primary-b:focus,
+.btn.btn-primary-b:active {
+    background-color: #264653D0;
+    border-color: #264653D0;
+    color: var(--tetiare-a);
+}
+
+.btn.btn-primary-b:hover.btn-bg-same,
+.btn.btn-primary-b:active.btn-bg-same,
+.btn.btn-primary-b:focus.btn-bg-same,
+.btn.btn-primary-b:active.btn-bg-same {
+    color: #E9C46BD0;
 }
 
 /* <--- STANDARD COMPONENTS ---> */

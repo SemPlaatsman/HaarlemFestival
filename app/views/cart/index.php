@@ -6,11 +6,11 @@
   <h1 class="w-100 text-center cart-header"><span class="hr-background bg-tetiare-a">YUMMY!</span></h1>
     <thead>
       <tr>
-      <th scope="col">Restaurant</th>
-      <th scope="col">Nr of adults</th>
-      <th scope="col">Nr of kids</th>
-      <th scope="col">Date</th>
-      <th scope="col">Total price</th>
+        <th scope="col">Restaurant</th>
+        <th scope="col">Nr of adults</th>
+        <th scope="col">Nr of kids</th>
+        <th scope="col">Date</th>
+        <th scope="col">Total price</th>
       </tr>
     </thead>
     <tbody>
@@ -26,15 +26,15 @@
           <div class="modal-dialog">
             <div class="modal-content bg-primary-b text-tetiare-a">
               <div class="modal-header">
-                <h5 class="modal-title" id="modelYummyLabel<?= $reservation->getId(); ?>">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="modelYummyLabel<?= $reservation->getId(); ?>">RESERVATION DETAILS</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
                 <?= $reservation->getRestaurantName(); ?>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-primary-b btn-bg-same" data-bs-dismiss="modal">CLOSE</button>
+                <button type="button" class="btn btn-tetiare-a">SAVE CHANGES</button>
               </div>
             </div>
           </div>
@@ -63,19 +63,19 @@
           <td><?= date_format($ticketDance->getStartDate(), 'd-m-Y H:i'); ?></td>
           <td>€<?= number_format($ticketDance->getTotalPrice(), 2); ?></td>
         </tr>
-        <div class="modal fade" id="modalDance<?= $ticketDance->getId(); ?>" tabindex="-1" aria-labelledby="modelDanceLabel<?= $ticketDance->getId(); ?>" aria-hidden="true">
+        <div class="modal fade" id="modalDance<?= $ticketDance->getId(); ?>" tabindex="-2" aria-labelledby="modelDanceLabel<?= $ticketDance->getId(); ?>" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content bg-primary-b text-tetiare-a">
               <div class="modal-header">
-                <h5 class="modal-title" id="modelDanceLabel<?= $ticketDance->getId(); ?>">Modal title</h5>
+                <h5 class="modal-title" id="modelDanceLabel<?= $ticketDance->getId(); ?>">TICKET DETAILS</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
                 <?= $ticketDance->getVenueName(); ?>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-primary-b btn-bg-same" data-bs-dismiss="modal">CLOSE</button>
+                <button type="button" class="btn btn-tetiare-a">SAVE CHANGES</button>
               </div>
             </div>
           </div>
@@ -100,19 +100,19 @@
           <td><?= date_format($ticketHistory->getDatetime(), 'd-m-Y H:i'); ?></td>
           <td>€<?= number_format($ticketHistory->getTotalPrice(), 2); ?></td>
         </tr>
-        <div class="modal fade" id="modalHistory<?= $ticketHistory->getId(); ?>" tabindex="-1" aria-labelledby="modelHistoryLabel<?= $ticketHistory->getId(); ?>" aria-hidden="true">
+        <div class="modal fade" id="modalHistory<?= $ticketHistory->getId(); ?>" tabindex="-3" aria-labelledby="modelHistoryLabel<?= $ticketHistory->getId(); ?>" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content bg-primary-b text-tetiare-a">
               <div class="modal-header">
-                <h5 class="modal-title" id="modelHistoryLabel<?= $ticketHistory->getId(); ?>">Modal title</h5>
+                <h5 class="modal-title" id="modelHistoryLabel<?= $ticketHistory->getId(); ?>">TICKET DETAILS</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
                 <?= $ticketHistory->getLanguage(); ?>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-primary-b btn-bg-same" data-bs-dismiss="modal">CLOSE</button>
+                <button type="button" class="btn btn-tetiare-a">SAVE CHANGES</button>
               </div>
             </div>
           </div>
