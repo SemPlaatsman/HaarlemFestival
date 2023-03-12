@@ -58,12 +58,22 @@ abstract class Item {
         return $this->total_price;
     }
 
+    public function getTotalPriceFormatted()
+    {
+        return "€ " . number_format($this->total_price, 2);
+    }
+
     /**
      * Get the value of VAT
      */ 
     public function getVAT()
     {
         return $this->VAT;
+    }
+
+    public function getVATFormatted()
+    {
+        return $this->VAT . "%";
     }
 
     /**

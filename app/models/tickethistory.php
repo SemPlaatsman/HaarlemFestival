@@ -55,6 +55,11 @@ class TicketHistory extends Item {
         return $this->datetime;
     }
 
+    public function getDatetimeFormatted()
+    {
+        return date_format($this->datetime, 'd-m-Y H:i');
+    }
+
     /**
      * Get the value of employee_id
      */ 

@@ -17,3 +17,10 @@
 table tbody tr {
     cursor: pointer;
 }
+
+.form-hr {
+    margin-top: 10px;
+    height: 1px;
+    background-color: var(--tetiare-a);
+    opacity: 100%;
+}

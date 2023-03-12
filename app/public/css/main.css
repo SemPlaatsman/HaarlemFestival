@@ -162,51 +162,51 @@
 }
 
 .border-primary-a {
-    border-color: var(--primary-a);
+    border-color: var(--primary-a) !important;
 }
 
 .border-secondary-a {
-    border-color: var(--secondary-a);
+    border-color: var(--secondary-a) !important;
 }
 
 .border-tetiare-a {
-    border-color: var(--tetiare-a);
+    border-color: var(--tetiare-a) !important;
 }
 
 .border-primary-b {
-    border-color: var(--primary-b);
+    border-color: var(--primary-b) !important;
 }
 
 .border-secondary-b {
-    border-color: var(--secondary-b);
+    border-color: var(--secondary-b) !important;
 }
 
 .border-acid-yellow {
-    border-color: var(--acid-yellow);
+    border-color: var(--acid-yellow) !important;
 }
 
 .border-light-purple {
-    border-color: var(--light-purple);
+    border-color: var(--light-purple) !important;
 }
 
 .border-dark-purple {
-    border-color: var(--dark-purple);
+    border-color: var(--dark-purple) !important;
 }
 
 .border-dance-gradient {
-    border-color: var(--dance-gradient);
+    border-color: var(--dance-gradient) !important;
 }
 
 .border-teyler-primary-a {
-    border-color: var(--teyler-primary-a);
+    border-color: var(--teyler-primary-a) !important;
 }
 
 .border-teyler-primary-b {
-    border-color: var(--teyler-primary-b);
+    border-color: var(--teyler-primary-b) !important;
 }
 
 .border-teyler-secondary-b {
-    border-color: var(--teyler-secondary-b);
+    border-color: var(--teyler-secondary-b) !important;
 }
 
 .text-primary-a { 

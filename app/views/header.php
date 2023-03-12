@@ -24,7 +24,7 @@
           <ul class="navbar-nav fs-1 w-100 d-flex justify-content-center">
             <section class="w-100 d-flex flex-row justify-content-center">
               <li class="nav-item mx-5">
-                <a class="nav-link <?= $directory == "home" ? "active" : "" ?>" href="#">HOME</a>
+                <a class="nav-link <?= $directory == "home" ? "active" : "" ?>" href="home">HOME</a>
               </li>
               <li class="nav-item mx-5">
                 <a class="nav-link <?= $directory == "yummy" ? "active" : "" ?>" href="#">YUMMY!</a>
