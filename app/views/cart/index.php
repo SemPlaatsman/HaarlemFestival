@@ -19,26 +19,48 @@
           <th scope="row" class="fw-normal"><?= $reservation->getRestaurantName(); ?></th>
           <td><?= $reservation->getNrOfAdults(); ?></td>
           <td><?= $reservation->getNrOfKids(); ?></td>
-          <td><?= date_format($reservation->getDatetime(), 'd-m-Y H:i'); ?></td>
-          <td>€<?= number_format($reservation->getTotalPrice(), 2); ?></td>
+          <td><?= $reservation->getDatetimeFormatted(); ?></td>
+          <td><?= $reservation->getTotalPriceFormatted(); ?></td>
         </tr>
-        <div class="modal fade" id="modalYummy<?= $reservation->getId(); ?>" tabindex="-1" aria-labelledby="modelYummyLabel<?= $reservation->getId(); ?>" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content bg-primary-b text-tetiare-a">
-              <div class="modal-header">
+        <article class="modal fade" id="modalYummy<?= $reservation->getId(); ?>" tabindex="-1" aria-labelledby="modelYummyLabel<?= $reservation->getId(); ?>" aria-hidden="true">
+          <section class="modal-dialog modal-xl">
+            <article class="modal-content bg-primary-b text-tetiare-a">
+              <section class="modal-header border-tetiare-a">
                 <h5 class="modal-title" id="modelYummyLabel<?= $reservation->getId(); ?>">RESERVATION DETAILS</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <?= $reservation->getRestaurantName(); ?>
-              </div>
-              <div class="modal-footer">
+              </section>
+              <section class="modal-body">
+                <form action="POST" id="yummyEditForm<?= $reservation->getId(); ?>">
+                  <input type="hidden" name="editId" value="<?= $reservation->getId(); ?>">
+                  <dl class="row">
+                    <dt class="text-sm-start text-md-end col-md-2">Restaurant:</dt>
+                    <dd class="text-sm-start text-md-start col-md-10"><?= $reservation->getRestaurantName(); ?></dd>
+                    <dt class="text-sm-start text-md-end col-md-2">Location:</dt>
+                    <dd class="text-sm-start text-md-start col-md-10"><?= $reservation->getRestaurantLocation(); ?></dd>
+                    <hr class="form-hr">
+                    <dt class="text-sm-start text-md-end col-md-2">Adults:</dt>
+                    <dd class="text-sm-start text-md-start col-md-4"><input class="border border-2 border-tetiare-a" type="number" min="0" max="8" name="editNrOfAdults" value="<?= $reservation->getNrOfAdults(); ?>" form="yummyEditForm<?= $reservation->getId(); ?>"></dd>
+                    <dt class="text-sm-start text-md-end col-md-2">Kids:</dt>
+                    <dd class="text-sm-start text-md-start col-md-4"><input class="border border-2 border-tetiare-a" type="number" min="0" max="8" name="editNrOfKids" value="<?= $reservation->getNrOfKids(); ?>" form="yummyEditForm<?= $reservation->getId(); ?>"></dd>
+                    <dt class="text-sm-start text-md-end col-md-2">Date & time:</dt>
+                    <dd class="text-sm-start text-md-start col-md-10"><?= $reservation->getDatetimeFormatted(); ?></dd>
+                    <hr class="form-hr">
+                    <dt class="text-sm-start text-md-end col-md-2">Total price:</dt>
+                    <dd class="text-sm-start text-md-start col-md-4"><?= $reservation->getTotalPriceFormatted(); ?></dd>
+                    <dt class="text-sm-start text-md-end col-md-2">VAT:</dt>
+                    <dd class="text-sm-start text-md-start col-md-4"><?= $reservation->getVATFormatted(); ?></dd>
+                    <dt class="text-sm-start text-md-end col-md-2"><span data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip!">Final check:</span></dt>
+                    <dd class="text-sm-start text-md-start col-md-10"><?= $reservation->getFinalCheckFormatted(); ?></dd>
+                  </dl>
+                </form>
+              </section>
+              <section class="modal-footer border-tetiare-a">
                 <button type="button" class="btn btn-primary-b btn-bg-same" data-bs-dismiss="modal">CLOSE</button>
-                <button type="button" class="btn btn-tetiare-a">SAVE CHANGES</button>
-              </div>
-            </div>
-          </div>
-        </div>
+                <button type="button" type="submit" form="yummyEditForm<?= $reservation->getId(); ?>" class="btn btn-tetiare-a">SAVE CHANGES</button>
+              </section>
+            </article>
+          </section>
+        </article>
       <?php } ?>
     </tbody>
   </table>
@@ -60,26 +82,28 @@
           <th scope="row" class="fw-normal"><?= $ticketDance->getArtistName(); ?></th>
           <td><?= $ticketDance->getVenueName(); ?></td>
           <td><?= $ticketDance->getNrOfPeople(); ?></td>
-          <td><?= date_format($ticketDance->getStartDate(), 'd-m-Y H:i'); ?></td>
-          <td>€<?= number_format($ticketDance->getTotalPrice(), 2); ?></td>
+          <td><?= $ticketDance->getStartDateFormatted(); ?></td>
+          <td><?= $ticketDance->getTotalPriceFormatted(); ?></td>
         </tr>
-        <div class="modal fade" id="modalDance<?= $ticketDance->getId(); ?>" tabindex="-2" aria-labelledby="modelDanceLabel<?= $ticketDance->getId(); ?>" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content bg-primary-b text-tetiare-a">
-              <div class="modal-header">
-                <h5 class="modal-title" id="modelDanceLabel<?= $ticketDance->getId(); ?>">TICKET DETAILS</h5>
+        <article class="modal fade" id="modalDance<?= $ticketDance->getId(); ?>" tabindex="-2" aria-labelledby="modelDanceLabel<?= $ticketDance->getId(); ?>" aria-hidden="true">
+          <section class="modal-dialog">
+            <article class="modal-content bg-primary-b text-tetiare-a">
+              <section class="modal-header">
+                <h5 class="modal-title" id="modelDanceLabel<?= $ticketDance->getId(); ?>">TICKET DANCE DETAILS</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <?= $ticketDance->getVenueName(); ?>
-              </div>
-              <div class="modal-footer">
+              </section>
+              <section class="modal-body">
+                <form action="POST" id="danceEditForm<?= $ticketDance->getId(); ?>">
+
+                </form>
+              </section>
+              <section class="modal-footer">
                 <button type="button" class="btn btn-primary-b btn-bg-same" data-bs-dismiss="modal">CLOSE</button>
-                <button type="button" class="btn btn-tetiare-a">SAVE CHANGES</button>
-              </div>
-            </div>
-          </div>
-        </div>
+                <button type="button" type="submit" form="danceEditForm<?= $ticketDance->getId(); ?>" class="btn btn-tetiare-a">SAVE CHANGES</button>
+              </section>
+            </article>
+          </section>
+        </article>
       <?php } ?>
     </tbody>
   </table>
@@ -97,26 +121,28 @@
       <?php foreach ($model['ticketsHistory'] as $ticketHistory) { ?>
         <tr data-bs-toggle="modal" data-bs-target="#modalHistory<?= $ticketHistory->getId(); ?>">
           <th scope="row" class="fw-normal"><?= $ticketHistory->getLanguage(); ?></th>
-          <td><?= date_format($ticketHistory->getDatetime(), 'd-m-Y H:i'); ?></td>
-          <td>€<?= number_format($ticketHistory->getTotalPrice(), 2); ?></td>
+          <td><?= $ticketHistory->getDatetimeFormatted(); ?></td>
+          <td><?= $ticketHistory->getTotalPriceFormatted(); ?></td>
         </tr>
-        <div class="modal fade" id="modalHistory<?= $ticketHistory->getId(); ?>" tabindex="-3" aria-labelledby="modelHistoryLabel<?= $ticketHistory->getId(); ?>" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content bg-primary-b text-tetiare-a">
-              <div class="modal-header">
-                <h5 class="modal-title" id="modelHistoryLabel<?= $ticketHistory->getId(); ?>">TICKET DETAILS</h5>
+        <article class="modal fade" id="modalHistory<?= $ticketHistory->getId(); ?>" tabindex="-3" aria-labelledby="modelHistoryLabel<?= $ticketHistory->getId(); ?>" aria-hidden="true">
+          <section class="modal-dialog">
+            <article class="modal-content bg-primary-b text-tetiare-a">
+              <section class="modal-header">
+                <h5 class="modal-title" id="modelHistoryLabel<?= $ticketHistory->getId(); ?>">TICKET HISTORY DETAILS</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <?= $ticketHistory->getLanguage(); ?>
-              </div>
-              <div class="modal-footer">
+              </section>
+              <section class="modal-body">
+                <form action="POST" id="historyEditForm<?= $ticketHistory->getId(); ?>">
+
+                </form>
+              </section>
+              <section class="modal-footer">
                 <button type="button" class="btn btn-primary-b btn-bg-same" data-bs-dismiss="modal">CLOSE</button>
-                <button type="button" class="btn btn-tetiare-a">SAVE CHANGES</button>
-              </div>
-            </div>
-          </div>
-        </div>
+                <button type="button" type="submit" form="historyEditForm<?= $ticketHistory->getId(); ?>" class="btn btn-tetiare-a">SAVE CHANGES</button>
+              </section>
+            </article>
+          </section>
+        </article>
       <?php } ?>
     </tbody>
   </table>

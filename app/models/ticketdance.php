@@ -83,12 +83,22 @@ class TicketDance extends Item {
         return $this->start_date;
     }
 
+    public function getStartDateFormatted()
+    {
+        return date_format($this->start_date, 'd-m-Y H:i');
+    }
+
     /**
      * Get the value of end_date
      */ 
     public function getEndDate()
     {
         return $this->end_date;
+    }
+
+    public function getEndDateFormatted()
+    {
+        return date_format($this->end_date, 'd-m-Y H:i');
     }
 
     /**
