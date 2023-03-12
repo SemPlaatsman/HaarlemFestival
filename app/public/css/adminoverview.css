@@ -1,21 +1,29 @@
+body {
+    background-color: var(--tetiare-a);
+}
+
 table {
     border-collapse: collapse;
     width: 100%;
+    background-color: var(--primary-b);
+}
+
+table.table {
+    margin: auto;
+    margin-top: 20px;
+    max-width: 1200px;
+    border: 1px solid var(--tetiare-a);
+}
+
+.title-table {
+    font-size: 25px;
 }
 
 th,
 td {
-    text-align: left;
+    text-align: center;
     padding: 8px;
-}
-
-th {
-    background-color: var(--tetiare-a);
-    color: white;
-}
-
-tr:nth-child(even) {
-    background-color: #f2f2f2;
+    color: var(--tetiare-a);
 }
 
 form {
@@ -24,14 +32,27 @@ form {
 }
 
 input[type="submit"] {
-    background-color: var(--primary-b);
-    color: var(--tetiare-a);
+    background-color: var(--primary-a);
+    color:  var(--primary-b);
     border: none;
     padding: 8px 16px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 14px;
+    font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
+}
+
+footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+footer button {
+    width: 100%;
+    max-width: 800px;
+    margin-top: 20px;
 }
