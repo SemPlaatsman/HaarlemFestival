@@ -15,11 +15,11 @@ class LoginRepository extends Repository {
      * @return ?User
      */
     public function validateUser(string $email, string $password) : ?User {
-        $query = $this->connection->prepare("SELECT id, email, password, is_admin, name FROM Users WHERE email=:email");
+        $query = $this->connection->prepare("SELECT id, email, password, is_admin, name FROM users WHERE email=:email LIMIT 1");
         $query->bindParam(":email", $email);
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC)[0] ?? null;
-        if (!empty($result) && (isset($result['id']) && isset($result['email']) && isset($result['is_admin']) && isset($result['name'])) && password_verify($_POST['password'], $result['password'])) {
+        if (!empty($result) && (isset($result['id']) && isset($result['email']) && isset($result['is_admin']) && isset($result['name'])) && password_verify($password, $result['password'])) {
             return new User($result['id'], $result['email'], boolval($result['is_admin']), $result['name']);
         }
         return null;
