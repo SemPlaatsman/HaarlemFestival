@@ -38,16 +38,15 @@ class AdminOverviewController extends Controller
     {
         try {
             $name = htmlspecialchars($_POST['name']);
-            $dateStr = htmlspecialchars($_POST['date']);
-            $date = DateTime::createFromFormat('Y-m-d\TH:i:s', $dateStr);
             $location = htmlspecialchars($_POST['location']);
             $seats = htmlspecialchars($_POST['seats']);
 
-            $result = $this->venueService->insertVenue($name, $date, $location, $seats);
+            $result = $this->venueService->insertVenue($name, $location, $seats);
 
             if ($result) {
-                // return success response
-                echo 'insert complete venue';
+                // redirect to the same page with a success query parameter
+                header("Location: /adminoverview");
+                exit;
             } else {
                 // return failed response
                 echo 'Something went wrong with the insert';
@@ -62,16 +61,14 @@ class AdminOverviewController extends Controller
         try {
             $id = htmlspecialchars($_POST['id']);
             $name = htmlspecialchars($_POST['name']);
-            $dateStr = htmlspecialchars($_POST['date']);
-            $date = DateTime::createFromFormat('Y-m-d\TH:i:s', $dateStr);
             $location = htmlspecialchars($_POST['location']);
             $seats = htmlspecialchars($_POST['seats']);
 
-            $result = $this->venueService->updateVenue($id, $name, $date, $location, $seats);
+            $result = $this->venueService->updateVenue($id, $name, $location, $seats);
 
             if ($result) {
                 // return succes response
-                echo 'Update complete venue';
+                header("Location: /adminoverview");
             } else {
                 // return failed response
                 echo 'Something went wrong with the update';
@@ -89,7 +86,7 @@ class AdminOverviewController extends Controller
             $result = $this->venueService->deleteVenue($id);
             if ($result) {
                 // return success response
-                echo 'Venue deleted';
+                header("Location: /adminoverview");
             } else {
                 // return failed response
                 echo 'Something went wrong with the deletion';
@@ -115,7 +112,7 @@ class AdminOverviewController extends Controller
 
             if ($result) {
                 // return success response
-                echo 'insert complete event';
+                header("Location: /adminoverview");
             } else {
                 // return failed response
                 echo 'Something went wrong with the insert';
@@ -141,7 +138,7 @@ class AdminOverviewController extends Controller
 
             if ($result) {
                 // return succes response
-                echo 'Update complete event';
+                header("Location: /adminoverview");
             } else {
                 // return failed response
                 echo 'Something went wrong with the update';
@@ -159,7 +156,7 @@ class AdminOverviewController extends Controller
             $result = $this->eventService->deleteEvent($id);
             if ($result) {
                 // return success response
-                echo 'Event deleted';
+                header("Location: /adminoverview");
             } else {
                 // return failed response
                 echo 'Something went wrong with the deletion';
@@ -181,7 +178,7 @@ class AdminOverviewController extends Controller
 
             if ($result) {
                 // return success response
-                echo 'insert complete artist';
+                header("Location: /adminoverview");
             } else {
                 // return failed response
                 echo 'Something went wrong with the insert';
@@ -194,9 +191,6 @@ class AdminOverviewController extends Controller
     public function updateArtist()
     {
         try {
-            // $id = htmlspecialchars($_POST['id']);
-            //$name = htmlspecialchars($_POST['name']);
-
             $artist = new Artist();
             $artist->id = intval($_POST['id']);
             $artist->name = htmlspecialchars($_POST['name']);
@@ -205,7 +199,7 @@ class AdminOverviewController extends Controller
 
             if ($result) {
                 // return succes response
-                echo 'Update complete artist';
+                header("Location: /adminoverview");
             } else {
                 // return failed response
                 echo 'Something went wrong with the update';
@@ -224,7 +218,7 @@ class AdminOverviewController extends Controller
             $result = $this->artistservice->deleteArtist($id);
             if ($result) {
                 // return success response
-                echo 'Event deleted';
+                header("Location: /adminoverview");
             } else {
                 // return failed response
                 echo 'Something went wrong with the deletion';

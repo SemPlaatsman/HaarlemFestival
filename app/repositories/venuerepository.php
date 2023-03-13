@@ -9,7 +9,7 @@ class VenueRepository extends Repository
         try {
             // Read all venues
             $venues = array();
-            $stmt = $this->connection->prepare("SELECT * FROM venue");
+            $stmt = $this->connection->prepare("SELECT `id`, `name`, `location`, `seats` FROM `venue`");
 
             $stmt->execute();
 
@@ -19,8 +19,6 @@ class VenueRepository extends Repository
                 $venue = new Venue();
                 $venue->setId($row['id']);
                 $venue->setName($row['name']);
-                $date = DateTime::createFromFormat('Y-m-d H:i:s', $row['date']);
-                $venue->setDate($date);
                 $venue->setLocation($row['location']);
                 $venue->setSeats($row['seats']);
                 array_push($venues, $venue);
@@ -31,17 +29,15 @@ class VenueRepository extends Repository
         }
     }
 
-    public function insertVenue(string $name, DateTime $date, string $location, int $seats)
+    public function insertVenue(string $name, string $location, int $seats)
     {
         try {
             // Create a venue
-            $stmt = $this->connection->prepare("INSERT INTO venue (name, date, location, seats) VALUES ( :name, :date, :location, :seats)");
+            $stmt = $this->connection->prepare("INSERT INTO `venue` (name, location, seats) VALUES ( :name, :location, :seats)");
 
 
             // Bind the parameters
-            $formattedDate = $date->format('Y-m-d H:i:s');
             $stmt->bindParam(':name', $name, PDO::PARAM_STR);
-            $stmt->bindParam(':date', $formattedDate, PDO::PARAM_STR);
             $stmt->bindParam(':location', $location, PDO::PARAM_STR);
             $stmt->bindParam(':seats', $seats, PDO::PARAM_INT);
 
@@ -53,16 +49,14 @@ class VenueRepository extends Repository
         }
     }
 
-    public function updateVenue(int $id, string $name, DateTime $date, string $location, int $seats)
+    public function updateVenue(int $id, string $name, string $location, int $seats)
     {
         try {
             // Update a venue
-            $stmt = $this->connection->prepare("UPDATE venue SET name=:name, date=:date, location=:location, seats=:seats WHERE id=:id");
+            $stmt = $this->connection->prepare("UPDATE `venue` SET name=:name, location=:location, seats=:seats WHERE id=:id");
 
             // Bind the parameters
-            $formattedDate = $date->format('Y-m-d H:i:s');
             $stmt->bindParam(':name', $name, PDO::PARAM_STR);
-            $stmt->bindParam(':date', $formattedDate, PDO::PARAM_STR);
             $stmt->bindParam(':location', $location, PDO::PARAM_STR);
             $stmt->bindParam(':seats', $seats, PDO::PARAM_INT);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
@@ -78,13 +72,29 @@ class VenueRepository extends Repository
     public function deleteVenue(int $id)
     {
         try {
-            $stmt = $this->connection->prepare("DELETE FROM venue WHERE id=:id");
+            $stmt = $this->connection->prepare("SELECT `id` FROM `venue` WHERE id=:id");
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
+
+            if ($stmt->rowCount() === 0) {
+                // Record with the given ID does not exist
+                return false;
+            }
+
+            $stmt = $this->connection->prepare("DELETE FROM `venue` WHERE id=:id LIMIT 1");
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+
+            if ($stmt->rowCount() === 0) {
+                // Failed to delete the record
+                return false;
+            }
+
             return true;
         } catch (PDOException $e) {
             return false;
         }
     }
+
 }
 ?>
