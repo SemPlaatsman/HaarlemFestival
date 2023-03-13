@@ -44,14 +44,10 @@ class api
                     break;
 
                     //restourant endpoint
-                    case 'restourants':
-                        require_once  __DIR__ . '/../controllers/restourantsController.php';
+                    case 'restaurants':
+                        require_once  __DIR__ . '/../controllers/restaurantsController.php';
                         $jsonBody =  $this->jsonhelper->retrieveJson();
-                        
-                        if (!$this->executeRequest(new RestourantController(), $this->url[2] ?? null,$jsonBody)){
-                            $this->errorhelper->error404();
-
-                        };
+                        $this->executeRequest(new RestaurantController(), $this->url[2] ?? null,$jsonBody);
                         break;
 
 
@@ -59,11 +55,9 @@ class api
                     case 'users':
                         require_once  __DIR__ . '/../controllers/usersController.php';
                         $jsonBody =  $this->jsonhelper->retrieveJson();
+                        $this->executeRequest(new UserController(), $this->url[2] ?? null,$jsonBody);
 
-                        if (!$this->executeRequest(new UserController(), $this->url[2] ?? null,$jsonBody)){
-                            $this->errorhelper->error404();
-
-                        };
+                       
                         break;
 
                     default:

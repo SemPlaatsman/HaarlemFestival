@@ -88,9 +88,16 @@ class ArtistController
         }
     }
 
-    public function delete()
+    public function delete(int $id) : bool
     {
-        echo "delete";
+        try {
+            $this->service->deleteArtist($id);
+            return true;
+        } catch (ServiceException $e) {
+            http_response_code($e->getHttpCode());
+            echo json_encode(array("message" => $e->getMessage()));
+            return false;
+        }
     }
 
 

@@ -1,9 +1,9 @@
 <?php
 require_once __DIR__ . '/repository.php';
-require_once __DIR__ . '/../models/restourant.php';
+require_once __DIR__ . '/../models/restaurant.php';
 
 
-class RestourantRepository extends Repository{
+class RestaurantRepository extends Repository{
 
     public function insert(string $name,int $seats ):int {
         $stmnt = $this -> connection -> prepare("INSERT INTO `Restaurant` (name, seats) VALUES (:name,:seats);");
@@ -30,20 +30,20 @@ class RestourantRepository extends Repository{
 
     }
 
-    public function get(int $id) : Restourant {
+    public function get(int $id) : Restaurant {
         $stmnt = $this -> connection -> prepare("SELECT `id`, `name`, `seats` FROM `Restaurant` WHERE id = :id ;");
         $stmnt -> bindParam(':id', $id, PDO::PARAM_INT);
-        $stmnt -> setFetchMode(PDO::FETCH_CLASS, 'Restourant');
+        $stmnt -> setFetchMode(PDO::FETCH_CLASS, 'Restaurant');
         $stmnt -> execute();
         $artist = $stmnt -> fetch();
         if ($artist === false) {
-            throw new Exception('Restournat not found');
+            throw new Exception('Restaurnat not found');
         }
         return $artist;
     }
     public function getAll():array  {
         $stmnt = $this -> connection -> prepare("SELECT `id`, `name`, `seats` FROM `Restaurant`;");
-        $stmnt -> setFetchMode(PDO::FETCH_CLASS, 'Restourant');
+        $stmnt -> setFetchMode(PDO::FETCH_CLASS, 'Restaurant');
         $stmnt -> execute();
         $artist = $stmnt -> fetchAll();
         return $artist;
