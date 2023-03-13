@@ -3,7 +3,7 @@ require_once __DIR__ . '/repository.php';
 require_once __DIR__ . '/../models/item.php';
 class ItemRepository extends Repository {
 
-    public function insertItem(Item item):int {
+    public function insertItem(Item $item):int {
         try {
             $stmnt = $this -> connection -> prepare("INSERT INTO Item (id, item_type_id, price, VAT, shoppingcart_id, QR_Code) VALUES (:id, :item_type_id, :price, :VAT, :shoppingcart_id, :QR_Code)");
             $stmnt -> bindParam(':id', $item->id, PDO::PARAM_STR);
@@ -15,12 +15,12 @@ class ItemRepository extends Repository {
             $stmnt -> execute();
             return $this->connection->lastInsertId();
         } catch (PDOException $e) {
-            return false;
+            return null;
         }
         
     }
 
-    public function updateItem(Item item):bool {
+    public function updateItem(Item $item):bool {
         try {
             $stmnt = $this -> connection -> prepare("UPDATE Item SET item_type_id=:item_type_id, price=:price, VAT=:VAT, shoppingcart_id=:shoppingcart_id, QR_Code=:QR_Code WHERE id=:id;");
             $stmnt -> bindParam(':id', $item->id, PDO::PARAM_STR);
@@ -57,7 +57,7 @@ class ItemRepository extends Repository {
             $item = $stmnt -> fetch();
         return $item;
         } catch (PDOException $e) {
-            return false;
+            return null;
         }
         
     }
@@ -69,7 +69,7 @@ class ItemRepository extends Repository {
             $items = $stmnt -> fetchAll();
             return $items;
         } catch (PDOException $e) {
-            return false;
+            return null;
         }
         
     }
