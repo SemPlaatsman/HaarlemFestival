@@ -15,7 +15,7 @@
     </thead>
     <tbody>
       <?php foreach ($model['reservations'] as $reservation) { ?>
-        <tr data-bs-toggle="modal" data-bs-target="#modalYummy<?= $reservation->getId(); ?>">
+        <tr role="button" data-bs-toggle="modal" data-bs-target="#modalYummy<?= $reservation->getId(); ?>">
           <th scope="row" class="fw-normal"><?= $reservation->getRestaurantName(); ?></th>
           <td><?= $reservation->getNrOfAdults(); ?></td>
           <td><?= $reservation->getNrOfKids(); ?></td>
@@ -78,7 +78,7 @@
     </thead>
     <tbody>
       <?php foreach ($model['ticketsDance'] as $ticketDance) { ?>
-        <tr data-bs-toggle="modal" data-bs-target="#modalDance<?= $ticketDance->getId(); ?>">
+        <tr role="button" data-bs-toggle="modal" data-bs-target="#modalDance<?= $ticketDance->getId(); ?>">
           <th scope="row" class="fw-normal"><?= $ticketDance->getArtistName(); ?></th>
           <td><?= $ticketDance->getVenueName(); ?></td>
           <td><?= $ticketDance->getNrOfPeople(); ?></td>
@@ -119,7 +119,7 @@
     </thead>
     <tbody>
       <?php foreach ($model['ticketsHistory'] as $ticketHistory) { ?>
-        <tr data-bs-toggle="modal" data-bs-target="#modalHistory<?= $ticketHistory->getId(); ?>">
+        <tr role="button" data-bs-toggle="modal" data-bs-target="#modalHistory<?= $ticketHistory->getId(); ?>">
           <th scope="row" class="fw-normal"><?= $ticketHistory->getLanguage(); ?></th>
           <td><?= $ticketHistory->getDatetimeFormatted(); ?></td>
           <td><?= $ticketHistory->getTotalPriceFormatted(); ?></td>
