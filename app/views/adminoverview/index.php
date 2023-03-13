@@ -1,158 +1,165 @@
 <?php
 include __DIR__ . '/../header.php';
 ?>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/adminoverview.css">
-    <title>Admin Overview</title>
-    <style>
-    </style>
-</head>
 
 <body>
     <div class="row" class="container">
         <div class="col-md-12">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th colspan="7" class="title-table">Venues</th>
-                    </tr>
-                    <tr>
-                        <th class="col-1">ID</th>
-                        <th class="col-3">Name</th>
-                        <th>Date</th>
-                        <th>Location</th>
-                        <th>Seats</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($model['venue'] as $venue): ?>
+            <div class="overflow-auto">
+                <table class="table table-bordered w-100 bg-primary-b m-auto mt-3 border border-white text-tetiare-a">
+                    <thead class="text-center">
                         <tr>
-                            <td>
-                                <?= $venue->getId() ?>
-                            </td>
-                            <td>
-                                <?= $venue->getName() ?>
-                            </td>
-                            <td>
-                                <?= $venue->getDate()->format('Y-m-d H:i:s') ?>
-                            </td>
-                            <td>
-                                <?= $venue->getLocation() ?>
-                            </td>
-                            <td>
-                                <?= $venue->getSeats() ?>
-                            </td>
-                            <td class="col-2">
-                                <div class="d-flex justify-content-center align-items-center">
-                                    <form method="post" action="/adminoverview">
-                                        <input type="hidden" name="id" value="<?= $venue->getId() ?>">
-                                        <input type="hidden" name="_venueMethod" value="DELETE">
-                                        <input type="submit" class="btn btn-danger mr-1" value="Delete">
-                                    </form>
-                                    <input type="submit" class="btn btn-primary edit-button-venue" value="Edit"
-                                        data-id="<?= $venue->getId() ?>">
-                                </div>
-                            </td>
+                            <th colspan="7" class="fs-3">Venues</th>
                         </tr>
-                    <?php endforeach; ?>
-                    <td colspan="7" class="text-center">
-                        <input type="submit" class="btn btn-primary insert-button-venue" value="Insert"
-                            style="width: 50%;">
-                    </td>
-                </tbody>
-            </table>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th colspan="7" class="title-table">Event</th>
-                    </tr>
-                    <tr>
-                        <th class="col-1">ID</th>
-                        <th class="col-3">Name</th>
-                        <th>Start date</th>
-                        <th>End date</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($model['event'] as $event): ?>
                         <tr>
-                            <td>
-                                <?= $event->getId() ?>
-                            </td>
-                            <td>
-                                <?= $event->getName() ?>
-                            </td>
-                            <td>
-                                <?= $event->getStart_date()->format('Y-m-d') ?>
-                            </td>
-                            <td>
-                                <?= $event->getEnd_date()->format('Y-m-d') ?>
-                            </td>
-                            <td class="col-2">
-                                <div class="d-flex justify-content-center align-items-center">
-                                    <form method="post" action="/adminoverview">
-                                        <input type="hidden" name="id" value="<?= $event->getId() ?>">
-                                        <input type="hidden" name="_eventMethod" value="DELETE">
-                                        <input type="submit" class="btn btn-danger mr-1" value="Delete">
-                                    </form>
-                                    <input type="submit" class="btn btn-primary edit-button-event" value="Edit"
-                                        data-id="<?= $event->getId() ?>">
-                                </div>
-                            </td>
+                            <th class="col-1">ID</th>
+                            <th class="col-3">Name</th>
+                            <th>Location</th>
+                            <th>Seats</th>
+                            <th>Action</th>
                         </tr>
-                    <?php endforeach; ?>
-                    <td colspan="7" class="text-center">
-                        <input type="submit" class="btn btn-primary insert-button-event" value="Insert"
-                            style="width: 50%;">
-                    </td>
-                </tbody>
-            </table>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th colspan="7" class="title-table">Artist</th>
-                    </tr>
-                    <tr>
-                        <th class="col-1">ID</th>
-                        <th>Name</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($model['artist'] as $artist): ?>
+                    </thead>
+                    <tbody class="text-center">
+                        <?php foreach ($model['venue'] as $venue): ?>
+                            <tr>
+                                <td>
+                                    <?= $venue->getId() ?>
+                                </td>
+                                <td>
+                                    <?= $venue->getName() ?>
+                                </td>
+                                <td>
+                                    <?= $venue->getLocation() ?>
+                                </td>
+                                <td>
+                                    <?= $venue->getSeats() ?>
+                                </td>
+                                <td class="col-2">
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <form method="post" action="/adminoverview">
+                                            <input type="hidden" name="id" value="<?= $venue->getId() ?>">
+                                            <input type="hidden" name="_venueMethod" value="DELETE">
+                                            <button type="submit"
+                                                class="btn btn-danger mr-1 bg-primary-a text-white border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
+                                                value="DELETE"><i class="fas fa-trash-alt"></i></button>
+                                        </form>
+                                        <button type="button"
+                                            class="btn btn-primary edit-button-venue bg-primary-a text-white border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
+                                            value="EDIT" data-id="<?= $venue->getId() ?>"><i
+                                                class="fas fa-edit"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                        <td colspan="7" class="text-center">
+                            <input type="submit"
+                                class="btn btn-primary insert-button-venue bg-primary-a text-white border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
+                                value="INSERT" style="width: 50%;">
+                        </td>
+                    </tbody>
+                </table>
+            </div>
+            <div class="overflow-auto">
+                <table class="table table-bordered w-100 bg-primary-b m-auto mt-3 border border-white text-tetiare-a">
+                    <thead class="text-center">
                         <tr>
-                            <td>
-                                <?= $artist->id ?>
-                            </td>
-                            <td>
-                                <?= $artist->name ?>
-                            </td>
-                            <td class="col-2">
-                                <div class="d-flex justify-content-center align-items-center">
-                                    <form method="post" action="/adminoverview">
-                                        <input type="hidden" name="id" value="<?= $artist->id ?>">
-                                        <input type="hidden" name="_artistMethod" value="DELETE">
-                                        <input type="submit" class="btn btn-danger mr-1" value="Delete">
-                                    </form>
-                                    <input type="submit" class="btn btn-primary edit-button-artist" value="Edit"
-                                        data-id="<?= $artist->id ?>">
-                                </div>
-                            </td>
+                            <th colspan="7" class="fs-3">Event</th>
                         </tr>
-                    <?php endforeach; ?>
-                    <td colspan="7" class="text-center">
-                        <input type="submit" class="btn btn-primary insert-button-artist" value="Insert"
-                            style="width: 50%;">
-                    </td>
-                </tbody>
-            </table>
+                        <tr>
+                            <th class="col-1">ID</th>
+                            <th class="col-3">Name</th>
+                            <th>Start date</th>
+                            <th>End date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        <?php foreach ($model['event'] as $event): ?>
+                            <tr>
+                                <td>
+                                    <?= $event->getId() ?>
+                                </td>
+                                <td>
+                                    <?= $event->getName() ?>
+                                </td>
+                                <td>
+                                    <?= $event->getStart_date()->format('Y-m-d') ?>
+                                </td>
+                                <td>
+                                    <?= $event->getEnd_date()->format('Y-m-d') ?>
+                                </td>
+                                <td class="col-2">
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <form method="post" action="/adminoverview">
+                                            <input type="hidden" name="id" value="<?= $event->getId() ?>">
+                                            <input type="hidden" name="_eventMethod" value="DELETE">
+                                            <button type="submit"
+                                                class="btn btn-danger mr-1 bg-primary-a text-white border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
+                                                value="DELETE"><i class="fas fa-trash-alt"></i></button>
+                                        </form>
+                                        <button type="button"
+                                            class="btn btn-primary edit-button-event bg-primary-a text-white border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
+                                            value="EDIT" data-id="<?= $event->getId() ?>"><i
+                                                class="fas fa-edit"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                        <td colspan="7" class="text-center">
+                            <input type="submit"
+                                class="btn btn-primary insert-button-event bg-primary-a text-white border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
+                                value="INSERT" style="width: 50%;">
+                        </td>
+                    </tbody>
+                </table>
+                <div class="overflow-auto">
+                    <table
+                        class="table table-bordered w-100 bg-primary-b m-auto mt-3 mb-3 border border-white text-tetiare-a">
+                        <thead class="text-center">
+                            <tr>
+                                <th colspan="7" class="fs-3">Artist</th>
+                            </tr>
+                            <tr>
+                                <th class="col-1">ID</th>
+                                <th>Name</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            <?php foreach ($model['artist'] as $artist): ?>
+                                <tr>
+                                    <td>
+                                        <?= $artist->id ?>
+                                    </td>
+                                    <td>
+                                        <?= $artist->name ?>
+                                    </td>
+                                    <td class="col-2">
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <form method="post" action="/adminoverview">
+                                                <input type="hidden" name="id" value="<?= $artist->id ?>">
+                                                <input type="hidden" name="_artistMethod" value="DELETE">
+                                                <button type="submit"
+                                                    class="btn btn-danger mr-1 bg-primary-a text-white border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
+                                                    value="DELETE"><i class="fas fa-trash-alt"></i></button>
+                                            </form>
+                                            <button type="button"
+                                                class="btn btn-primary edit-button-artist bg-primary-a text-white border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
+                                                value="EDIT" data-id="<?= $artist->id ?>"><i
+                                                    class="fas fa-edit"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                            <td colspan="7" class="text-center">
+                                <input type="submit"
+                                    class="btn btn-primary insert-button-artist bg-primary-a text-white border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
+                                    value="INSERT" style="width: 50%;">
+                            </td>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -164,17 +171,12 @@ include __DIR__ . '/../header.php';
                     <h5 class="modal-title">Update Venue</h5>
                     <button type="button" class="btn-close" aria-label="Close" data-dismiss="modal"></button>
                 </div>
-                <form id="editFormVenue" method="post" action="/adminoverview">
+                <form id="editFormVenue" method="post" action="/adminoverview" class="d-flex justify-content-between">
                     <div class="modal-body">
                         <input type="hidden" name="id" id="edit-id-venue">
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" class="form-control" id="name-venue" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="date">Date and Time</label>
-                            <input type="datetime-local" class="form-control" id="date-venue" name="date" step="1"
-                                required>
                         </div>
                         <div class="form-group">
                             <label for="location">Location</label>
@@ -187,8 +189,10 @@ include __DIR__ . '/../header.php';
                         <input type="hidden" name="_venueMethod" value="PUT">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <input type="submit" class="btn btn-primary" value="Save">
+                        <button type="button" class="btn btn-secondary fs-5" data-dismiss="modal">Close</button>
+                        <input type="submit"
+                            class="btn btn-primary bg-primary-a text-white border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
+                            value="Save">
                     </div>
                 </form>
             </div>
@@ -203,7 +207,7 @@ include __DIR__ . '/../header.php';
                     <h5 class="modal-title">Update Event</h5>
                     <button type="button" class="btn-close" aria-label="Close" data-dismiss="modal"></button>
                 </div>
-                <form id="editFormEvent" method="post" action="/adminoverview">
+                <form id="editFormEvent" method="post" action="/adminoverview" class="d-flex justify-content-between">
                     <div class="modal-body">
                         <input type="hidden" name="id" id="edit-id-event">
                         <div class="form-group">
@@ -221,8 +225,10 @@ include __DIR__ . '/../header.php';
                         <input type="hidden" name="_eventMethod" value="PUT">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <input type="submit" class="btn btn-primary" value="Save">
+                        <button type="button" class="btn btn-secondary fs-5" data-dismiss="modal">Close</button>
+                        <input type="submit"
+                            class="btn btn-primary bg-primary-a text-white border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
+                            value="Save">
                     </div>
                 </form>
             </div>
@@ -237,18 +243,20 @@ include __DIR__ . '/../header.php';
                     <h5 class="modal-title">Update Artist</h5>
                     <button type="button" class="btn-close" aria-label="Close" data-dismiss="modal"></button>
                 </div>
-                <form id="editFormArtist" method="post" action="/adminoverview">
+                <form id="editFormArtist" method="post" action="/adminoverview" class="d-flex justify-content-between">
                     <div class="modal-body">
                         <input type="hidden" name="id" id="edit-id-artist">
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input type="text" class="form-control" id="name-artist" name="name-artist" required>
+                            <input type="text" class="form-control" id="name-artist" name="name" required>
                         </div>
                         <input type="hidden" name="_artistMethod" value="PUT">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <input type="submit" class="btn btn-primary" value="Save">
+                        <button type="button" class="btn btn-secondary fs-5" data-dismiss="modal">Close</button>
+                        <input type="submit"
+                            class="btn btn-primary bg-primary-a text-white border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
+                            value="Save">
                     </div>
                 </form>
             </div>
@@ -263,16 +271,11 @@ include __DIR__ . '/../header.php';
                     <h5 class="modal-title">Insert Venue</h5>
                     <button type="button" class="btn-close" aria-label="Close" data-dismiss="modal"></button>
                 </div>
-                <form id="insertFormVenue" method="post" action="/adminoverview">
+                <form id="insertFormVenue" method="post" action="/adminoverview" class="d-flex justify-content-between">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" class="form-control" id="name-venue" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="date">Date and Time</label>
-                            <input type="datetime-local" class="form-control" id="date-venue" name="date" step="1"
-                                required>
                         </div>
                         <div class="form-group">
                             <label for="location">Location</label>
@@ -285,8 +288,10 @@ include __DIR__ . '/../header.php';
                         <input type="hidden" name="_venueMethod" value="CREATE">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <input type="submit" class="btn btn-primary" value="Insert">
+                        <button type="button" class="btn btn-secondary fs-5" data-bs-dismiss="modal">Close</button>
+                        <input type="submit"
+                            class="btn btn-primary bg-primary-a text-white border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
+                            value="Insert">
                     </div>
                 </form>
             </div>
@@ -301,7 +306,7 @@ include __DIR__ . '/../header.php';
                     <h5 class="modal-title">Insert Event</h5>
                     <button type="button" class="btn-close" aria-label="Close" data-dismiss="modal"></button>
                 </div>
-                <form id="insertEventForm" method="post" action="/adminoverview">
+                <form id="insertEventForm" method="post" action="/adminoverview" class="d-flex justify-content-between">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="name">Name</label>
@@ -318,8 +323,10 @@ include __DIR__ . '/../header.php';
                         <input type="hidden" name="_eventMethod" value="CREATE">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <input type="submit" class="btn btn-primary" value="Insert">
+                        <button type="button" class="btn btn-secondary fs-5" data-dismiss="modal">Close</button>
+                        <input type="submit"
+                            class="btn btn-primary bg-primary-a text-white border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
+                            value="Insert">
                     </div>
                 </form>
             </div>
@@ -334,7 +341,8 @@ include __DIR__ . '/../header.php';
                     <h5 class="modal-title">Insert Artist</h5>
                     <button type="button" class="btn-close" aria-label="Close" data-dismiss="modal"></button>
                 </div>
-                <form id="insertArtistForm" method="post" action="/adminoverview">
+                <form id="insertArtistForm" method="post" action="/adminoverview"
+                    class="d-flex justify-content-between">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="name">Name</label>
@@ -343,19 +351,15 @@ include __DIR__ . '/../header.php';
                         <input type="hidden" name="_artistMethod" value="CREATE">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <input type="submit" class="btn btn-primary" value="Insert">
+                        <button type="button" class="btn btn-secondary fs-5" data-dismiss="modal">Close</button>
+                        <input type="submit" role="button"
+                            class="btn btn-primary bg-primary-a text-white border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
+                            value="Insert">
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
-    <script src="javascript/adminoverview.js"></script>
-</body>
-
-</html>
-
-<?php
-include __DIR__ . '/../footer.php';
-?>
+    <?php
+    include __DIR__ . '/../footer.php';
+    ?>

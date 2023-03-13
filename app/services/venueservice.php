@@ -10,18 +10,18 @@ class VenueService
         return $repository->getVenue();
     }
 
-    public function insertVenue(string $name, DateTime $date, string $address, int $seats)
+    public function insertVenue(string $name, string $address, int $seats)
     {
         $repository = new VenueRepository();
 
-        return $repository->insertVenue($name, $date, $address, $seats);
+        return $repository->insertVenue($name, $address, $seats);
     }
 
-    public function updateVenue(int $id, string $name, DateTime $date, string $address, int $seats)
+    public function updateVenue(int $id, string $name, string $address, int $seats)
     {
         $repository = new VenueRepository();
 
-        return $repository->updateVenue($id, $name, $date, $address, $seats);
+        return $repository->updateVenue($id, $name, $address, $seats);
     }
 
     public function deleteVenue(int $id)

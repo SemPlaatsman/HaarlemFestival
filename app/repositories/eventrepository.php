@@ -9,7 +9,7 @@ class EventRepository extends Repository
         try {
             // Read all events
             $events = array();
-            $stmt = $this->connection->prepare("SELECT * FROM event");
+            $stmt = $this->connection->prepare("SELECT `id`, `name`, `start_date`, `end_date` FROM `event`");
 
             $stmt->execute();
 
@@ -35,7 +35,7 @@ class EventRepository extends Repository
     {
         try {
             // Create a venue
-            $stmt = $this->connection->prepare("INSERT INTO event (name, start_date, end_date) VALUES (:name, :start_date, :end_date)");
+            $stmt = $this->connection->prepare("INSERT INTO `event` (name, start_date, end_date) VALUES (:name, :start_date, :end_date)");
 
 
             // Bind the parameters
@@ -58,7 +58,7 @@ class EventRepository extends Repository
     {
         try {
             // Update a venue
-            $stmt = $this->connection->prepare("UPDATE event SET name=:name, start_date=:start_date, end_date=:end_date WHERE id=:id");
+            $stmt = $this->connection->prepare("UPDATE `event` SET name=:name, start_date=:start_date, end_date=:end_date WHERE id=:id");
 
             // Bind the parameters
             $formattedStart_Date = $start_date->format('Y-m-d');
@@ -80,13 +80,30 @@ class EventRepository extends Repository
     public function deleteEvent(int $id)
     {
         try {
-            $stmt = $this->connection->prepare("DELETE FROM event WHERE id=:id");
+            $stmt = $this->connection->prepare("SELECT `id` FROM `event` WHERE id=:id");
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
+
+            if ($stmt->rowCount() === 0) {
+                // Record with the given ID does not exist
+                return false;
+            }
+
+            $stmt = $this->connection->prepare("DELETE FROM `event` WHERE id=:id LIMIT 1");
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+
+            if ($stmt->rowCount() === 0) {
+                // Failed to delete the record
+                return false;
+            }
+
             return true;
         } catch (PDOException $e) {
+            // Handle the exception
             return false;
         }
     }
+
 }
 ?>
