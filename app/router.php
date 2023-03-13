@@ -102,9 +102,10 @@ class router
             // $api = new api();
             // break;
 
-            case 'api':
-                require __DIR__ . '/controllers/historycontroller.php';
-                $controller = new historycontroller();
+            case 'history':
+                require_once __DIR__ . '/controllers/historycontroller.php';
+                $controller = new HistoryController();
+                
                 $controller->index();
                 break;
 

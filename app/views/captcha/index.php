@@ -1,10 +1,6 @@
 <?php 
-<<<<<<< HEAD
-require_once (__DIR__."/../../dbconfig.php");
-=======
 require_once ("/config.php");
 $Config = new Config();
->>>>>>> origin/development
 ?>
 
 <h1>hcaptcha script</h1>
