@@ -8,8 +8,8 @@ class CartService {
         $this->cartRepository = new CartRepository();
     }
 
-    public function getCart(int $userId) {
-        $this->cartRepository->getCart($userId);
+    public function getCart(int $userId) : array {
+        return $this->cartRepository->getCart($userId);
     }
 }
 ?>

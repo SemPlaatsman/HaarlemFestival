@@ -30,6 +30,5 @@ class VenueService
 
         return $repository->deleteVenue($id);
     }
-
 }
 ?>
