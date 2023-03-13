@@ -30,13 +30,11 @@ editButtonVenue.forEach((button) => {
         const row = event.target.closest('tr');
         const id = row.querySelector('.edit-button-venue').dataset.id;
         const name = row.querySelector('td:nth-of-type(2)').innerText;
-        const date = row.querySelector('td:nth-of-type(3)').innerText;
-        const location = row.querySelector('td:nth-of-type(4)').innerText;
-        const seats = row.querySelector('td:nth-of-type(5)').innerText;
+        const location = row.querySelector('td:nth-of-type(3)').innerText;
+        const seats = row.querySelector('td:nth-of-type(4)').innerText;
 
         document.getElementById('edit-id-venue').value = id;
         document.getElementById('name-venue').value = name;
-        document.getElementById('date-venue').value = date;
         document.getElementById('location-venue').value = location;
         document.getElementById('seats-venue').value = seats;
 
@@ -163,3 +161,4 @@ const editCancelBtnArtist = editModalFooterArtist.querySelector('.btn-secondary'
 editCancelBtnArtist.addEventListener('click', () => {
     editModalArtist.style.display = 'none';
 });
+

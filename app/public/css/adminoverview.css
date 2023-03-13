@@ -2,57 +2,6 @@ body {
     background-color: var(--tetiare-a); /* -> bg-tetiare-a */
 }
 
-table {
-    border-collapse: collapse; /* -> collapse */
-    width: 100%; /* -> w-100 */
-    background-color: var(--primary-b); /* -> bg-primary-b */
-}
-
 table.table {
-    margin: auto; /* -> m-auto */
-    margin-top: 20px; /* -> mt-<cijfer> */
     max-width: 1200px;
-    border: 1px solid var(--tetiare-a); /* -> border */
-}
-
-.title-table {
-    font-size: 25px; /* -> fs-1 t/m fs-5 of display-1 t/m display-5 voor standard font sizes */
-}
-
-th,
-td {
-    text-align: center; /* -> text-center */
-    padding: 8px; /* -> p-<cijfer> */
-    color: var(--tetiare-a); /* -> text-tetiare-a */
-}
-
-form {
-    display: flex; /* -> d-flex */
-    justify-content: space-between; /* -> justify-content-between */
-}
-
-input[type="submit"] {
-    background-color: var(--primary-a); /* -> bg-primary-a */
-    color:  var(--primary-b); /* -> text-primary-b */
-    border: none; /* -> border-0 */
-    padding: 8px 16px; /* -> p-<cijfer> */
-    text-align: center; /* -> text-center */
-    text-decoration: none; /* -> text-decoration-none */
-    display: inline-block; /* -> d-inline-block */
-    font-size: 16px; /* -> fs-1 t/m fs-5 of display-1 t/m display-5 voor standard font sizes */
-    margin: 4px 2px; /* -> m-<cijfer> */
-    cursor: pointer; /* -> role="button" on the element */
-}
-
-footer {
-    width: 100%; /* -> w-100 */
-    display: flex; /* -> d-flex */
-    justify-content: center; /* -> justify-content-center deze weet ik niet uit hoofd */
-    margin-top: 50px; /* -> mt-<cijfer> */
-}
-
-footer button {
-    width: 100%; /* -> w-100 */
-    max-width: 800px;
-    margin-top: 20px; /* -> mt-<cijfer> */
 }
