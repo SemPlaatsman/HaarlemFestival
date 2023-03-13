@@ -24,7 +24,7 @@ class CartRepository extends Repository
             "history_tours.datetime, history_tours.employee_id, history_tours.employee_name, ticket_history.nr_of_people " .
             "FROM `item` JOIN `ticket_history` ON ticket_history.item_id = item.id JOIN `history_tours` ON history_tours.id = ticket_history.tour_id " .
             "WHERE order_id = (SELECT order_id FROM `orders` WHERE user_id = :user_id AND time_payed IS NULL AND payment_status = 0);");
-        $query->bindParam(":user_id", $userId);
+        $query->bindParam(":user_id", $userId, PDO::PARAM_INT);
         $query->execute();
         $query->setFetchMode(PDO::FETCH_CLASS, 'TicketHistory');
 
@@ -69,7 +69,7 @@ class CartRepository extends Repository
             "performance.start_date, performance.end_date, ticket_dance.nr_of_people " .
             "FROM `item` JOIN ticket_dance ON ticket_dance.item_id = item.id JOIN `performance` ON performance.id = ticket_dance.performance_id " .
             "WHERE order_id = (SELECT order_id FROM `orders` WHERE user_id = :user_id AND time_payed IS NULL AND payment_status = 0);");
-        $query->bindParam(":user_id", $userId);
+        $query->bindParam(":user_id", $userId, PDO::PARAM_INT);
         $query->execute();
         $query->setFetchMode(PDO::FETCH_CLASS, 'TicketDance');
 
@@ -114,7 +114,7 @@ class CartRepository extends Repository
         "restaurant.reservation_fee as 'restaurant_reservation_fee', reservation.final_check, reservation.nr_of_adults, reservation.nr_of_kids, reservation.datetime " . 
         "FROM `item` JOIN reservation ON reservation.item_id = item.id JOIN `restaurant` ON restaurant.id = reservation.restaurant_id " . 
         "WHERE order_id = (SELECT order_id FROM `orders` WHERE user_id = :user_id AND time_payed IS NULL AND payment_status = 0);");
-        $query->bindParam(":user_id", $userId);
+        $query->bindParam(":user_id", $userId, PDO::PARAM_INT);
         $query->execute();
         $query->setFetchMode(PDO::FETCH_CLASS, 'Reservation');
 
@@ -132,6 +132,19 @@ class CartRepository extends Repository
 
         $reservations = $query->fetchAll(PDO::FETCH_FUNC, 'rowMapperReservation');
         return $reservations;
+    }
+
+    public function updateReservation(int $reservationId, int $nrOfAdults, int $nrOfKids, string $datetime) : bool {
+        $query = $this->connection->prepare('UPDATE `item` JOIN `reservation` ON `reservation`.`item_id` = `item`.`id` ' . 
+        'JOIN `restaurant` ON `restaurant`.`id` = `reservation`.`restaurant_id` SET `reservation`.`nr_of_adults` = :nr_of_adults, `reservation`.`nr_of_kids` = :nr_of_kids, ' . 
+        '`reservation`.`datetime` = :datetime, `reservation`.`final_check` = ((:nr_of_adults * `restaurant`.`adult_price`) + (:nr_of_kids * `restaurant`.`kids_price`) - ((:nr_of_adults + :nr_of_kids) * `restaurant`.`reservation_fee`)), ' . 
+        '`item`.`total_price` = ((:nr_of_adults + :nr_of_kids) * `restaurant`.`reservation_fee`) WHERE `reservation`.`id` = :reservation_id;');
+        $query->bindParam(':reservation_id', $reservationId, PDO::PARAM_INT);
+        $query->bindParam(':nr_of_adults', $nrOfAdults, PDO::PARAM_INT);
+        $query->bindParam(':nr_of_kids', $nrOfKids, PDO::PARAM_INT);
+        $query->bindParam(':datetime', $datetime, PDO::PARAM_STR);
+        $query->execute();
+        return boolval($query->rowCount());
     }
 }
 ?>
