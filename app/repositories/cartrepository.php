@@ -106,14 +106,14 @@ class CartRepository extends Repository
         return $ticketsDance;
     }
 
-    public function getReservations(int $userId): array
-    {
-        $query = $this->connection->prepare("SELECT reservation.item_id, item.order_id, item.event_id, " .
-            "(SELECT event.name FROM `event` WHERE event.id = item.event_id) as 'event_name', item.total_price, item.VAT, " .
-            "item.QR_Code, reservation.id, reservation.restaurant_id, restaurant.name as 'restaurant_name', " .
-            "restaurant.location as 'restaurant_location', reservation.final_check, reservation.nr_of_adults, reservation.nr_of_kids, reservation.datetime " .
-            "FROM `item` JOIN reservation ON reservation.item_id = item.id JOIN `restaurant` ON restaurant.id = reservation.restaurant_id " .
-            "WHERE order_id = (SELECT order_id FROM `orders` WHERE user_id = :user_id AND time_payed IS NULL AND payment_status = 0);");
+    public function getReservations(int $userId) : array {
+        $query = $this->connection->prepare("SELECT reservation.item_id, item.order_id, item.event_id, " . 
+        "(SELECT event.name FROM `event` WHERE event.id = item.event_id) as 'event_name', item.total_price, item.VAT, " . 
+        "item.QR_Code, reservation.id, reservation.restaurant_id, restaurant.name as 'restaurant_name', restaurant.seats as 'restaurant_seats', " . 
+        "restaurant.location as 'restaurant_location', restaurant.adult_price as 'restaurant_adult_price', restaurant.kids_price as 'restaurant_kids_price', " . 
+        "restaurant.reservation_fee as 'restaurant_reservation_fee', reservation.final_check, reservation.nr_of_adults, reservation.nr_of_kids, reservation.datetime " . 
+        "FROM `item` JOIN reservation ON reservation.item_id = item.id JOIN `restaurant` ON restaurant.id = reservation.restaurant_id " . 
+        "WHERE order_id = (SELECT order_id FROM `orders` WHERE user_id = :user_id AND time_payed IS NULL AND payment_status = 0);");
         $query->bindParam(":user_id", $userId);
         $query->execute();
         $query->setFetchMode(PDO::FETCH_CLASS, 'Reservation');
@@ -121,28 +121,12 @@ class CartRepository extends Repository
         // if rowMapper function is already loaded, don't load it again
         if (!function_exists('rowMapperReservation')) {
             // rowMapper based on this stackoverflow post: https://stackoverflow.com/questions/12368035/pdo-fetch-class-pass-results-to-constructor-as-parameters
-            function rowMapperReservation(
-                int $item_id, int $order_id, int $event_id, string $event_name, float $total_price, int $VAT, string $QR_Code,
-                int $id, int $restaurant_id, string $restaurant_name, string $restaurant_location, float $final_check, int $nr_of_adults, int $nr_of_kids, string $datetime
-            )
-            {
-                return new Reservation(
-                    $item_id,
-                    $order_id,
-                    $event_id,
-                    $event_name,
-                    $total_price,
-                    $VAT,
-                    $QR_Code,
-                    $id,
-                    $restaurant_id,
-                    $restaurant_name,
-                    $restaurant_location,
-                    $final_check,
-                    $nr_of_adults,
-                    $nr_of_kids,
-                    $datetime
-                );
+            function rowMapperReservation(int $item_id, int $order_id, int $event_id, string $event_name, float $total_price, int $VAT, string $QR_Code, 
+            int $id, int $restaurant_id, string $restaurant_name, int $restaurant_seats, string $restaurant_location, float $restaurant_adults_price, 
+            float $restaurant_kids_price, float $restaurant_reservation_fee , float $final_check, int $nr_of_adults, int $nr_of_kids, string $datetime) {
+                return new Reservation($item_id, $order_id, $event_id, $event_name, $total_price, $VAT, $QR_Code, 
+                $id, new Restaurant($restaurant_id, $restaurant_name, $restaurant_seats, $restaurant_location, $restaurant_adults_price, 
+                $restaurant_kids_price, $restaurant_reservation_fee), $final_check, $nr_of_adults, $nr_of_kids, $datetime);
             }
         }
 
