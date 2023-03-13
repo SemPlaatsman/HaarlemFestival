@@ -2,7 +2,6 @@
 include __DIR__ . '/../header.php';
 ?>
 
-<body>
     <div class="row" class="container">
         <div class="col-md-12">
             <div class="overflow-auto">
