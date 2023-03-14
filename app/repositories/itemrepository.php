@@ -130,7 +130,6 @@ class ItemRepository extends Repository {
         } catch (PDOException $e) {
             return false;
         }
-        
     }
 
     public function getItem(int $id) : Item {
