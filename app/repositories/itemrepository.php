@@ -5,12 +5,12 @@ class ItemRepository extends Repository {
 
     public function insertItem(Item $item):int {
         try {
-            $stmnt = $this -> connection -> prepare("INSERT INTO Item (id, item_type_id, price, VAT, shoppingcart_id, QR_Code) VALUES (:id, :item_type_id, :price, :VAT, :shoppingcart_id, :QR_Code)");
+            $stmnt = $this -> connection -> prepare("INSERT INTO Item (id, order_id, event_id, total_price, VAT, QR_Code) VALUES (:id, :order_id, :event_id, :total_price, :VAT, :QR_Code)");
             $stmnt -> bindParam(':id', $item->id, PDO::PARAM_STR);
-            $stmnt -> bindParam(':item_type_id', $item->item_type_id, PDO::PARAM_STR);
-            $stmnt -> bindParam(':price', $item->price, PDO::PARAM_STR);
+            $stmnt -> bindParam(':order_id', $item->order_id, PDO::PARAM_STR);
+            $stmnt -> bindParam(':event_id', $item->event_id, PDO::PARAM_STR);
+            $stmnt -> bindParam(':total_price', $item->total_price, PDO::PARAM_STR);
             $stmnt -> bindParam(':VAT', $item->VAT, PDO::PARAM_STR);
-            $stmnt -> bindParam(':shoppingcart_id', $item->shoppingcart_id, PDO::PARAM_STR);
             $stmnt -> bindParam(':QR_Code', $item->QR_Code, PDO::PARAM_STR);
             $stmnt -> execute();
             return $this->connection->lastInsertId();
@@ -19,15 +19,21 @@ class ItemRepository extends Repository {
         }
         
     }
+    public int $id;
+       public int $order_id;
+       public int $event_id;
+       public float $total_price;
+       public float $VAT;
+       public int $QR_Code;
 
     public function updateItem(Item $item):bool {
         try {
-            $stmnt = $this -> connection -> prepare("UPDATE Item SET item_type_id=:item_type_id, price=:price, VAT=:VAT, shoppingcart_id=:shoppingcart_id, QR_Code=:QR_Code WHERE id=:id;");
+            $stmnt = $this -> connection -> prepare("UPDATE Item SET order_id=:order_id, event_id=:event_id, total_price=:total_price, VAT=:VAT, QR_Code=:QR_Code WHERE id=:id;");
             $stmnt -> bindParam(':id', $item->id, PDO::PARAM_STR);
-            $stmnt -> bindParam(':item_type_id', $item->item_type_id, PDO::PARAM_STR);
-            $stmnt -> bindParam(':price', $item->price, PDO::PARAM_STR);
+            $stmnt -> bindParam(':order_id', $item->order_id, PDO::PARAM_STR);
+            $stmnt -> bindParam(':event_id', $item->event_id, PDO::PARAM_STR);
+            $stmnt -> bindParam(':total_price', $item->total_price, PDO::PARAM_STR);
             $stmnt -> bindParam(':VAT', $item->VAT, PDO::PARAM_STR);
-            $stmnt -> bindParam(':shoppingcart_id', $item->shoppingcart_id, PDO::PARAM_STR);
             $stmnt -> bindParam(':QR_Code', $item->QR_Code, PDO::PARAM_STR);
             return $stmnt -> execute();
         } catch (PDOException $e) {
@@ -50,7 +56,7 @@ class ItemRepository extends Repository {
 
     public function getItem(int $id) : Item {
         try {
-            $stmnt = $this -> connection -> prepare("SELECT id, item_type_id, price, VAT, shoppingcart_id, QR_Code FROM Item WHERE id = :id");
+            $stmnt = $this -> connection -> prepare("SELECT id, order_id, event_id, total_price, VAT, QR_Code FROM Item WHERE id = :id");
             $stmnt -> bindParam(':id', $id, PDO::PARAM_INT);
             $stmnt -> setFetchMode(PDO::FETCH_CLASS, 'Item');
             $stmnt -> execute();
@@ -63,7 +69,7 @@ class ItemRepository extends Repository {
     }
     public function getAllItems():array  {
         try {
-            $stmnt = $this -> connection -> prepare("SELECT id, item_type_id, price, VAT, shoppingcart_id, QR_Code FROM Item;");
+            $stmnt = $this -> connection -> prepare("SELECT id, order_id, event_id, total_price, VAT, QR_Code FROM Item;");
             $stmnt -> setFetchMode(PDO::FETCH_CLASS, 'Item');
             $stmnt -> execute();
             $items = $stmnt -> fetchAll();
