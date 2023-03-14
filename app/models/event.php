@@ -1,12 +1,10 @@
 <?php
 
-class Venue
+class Event
 {
     private int $id;
     private string $name;
     private DateTime $date;
-    private string $location;
-    private int $seats;
 
     /**
      * @return int
@@ -45,24 +43,6 @@ class Venue
     }
 
     /**
-     * @return int
-     */
-    public function getSeats(): int
-    {
-        return $this->seats;
-    }
-
-    /**
-     * @param int $seats 
-     * @return self
-     */
-    public function setSeats(int $seats): self
-    {
-        $this->seats = $seats;
-        return $this;
-    }
-
-    /**
      * @return DateTime
      */
     public function getDate(): DateTime
@@ -77,24 +57,6 @@ class Venue
     public function setDate(DateTime $date): self
     {
         $this->date = $date;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLocation(): string
-    {
-        return $this->location;
-    }
-
-    /**
-     * @param string $location 
-     * @return self
-     */
-    public function setLocation(string $location): self
-    {
-        $this->location = $location;
         return $this;
     }
 }

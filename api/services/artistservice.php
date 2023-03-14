@@ -1,55 +1,59 @@
 <?php
 require_once __DIR__ . '/../repository/artistrepository.php';
 
+
 class ArtistService
 {
- 
-    function getArtist(int $id) : Artist
+    private $repository;
+
+    function __construct()
     {
-        $repository = new ArtistRepository();
+        $this->repository = new ArtistRepository();
+    }
+ 
+    function getArtist(int $id) : ?Artist
+    {        
         try {
-            $artist = $repository->get($id);
+            $artist = $this->repository->get($id);
         } catch (Exception $e) {
-            $artist = new Artist();
+            throw new ServiceException('Error getting artist: ' . $e->getMessage(), 404);
         } 
         return $artist;
     }
     
     function getArtists() : array 
     {
-        $repository = new ArtistRepository();
-        if(!$repository->getAll()){
-            
-            return array();
+       
+        try {
+            $artists = $this->repository->getAll();
+            return $artists ?? [];
+        } catch (Exception $e) {
+            throw new ServiceException("An error occurred while retrieving the list of artists.".$e->getMessage(), 500);
         }
-   
-
-        return $repository->getAll();
     }
 
     function createArtist(Artist $artist) : Artist
     {
-        $repository = new ArtistRepository();
-        $id = $repository->insert($artist->name);
+        $id = $this->repository->insert($artist->name);
         return $this->getArtist($id);
     }
 
-    function updateArtist(int $id, Artist $updatedArtist) : Artist
+    function updateArtist(int $id, Artist $updatedArtist) : ?Artist
     {
-        $repository = new ArtistRepository();
-         $returnedID = $repository->update($id, $updatedArtist->name);
-        $retrievedArtist = $this->getArtist($id);
-        if($updatedArtist->name == $retrievedArtist->name){
+        
+        $retrievedArtist = $this->repository->get($id);
+        if ($retrievedArtist->name === $updatedArtist->name) {
             return $retrievedArtist;
         }
-
-        return null;
+    
+        $this->repository->update($id, $updatedArtist->name);
+        $updatedArtist = $this->repository->get($id);
+        return $updatedArtist;
     }
 
     function deleteArtist(int $id) : bool
     {
-        $repository = new ArtistRepository();
-        return $repository->delete($id);
+        return $this->repository->delete($id);
     }
     
 

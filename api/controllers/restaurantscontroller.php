@@ -1,39 +1,47 @@
 <?php
-include_once __DIR__ . '/../services/artistservice.php';
-include_once __DIR__ . '/../models/artist.php';
+//controller class for a rest api
+
+include_once __DIR__ . '/../services/restaurantservice.php';
 include_once __DIR__ . '/../helpers/jsonHelper.php';
 include_once __DIR__ . '/../helpers/objectHelper.php';
 
-
-class ArtistController
+class RestaurantController
 {
     private $service;
     private $jsonHelper;
     private $objectHelper;
 
+
     public function __construct()
     {
-        $this->service = new ArtistService();
         $this->jsonHelper = new JsonHelper();
         $this->objectHelper = new ObjectHelper();
+        $this->service = new RestaurantService();
     }
 
     public function get(int $id = null): bool
     {
+
+
+
         try {
             if (!is_null($id)) {
-                $artist = $this->service->getArtist($id);
-                if ($this->objectHelper->checkEmpty($artist)) {
+                $restaurant = $this->service->getRestaurant($id);
+
+
+                if ($this->objectHelper->checkEmpty($restaurant)) {
                     http_response_code(404);
-                    echo json_encode(array("message" => "Artist not found."));
+                    echo json_encode(array("message" => "Restaurant not found."));
                     return false;
                 }
-                $this->jsonHelper->printJson([$artist]);
+                $this->jsonHelper->printJson([$restaurant]);
+                return true;
             } else {
-                $artists = $this->service->getArtists();
-                $this->jsonHelper->printJson($artists);
+
+                $restaurants = $this->service->getRestaurants();
+                $this->jsonHelper->printJson($restaurants);
+                return true;
             }
-            return true;
         } catch (ServiceException $e) {
             http_response_code($e->getHttpCode());
             echo json_encode(array("message" => $e->getMessage()));
@@ -43,13 +51,14 @@ class ArtistController
 
     public function create(int $id = null, Object $data): bool
     {
+
         try {
-            $artist = $this->MakeArtist($data, $id);
-            $insertedArtist = $this->service->createArtist($artist);
-            if (!is_null($insertedArtist)) {
+            $restaurant = $this->MakeRestaurant($data, $id);
+            $insertedRestaurant = $this->service->createRestaurant($restaurant);
+            if (!is_null($insertedRestaurant)) {
 
                 $array = array();    //janky hack to make it work with the jsonHelper 
-                $array[0] = $insertedArtist; //might need to make different functions for single and multiple
+                $array[0] = $insertedRestaurant; //might need to make different functions for single and multiple
 
                 $this->jsonHelper->printJson($array);
 
@@ -57,6 +66,7 @@ class ArtistController
             }
             return false;
         } catch (ServiceException $e) {
+
             http_response_code($e->getHttpCode());
             echo json_encode(array("message" => $e->getMessage()));
             return false;
@@ -65,50 +75,51 @@ class ArtistController
 
     public function update(int $id = null, Object $data): bool
     {
-        try {
-            if (!isset($data->id) || !isset($data->name)) {
+
+        try{
+            if(!isset($data->id)||!isset($data->name)||!isset($data->seats) ){
+                return false;
+            }
+            $restaurant = new Restaurant();
+            $restaurant->id = $id;
+            $restaurant->name = $data->name;
+            $restaurant->seats = $data->seats;
+
+            if(is_null($this->service->updateRestaurant($id, $restaurant))){
                 return false;
             }
 
-
-            $artist = new Artist();
-            $artist->id = $data->id;
-            $artist->name = $data->name;
-
-            if (is_null($this->service->updateArtist($id, $artist))) {
-                return false;
-            }
-
-            $this->jsonHelper->printJsonSingle($artist);
+            $this->jsonHelper->printJson([$restaurant]);
             return true;
-        } catch (ServiceException $e) {
+        }catch(ServiceException $e){
+            http_response_code($e->getHttpCode());
+            echo json_encode(array("message" => $e->getMessage()));
+            return false;
+        }
+
+
+        
+    }
+
+    public function delete(int $id = null): bool
+    {
+        try{
+                $this->service->deleteRestaurant($id);
+                return false;   
+        }
+        catch(ServiceException $e){
             http_response_code($e->getHttpCode());
             echo json_encode(array("message" => $e->getMessage()));
             return false;
         }
     }
-
-    public function delete(int $id) : bool
+    private function  MakeRestaurant(Object $data, int $id = null): restaurant
     {
-        try {
-            $this->service->deleteArtist($id);
-            return true;
-        } catch (ServiceException $e) {
-            http_response_code($e->getHttpCode());
-            echo json_encode(array("message" => $e->getMessage()));
-            return false;
-        }
-    }
-
-
-
-    // maybe put this in the artist model
-    private function  MakeArtist(Object $data, int $id = null): Artist
-    {
-        $artist = new Artist();
+        $restaurant = new Restaurant();
         $id = $id ?? $data->id;
-        $artist->id = $id;
-        $artist->name = $data->name;
-        return $artist;
+        $restaurant->name = $data->name;
+        $restaurant->seats = $data->seats;
+
+        return $restaurant;
     }
 }

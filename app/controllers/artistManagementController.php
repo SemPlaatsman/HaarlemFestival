@@ -32,7 +32,7 @@ class ArtistManagementController extends Controller
         $ArtistService = new ArtistService();
         $artists = $ArtistService->getArtists();
 
-?>
+        ?>
         <div class="table-responsive">
             <table class="table">
                 <thead>
@@ -45,10 +45,10 @@ class ArtistManagementController extends Controller
                 </thead>
                 <tbody>
                     <?php
-                    foreach ($artists as  $artist) {
+                    foreach ($artists as $artist) {
                         echo '<form action="/test" method="post">
-                        <input type="hidden"  name="id" value="'.$artist->id.'">
-                        <input type="hidden"  name="name" value="'.$artist->name.'">';
+                        <input type="hidden"  name="id" value="' . $artist->id . '">
+                        <input type="hidden"  name="name" value="' . $artist->name . '">';
                         echo '<tr>';
                         echo '<th scope="row">' . $artist->id . '</th>';
                         echo '<td>' . $artist->name . '</td>';
@@ -67,7 +67,7 @@ class ArtistManagementController extends Controller
                 </tbody>
             </table>
         </div>
-<?php
+        <?php
 
         require_once __DIR__ . '/../views/footer/index.php';
     }

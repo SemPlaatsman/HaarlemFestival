@@ -5,8 +5,8 @@
         <form class="col-md-4 mx-auto row align-content-start vh-50" method="POST" id="login-form">
             <h1 class="text-center text-primary-b display-2">LOGIN</h1>
             <fieldset class="form-group p-2">
-                <label class="text-primary-b fs-5" for="usernameField">Username:</label>
-                <input class="w-100" id="usernameField" type="text" name="username" value="<?= $_POST['username'] ?? "" ?>" />
+                <label class="text-primary-b fs-5" for="emailField">Email:</label>
+                <input class="w-100" id="emailField" type="email" name="email" value="<?= $_POST['email'] ?? "" ?>" />
             </fieldset>
             <fieldset class="form-group p-2">
                 <label class="text-primary-b fs-5" for="passwordField">Password:</label>
