@@ -16,6 +16,29 @@ class HistoryController extends Controller {
         //$model = $this->cartService->getCart(unserialize($_SESSION['user'])->getId());
         $this->displayView();
     }
-    
+
+    public function insertItem()
+    {
+        try {
+            $id = 1;
+            $item_type_id = htmlspecialchars($_POST['date']);
+            $price = 2;
+            $VAT = 1;
+            $shoppingcart_id = 1;
+            $QR_Code = 1;
+
+            $result = $this->itemService->insertItem($name, $date, $location, $seats);
+
+            if ($result) {
+                // return success response
+                echo 'insert complete item';
+            } else {
+                // return failed response
+                echo 'Something went wrong with the insert';
+            }
+        } catch (Exception $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
 }
 ?>
