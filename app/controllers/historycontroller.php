@@ -15,19 +15,25 @@ class HistoryController extends Controller {
         //(session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
         //$model = $this->cartService->getCart(unserialize($_SESSION['user'])->getId());
         $this->displayView();
+        echo 'test1';
+        if(isset($_POST['submit'])) {
+            $this->insertItem();
+        }
     }
 
     public function insertItem()
     {
+        echo 'test2';
         try {
-            $id = 1;
-            $item_type_id = htmlspecialchars($_POST['date']);
-            $price = 2;
+            $id = 10;
+            $order_id = 2;
+            $event_id = 2;
+            $total_price = 1;
             $VAT = 1;
-            $shoppingcart_id = 1;
             $QR_Code = 1;
+            $item = new Item($id, $order_id, $event_id, $total_price, $VAT, $QR_Code);
 
-            $result = $this->itemService->insertItem($name, $date, $location, $seats);
+            $result = $this->itemService->deleteItem(10);
 
             if ($result) {
                 // return success response
