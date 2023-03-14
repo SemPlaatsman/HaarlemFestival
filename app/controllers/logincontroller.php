@@ -13,10 +13,10 @@ class LoginController extends Controller {
         // handle POST
         if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST)) {
             // login process
-            if (!empty($_POST['email']) && !empty($_POST['password']) && isset($_POST['email']) && isset($_POST['password'])) {
-                $email = htmlspecialchars($_POST['email']);
+            if (!empty($_POST['username']) && !empty($_POST['password']) && isset($_POST['username']) && isset($_POST['password'])) {
+                $username = htmlspecialchars($_POST['username']);
                 $password = htmlspecialchars($_POST['password']);
-                $user = $this->validateUser($email, $password);
+                $user = $this->validateUser($username, $password);
                 if ($user != null) {
                     // start session if it hasn't been started yet
                     (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
@@ -30,8 +30,8 @@ class LoginController extends Controller {
         $this->displayView();
     }
 
-    public function validateUser(string $email, string $password) : ?User {
-        return $this->loginService->validateUser($email, $password);
+    public function validateUser(string $username, string $password) : ?User {
+        return $this->loginService->validateUser($username, $password);
     }
 }
 ?>

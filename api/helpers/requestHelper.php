@@ -6,19 +6,16 @@ class RequestHelper{
     }
     public function checkMethodExists($controller){
         $requestMethod = $this->getRequestMethod();
-
         switch ($requestMethod) {
             case 'GET':
                 return method_exists($controller, 'get');
                 break;
     
             case 'POST':
-
                 return method_exists($controller, 'create');
                 break;
     
             case 'PUT':
-
                 return method_exists($controller, 'update');
                 break;
     
@@ -47,9 +44,7 @@ class RequestHelper{
                 break;
     
             case 'PUT':
-
                 if($jsonData !=null){
-
                 return $controller->update($id, $jsonData);
                 }
                 return false;

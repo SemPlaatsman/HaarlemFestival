@@ -1,20 +1,12 @@
 <?php
 
-class Venue
+class Page
 {
     private int $id;
     private string $name;
     private DateTime $date;
-    private string $location;
+    private string $address;
     private int $seats;
-
-    /**
-     * @return int
-     */
-    public function getId(): int
-    {
-        return $this->id;
-    }
 
     /**
      * @param int $id 
@@ -23,24 +15,6 @@ class Venue
     public function setId(int $id): self
     {
         $this->id = $id;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param string $name 
-     * @return self
-     */
-    public function setName(string $name): self
-    {
-        $this->name = $name;
         return $this;
     }
 
@@ -83,19 +57,27 @@ class Venue
     /**
      * @return string
      */
-    public function getLocation(): string
+    public function getAddress(): string
     {
-        return $this->location;
+        return $this->address;
     }
 
     /**
-     * @param string $location 
+     * @param string $address 
      * @return self
      */
-    public function setLocation(string $location): self
+    public function setAddress(string $address): self
     {
-        $this->location = $location;
+        $this->address = $address;
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
     }
 }
 ?>

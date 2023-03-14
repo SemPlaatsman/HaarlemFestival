@@ -14,13 +14,13 @@ class LoginService {
      * If it returns null the user is invalid
      * If it returns a User the user is validated and can be used in the SESSION data
      * 
-     * @param string $email
+     * @param string $username
      * @param string $password
      * 
      * @return ?User
      */
-    public function validateUser(string $email, string $password) : ?User {
-        return $this->loginRepository->validateUser($email, $password);
+    public function validateUser(string $username, string $password) : ?User {
+        return $this->loginRepository->validateUser($username, $password);
     }
 }
 ?>
