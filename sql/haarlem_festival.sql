@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Mar 11, 2023 at 06:30 PM
+-- Generation Time: Mar 14, 2023 at 10:17 AM
 -- Server version: 10.10.3-MariaDB-1:10.10.3+maria~ubu2204
 -- PHP Version: 8.1.15
 
@@ -212,6 +212,7 @@ INSERT INTO `performance` (`id`, `artist_id`, `venue_id`, `start_date`, `end_dat
 CREATE TABLE `reservation` (
   `id` int(11) NOT NULL,
   `restaurant_id` int(11) NOT NULL,
+  `final_check` decimal(11,2) NOT NULL,
   `item_id` int(11) NOT NULL,
   `nr_of_adults` int(11) NOT NULL,
   `nr_of_kids` int(11) NOT NULL,
@@ -222,9 +223,9 @@ CREATE TABLE `reservation` (
 -- Dumping data for table `reservation`
 --
 
-INSERT INTO `reservation` (`id`, `restaurant_id`, `item_id`, `nr_of_adults`, `nr_of_kids`, `datetime`) VALUES
-(1, 1, 1, 2, 2, '2023-03-15 18:00:00'),
-(2, 2, 4, 2, 0, '2023-03-25 19:00:00');
+INSERT INTO `reservation` (`id`, `restaurant_id`, `final_check`, `item_id`, `nr_of_adults`, `nr_of_kids`, `datetime`) VALUES
+(1, 1, 65.00, 1, 2, 2, '2023-03-15 18:00:00'),
+(2, 2, 50.00, 4, 2, 0, '2023-03-25 19:00:00');
 
 -- --------------------------------------------------------
 
@@ -520,7 +521,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `venue`
 --
 ALTER TABLE `venue`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
