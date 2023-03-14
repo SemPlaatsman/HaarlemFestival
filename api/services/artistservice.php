@@ -28,7 +28,7 @@ class ArtistService
             $artists = $this->repository->getAll();
             return $artists ?? [];
         } catch (Exception $e) {
-            throw new ServiceException("An error occurred while retrieving the list of artists.", 500, $e);
+            throw new ServiceException("An error occurred while retrieving the list of artists.".$e->getMessage(), 500);
         }
     }
 
@@ -38,16 +38,17 @@ class ArtistService
         return $this->getArtist($id);
     }
 
-    function updateArtist(int $id, Artist $updatedArtist) : Artist
+    function updateArtist(int $id, Artist $updatedArtist) : ?Artist
     {
-        $repository = new ArtistRepository();
-         $returnedID = $repository->update($id, $updatedArtist->name);
-        $retrievedArtist = $this->getArtist($id);
-        if($updatedArtist->name == $retrievedArtist->name){
+        
+        $retrievedArtist = $this->repository->get($id);
+        if ($retrievedArtist->name === $updatedArtist->name) {
             return $retrievedArtist;
         }
-
-        return null;
+    
+        $this->repository->update($id, $updatedArtist->name);
+        $updatedArtist = $this->repository->get($id);
+        return $updatedArtist;
     }
 
     function deleteArtist(int $id) : bool

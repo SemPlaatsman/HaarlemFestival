@@ -1,5 +1,5 @@
 <?php
-    class Restourant{
+    class Restaurant{
         public int $id;
         public string $name;
         public int $seats;
