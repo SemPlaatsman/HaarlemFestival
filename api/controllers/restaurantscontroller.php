@@ -119,12 +119,21 @@ class RestaurantController
     }
     private function  MakeRestaurant(Object $data, int $id = null): restaurant
     {
+        try{
         $restaurant = new Restaurant();
         $id = $id ?? $data->id;
         $restaurant->name = $data->name;
         $restaurant->seats = $data->seats;
-
+        $restaurant->location = $data->location;
+        $restaurant->adult_price = $data->adult_price;
+        $restaurant->kids_price = $data->kids_price;
+        $restaurant->reservation_fee = $data->reservation_fee;
         return $restaurant;
+
+        }catch(Exception $e){
+            throw new ServiceException("Invalid data", 400);
+        }
+
 
     }
 }
