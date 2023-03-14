@@ -24,7 +24,7 @@
           <ul class="navbar-nav fs-1 w-100 d-flex justify-content-center">
             <section class="w-100 d-flex flex-row justify-content-center">
               <li class="nav-item mx-5">
-                <a class="nav-link <?= $directory == "home" ? "active" : "" ?>" href="#">HOME</a>
+                <a class="nav-link <?= $directory == "home" ? "active" : "" ?>" href="home">HOME</a>
               </li>
               <li class="nav-item mx-5">
                 <a class="nav-link <?= $directory == "yummy" ? "active" : "" ?>" href="#">YUMMY!</a>
@@ -33,9 +33,12 @@
                 <a class="nav-link <?= $directory == "dance" ? "active" : "" ?>" href="#">DANCE!</a>
               </li>
             </section>
-            <li class="nav-item">
-              <a class="nav-link <?= $directory == "cart" ? "active" : "" ?>" href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
-            </li>
+            <?php (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
+            if (isset($_SESSION['user'])) { ?>
+              <li class="nav-item">
+                <a class="nav-link <?= $directory == "cart" ? "active" : "" ?>" href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
+              </li>
+            <?php } ?>
             <li class="nav-item authBtn">
               <a class="nav-link pull-right <?= $directory == "login" ? "active" : "" ?>" href="/<?= isset($_SESSION['user']) ? "logout" : "login" ?>"><?= isset($_SESSION['user']) ? "LOGOUT" : "LOGIN" ?> <i class="fa-solid fa-arrow-right-from-bracket mx-2"></i></a>
             </li>
@@ -43,4 +46,4 @@
         </div>
       </div>
     </nav>
-    <main class="container-fluid row align-items-center m-0 p-0 mb-auto h-100">
+    <main class="main-container container-fluid row align-items-center m-0 p-0 mb-auto h-100 text-primary-b">

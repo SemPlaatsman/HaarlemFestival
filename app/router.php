@@ -28,7 +28,7 @@ class router
                     $controller->index();
                 }
                 break;
-            
+
             case 'cart':
                 require_once __DIR__ . '/controllers/cartcontroller.php';
                 $controller = new CartController();
@@ -40,11 +40,11 @@ class router
                 $controller = new AdminOverviewController();
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     // Check if this is an update request
-                    if (isset($_POST['_valueMethod']) && $_POST['_valueMethod'] === 'PUT') {
+                    if (isset($_POST['_venueMethod']) && $_POST['_venueMethod'] === 'PUT') {
                         $controller->updateVenue();
-                    } else if (isset($_POST['_valueMethod']) && $_POST['_valueMethod'] === 'DELETE') {
+                    } else if (isset($_POST['_venueMethod']) && $_POST['_venueMethod'] === 'DELETE') {
                         $controller->deleteVenue();
-                    } else if (isset($_POST['_valueMethod']) && $_POST['_valueMethod'] === 'CREATE') {
+                    } else if (isset($_POST['_venueMethod']) && $_POST['_venueMethod'] === 'CREATE') {
                         $controller->insertVenue();
                     } else if (isset($_POST['_eventMethod']) && $_POST['_eventMethod'] === 'PUT') {
                         $controller->updateEvent();
@@ -52,6 +52,12 @@ class router
                         $controller->deleteEvent();
                     } else if (isset($_POST['_eventMethod']) && $_POST['_eventMethod'] === 'CREATE') {
                         $controller->insertEvent();
+                    } else if (isset($_POST['_artistMethod']) && $_POST['_artistMethod'] === 'PUT') {
+                        $controller->updateArtist();
+                    } else if (isset($_POST['_artistMethod']) && $_POST['_artistMethod'] === 'CREATE') {
+                        $controller->insertArtist();
+                    } else if (isset($_POST['_artistMethod']) && $_POST['_artistMethod'] === 'DELETE') {
+                        $controller->deleteArtist();
                     }
                 } else {
                     $controller->index();
@@ -92,9 +98,9 @@ class router
                 break;
 
             case 'api':
-                // require __DIR__ . '/apiControllers/apiController.php';
-                // $api = new api();
-                // break;
+            // require __DIR__ . '/apiControllers/apiController.php';
+            // $api = new api();
+            // break;
 
 
 

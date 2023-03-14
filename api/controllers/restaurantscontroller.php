@@ -6,6 +6,7 @@ include_once __DIR__ . '/../helpers/jsonHelper.php';
 include_once __DIR__ . '/../helpers/objectHelper.php';
 
 class RestaurantController
+
 {
     private $service;
     private $jsonHelper;
@@ -17,6 +18,7 @@ class RestaurantController
         $this->jsonHelper = new JsonHelper();
         $this->objectHelper = new ObjectHelper();
         $this->service = new RestaurantService();
+
     }
 
     public function get(int $id = null): bool
@@ -46,6 +48,7 @@ class RestaurantController
             http_response_code($e->getHttpCode());
             echo json_encode(array("message" => $e->getMessage()));
             return false;
+
         }
     }
 
@@ -71,6 +74,7 @@ class RestaurantController
             echo json_encode(array("message" => $e->getMessage()));
             return false;
         }
+
     }
 
     public function update(int $id = null, Object $data): bool
@@ -121,5 +125,6 @@ class RestaurantController
         $restaurant->seats = $data->seats;
 
         return $restaurant;
+
     }
 }
