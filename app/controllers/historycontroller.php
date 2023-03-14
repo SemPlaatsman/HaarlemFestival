@@ -15,7 +15,6 @@ class HistoryController extends Controller {
         //(session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
         //$model = $this->cartService->getCart(unserialize($_SESSION['user'])->getId());
         $this->displayView();
-        echo 'test1';
         if(isset($_POST['submit'])) {
             $this->insertItem();
         }
@@ -23,7 +22,6 @@ class HistoryController extends Controller {
 
     public function insertItem()
     {
-        echo 'test2';
         try {
             $id = 10;
             $order_id = 2;
