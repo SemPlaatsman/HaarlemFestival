@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../repository/repository.php';
+require_once __DIR__ . '/../repositories/repository.php';
 
 class UserRepository extends Repository
 {
@@ -7,7 +7,7 @@ class UserRepository extends Repository
 
     public function insert(string $name, string $address,string $password, string $date, bool $isadmin ): int
     {
-        $stmnt = $this->connection->prepare("INSERT INTO `Users` (email, password, time_created, role, name) VALUES (:email,:password,:date,:admin,:name);");
+        $stmnt = $this->connection->prepare("INSERT INTO `users` (email, password, time_created, role, name) VALUES (:email,:password,:date,:admin,:name);");
         $stmnt->bindParam(':email', $address, PDO::PARAM_STR);
         $stmnt->bindParam(':password', $password, PDO::PARAM_STR);
         $stmnt->bindParam(':date', $date, PDO::PARAM_STR);
@@ -19,7 +19,7 @@ class UserRepository extends Repository
 
     public function update(int $id, string $name, string $email,string $password, string $date, bool $isadmin): int
     {
-        $stmnt = $this->connection->prepare("UPDATE `Users` SET email=:email , password = :password, time_created = :date, role = :admin , name =:name WHERE id=:id;");
+        $stmnt = $this->connection->prepare("UPDATE `users` SET email=:email , password = :password, time_created = :date, role = :admin , name =:name WHERE id=:id;");
         $stmnt->bindParam(':email', $address, PDO::PARAM_STR);
         $stmnt->bindParam(':password', $password, PDO::PARAM_STR);
         $stmnt->bindParam(':date', $date, PDO::PARAM_STR);
@@ -32,7 +32,7 @@ class UserRepository extends Repository
 
     public function delete(int $id): int
     {
-        $stmnt = $this->connection->prepare("DELETE FROM `Users` WHERE id = :id;");
+        $stmnt = $this->connection->prepare("DELETE FROM `users` WHERE id = :id;");
         $stmnt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmnt->execute();
         return $this->connection->lastInsertId();
@@ -40,7 +40,7 @@ class UserRepository extends Repository
 
     public function get(int $id): User
     {
-        $stmnt = $this->connection->prepare("SELECT `id`, `email`, `password`, `time_created`, `role`, `name` FROM `Users` WHERE id = :id;");
+        $stmnt = $this->connection->prepare("SELECT `id`, `email`, `password`, `time_created`, `role`, `name` FROM `users` WHERE id = :id;");
         $stmnt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmnt->setFetchMode(PDO::FETCH_CLASS, 'User');
         $stmnt->execute();
@@ -52,7 +52,7 @@ class UserRepository extends Repository
     }
     public function getAll(): array
     {
-        $stmnt = $this->connection->prepare("SELECT `id`, `email`, `password`, `time_created`, `role`, `name`  FROM `Users`;");
+        $stmnt = $this->connection->prepare("SELECT `id`, `email`, `password`, `time_created`, `role`, `name`  FROM `users`;");
         $stmnt->setFetchMode(PDO::FETCH_CLASS, 'User');
         $stmnt->execute();
         $artist = $stmnt->fetchAll();

@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../repository/pagerepository.php';
+require_once __DIR__ . '/../repositories/pagerepository.php';
 
 class PageService
 {
