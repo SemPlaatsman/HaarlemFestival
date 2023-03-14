@@ -169,8 +169,8 @@ include __DIR__ . '/../header.php';
 
 <!-- Modal Update Venue -->
 <div id="editModalVenue" class="modal">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+    <div class="modal-dialog modal-dialog-centered text-white">
+        <div class="modal-content bg-primary-a border border-white">
             <div class="modal-header">
                 <h5 class="modal-title">Update Venue</h5>
                 <button type="button" class="btn-close" aria-label="Close" data-dismiss="modal"></button>
@@ -195,7 +195,7 @@ include __DIR__ . '/../header.php';
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary fs-5" data-dismiss="modal">Close</button>
                     <input type="submit"
-                        class="btn btn-primary bg-primary-a text-white border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
+                        class="btn btn-primary bg-primary-b border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
                         value="Save">
                 </div>
             </form>
@@ -205,8 +205,8 @@ include __DIR__ . '/../header.php';
 
 <!-- Modal Update Event -->
 <div id="editModalEvent" class="modal">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+    <div class="modal-dialog modal-dialog-centered text-white">
+        <div class="modal-content bg-primary-a border border-white">
             <div class="modal-header">
                 <h5 class="modal-title">Update Event</h5>
                 <button type="button" class="btn-close" aria-label="Close" data-dismiss="modal"></button>
@@ -231,7 +231,7 @@ include __DIR__ . '/../header.php';
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary fs-5" data-dismiss="modal">Close</button>
                     <input type="submit"
-                        class="btn btn-primary bg-primary-a text-white border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
+                        class="btn btn-primary bg-primary-b border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
                         value="Save">
                 </div>
             </form>
@@ -241,8 +241,8 @@ include __DIR__ . '/../header.php';
 
 <!-- Modal Update Artist -->
 <div id="editModalArtist" class="modal">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+    <div class="modal-dialog modal-dialog-centered text-white">
+        <div class="modal-content bg-primary-a border border-white">
             <div class="modal-header">
                 <h5 class="modal-title">Update Artist</h5>
                 <button type="button" class="btn-close" aria-label="Close" data-dismiss="modal"></button>
@@ -259,7 +259,7 @@ include __DIR__ . '/../header.php';
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary fs-5" data-dismiss="modal">Close</button>
                     <input type="submit"
-                        class="btn btn-primary bg-primary-a text-white border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
+                        class="btn btn-primary bg-primary-b border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
                         value="Save">
                 </div>
             </form>
@@ -269,8 +269,8 @@ include __DIR__ . '/../header.php';
 
 <!-- Modal Insert Venue -->
 <div id="insertModalVenue" class="modal">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+    <div class="modal-dialog modal-dialog-centered text-white">
+        <div class="modal-content bg-primary-a border border-white">
             <div class="modal-header">
                 <h5 class="modal-title">Insert Venue</h5>
                 <button type="button" class="btn-close" aria-label="Close" data-dismiss="modal"></button>
@@ -294,7 +294,7 @@ include __DIR__ . '/../header.php';
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary fs-5" data-bs-dismiss="modal">Close</button>
                     <input type="submit"
-                        class="btn btn-primary bg-primary-a text-white border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
+                        class="btn btn-primary bg-primary-b border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
                         value="Insert">
                 </div>
             </form>
@@ -304,8 +304,8 @@ include __DIR__ . '/../header.php';
 
 <!-- Modal Insert Event -->
 <div id="insertModalEvent" class="modal">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+    <div class="modal-dialog modal-dialog-centered text-white">
+        <div class="modal-content bg-primary-a border border-white">
             <div class="modal-header">
                 <h5 class="modal-title">Insert Event</h5>
                 <button type="button" class="btn-close" aria-label="Close" data-dismiss="modal"></button>
@@ -329,7 +329,7 @@ include __DIR__ . '/../header.php';
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary fs-5" data-dismiss="modal">Close</button>
                     <input type="submit"
-                        class="btn btn-primary bg-primary-a text-white border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
+                        class="btn btn-primary bg-primary-b border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
                         value="Insert">
                 </div>
             </form>
@@ -339,8 +339,8 @@ include __DIR__ . '/../header.php';
 
 <!-- Modal Insert Artist -->
 <div id="insertModalArtist" class="modal">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+    <div class="modal-dialog modal-dialog-centered text-white">
+        <div class="modal-content bg-primary-a border border-white">
             <div class="modal-header">
                 <h5 class="modal-title">Insert Artist</h5>
                 <button type="button" class="btn-close" aria-label="Close" data-dismiss="modal"></button>
@@ -356,7 +356,7 @@ include __DIR__ . '/../header.php';
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary fs-5" data-dismiss="modal">Close</button>
                     <input type="submit" role="button"
-                        class="btn btn-primary bg-primary-a text-white border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
+                        class="btn btn-primary bg-primary-b border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
                         value="Insert">
                 </div>
             </form>
