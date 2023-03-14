@@ -31,7 +31,7 @@ class ItemRepository extends Repository {
 
     public function insertReservation(Reservation $reservation):int {
         try {
-            $itemid = insertItem($reservation);
+            $itemid = $this->insertItem($reservation);
             $stmnt = $this -> connection -> prepare("INSERT INTO `reservation`(`restaurant_id`, `final_check`, `item_id`, `nr_of_adults`, `nr_of_kids`, `datetime`) VALUES (:restaurant_id, :final_check, :item_id, :nr_of_adults :nr_of_kids, :'datetime')");
             $restaurant = $reservation->getRestaurant();
             $restaurant_id = $restaurant->getId();
@@ -54,7 +54,7 @@ class ItemRepository extends Repository {
 
     public function insertTicketDance(TicketDance $ticket_dance):int {
         try {
-            $itemid = insertItem($reservation);
+            $itemid = $this->insertItem($reservation);
             $stmnt = $this -> connection -> prepare("INSERT INTO `ticket_dance`(`item_id`, `performance_id`, `nr_of_people`) VALUES (:item_id, :performance_id, :nr_of_people)");
             $performance_id = $ticket_dance->getPerformanceId();
             $nr_of_people = $ticket_dance->getNrOfPeople();
@@ -70,7 +70,7 @@ class ItemRepository extends Repository {
 
     public function insertTicketHistory(TicketHistory $ticket_history):int {
         try {
-            $itemid = insertItem($reservation);
+            $itemid = $this->insertItem($reservation);
             $stmnt = $this -> connection -> prepare("INSERT INTO `ticket_history`(`item_id`, `tour_id`, `nr_of_people`) VALUES (:item_id, :performance_id, :nr_of_people)");
             $tour_id = $ticket_history->getPerformanceId();
             $nr_of_people = $ticket_history->getNrOfPeople();
@@ -123,9 +123,7 @@ class ItemRepository extends Repository {
             $stmnt = $this -> connection -> prepare("SELECT `item_id` FROM `reservation` WHERE :id");
             $stmnt -> bindParam(':id', $id, PDO::PARAM_INT);
             $item_id = $stmnt -> fetch();
-            $stmnt = $this -> connection -> prepare("DELETE FROM item WHERE id = :id");
-            $stmnt -> bindParam(':id', $item_id, PDO::PARAM_INT);
-            $stmnt -> execute();
+            $this->deleteItem($item_id)
             $stmnt = $this -> connection -> prepare("DELETE FROM reservation WHERE id = :id");
             $stmnt -> bindParam(':id', $id, PDO::PARAM_INT);
             $stmnt -> execute();
