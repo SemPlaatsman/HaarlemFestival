@@ -16,7 +16,7 @@ class ItemService
 
     function getItems() : array 
     {
-        return $repository->getAllItems();
+        return $this->itemRepository->getAllItems();
     }
 
     public function insertItem(Item $item) : int
