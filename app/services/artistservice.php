@@ -3,43 +3,44 @@ require_once __DIR__ . '/../repositories/artistrepository.php';
 
 class ArtistService
 {
- 
-    function getArtist(int $id) : Artist
+
+    function getArtist(int $id): Artist
     {
         $repository = new ArtistRepository();
-    
+
         return $repository->get($id);
     }
-    
-    function getArtists() : array 
+
+    function getArtists(): array
     {
         $repository = new ArtistRepository();
-        if(!$repository->getAll()){
-            echo "null";
+        if (!$repository->getAll()) {
+            //echo "null";
+            return [];
         }
-   
+
 
         return $repository->getAll();
     }
 
-    function createArtist(Artist $artist) : bool
+    function createArtist(Artist $artist): bool
     {
         $repository = new ArtistRepository();
         return $repository->insert($artist->name);
     }
 
-    function updateArtist(Artist $artist) : bool
+    function updateArtist(Artist $artist): bool
     {
         $repository = new ArtistRepository();
         return $repository->update($artist->id, $artist->name);
     }
 
-    function deleteArtist(int $id) : bool
+    function deleteArtist(int $id): bool
     {
         $repository = new ArtistRepository();
         return $repository->delete($id);
     }
-    
+
 
 
 }
