@@ -1,11 +1,12 @@
 <?php
 //controller class for a rest api
 
-include_once __DIR__ . '/../services/restourantservice.php';
+include_once __DIR__ . '/../services/restaurantservice.php';
 include_once __DIR__ . '/../helpers/jsonHelper.php';
 include_once __DIR__ . '/../helpers/objectHelper.php';
 
-class RestourantController
+class RestaurantController
+
 {
     private $service;
     private $jsonHelper;
@@ -16,87 +17,114 @@ class RestourantController
     {
         $this->jsonHelper = new JsonHelper();
         $this->objectHelper = new ObjectHelper();
-        $this->service = new RestourantService();
+        $this->service = new RestaurantService();
+
     }
 
     public function get(int $id = null): bool
     {
-       
-        if (!is_null($id)) {
-            $restourant = $this->service->getRestourant($id);
-            $array = array();    //janky hack to make it work with the jsonHelper 
-            $array[0] = $restourant; //might need to make different functions for single and multiple
 
-            if ($this->objectHelper->checkEmpty($restourant)) {
 
-                return false;
+
+        try {
+            if (!is_null($id)) {
+                $restaurant = $this->service->getRestaurant($id);
+
+
+                if ($this->objectHelper->checkEmpty($restaurant)) {
+                    http_response_code(404);
+                    echo json_encode(array("message" => "Restaurant not found."));
+                    return false;
+                }
+                $this->jsonHelper->printJson([$restaurant]);
+                return true;
+            } else {
+
+                $restaurants = $this->service->getRestaurants();
+                $this->jsonHelper->printJson($restaurants);
+                return true;
             }
+        } catch (ServiceException $e) {
+            http_response_code($e->getHttpCode());
+            echo json_encode(array("message" => $e->getMessage()));
+            return false;
 
-            $this->jsonHelper->printJson($array);
-            return true;
-        } else {
-
-            $restourants = $this->service->getRestourants();
-            $this->jsonHelper->printJson($restourants);
-            return true;
         }
     }
 
     public function create(int $id = null, Object $data): bool
     {
-      
 
-        $restourant = $this->MakeRestourant($data, $id);
+        try {
+            $restaurant = $this->MakeRestaurant($data, $id);
+            $insertedRestaurant = $this->service->createRestaurant($restaurant);
+            if (!is_null($insertedRestaurant)) {
 
-        $insertedRestourant = $this->service->createRestourant($restourant);
-        if (!is_null($insertedRestourant)) {
+                $array = array();    //janky hack to make it work with the jsonHelper 
+                $array[0] = $insertedRestaurant; //might need to make different functions for single and multiple
 
-            $array = array();    //janky hack to make it work with the jsonHelper 
-            $array[0] = $insertedRestourant; //might need to make different functions for single and multiple
+                $this->jsonHelper->printJson($array);
 
-            $this->jsonHelper->printJson($array);
+                return true;
+            }
+            return false;
+        } catch (ServiceException $e) {
 
-            return true;
+            http_response_code($e->getHttpCode());
+            echo json_encode(array("message" => $e->getMessage()));
+            return false;
         }
-        return false;
+
     }
 
     public function update(int $id = null, Object $data): bool
     {
-       
 
-        $restourant = $this->MakeRestourant($data, $id);
+        try{
+            if(!isset($data->id)||!isset($data->name)||!isset($data->seats) ){
+                return false;
+            }
+            $restaurant = new Restaurant();
+            $restaurant->id = $id;
+            $restaurant->name = $data->name;
+            $restaurant->seats = $data->seats;
 
-        $updatedRestourant = $this->service->updateRestourant($id,$restourant);
-        if (!is_null($updatedRestourant)) {
+            if(is_null($this->service->updateRestaurant($id, $restaurant))){
+                return false;
+            }
 
-            $array = array();    //janky hack to make it work with the jsonHelper 
-            $array[0] = $updatedRestourant; //might need to make different functions for single and multiple
-
-            $this->jsonHelper->printJson($array);
-
+            $this->jsonHelper->printJson([$restaurant]);
             return true;
+        }catch(ServiceException $e){
+            http_response_code($e->getHttpCode());
+            echo json_encode(array("message" => $e->getMessage()));
+            return false;
         }
-        return false;
+
+
+        
     }
 
-    public function delete(int $id = null, Object $data): bool
+    public function delete(int $id = null): bool
     {
-        throw new Exception("not implemented");
-        return false;
-    }
-    private function  MakeRestourant(Object $data,int $id = null):restourant {
-        $restourant = new Restourant();
-
-        if(isset($data->id)){
-            $id = $id ?? $data -> id;
-            $restourant->id = $id;
-
+        try{
+                $this->service->deleteRestaurant($id);
+                return false;   
         }
+        catch(ServiceException $e){
+            http_response_code($e->getHttpCode());
+            echo json_encode(array("message" => $e->getMessage()));
+            return false;
+        }
+    }
+    private function  MakeRestaurant(Object $data, int $id = null): restaurant
+    {
+        $restaurant = new Restaurant();
+        $id = $id ?? $data->id;
+        $restaurant->name = $data->name;
+        $restaurant->seats = $data->seats;
 
-        $restourant->name = $data->name;
-        $restourant->seats = $data->seats;
+        return $restaurant;
 
-        return $restourant;
     }
 }

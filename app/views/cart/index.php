@@ -16,7 +16,7 @@
     <tbody>
       <?php foreach ($model['reservations'] as $reservation) { ?>
         <tr role="button" data-bs-toggle="modal" data-bs-target="#modalYummy<?= $reservation->getId(); ?>">
-          <th scope="row" class="fw-normal"><?= $reservation->getRestaurantName(); ?></th>
+          <th scope="row" class="fw-normal"><?= $reservation->getRestaurant()->getName(); ?></th>
           <td><?= $reservation->getNrOfAdults(); ?></td>
           <td><?= $reservation->getNrOfKids(); ?></td>
           <td><?= $reservation->getDatetimeFormatted(); ?></td>
@@ -25,39 +25,41 @@
         <article class="modal fade" id="modalYummy<?= $reservation->getId(); ?>" tabindex="-1" aria-labelledby="modelYummyLabel<?= $reservation->getId(); ?>" aria-hidden="true">
           <section class="modal-dialog modal-xl">
             <article class="modal-content bg-primary-b text-tetiare-a">
-              <section class="modal-header border-tetiare-a">
-                <h5 class="modal-title" id="modelYummyLabel<?= $reservation->getId(); ?>">RESERVATION DETAILS</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-              </section>
-              <section class="modal-body">
-                <form action="POST" id="yummyEditForm<?= $reservation->getId(); ?>">
-                  <input type="hidden" name="editId" value="<?= $reservation->getId(); ?>">
+              <form method="POST" id="yummyEditForm-<?= $reservation->getId(); ?>">
+                <section class="modal-header border-tetiare-a">
+                  <h5 class="modal-title" id="modelYummyLabel<?= $reservation->getId(); ?>">RESERVATION DETAILS</h5>
+                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </section>
+                <section class="modal-body">
+                  <input required type="hidden" name="editId" value="<?= $reservation->getId(); ?>">
                   <dl class="row">
                     <dt class="text-sm-start text-md-end col-md-2">Restaurant:</dt>
-                    <dd class="text-sm-start text-md-start col-md-10"><?= $reservation->getRestaurantName(); ?></dd>
+                    <dd class="text-sm-start text-md-start col-md-10"><?= $reservation->getRestaurant()->getName(); ?></dd>
                     <dt class="text-sm-start text-md-end col-md-2">Location:</dt>
-                    <dd class="text-sm-start text-md-start col-md-10"><?= $reservation->getRestaurantLocation(); ?></dd>
+                    <dd class="text-sm-start text-md-start col-md-10"><?= $reservation->getRestaurant()->getLocation(); ?></dd>
                     <hr class="form-hr">
-                    <dt class="text-sm-start text-md-end col-md-2">Adults:</dt>
-                    <dd class="text-sm-start text-md-start col-md-4"><input class="border border-2 border-tetiare-a" type="number" min="0" max="8" name="editNrOfAdults" value="<?= $reservation->getNrOfAdults(); ?>" form="yummyEditForm<?= $reservation->getId(); ?>"></dd>
-                    <dt class="text-sm-start text-md-end col-md-2">Kids:</dt>
-                    <dd class="text-sm-start text-md-start col-md-4"><input class="border border-2 border-tetiare-a" type="number" min="0" max="8" name="editNrOfKids" value="<?= $reservation->getNrOfKids(); ?>" form="yummyEditForm<?= $reservation->getId(); ?>"></dd>
+                    <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" title="<?= $reservation->getRestaurant()->getAdultPriceFormatted(); ?> p.p.">Adults:</u></dt>
+                    <dd class="text-sm-start text-md-start col-md-4"><input required class="border border-2 border-tetiare-a" type="number" min="0" max="8" name="editNrOfAdults" value="<?= $reservation->getNrOfAdults(); ?>"></dd>
+                    <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" title="<?= $reservation->getRestaurant()->getKidsPriceFormatted(); ?> p.p.">Kids:</u></dt>
+                    <dd class="text-sm-start text-md-start col-md-4"><input required class="border border-2 border-tetiare-a" type="number" min="0" max="8" name="editNrOfKids" value="<?= $reservation->getNrOfKids(); ?>"></dd>
                     <dt class="text-sm-start text-md-end col-md-2">Date & time:</dt>
-                    <dd class="text-sm-start text-md-start col-md-10"><?= $reservation->getDatetimeFormatted(); ?></dd>
+                    <dd class="text-sm-start text-md-start col-md-10"><input required class="border border-2 border-tetiare-a" type="datetime-local" name="editDatetime" value="<?= date_format($reservation->getDatetime(), 'Y-m-d\TH:i'); ?>"></dd>
                     <hr class="form-hr">
-                    <dt class="text-sm-start text-md-end col-md-2">Total price:</dt>
-                    <dd class="text-sm-start text-md-start col-md-4"><?= $reservation->getTotalPriceFormatted(); ?></dd>
+                    <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" title="This fee is subtracted from the final check at <?= $reservation->getRestaurant()->getName(); ?>!">Fee (p.p.):</u></dt>
+                    <dd class="text-sm-start text-md-start col-md-4"><?= $reservation->getRestaurant()->getReservationFeeFormatted(); ?></dd>
                     <dt class="text-sm-start text-md-end col-md-2">VAT:</dt>
                     <dd class="text-sm-start text-md-start col-md-4"><?= $reservation->getVATFormatted(); ?></dd>
-                    <dt class="text-sm-start text-md-end col-md-2"><span data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip!">Final check:</span></dt>
-                    <dd class="text-sm-start text-md-start col-md-10"><?= $reservation->getFinalCheckFormatted(); ?></dd>
+                    <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" title="<?= $reservation->getNrOfAdults(); ?> * <?= $reservation->getRestaurant()->getAdultPrice(); ?> + <?= $reservation->getNrOfKids(); ?> * <?= $reservation->getRestaurant()->getKidsPrice(); ?> = <?= "€ " . number_format($reservation->getFinalCheck() + $reservation->getTotalPrice(), 2); ?>&#013;<?= ($reservation->getFinalCheck() + $reservation->getTotalPrice()); ?> - <?= $reservation->getTotalPrice(); ?> = <?= $reservation->getFinalCheckFormatted(); ?>">Final check:</u></dt>
+                    <dd class="text-sm-start text-md-start col-md-4"><?= $reservation->getFinalCheckFormatted(); ?></dd>
+                    <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" title="<?= ($reservation->getNrOfAdults() + $reservation->getNrOfKids()); ?> * <?= $reservation->getRestaurant()->getReservationFee(); ?> = <?= $reservation->getTotalPriceFormatted(); ?>">Total price:</u></dt>
+                    <dd class="text-sm-start text-md-start col-md-4"><?= $reservation->getTotalPriceFormatted(); ?></dd>
                   </dl>
-                </form>
-              </section>
-              <section class="modal-footer border-tetiare-a">
-                <button type="button" class="btn btn-primary-b btn-bg-same" data-bs-dismiss="modal">CLOSE</button>
-                <button type="button" type="submit" form="yummyEditForm<?= $reservation->getId(); ?>" class="btn btn-tetiare-a">SAVE CHANGES</button>
-              </section>
+                </section>
+                <section class="modal-footer border-tetiare-a">
+                  <button type="button" class="btn btn-primary-b btn-bg-same" data-bs-dismiss="modal">CLOSE</button>
+                  <input type="submit" class="btn btn-tetiare-a" value="SAVE CHANGES">
+                </section>
+              </form>
             </article>
           </section>
         </article>

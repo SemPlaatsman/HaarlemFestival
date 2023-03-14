@@ -4,7 +4,6 @@ class Venue
 {
     private int $id;
     private string $name;
-    private DateTime $date;
     private string $location;
     private int $seats;
 
@@ -59,24 +58,6 @@ class Venue
     public function setSeats(int $seats): self
     {
         $this->seats = $seats;
-        return $this;
-    }
-
-    /**
-     * @return DateTime
-     */
-    public function getDate(): DateTime
-    {
-        return $this->date;
-    }
-
-    /**
-     * @param DateTime $date 
-     * @return self
-     */
-    public function setDate(DateTime $date): self
-    {
-        $this->date = $date;
         return $this;
     }
 
