@@ -2,8 +2,8 @@
 
 class Repository
 {
-
     protected $connection;
+    protected $database;
 
     function __construct()
     {

@@ -25,12 +25,15 @@ class CartController extends Controller {
         // filter POST
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-        if (isset($_POST['editId']) && isset($_POST['editNrOfAdults']) && isset($_POST['editNrOfKids']) && isset($_POST['editDatetime'])) {
-            $reservationId = $_POST['editId'];
-            $nrOfAdults = $_POST['editNrOfAdults'];
-            $nrOfKids = $_POST['editNrOfKids'];
-            $datetime = date_format(DateTime::createFromFormat('Y-m-d\TH:i', $_POST['editDatetime']), 'Y-m-d H:i:s');
+        if (isset($_POST['editYummyId']) && isset($_POST['editYummyNrOfAdults']) && isset($_POST['editYummyNrOfKids']) && isset($_POST['editYummyDatetime'])) {
+            $reservationId = $_POST['editYummyId'];
+            $nrOfAdults = $_POST['editYummyNrOfAdults'];
+            $nrOfKids = $_POST['editYummyNrOfKids'];
+            $datetime = date_format(DateTime::createFromFormat('Y-m-d\TH:i', $_POST['editYummyDatetime']), 'Y-m-d H:i:s');
             $this->cartService->updateReservation($reservationId, $nrOfAdults, $nrOfKids, $datetime);
+        } else if (isset($_POST['deleteYummyItemId'])) {
+            $itemId = $_POST['deleteYummyItemId'];
+            $this->cartService->deleteItem($itemId);
         }
     }
 }
