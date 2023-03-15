@@ -32,6 +32,9 @@
               <li class="nav-item mx-5">
                 <a class="nav-link <?= $directory == "dance" ? "active" : "" ?>" href="#">DANCE!</a>
               </li>
+              <li class="nav-item mx-5">
+                <a class="nav-link <?= $directory == "history" ? "active" : "" ?>" href="/history">A STROLL THROUGH HISTORY</a>
+              </li>
             </section>
             <?php (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
             if (isset($_SESSION['user'])) { ?>

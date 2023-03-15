@@ -1,6 +1,11 @@
 <?php
 include __DIR__ . '/../header.php';
 ?>
+<!-- temp -->
+<?php
+new breadcrumbcontroller();
+new imageslidercontroller();
+?>
 <html lang="en">
 
 <head>
@@ -14,7 +19,8 @@ include __DIR__ . '/../header.php';
     <input type="submit" class="btn btn-primary insert-button-venue" value="BUY TICKETS " style="width: 50%;">
 
     <!-- Open ticket form -->
-    <div id="history-ticket-form" class="modal">
+
+    <!-- <div id="history-ticket-form" class="modal">
         <form class="col-md-4 row bg-primary-b p-0 form-rightside" method="POST" id="history-ticket-form">
             <fieldset class="form-group p-2 col-md-6 gx-100">
                 <label class="text-tetiare-a fs-5  col-form-label" for="language">Language</label>
@@ -66,7 +72,7 @@ include __DIR__ . '/../header.php';
             <input type="cancel" value="cancel" class="btn btn-secondary col-md-4">
             <input type="submit" name="submit" value="Submit" class="btn btn-primary col-md-8">
         </form>
-    </div>
+    </div> -->
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
