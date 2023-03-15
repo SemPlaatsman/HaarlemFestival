@@ -1,12 +1,12 @@
 <?php
 
 class Restaurant {
-    private $id;
-    private $name;
-    private $seats;
-    private $location;
-    private $adult_price;
-    private $kids_price;
+    private int $id;
+    private string $name;
+    private int $seats;
+    private string $location;
+    private float $adult_price;
+    private float $kids_price;
     private $reservation_fee;
 
     public function __construct($id, $name, $seats, $location, $adult_price, $kids_price, $reservation_fee) {

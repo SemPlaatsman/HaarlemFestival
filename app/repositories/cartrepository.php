@@ -65,8 +65,9 @@ class CartRepository extends Repository
             "(SELECT event.name FROM `event` WHERE event.id = item.event_id) as 'event_name', item.total_price, " .
             "item.VAT, item.QR_Code, ticket_dance.id, ticket_dance.performance_id, performance.artist_id, " .
             "(SELECT name FROM `artist` WHERE artist.id = performance.artist_id) as 'artist_name', performance.venue_id, " .
-            "(SELECT venue.name FROM `venue` WHERE venue.id = performance.venue_id) as 'venue_name', " .
-            "performance.start_date, performance.end_date, ticket_dance.nr_of_people " .
+            "(SELECT venue.name FROM `venue` WHERE venue.id = performance.venue_id) as 'venue_name', " . 
+            "(SELECT venue.location FROM `venue` WHERE venue.id = performance.venue_id) as 'venue_location', " .
+            "performance.start_date, performance.end_date, performance.price as 'ticket_price', ticket_dance.nr_of_people " .
             "FROM `item` JOIN ticket_dance ON ticket_dance.item_id = item.id JOIN `performance` ON performance.id = ticket_dance.performance_id " .
             "WHERE order_id = (SELECT order_id FROM `orders` WHERE user_id = :user_id AND time_payed IS NULL AND payment_status = 0);");
         $query->bindParam(":user_id", $userId, PDO::PARAM_INT);
@@ -76,29 +77,12 @@ class CartRepository extends Repository
         // if rowMapper function is already loaded, don't load it again
         if (!function_exists('rowMapperTicketDance')) {
             // rowMapper based on this stackoverflow post: https://stackoverflow.com/questions/12368035/pdo-fetch-class-pass-results-to-constructor-as-parameters
-            function rowMapperTicketDance(
-                int $item_id, int $order_id, int $event_id, string $event_name, float $total_price, int $VAT, string $QR_Code,
-                int $id, int $performance_id, int $artist_id, string $artist_name, int $venue_id, string $venue_name, string $start_date, string $end_date, int $nr_of_people
-            )
-            {
-                return new TicketDance(
-                    $item_id,
-                    $order_id,
-                    $event_id,
-                    $event_name,
-                    $total_price,
-                    $VAT,
-                    $QR_Code,
-                    $id,
-                    $performance_id,
-                    $artist_id,
-                    $artist_name,
-                    $venue_id,
-                    $venue_name,
-                    $start_date,
-                    $end_date,
-                    $nr_of_people
-                );
+            function rowMapperTicketDance(int $item_id, int $order_id, int $event_id, string $event_name, float $total_price, int $VAT, string $QR_Code,
+                int $id, int $performance_id, int $artist_id, string $artist_name, int $venue_id, string $venue_name, string $venue_location, 
+                string $start_date, string $end_date, $ticket_price, int $nr_of_people) {
+                return new TicketDance($item_id, $order_id, $event_id, $event_name, $total_price, $VAT, $QR_Code, 
+                    $id, $performance_id, $artist_id, $artist_name, $venue_id, $venue_name, $venue_location, $start_date, 
+                    $end_date, $ticket_price, $nr_of_people);
             }
         }
 
@@ -138,11 +122,19 @@ class CartRepository extends Repository
         $query = $this->connection->prepare('UPDATE `item` JOIN `reservation` ON `reservation`.`item_id` = `item`.`id` ' . 
         'JOIN `restaurant` ON `restaurant`.`id` = `reservation`.`restaurant_id` SET `reservation`.`nr_of_adults` = :nr_of_adults, `reservation`.`nr_of_kids` = :nr_of_kids, ' . 
         '`reservation`.`datetime` = :datetime, `reservation`.`final_check` = ((:nr_of_adults * `restaurant`.`adult_price`) + (:nr_of_kids * `restaurant`.`kids_price`) - ((:nr_of_adults + :nr_of_kids) * `restaurant`.`reservation_fee`)), ' . 
-        '`item`.`total_price` = ((:nr_of_adults + :nr_of_kids) * `restaurant`.`reservation_fee`) WHERE `reservation`.`id` = :reservation_id;');
+        '`item`.`total_price` = ((:nr_of_adults + :nr_of_kids) * `restaurant`.`reservation_fee`) WHERE `reservation`.`id` = :reservation_id; LIMIT 1');
         $query->bindParam(':reservation_id', $reservationId, PDO::PARAM_INT);
         $query->bindParam(':nr_of_adults', $nrOfAdults, PDO::PARAM_INT);
         $query->bindParam(':nr_of_kids', $nrOfKids, PDO::PARAM_INT);
         $query->bindParam(':datetime', $datetime, PDO::PARAM_STR);
+        $query->execute();
+        return boolval($query->rowCount());
+    }
+
+    public function deleteItem($itemId) : bool {
+        require_once __DIR__ . '/../dbconfig.php';
+        $query = $this->connection->prepare("DELETE FROM `item` WHERE `id` = :id LIMIT 1");
+        $query->bindParam(":id", $itemId);
         $query->execute();
         return boolval($query->rowCount());
     }
