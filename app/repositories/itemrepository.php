@@ -25,38 +25,6 @@ class ItemRepository extends Repository {
         
     }
 
-    public function insertTicketDance(TicketDance $ticket_dance):int {
-        try {
-            $itemid = $this->insertItem($reservation);
-            $stmnt = $this -> connection -> prepare("INSERT INTO `ticket_dance`(`item_id`, `performance_id`, `nr_of_people`) VALUES (:item_id, :performance_id, :nr_of_people)");
-            $performance_id = $ticket_dance->getPerformanceId();
-            $nr_of_people = $ticket_dance->getNrOfPeople();
-            $stmnt -> bindParam(':performance_id', $performance_id, PDO::PARAM_STR);
-            $stmnt -> bindParam(':nr_of_people', $nr_of_people, PDO::PARAM_STR);
-            $stmnt -> bindParam(':item_id', $itemid, PDO::PARAM_STR);
-            $stmnt -> execute();
-        } catch (PDOException $e) {
-            echo $e;
-            return null;
-        }        
-    }
-
-    public function insertTicketHistory(TicketHistory $ticket_history):int {
-        try {
-            $itemid = $this->insertItem($reservation);
-            $stmnt = $this -> connection -> prepare("INSERT INTO `ticket_history`(`item_id`, `tour_id`, `nr_of_people`) VALUES (:item_id, :performance_id, :nr_of_people)");
-            $tour_id = $ticket_history->getPerformanceId();
-            $nr_of_people = $ticket_history->getNrOfPeople();
-            $stmnt -> bindParam(':tour_id', $performance_id, PDO::PARAM_STR);
-            $stmnt -> bindParam(':nr_of_people', $nr_of_people, PDO::PARAM_STR);
-            $stmnt -> bindParam(':item_id', $itemid, PDO::PARAM_STR);
-            $stmnt -> execute();
-        } catch (PDOException $e) {
-            echo $e;
-            return null;
-        }        
-    }
-
     public function updateItem(Item $item):bool {
         try {
             $stmnt = $this -> connection -> prepare("UPDATE item SET order_id=:order_id, event_id=:event_id, total_price=:total_price, VAT=:VAT, QR_Code=:QR_Code WHERE id=:id;");
