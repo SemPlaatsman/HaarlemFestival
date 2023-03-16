@@ -23,16 +23,17 @@ class HistoryController extends Controller {
     public function insertItem()
     {
         try {
-            $id = 10;
-            $order_id = 2;
-            $event_id = 2;
+            $item_id = 10;
+            $order_id = 1;
+            $event_id = 1;
             $total_price = 1;
             $VAT = 1;
             $QR_Code = 1;
-            $item = new Item($id, $order_id, $event_id, $total_price, $VAT, $QR_Code);
-
-            $result = $this->itemService->deleteItem(10);
-
+            $id = 0;
+            $restaurant = new Restaurant(1, "restaurant", 50, "Haarlem", 10, 5, 10);
+            $item = new Reservation($item_id, $order_id, $event_id, "test", $total_price, $VAT, $QR_Code, $id, $restaurant, 90, 1, 1, '2023-04-13 00:00:00');
+            $this->itemService->insertReservation($item);
+            //$result = $this->itemService->deleteItem(10);
             if ($result) {
                 // return success response
                 echo 'insert complete item';

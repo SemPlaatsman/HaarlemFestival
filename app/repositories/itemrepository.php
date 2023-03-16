@@ -7,14 +7,14 @@ class ItemRepository extends Repository {
 
     public function insertItem(Item $item):int {
         try {
-            $stmnt = $this -> connection -> prepare("INSERT INTO item (id, order_id, event_id, total_price, VAT, QR_Code) VALUES (:id, :order_id, :event_id, :total_price, :VAT, :QR_Code)");
+            $stmnt = $this -> connection -> prepare("INSERT INTO item (order_id, event_id, total_price, VAT, QR_Code) VALUES (:order_id, :event_id, :total_price, :VAT, :QR_Code)");
             //$id = $item->getItemId();
             $order_id = $item->getOrderId();
             $event_id = $item->getEventId();
             $total_price = $item->getTotalPrice();
             $VAT = $item->getVAT();
             $QR_Code = $item->getQRCode();
-            $stmnt -> bindParam(':id', $id, PDO::PARAM_STR);
+            //$stmnt -> bindParam(':id', $id, PDO::PARAM_STR);
             $stmnt -> bindParam(':order_id', $order_id, PDO::PARAM_STR);
             $stmnt -> bindParam(':event_id', $event_id, PDO::PARAM_STR);
             $stmnt -> bindParam(':total_price', $total_price, PDO::PARAM_STR);
@@ -24,7 +24,7 @@ class ItemRepository extends Repository {
             return $this->connection->lastInsertId();
         } catch (PDOException $e) {
             echo $e;
-            return null;
+            return $e;
         }
         
     }
@@ -32,13 +32,14 @@ class ItemRepository extends Repository {
     public function insertReservation(Reservation $reservation):int {
         try {
             $itemid = $this->insertItem($reservation);
-            $stmnt = $this -> connection -> prepare("INSERT INTO `reservation`(`restaurant_id`, `final_check`, `item_id`, `nr_of_adults`, `nr_of_kids`, `datetime`) VALUES (:restaurant_id, :final_check, :item_id, :nr_of_adults :nr_of_kids, :'datetime')");
+            $stmnt = $this->connection->prepare("INSERT INTO reservation (restaurant_id, final_check, item_id, nr_of_adults, nr_of_kids, `datetime`) VALUES (:restaurant_id, :final_check, :item_id, :nr_of_adults, :nr_of_kids, :datetime)");
             $restaurant = $reservation->getRestaurant();
             $restaurant_id = $restaurant->getId();
             $final_check = $reservation->getFinalCheck();
             $nr_of_adults = $reservation->getNrOfAdults();
             $nr_of_kids = $reservation->getNrOfKids();
-            $datetime = $reservation->getDatetime();
+            $datetime = $reservation->getDatetime()->format('Y-m-d H:i:s');
+            //$datetime = "test";
             $stmnt -> bindParam(':restaurant_id', $restaurant_id, PDO::PARAM_STR);
             $stmnt -> bindParam(':final_check', $final_check, PDO::PARAM_STR);
             $stmnt -> bindParam(':item_id', $itemid, PDO::PARAM_STR);
@@ -123,7 +124,7 @@ class ItemRepository extends Repository {
             $stmnt = $this -> connection -> prepare("SELECT `item_id` FROM `reservation` WHERE :id");
             $stmnt -> bindParam(':id', $id, PDO::PARAM_INT);
             $item_id = $stmnt -> fetch();
-            $this->deleteItem($item_id)
+            $this->deleteItem($item_id);
             $stmnt = $this -> connection -> prepare("DELETE FROM reservation WHERE id = :id");
             $stmnt -> bindParam(':id', $id, PDO::PARAM_INT);
             $stmnt -> execute();

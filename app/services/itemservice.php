@@ -33,5 +33,15 @@ class ItemService
     {
         return $this->itemRepository->deleteItem($id);
     }
+
+    public function insertReservation(Reservation $reservation):int 
+    {
+        return $this->itemRepository->insertReservation($reservation);
+    }
+
+    public function deleteReservation(int $id) : bool
+    {
+        return $this->itemRepository->deleteReservation($id);
+    }
 }
 ?>
