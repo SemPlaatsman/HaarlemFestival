@@ -6,32 +6,32 @@ class ReservationService
     private $reservationRepository;
 
     function __construct() {
-        $this->reservationRepository = new ReservationRepository();
+        $this->ticketHistoryRepository = new ReservationRepository();
     }
 
-    public function insertReservation(Reservation $reservation):int 
+    public function insertTicketHistory(TicketHistory $ticketHistory):int 
     {
-        return $this->itemRepository->insertReservation($reservation);
+        return $this->ticketHistoryRepository->insertTicketHistory($reservation);
     }
 
-    public function deleteReservation(int $id) : bool
+    public function deleteTicketHistory(int $id) : bool
     {
-        return $this->itemRepository->deleteReservation($id);
+        return $this->ticketHistoryRepository->deleteTicketHistory($id);
     }
 
-    public function updateReservation(Reservation $reservation):bool 
+    public function updateTicketHistory(TicketHistory $ticketHistory):bool 
     {
-        return $this->itemRepository->updateReservation($id);
+        return $this->ticketHistoryRepository->updateTicketHistory($id);
     }
 
-    public function getReservation(int $id) : Item
+    public function getTicketHistory(int $id) : Item
     {
-        return $this->itemRepository->getReservation($id);
+        return $this->ticketHistoryRepository->getTicketHistory($id);
     }
 
-    function getReservations() : array 
+    function getAllTicketHistory() : array 
     {
-        return $this->itemRepository->getAllReservations();
+        return $this->ticketHistoryRepository->getAllReservations();
     }
 }
 ?>
