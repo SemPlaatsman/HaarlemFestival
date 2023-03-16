@@ -20,8 +20,9 @@ class CartRepository extends Repository
     {
         $query = $this->connection->prepare("SELECT ticket_history.item_id, item.order_id, item.event_id, " .
             "(SELECT event.name FROM `event` WHERE event.id = item.event_id) as 'event_name', item.total_price, " .
-            "item.VAT, item.QR_Code, ticket_history.id, ticket_history.tour_id, history_tours.language, " .
-            "history_tours.datetime, history_tours.employee_id, history_tours.employee_name, ticket_history.nr_of_people " .
+            "item.VAT, item.QR_Code, ticket_history.id, ticket_history.tour_id, history_tours.language, history_tours.datetime, " . 
+            "history_tours.gathering_location, history_tours.employee_id, history_tours.employee_name, " . 
+            "ticket_history.nr_of_people, history_tours.price, history_tours.group_price " .
             "FROM `item` JOIN `ticket_history` ON ticket_history.item_id = item.id JOIN `history_tours` ON history_tours.id = ticket_history.tour_id " .
             "WHERE order_id = (SELECT order_id FROM `orders` WHERE user_id = :user_id AND time_payed IS NULL AND payment_status = 0);");
         $query->bindParam(":user_id", $userId, PDO::PARAM_INT);
@@ -31,27 +32,11 @@ class CartRepository extends Repository
         // if rowMapper function is already loaded, don't load it again
         if (!function_exists('rowMapperTicketHistory')) {
             // rowMapper based on this stackoverflow post: https://stackoverflow.com/questions/12368035/pdo-fetch-class-pass-results-to-constructor-as-parameters
-            function rowMapperTicketHistory(
-                int $item_id, int $order_id, int $event_id, string $event_name, float $total_price, int $VAT, string $QR_Code,
-                int $id, int $tour_id, string $language, string $datetime, int $employee_id, string $employee_name, int $nr_of_people
-            )
-            {
-                return new TicketHistory(
-                    $item_id,
-                    $order_id,
-                    $event_id,
-                    $event_name,
-                    $total_price,
-                    $VAT,
-                    $QR_Code,
-                    $id,
-                    $tour_id,
-                    $language,
-                    $datetime,
-                    $employee_id,
-                    $employee_name,
-                    $nr_of_people
-                );
+            function rowMapperTicketHistory(int $item_id, int $order_id, int $event_id, string $event_name, float $total_price, int $VAT, string $QR_Code,
+                int $id, int $tour_id, string $language, string $datetime, string $gathering_location, int $employee_id, 
+                string $employee_name, int $nr_of_people, float $price, float $group_price) {
+                return new TicketHistory($item_id, $order_id, $event_id, $event_name, $total_price, $VAT, $QR_Code, $id, $tour_id, 
+                    $language, $datetime, $gathering_location, $employee_id, $employee_name, $nr_of_people, $price, $group_price);
             }
         }
 
@@ -119,10 +104,10 @@ class CartRepository extends Repository
     }
 
     public function updateReservation(int $reservationId, int $nrOfAdults, int $nrOfKids, string $datetime) : bool {
-        $query = $this->connection->prepare('UPDATE `item` JOIN `reservation` ON `reservation`.`item_id` = `item`.`id` ' . 
-        'JOIN `restaurant` ON `restaurant`.`id` = `reservation`.`restaurant_id` SET `reservation`.`nr_of_adults` = :nr_of_adults, `reservation`.`nr_of_kids` = :nr_of_kids, ' . 
-        '`reservation`.`datetime` = :datetime, `reservation`.`final_check` = ((:nr_of_adults * `restaurant`.`adult_price`) + (:nr_of_kids * `restaurant`.`kids_price`) - ((:nr_of_adults + :nr_of_kids) * `restaurant`.`reservation_fee`)), ' . 
-        '`item`.`total_price` = ((:nr_of_adults + :nr_of_kids) * `restaurant`.`reservation_fee`) WHERE `reservation`.`id` = :reservation_id; LIMIT 1');
+        $query = $this->connection->prepare("UPDATE `item` JOIN `reservation` ON `reservation`.`item_id` = `item`.`id` " . 
+        "JOIN `restaurant` ON `restaurant`.`id` = `reservation`.`restaurant_id` SET `reservation`.`nr_of_adults` = :nr_of_adults, `reservation`.`nr_of_kids` = :nr_of_kids, " . 
+        "`reservation`.`datetime` = :datetime, `reservation`.`final_check` = ((:nr_of_adults * `restaurant`.`adult_price`) + (:nr_of_kids * `restaurant`.`kids_price`) - ((:nr_of_adults + :nr_of_kids) * `restaurant`.`reservation_fee`)), " . 
+        "`item`.`total_price` = ((:nr_of_adults + :nr_of_kids) * `restaurant`.`reservation_fee`) WHERE `reservation`.`id` = :reservation_id; LIMIT 1");
         $query->bindParam(':reservation_id', $reservationId, PDO::PARAM_INT);
         $query->bindParam(':nr_of_adults', $nrOfAdults, PDO::PARAM_INT);
         $query->bindParam(':nr_of_kids', $nrOfKids, PDO::PARAM_INT);
@@ -132,10 +117,21 @@ class CartRepository extends Repository
     }
 
     public function updateTicketDance(int $ticketDanceId, int $nrOfPeople) : bool {
-        $query = $this->connection->prepare('UPDATE `item` JOIN `ticket_dance` ON `ticket_dance`.`item_id` = `item`.`id` SET `ticket_dance`.`nr_of_people` = :nr_of_people, ' . 
-        '`item`.`total_price` = (:nr_of_people * (SELECT `performance`.`price` FROM `performance` WHERE `performance`.`id` = `ticket_dance`.`performance_id`)) ' . 
-        'WHERE `ticket_dance`.`id` = :ticket_dance_id LIMIT 1;');
+        $query = $this->connection->prepare("UPDATE `item` JOIN `ticket_dance` ON `ticket_dance`.`item_id` = `item`.`id` SET `ticket_dance`.`nr_of_people` = :nr_of_people, " . 
+        "`item`.`total_price` = (:nr_of_people * (SELECT `performance`.`price` FROM `performance` WHERE `performance`.`id` = `ticket_dance`.`performance_id`)) " . 
+        "WHERE `ticket_dance`.`id` = :ticket_dance_id LIMIT 1;");
         $query->bindParam(':ticket_dance_id', $ticketDanceId, PDO::PARAM_INT);
+        $query->bindParam(':nr_of_people', $nrOfPeople, PDO::PARAM_INT);
+        $query->execute();
+        return boolval($query->rowCount() > 0);
+    }
+
+    public function updateTicketHistory(int $ticketHistoryId, int $nrOfPeople) : bool {
+        $query = $this->connection->prepare("UPDATE `item` JOIN `ticket_history` ON `ticket_history`.`item_id` = `item`.`id` " . 
+        "JOIN `history_tours` ON `history_tours`.`id` = `ticket_history`.`tour_id` SET `ticket_history`.`nr_of_people` = :nr_of_people, " . 
+        "`item`.`total_price` = ((:nr_of_people % 4) * `history_tours`.`price`) + (FLOOR(:nr_of_people / 4) * `history_tours`.`group_price`) " . 
+        "WHERE `ticket_history`.`id` = :ticket_history_id");
+        $query->bindParam(':ticket_history_id', $ticketHistoryId, PDO::PARAM_INT);
         $query->bindParam(':nr_of_people', $nrOfPeople, PDO::PARAM_INT);
         $query->execute();
         return boolval($query->rowCount() > 0);
