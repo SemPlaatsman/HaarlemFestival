@@ -16,6 +16,10 @@ class CartService {
         return $this->cartRepository->updateReservation($reservationId, $nrOfAdults, $nrOfKids, $datetime);
     }
 
+    public function updateTicketDance(int $ticketDanceId, int $nrOfPeople) : bool {
+        return $this->cartRepository->updateTicketDance($ticketDanceId, $nrOfPeople);
+    }
+
     public function deleteItem(int $itemId) : bool {
         return $this->cartRepository->deleteItem($itemId);
     }

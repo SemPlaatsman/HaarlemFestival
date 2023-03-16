@@ -82,7 +82,7 @@ class TicketDance extends Item {
     /**
      * Get the value of venue_location
      */ 
-    public function getVenue_location()
+    public function getVenueLocation()
     {
         return $this->venue_location;
     }
