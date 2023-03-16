@@ -31,8 +31,12 @@ class CartController extends Controller {
             $nrOfKids = $_POST['editYummyNrOfKids'];
             $datetime = date_format(DateTime::createFromFormat('Y-m-d\TH:i', $_POST['editYummyDatetime']), 'Y-m-d H:i:s');
             $this->cartService->updateReservation($reservationId, $nrOfAdults, $nrOfKids, $datetime);
-        } else if (isset($_POST['deleteYummyItemId'])) {
-            $itemId = $_POST['deleteYummyItemId'];
+        } else if (isset($_POST['editDanceId']) && isset($_POST['editDanceNrOfPeople'])) {
+            $ticketDanceId = $_POST['editDanceId'];
+            $nrOfPeople = $_POST['editDanceNrOfPeople'];
+            $this->cartService->updateTicketDance($ticketDanceId, $nrOfPeople);
+        } else if (isset($_POST['deleteItemId'])) {
+            $itemId = $_POST['deleteItemId'];
             $this->cartService->deleteItem($itemId);
         }
     }

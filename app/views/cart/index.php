@@ -33,7 +33,7 @@
               </section>
               <section class="modal-body">
                 <input required type="hidden" name="editYummyId" form="editYummyForm-<?= $reservation->getId(); ?>" value="<?= $reservation->getId(); ?>">
-                <input required type="hidden" name="deleteYummyItemId" form="deleteYummyForm-<?= $reservation->getId(); ?>" value="<?= $reservation->getItemId(); ?>">
+                <input required type="hidden" name="deleteItemId" form="deleteYummyForm-<?= $reservation->getId(); ?>" value="<?= $reservation->getItemId(); ?>">
                 <dl class="row">
                   <dt class="text-sm-start text-md-end col-md-2">Restaurant:</dt>
                   <dd class="text-sm-start text-md-start col-md-10"><?= $reservation->getRestaurant()->getName(); ?></dd>
@@ -100,12 +100,28 @@
               </section>
               <section class="modal-body">
                 <input required type="hidden" name="editDanceId" form="editDanceForm-<?= $ticketDance->getId(); ?>" value="<?= $ticketDance->getId(); ?>">
-                <input required type="hidden" name="deleteDanceItemId" form="editDanceForm-<?= $ticketDance->getId(); ?>" value="<?= $ticketDance->getItemId(); ?>">
+                <input required type="hidden" name="deleteItemId" form="deleteDanceForm-<?= $ticketDance->getId(); ?>" value="<?= $ticketDance->getItemId(); ?>">
                 <dl class="row">
-                  <input required class="border border-2 border-tetiare-a" type="number" name="editDanceNrOfPeople" form="editDanceForm-<?= $ticketDance->getId(); ?>" value="<?= $ticketDance->getNrOfPeople(); ?>">
+                  <dt class="text-sm-start text-md-end col-md-2">Artist:</dt>
+                  <dd class="text-sm-start text-md-start col-md-4"><?= $ticketDance->getArtistName(); ?></dd>
+                  <dt class="text-sm-start text-md-end col-md-2">Venue:</dt>
+                  <dd class="text-sm-start text-md-start col-md-4"><?= $ticketDance->getVenueName(); ?></dd>
+                  <dt class="text-sm-start text-md-end col-md-2">Location:</dt>
+                  <dd class="text-sm-start text-md-start col-md-10"><?= $ticketDance->getVenueLocation(); ?></dd>
+                  <dt class="text-sm-start text-md-end col-md-2">Start date:</dt>
+                  <dd class="text-sm-start text-md-start col-md-4"><?= $ticketDance->getStartDateFormatted(); ?></dd>
+                  <dt class="text-sm-start text-md-end col-md-2">End date:</dt>
+                  <dd class="text-sm-start text-md-start col-md-4"><?= $ticketDance->getEndDateFormatted(); ?></dd>
+                  <hr class="form-hr">
+                  <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" title="<?= $ticketDance->getTicketPriceFormatted(); ?> p.p.">Nr of people:</u></dt>
+                  <dd class="text-sm-start text-md-start col-md-4"><input required class="border border-2 border-tetiare-a" type="number" min="0" max="24" name="editDanceNrOfPeople" form="editDanceForm-<?= $ticketDance->getId(); ?>" value="<?= $ticketDance->getNrOfPeople(); ?>"></dd>
+                  <dt class="text-sm-start text-md-end col-md-2">VAT:</dt>
+                  <dd class="text-sm-start text-md-start col-md-4"><?= $ticketDance->getVATFormatted(); ?></dd>
+                  <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" title="<?= $ticketDance->getNrOfPeople(); ?> * <?= $ticketDance->getTicketPrice(); ?> = <?= $ticketDance->getTotalPriceFormatted(); ?>">Total price:</u></dt>
+                  <dd class="text-sm-start text-md-start col-md-10"><?= $ticketDance->getTotalPriceFormatted(); ?></dd>
                 </dl>
               </section>
-              <section class="modal-footer border-tetiare-a">           
+              <section class="modal-footer border-tetiare-a">
                 <button type="submit" class="btn btn-primary-b btn-bg-same me-auto" form="deleteDanceForm-<?= $ticketDance->getId(); ?>"><i class="fa-solid fa-trash-can fs-3"></i></button>
                 <button type="button" class="btn btn-primary-b btn-bg-same" data-bs-dismiss="modal">CLOSE</button>
                 <button type="submit" form="editDanceForm-<?= $ticketDance->getId(); ?>" class="btn btn-tetiare-a">SAVE CHANGES</button>
@@ -137,12 +153,14 @@
           <section class="modal-dialog modal-xl">
             <article class="modal-content bg-primary-b text-tetiare-a">
               <form method="POST" id="editHistoryForm-<?= $ticketHistory->getId(); ?>"></form>
-              <form method="POST" id="deleteHistoryForm-<?= $ticketHistory->getId(); ?>" onsubmit='return confirm("Are you sure you wish your tour tickets for <?= $ticketHistory->getNrOfPeople(); ?> people in <?= $ticketHistory->getLanguage(); ?>?");'></form>
+              <form method="POST" id="deleteHistoryForm-<?= $ticketHistory->getId(); ?>" onsubmit='return confirm("Are you sure you wish to delete your tour tickets for <?= $ticketHistory->getNrOfPeople(); ?> people in <?= $ticketHistory->getLanguage(); ?>?");'></form>
               <section class="modal-header border-tetiare-a">
                 <h5 class="modal-title" id="modelHistoryLabel-<?= $ticketHistory->getId(); ?>">TICKET HISTORY DETAILS</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
               </section>
               <section class="modal-body">
+                <input required type="hidden" name="editHistoryId" form="editHistoryForm-<?= $ticketHistory->getId(); ?>" value="<?= $ticketHistory->getId(); ?>">
+                <input required type="hidden" name="deleteItemId" form="deleteHistoryForm-<?= $ticketHistory->getId(); ?>" value="<?= $ticketHistory->getItemId(); ?>">
                 <dl class="row">
 
                 </dl>

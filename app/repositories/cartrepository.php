@@ -128,15 +128,24 @@ class CartRepository extends Repository
         $query->bindParam(':nr_of_kids', $nrOfKids, PDO::PARAM_INT);
         $query->bindParam(':datetime', $datetime, PDO::PARAM_STR);
         $query->execute();
-        return boolval($query->rowCount());
+        return boolval($query->rowCount() > 0);
+    }
+
+    public function updateTicketDance(int $ticketDanceId, int $nrOfPeople) : bool {
+        $query = $this->connection->prepare('UPDATE `item` JOIN `ticket_dance` ON `ticket_dance`.`item_id` = `item`.`id` SET `ticket_dance`.`nr_of_people` = :nr_of_people, ' . 
+        '`item`.`total_price` = (:nr_of_people * (SELECT `performance`.`price` FROM `performance` WHERE `performance`.`id` = `ticket_dance`.`performance_id`)) ' . 
+        'WHERE `ticket_dance`.`id` = :ticket_dance_id LIMIT 1;');
+        $query->bindParam(':ticket_dance_id', $ticketDanceId, PDO::PARAM_INT);
+        $query->bindParam(':nr_of_people', $nrOfPeople, PDO::PARAM_INT);
+        $query->execute();
+        return boolval($query->rowCount() > 0);
     }
 
     public function deleteItem($itemId) : bool {
-        require_once __DIR__ . '/../dbconfig.php';
         $query = $this->connection->prepare("DELETE FROM `item` WHERE `id` = :id LIMIT 1");
-        $query->bindParam(":id", $itemId);
+        $query->bindParam(":id", $itemId, PDO::PARAM_INT);
         $query->execute();
-        return boolval($query->rowCount());
+        return boolval($query->rowCount() > 0);
     }
 }
 ?>
