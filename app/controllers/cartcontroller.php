@@ -35,6 +35,10 @@ class CartController extends Controller {
             $ticketDanceId = $_POST['editDanceId'];
             $nrOfPeople = $_POST['editDanceNrOfPeople'];
             $this->cartService->updateTicketDance($ticketDanceId, $nrOfPeople);
+        } else if (isset($_POST['editHistoryId']) && isset($_POST['editHistoryNrOfPeople'])) {
+            $ticketHistoryId = $_POST['editHistoryId'];
+            $nrOfPeople = $_POST['editHistoryNrOfPeople'];
+            $this->cartService->updateTicketHistory($ticketHistoryId, $nrOfPeople);
         } else if (isset($_POST['deleteItemId'])) {
             $itemId = $_POST['deleteItemId'];
             $this->cartService->deleteItem($itemId);

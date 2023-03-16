@@ -34,7 +34,7 @@
               <section class="modal-body">
                 <input required type="hidden" name="editYummyId" form="editYummyForm-<?= $reservation->getId(); ?>" value="<?= $reservation->getId(); ?>">
                 <input required type="hidden" name="deleteItemId" form="deleteYummyForm-<?= $reservation->getId(); ?>" value="<?= $reservation->getItemId(); ?>">
-                <dl class="row">
+                <dl class="row mb-0">
                   <dt class="text-sm-start text-md-end col-md-2">Restaurant:</dt>
                   <dd class="text-sm-start text-md-start col-md-10"><?= $reservation->getRestaurant()->getName(); ?></dd>
                   <dt class="text-sm-start text-md-end col-md-2">Location:</dt>
@@ -51,7 +51,7 @@
                   <dd class="text-sm-start text-md-start col-md-4"><?= $reservation->getRestaurant()->getReservationFeeFormatted(); ?></dd>
                   <dt class="text-sm-start text-md-end col-md-2">VAT:</dt>
                   <dd class="text-sm-start text-md-start col-md-4"><?= $reservation->getVATFormatted(); ?></dd>
-                  <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" title="<?= $reservation->getNrOfAdults(); ?> * <?= $reservation->getRestaurant()->getAdultPrice(); ?> + <?= $reservation->getNrOfKids(); ?> * <?= $reservation->getRestaurant()->getKidsPrice(); ?> = <?= "€ " . number_format($reservation->getFinalCheck() + $reservation->getTotalPrice(), 2); ?>&#013;<?= ($reservation->getFinalCheck() + $reservation->getTotalPrice()); ?> - <?= $reservation->getTotalPrice(); ?> = <?= $reservation->getFinalCheckFormatted(); ?>">Final check:</u></dt>
+                  <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<?= $reservation->getNrOfAdults(); ?> * <?= $reservation->getRestaurant()->getAdultPrice(); ?> + <?= $reservation->getNrOfKids(); ?> * <?= $reservation->getRestaurant()->getKidsPrice(); ?> = <?= "€ " . number_format($reservation->getFinalCheck() + $reservation->getTotalPrice(), 2); ?><br><?= ($reservation->getFinalCheck() + $reservation->getTotalPrice()); ?> - <?= $reservation->getTotalPrice(); ?> = <?= $reservation->getFinalCheckFormatted(); ?>">Final check:</u></dt>
                   <dd class="text-sm-start text-md-start col-md-4"><?= $reservation->getFinalCheckFormatted(); ?></dd>
                   <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" title="<?= ($reservation->getNrOfAdults() + $reservation->getNrOfKids()); ?> * <?= $reservation->getRestaurant()->getReservationFee(); ?> = <?= $reservation->getTotalPriceFormatted(); ?>">Total price:</u></dt>
                   <dd class="text-sm-start text-md-start col-md-4"><?= $reservation->getTotalPriceFormatted(); ?></dd>
@@ -101,16 +101,16 @@
               <section class="modal-body">
                 <input required type="hidden" name="editDanceId" form="editDanceForm-<?= $ticketDance->getId(); ?>" value="<?= $ticketDance->getId(); ?>">
                 <input required type="hidden" name="deleteItemId" form="deleteDanceForm-<?= $ticketDance->getId(); ?>" value="<?= $ticketDance->getItemId(); ?>">
-                <dl class="row">
+                <dl class="row mb-0">
                   <dt class="text-sm-start text-md-end col-md-2">Artist:</dt>
                   <dd class="text-sm-start text-md-start col-md-4"><?= $ticketDance->getArtistName(); ?></dd>
                   <dt class="text-sm-start text-md-end col-md-2">Venue:</dt>
                   <dd class="text-sm-start text-md-start col-md-4"><?= $ticketDance->getVenueName(); ?></dd>
                   <dt class="text-sm-start text-md-end col-md-2">Location:</dt>
                   <dd class="text-sm-start text-md-start col-md-10"><?= $ticketDance->getVenueLocation(); ?></dd>
-                  <dt class="text-sm-start text-md-end col-md-2">Start date:</dt>
+                  <dt class="text-sm-start text-md-end col-md-2">Start date & time:</dt>
                   <dd class="text-sm-start text-md-start col-md-4"><?= $ticketDance->getStartDateFormatted(); ?></dd>
-                  <dt class="text-sm-start text-md-end col-md-2">End date:</dt>
+                  <dt class="text-sm-start text-md-end col-md-2">End date & time:</dt>
                   <dd class="text-sm-start text-md-start col-md-4"><?= $ticketDance->getEndDateFormatted(); ?></dd>
                   <hr class="form-hr">
                   <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" title="<?= $ticketDance->getTicketPriceFormatted(); ?> p.p.">Nr of people:</u></dt>
@@ -137,16 +137,18 @@
   <a href="/history" class="text-decoration-none text-primary-b"><h1 class="w-100 text-center cart-header"><span class="hr-background bg-tetiare-a">A STROLL THROUGH HISTORY</span></h1></a>
     <thead>
       <tr>
-        <th scope="col">Language</th>
+        <th scope="col">Gathering location</th>
         <th scope="col">Date</th>
+        <th scope="col">Language</th>
         <th scope="col">Total price</th>
       </tr>
     </thead>
     <tbody>
       <?php foreach ($model['ticketsHistory'] as $ticketHistory) { ?>
         <tr role="button" data-bs-toggle="modal" data-bs-target="#modalHistory-<?= $ticketHistory->getId(); ?>">
-          <th scope="row" class="fw-normal"><?= $ticketHistory->getLanguage(); ?></th>
+          <th scope="row" class="fw-normal"><?= $ticketHistory->getGatheringLocation(); ?></th>
           <td><?= $ticketHistory->getDatetimeFormatted(); ?></td>
+          <td><?= $ticketHistory->getLanguage(); ?></td>
           <td><?= $ticketHistory->getTotalPriceFormatted(); ?></td>
         </tr>
         <article class="modal fade" id="modalHistory-<?= $ticketHistory->getId(); ?>" tabindex="-3" aria-labelledby="modelHistoryLabel-<?= $ticketHistory->getId(); ?>" aria-hidden="true">
@@ -161,8 +163,22 @@
               <section class="modal-body">
                 <input required type="hidden" name="editHistoryId" form="editHistoryForm-<?= $ticketHistory->getId(); ?>" value="<?= $ticketHistory->getId(); ?>">
                 <input required type="hidden" name="deleteItemId" form="deleteHistoryForm-<?= $ticketHistory->getId(); ?>" value="<?= $ticketHistory->getItemId(); ?>">
-                <dl class="row">
-
+                <dl class="row mb-0">
+                  <dt class="text-sm-start text-md-end col-md-2">Gathering location:</dt>
+                  <dd class="text-sm-start text-md-start col-md-4"><?= $ticketHistory->getGatheringLocation(); ?></dd>
+                  <dt class="text-sm-start text-md-end col-md-2">Date & time:</dt>
+                  <dd class="text-sm-start text-md-start col-md-4"><?= $ticketHistory->getDatetimeFormatted(); ?></dd>
+                  <dt class="text-sm-start text-md-end col-md-2">Employee:</dt>
+                  <dd class="text-sm-start text-md-start col-md-4"><?= $ticketHistory->getEmployeeName(); ?></dd>
+                  <dt class="text-sm-start text-md-end col-md-2">Language:</dt>
+                  <dd class="text-sm-start text-md-start col-md-4"><?= $ticketHistory->getLanguage(); ?></dd>
+                  <hr class="form-hr">
+                  <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="Individual price: <?= $ticketHistory->getPriceFormatted(); ?><br>Group price: <?= $ticketHistory->getGroupPriceFormatted(); ?>">Nr of people:</u></dt>
+                  <dd class="text-sm-start text-md-start col-md-4"><input required class="border border-2 border-tetiare-a" type="number" name="editHistoryNrOfPeople" min="0" max="12" form="editHistoryForm-<?= $ticketHistory->getId(); ?>" value="<?= $ticketHistory->getNrOfPeople(); ?>"></dd>
+                  <dt class="text-sm-start text-md-end col-md-2">VAT:</dt>
+                  <dd class="text-sm-start text-md-start col-md-4"><?= $ticketHistory->getVATFormatted(); ?></dd>
+                  <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" title="<?= $ticketHistory->getNrOfPeople() % 4; ?> * <?= $ticketHistory->getPrice(); ?> + <?= floor($ticketHistory->getNrOfPeople() / 4); ?> * <?= $ticketHistory->getGroupPrice(); ?> = <?= $ticketHistory->getTotalPriceFormatted(); ?>">Total price:</u></dt>
+                  <dd class="text-sm-start text-md-start col-md-4"><?= $ticketHistory->getTotalPriceFormatted(); ?></dd>
                 </dl>
               </section>
               <section class="modal-footer border-tetiare-a">           
