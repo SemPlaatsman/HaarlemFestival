@@ -12,8 +12,8 @@ include __DIR__ . '/../header.php';
                 <tr>
                     <th class="col-1">ID</th>
                     <th class="col-3">Name</th>
-                    <th>Location</th>
-                    <th>Seats</th>
+                    <th class="col-3">Location</th>
+                    <th class="col-3">Seats</th>
                     <th>Delete</th>
                     <th>Edit</th>
                 </tr>
@@ -69,8 +69,8 @@ include __DIR__ . '/../header.php';
             <tr>
                 <th class="col-1">ID</th>
                 <th class="col-3">Name</th>
-                <th>Start date</th>
-                <th>End date</th>
+                <th class="col-3">Start date</th>
+                <th class="col-3">End date</th>
                 <th>Delete</th>
                 <th>Edit</th>
             </tr>
@@ -117,7 +117,7 @@ include __DIR__ . '/../header.php';
             </td>
         </tbody>
     </table>
-    <table class="table table-bordered w-100 bg-primary-b m-auto mt-3 mb-3 border border-white text-tetiare-a">
+    <table class="table table-bordered w-100 bg-primary-b m-auto mt-3 border border-white text-tetiare-a">
         <thead class="text-center">
             <tr>
                 <th colspan="7" class="fs-3">Artist</th>
@@ -161,6 +161,66 @@ include __DIR__ . '/../header.php';
             <td colspan="7" class="text-center">
                 <input type="submit" data-bs-toggle="modal" data-bs-target="#insertModalArtist"
                     class="btn btn-primary insert-button-artist bg-primary-a text-white border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
+                    value="INSERT" style="width: 50%;">
+            </td>
+        </tbody>
+    </table>
+    <table class="table table-bordered w-100 bg-primary-b m-auto mt-3 border border-white text-tetiare-a">
+        <thead class="text-center">
+            <tr>
+                <th colspan="7" class="fs-3">Users</th>
+            </tr>
+            <tr>
+                <th class="col-1">ID</th>
+                <th class="col-3">Email</th>
+                <th class="col-3">Time created</th>
+                <th class="col-1">Is admin</th>
+                <th class="col-3">Name</th>
+                <th>Delete</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            <?php foreach ($model['user'] as $user): ?>
+                <tr>
+                    <td class="align-middle">
+                        <?= $user->getId() ?>
+                    </td>
+                    <td class="align-middle">
+                        <?= $user->getEmail() ?>
+                    </td>
+                    <td class="align-middle">
+                        <?= $user->getTime_created()->format('Y-m-d H:i:s') ?>
+                    </td>
+                    <td class="align-middle">
+                        <?= $user->getIsAdmin() == 1 ? 'Yes' : 'No' ?>
+                    </td>
+                    <td class="align-middle">
+                        <?= $user->getName() ?>
+                    </td>
+                    <td class="col-1">
+                        <div class="justify-content-center align-items-center">
+                            <form method="post" action="/adminoverview">
+                                <input type="hidden" name="id" value="<?= $user->getId() ?>">
+                                <input type="hidden" name="_userMethod" value="DELETE">
+                                <button type="submit"
+                                    class="btn btn-danger bg-primary-a text-white border-0 text-center d-inline-block fs-5 m-2"><i
+                                        class="fas fa-trash-alt"></i></button>
+                            </form>
+                        </div>
+                    </td>
+                    <td class="col-1">
+                        <div class="justify-content-center align-items-center">
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#editModalUser"
+                                class="btn btn-primary edit-button-venue bg-primary-a text-white border-0 text-center d-inline-block fs-5 m-2"
+                                data-id="<?= $user->getId() ?>"><i class="fas fa-edit"></i></button>
+                        </div>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            <td colspan="7" class="text-center">
+                <input type="submit" data-bs-toggle="modal" data-bs-target="#insertModalUser"
+                    class="btn btn-primary insert-button-venue bg-primary-a text-white border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
                     value="INSERT" style="width: 50%;">
             </td>
         </tbody>
@@ -369,6 +429,50 @@ include __DIR__ . '/../header.php';
         </div>
     </div>
 </div>
+
+<!-- Modal Insert User -->
+<div id="insertModalUser" class="modal fade" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered text-white">
+        <div class="modal-content bg-primary-a border border-white">
+            <div class="modal-header">
+                <h5 class="modal-title">Insert User</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <form id="insertEventForm" method="post" action="/adminoverview" class="d-flex justify-content-between">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="is_admin">Is admin</label>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="is_admin" name="is_admin" value="1">
+                            <label class="form-check-label" for="is_admin">Yes</label>
+                        </div>
+                    </div>
+                    <input type="hidden" name="_userMethod" value="CREATE">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary fs-5" data-bs-dismiss="modal">Close</button>
+                    <input type="submit"
+                        class="btn btn-primary bg-primary-b border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
+                        value="Insert">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <?php
 include __DIR__ . '/../footer.php';
 ?>

@@ -58,6 +58,10 @@ class router
                         $controller->insertArtist();
                     } else if (isset($_POST['_artistMethod']) && $_POST['_artistMethod'] === 'DELETE') {
                         $controller->deleteArtist();
+                    } else if (isset($_POST['_userMethod']) && $_POST['_userMethod'] === 'CREATE') {
+                        $controller->insertUser();
+                    } else if (isset($_POST['_userMethod']) && $_POST['_userMethod'] === 'DELETE') {
+                        $controller->deleteUser();
                     }
                 } else {
                     $controller->index();
@@ -105,7 +109,7 @@ class router
             case 'history':
                 require_once __DIR__ . '/controllers/historycontroller.php';
                 $controller = new HistoryController();
-                
+
                 $controller->index();
                 break;
 
