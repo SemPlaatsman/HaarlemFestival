@@ -104,6 +104,5 @@ class EventRepository extends Repository
             return false;
         }
     }
-
 }
 ?>

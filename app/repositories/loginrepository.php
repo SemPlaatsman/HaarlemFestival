@@ -2,7 +2,8 @@
 require_once __DIR__ . '/repository.php';
 require_once __DIR__ . '/../models/user.php';
 
-class LoginRepository extends Repository {
+class LoginRepository extends Repository
+{
     /**
      * Method to validate a user
      * Returns a ?User to check if the user was validated
@@ -14,7 +15,8 @@ class LoginRepository extends Repository {
      * 
      * @return ?User
      */
-    public function validateUser(string $email, string $password) : ?User {
+    public function validateUser(string $email, string $password): ?User
+    {
         $query = $this->connection->prepare("SELECT id, email, password, is_admin, name FROM users WHERE email=:email LIMIT 1");
         $query->bindParam(":email", $email);
         $query->execute();
