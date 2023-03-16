@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Mar 14, 2023 at 10:17 AM
+-- Generation Time: Mar 16, 2023 at 08:30 PM
 -- Server version: 10.10.3-MariaDB-1:10.10.3+maria~ubu2204
 -- PHP Version: 8.1.15
 
@@ -74,6 +74,7 @@ CREATE TABLE `history_tours` (
   `id` int(11) NOT NULL,
   `language` varchar(255) NOT NULL,
   `datetime` datetime NOT NULL,
+  `gathering_location` varchar(255) NOT NULL,
   `employee_id` int(11) NOT NULL,
   `employee_name` varchar(255) NOT NULL,
   `capacity` int(11) NOT NULL,
@@ -85,10 +86,10 @@ CREATE TABLE `history_tours` (
 -- Dumping data for table `history_tours`
 --
 
-INSERT INTO `history_tours` (`id`, `language`, `datetime`, `employee_id`, `employee_name`, `capacity`, `price`, `group_price`) VALUES
-(1, 'Dutch', '2023-03-07 12:00:00', 1, 'Jan Jaap van Laar', 24, 17.50, 60.00),
-(2, 'Chinese', '2023-03-07 12:00:00', 1, 'Jan Jaap van Laar', 24, 17.50, 60.00),
-(3, 'English', '2023-03-07 12:00:00', 1, 'Jan Jaap van Laar', 24, 17.50, 60.00);
+INSERT INTO `history_tours` (`id`, `language`, `datetime`, `gathering_location`, `employee_id`, `employee_name`, `capacity`, `price`, `group_price`) VALUES
+(1, 'Dutch', '2023-03-07 12:00:00', 'Standbeeld van Laurens Janszoon Coster', 1, 'Jan Jaap van Laar', 24, 17.50, 60.00),
+(2, 'Chinese', '2023-03-07 12:00:00', 'Oude Groenmarkt 22, 2011 HL Haarlem', 1, 'Jan Jaap van Laar', 24, 17.50, 60.00),
+(3, 'English', '2023-03-07 12:00:00', 'Statue of Laurens Jansz Coster', 1, 'Jan Jaap van Laar', 24, 17.50, 60.00);
 
 -- --------------------------------------------------------
 
@@ -224,7 +225,7 @@ CREATE TABLE `reservation` (
 --
 
 INSERT INTO `reservation` (`id`, `restaurant_id`, `final_check`, `item_id`, `nr_of_adults`, `nr_of_kids`, `datetime`) VALUES
-(1, 1, 65.00, 1, 2, 2, '2023-03-15 18:00:00'),
+(1, 1, 65.00, 1, 2, 2, '2023-03-26 18:00:00'),
 (2, 2, 50.00, 4, 2, 0, '2023-03-25 19:00:00');
 
 -- --------------------------------------------------------
@@ -248,8 +249,8 @@ CREATE TABLE `restaurant` (
 --
 
 INSERT INTO `restaurant` (`id`, `name`, `seats`, `location`, `adult_price`, `kids_price`, `reservation_fee`) VALUES
-(1, 'De Ripper', 32, 'Ripperdastraat 13-A, 2011 KG, Haarlem', 35.00, 17.50, 10.00),
-(2, 'Coster 52°', 21, 'Lange Veerstraat 20-22, 2011 DB, Haarlem', 35.00, 17.50, 10.00);
+(1, 'De Ripper', 32, 'Ripperdastraat 13-A, 2011 KG Haarlem', 35.00, 17.50, 10.00),
+(2, 'Coster 52°', 21, 'Lange Veerstraat 20-22, 2011 DB Haarlem', 35.00, 17.50, 10.00);
 
 -- --------------------------------------------------------
 
@@ -362,8 +363,8 @@ ALTER TABLE `history_tours`
 --
 ALTER TABLE `item`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `order_id` (`order_id`),
-  ADD KEY `event_id` (`event_id`);
+  ADD KEY `event_id` (`event_id`),
+  ADD KEY `item_ibfk_1` (`order_id`);
 
 --
 -- Indexes for table `opening_hours`
@@ -399,7 +400,7 @@ ALTER TABLE `performance`
 ALTER TABLE `reservation`
   ADD PRIMARY KEY (`id`),
   ADD KEY `restaurantId` (`restaurant_id`),
-  ADD KEY `item_id` (`item_id`);
+  ADD KEY `reservation_ibfk_2` (`item_id`);
 
 --
 -- Indexes for table `restaurant`
@@ -412,16 +413,16 @@ ALTER TABLE `restaurant`
 --
 ALTER TABLE `ticket_dance`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `item_id` (`item_id`),
-  ADD KEY `performance_id` (`performance_id`);
+  ADD KEY `performance_id` (`performance_id`),
+  ADD KEY `ticket_dance_ibfk_1` (`item_id`);
 
 --
 -- Indexes for table `ticket_history`
 --
 ALTER TABLE `ticket_history`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `item_id` (`item_id`),
-  ADD KEY `tour_id` (`tour_id`);
+  ADD KEY `tour_id` (`tour_id`),
+  ADD KEY `ticket_history_ibfk_1` (`item_id`);
 
 --
 -- Indexes for table `users`
@@ -443,13 +444,13 @@ ALTER TABLE `venue`
 -- AUTO_INCREMENT for table `artist`
 --
 ALTER TABLE `artist`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `history_tours`
@@ -461,7 +462,7 @@ ALTER TABLE `history_tours`
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `opening_hours`
@@ -491,7 +492,7 @@ ALTER TABLE `performance`
 -- AUTO_INCREMENT for table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `restaurant`
@@ -503,13 +504,13 @@ ALTER TABLE `restaurant`
 -- AUTO_INCREMENT for table `ticket_dance`
 --
 ALTER TABLE `ticket_dance`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `ticket_history`
 --
 ALTER TABLE `ticket_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -521,7 +522,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `venue`
 --
 ALTER TABLE `venue`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
@@ -558,20 +559,20 @@ ALTER TABLE `performance`
 --
 ALTER TABLE `reservation`
   ADD CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurant` (`id`),
-  ADD CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`);
+  ADD CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `ticket_dance`
 --
 ALTER TABLE `ticket_dance`
-  ADD CONSTRAINT `ticket_dance_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`),
+  ADD CONSTRAINT `ticket_dance_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `ticket_dance_ibfk_2` FOREIGN KEY (`performance_id`) REFERENCES `performance` (`id`);
 
 --
 -- Constraints for table `ticket_history`
 --
 ALTER TABLE `ticket_history`
-  ADD CONSTRAINT `ticket_history_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`),
+  ADD CONSTRAINT `ticket_history_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `ticket_history_ibfk_2` FOREIGN KEY (`tour_id`) REFERENCES `history_tours` (`id`);
 COMMIT;
 
