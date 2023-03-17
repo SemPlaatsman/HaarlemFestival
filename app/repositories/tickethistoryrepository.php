@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/repository.php';
-require_once __DIR__ . '/../models/item.php';
-class ItemRepository extends Repository {
+require_once __DIR__ . '/../models/tickethistory.php';
+class TicketHistoryRepository extends ItemRepository {
 
     public function insertTicketHistory(TicketHistory $ticket_history):int {
         try {
@@ -36,7 +36,7 @@ class ItemRepository extends Repository {
     }
     
 
-    public function getItem(int $id) : Item {
+    public function getTicketHistory(int $id) : Item {
         try {
             $stmnt = $this -> connection -> prepare("SELECT id, order_id, event_id, total_price, VAT, QR_Code FROM item WHERE id = :id");
             $stmnt -> bindParam(':id', $id, PDO::PARAM_INT);
@@ -48,7 +48,7 @@ class ItemRepository extends Repository {
             return null;
         }
     }
-    public function getAllItems():array  {
+    public function getAllTicketHistory():array  {
         try {
             $stmnt = $this -> connection -> prepare("SELECT id, order_id, event_id, total_price, VAT, QR_Code FROM item;");
             $stmnt -> setFetchMode(PDO::FETCH_CLASS, 'Item');

@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '/itemrepository.php';
-require_once __DIR__ . '/../models/item.php';
 require_once __DIR__ . '/../models/reservation.php';
 require_once __DIR__ . '/../models/restaurant.php';
 class ReservationRepository extends ItemRepository {
@@ -44,19 +43,20 @@ class ReservationRepository extends ItemRepository {
         }
     }
 
-    public function getItem(int $id) : Item {
+    public function getReservation(int $id) : Item {
         try {
-            $stmnt = $this -> connection -> prepare("SELECT id, order_id, event_id, total_price, VAT, QR_Code FROM item WHERE id = :id");
+            $stmnt = $this -> connection -> prepare("SELECT reservation.item_id AS item_id, order_id, event_id, total_price, VAT, QR_Code, reservation.id AS id, restaurant_id, final_check, nr_of_adults, nr_of_kids, 'datetime' FROM item JOIN reservation ON item.id = reservation.id WHERE reservation.id = :id");
             $stmnt -> bindParam(':id', $id, PDO::PARAM_INT);
-            $stmnt -> setFetchMode(PDO::FETCH_CLASS, 'Item');
+            $stmnt -> setFetchMode(PDO::FETCH_CLASS, 'Reservation');
             $stmnt -> execute();
-            $item = $stmnt -> fetch();
-        return $item;
+            $reservation = $stmnt -> fetch();
+            return $reservation;
         } catch (PDOException $e) {
-            return null;
+            echo($e);
+            return $e;
         }
     }
-    public function getAllItems():array  {
+    public function getAllReservations():array  {
         try {
             $stmnt = $this -> connection -> prepare("SELECT id, order_id, event_id, total_price, VAT, QR_Code FROM item;");
             $stmnt -> setFetchMode(PDO::FETCH_CLASS, 'Item');

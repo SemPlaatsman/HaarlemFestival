@@ -37,7 +37,7 @@ class TicketDanceRepository extends ItemRepository {
     }
     
 
-    public function getItem(int $id) : Item {
+    public function getTicketDance(int $id) : Item {
         try {
             $stmnt = $this -> connection -> prepare("SELECT id, order_id, event_id, total_price, VAT, QR_Code FROM item WHERE id = :id");
             $stmnt -> bindParam(':id', $id, PDO::PARAM_INT);
@@ -49,7 +49,7 @@ class TicketDanceRepository extends ItemRepository {
             return null;
         }
     }
-    public function getAllItems():array  {
+    public function getAllTicketsDance():array  {
         try {
             $stmnt = $this -> connection -> prepare("SELECT id, order_id, event_id, total_price, VAT, QR_Code FROM item;");
             $stmnt -> setFetchMode(PDO::FETCH_CLASS, 'Item');

@@ -62,7 +62,7 @@ class ItemRepository extends Repository {
 
     public function getItem(int $id) : Item {
         try {
-            $stmnt = $this -> connection -> prepare("SELECT id, order_id, event_id, total_price, VAT, QR_Code FROM item WHERE id = :id");
+            $stmnt = $this -> connection -> prepare("SELECT id AS item_id, order_id, event_id, total_price, VAT, QR_Code FROM item WHERE id = :id");
             $stmnt -> bindParam(':id', $id, PDO::PARAM_INT);
             $stmnt -> setFetchMode(PDO::FETCH_CLASS, 'Item');
             $stmnt -> execute();

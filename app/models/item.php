@@ -1,5 +1,5 @@
 <?php
-abstract class Item {
+ class Item {
     protected int $item_id;
     protected int $order_id;
     protected int $event_id;
@@ -8,14 +8,17 @@ abstract class Item {
     protected int $VAT;
     protected string $QR_Code;
 
-    public function __construct(int $item_id, int $order_id, int $event_id, string $event_name, float $total_price, int $VAT, string $QR_Code) {
-        $this->item_id = $item_id;
-        $this->order_id = $order_id;
-        $this->event_id = $event_id;
-        $this->event_name = $event_name;
-        $this->total_price = $total_price;
-        $this->VAT = $VAT;
-        $this->QR_Code = $QR_Code;
+    public function __construct(int $item_id = null, int $order_id = null, int $event_id = null, string $event_name = null, float $total_price = null, int $VAT = null, string $QR_Code = null) {
+        if($item_id!=null){
+            $this->item_id = $item_id;
+            $this->order_id = $order_id;
+            $this->event_id = $event_id;
+            $this->event_name = $event_name;
+            $this->total_price = $total_price;
+            $this->VAT = $VAT;
+            $this->QR_Code = $QR_Code;
+        }
+        
     }
 
     /**
@@ -82,6 +85,90 @@ abstract class Item {
     public function getQRCode()
     {
         return $this->QR_Code;
+    }
+
+    /**
+     * Set the value of item_id
+     *
+     * @return  self
+     */ 
+    public function setItem_id($item_id)
+    {
+        $this->item_id = $item_id;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of order_id
+     *
+     * @return  self
+     */ 
+    public function setOrder_id($order_id)
+    {
+        $this->order_id = $order_id;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of event_id
+     *
+     * @return  self
+     */ 
+    public function setEvent_id($event_id)
+    {
+        $this->event_id = $event_id;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of event_name
+     *
+     * @return  self
+     */ 
+    public function setEvent_name($event_name)
+    {
+        $this->event_name = $event_name;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of total_price
+     *
+     * @return  self
+     */ 
+    public function setTotal_price($total_price)
+    {
+        $this->total_price = $total_price;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of VAT
+     *
+     * @return  self
+     */ 
+    public function setVAT($VAT)
+    {
+        $this->VAT = $VAT;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of QR_Code
+     *
+     * @return  self
+     */ 
+    public function setQR_Code($QR_Code)
+    {
+        $this->QR_Code = $QR_Code;
+
+        return $this;
     }
 }
 

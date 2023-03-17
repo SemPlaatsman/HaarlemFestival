@@ -1,9 +1,9 @@
 <?php
-require_once __DIR__ . '/../repositories/itemrepository.php';
+require_once __DIR__ . '/../repositories/tickethistoryrepository.php';
 
-class ReservationService
+class TicketHistoryService
 {
-    private $reservationRepository;
+    private $ticketHistoryRepository;
 
     function __construct() {
         $this->ticketHistoryRepository = new ReservationRepository();
