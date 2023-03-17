@@ -2,13 +2,15 @@
 require_once __DIR__ . '/controller.php';
 require_once __DIR__ . '/../models/item.php';
 require_once __DIR__ . '/../services/reservationservice.php';
+require_once __DIR__ . '/../services/ticketdanceservice.php';
+require_once __DIR__ . '/../services/tickethistoryservice.php';
 
 
 class HistoryController extends Controller {
     private $itemService;
 
     function __construct() {
-        $this->itemService = new ReservationService();
+        $this->itemService = new TicketDanceService();
     }
 
     public function index() {
