@@ -39,9 +39,10 @@ class TicketDanceRepository extends ItemRepository {
 
     public function getTicketDance(int $id) : Item {
         try {
-            $stmnt = $this -> connection -> prepare("SELECT id, order_id, event_id, total_price, VAT, QR_Code FROM item WHERE id = :id");
+            $stmnt = $this -> connection -> prepare("SELECT ticket_dance.item_id AS item_id, order_id, event_id, total_price, VAT, QR_Code, ticket_dance.id AS id, performance.id AS performance_id, artist.id AS artist_id, artist.name AS artist_name, venue.id AS venue_id, venue.name AS venue_name, start_date, end_date, nr_of_people " .
+            "FROM item JOIN ticket_dance ON item.id = ticket_dance.item_id JOIN performance ON ticket_dance.performance_id = performance.id JOIN artist ON artist.id =performance.artist_id JOIN venue ON venue.id = performance.venue_id WHERE ticket_dance.id = :id");
             $stmnt -> bindParam(':id', $id, PDO::PARAM_INT);
-            $stmnt -> setFetchMode(PDO::FETCH_CLASS, 'Item');
+            $stmnt -> setFetchMode(PDO::FETCH_CLASS, 'TicketDance');
             $stmnt -> execute();
             $item = $stmnt -> fetch();
         return $item;
@@ -51,8 +52,9 @@ class TicketDanceRepository extends ItemRepository {
     }
     public function getAllTicketsDance():array  {
         try {
-            $stmnt = $this -> connection -> prepare("SELECT id, order_id, event_id, total_price, VAT, QR_Code FROM item;");
-            $stmnt -> setFetchMode(PDO::FETCH_CLASS, 'Item');
+            $stmnt = $this -> connection -> prepare("SELECT ticket_dance.item_id AS item_id, order_id, event_id, total_price, VAT, QR_Code, ticket_dance.id AS id, performance.id AS performance_id, artist.id AS artist_id, artist.name AS artist_name, venue.id AS venue_id, venue.name AS venue_name, start_date, end_date, nr_of_people " .
+            "FROM item JOIN ticket_dance ON item.id = ticket_dance.item_id JOIN performance ON ticket_dance.performance_id = performance.id JOIN artist ON artist.id =performance.artist_id JOIN venue ON venue.id = performance.venue_id");
+            $stmnt -> setFetchMode(PDO::FETCH_CLASS, 'TicketDance');
             $stmnt -> execute();
             $items = $stmnt -> fetchAll();
             return $items;

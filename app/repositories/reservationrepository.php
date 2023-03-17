@@ -45,7 +45,7 @@ class ReservationRepository extends ItemRepository {
 
     public function getReservation(int $id) : Item {
         try {
-            $stmnt = $this -> connection -> prepare("SELECT reservation.item_id AS item_id, order_id, event_id, total_price, VAT, QR_Code, reservation.id AS id, restaurant_id, final_check, nr_of_adults, nr_of_kids, 'datetime' FROM item JOIN reservation ON item.id = reservation.id WHERE reservation.id = :id");
+            $stmnt = $this -> connection -> prepare("SELECT reservation.item_id AS item_id, order_id, event_id, total_price, VAT, QR_Code, reservation.id AS id, restaurant_id, final_check, nr_of_adults, nr_of_kids, 'datetime' FROM item JOIN reservation ON item.item_id = reservation.id WHERE reservation.id = :id");
             $stmnt -> bindParam(':id', $id, PDO::PARAM_INT);
             $stmnt -> setFetchMode(PDO::FETCH_CLASS, 'Reservation');
             $stmnt -> execute();
@@ -58,8 +58,8 @@ class ReservationRepository extends ItemRepository {
     }
     public function getAllReservations():array  {
         try {
-            $stmnt = $this -> connection -> prepare("SELECT id, order_id, event_id, total_price, VAT, QR_Code FROM item;");
-            $stmnt -> setFetchMode(PDO::FETCH_CLASS, 'Item');
+            $stmnt = $this -> connection -> prepare("SELECT reservation.item_id AS item_id, order_id, event_id, total_price, VAT, QR_Code, reservation.id AS id, restaurant_id, final_check, nr_of_adults, nr_of_kids, 'datetime' FROM item JOIN reservation ON item.id = reservation.item_id");
+            $stmnt -> setFetchMode(PDO::FETCH_CLASS, 'Reservation');
             $stmnt -> execute();
             $items = $stmnt -> fetchAll();
             return $items;
