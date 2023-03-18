@@ -51,6 +51,17 @@ class Reservation extends Item {
     }
 
     /**
+     * Set the value of final_check
+     *
+     * @return  self
+     */ 
+    public function setFinalCheck($final_check) : self
+    {
+        $this->final_check = $final_check;
+        return $this;
+    }
+
+    /**
      * Get the value of nr_of_adults
      */ 
     public function getNrOfAdults()
@@ -59,11 +70,33 @@ class Reservation extends Item {
     }
 
     /**
+     * Set the value of nr_of_adults
+     *
+     * @return  self
+     */ 
+    public function setNrOfAdults($nr_of_adults) : self
+    {
+        $this->nr_of_adults = $nr_of_adults;
+        return $this;
+    }
+
+    /**
      * Get the value of nr_of_kids
      */ 
     public function getNrOfKids()
     {
         return $this->nr_of_kids;
+    }
+
+    /**
+     * Set the value of nr_of_kids
+     *
+     * @return  self
+     */ 
+    public function setNrOfKids($nr_of_kids) : self
+    {
+        $this->nr_of_kids = $nr_of_kids;
+        return $this;
     }
 
     /**
@@ -77,6 +110,17 @@ class Reservation extends Item {
     public function getDatetimeFormatted()
     {
         return date_format($this->datetime, 'd-m-Y H:i');
+    }
+
+    /**
+     * Set the value of datetime
+     *
+     * @return  self
+     */ 
+    public function setDatetime($datetime) : self
+    {
+        $this->datetime = DateTime::createFromFormat('Y-m-d H:i:s', $datetime);
+        return $this;
     }
 }
 ?>

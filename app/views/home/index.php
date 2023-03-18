@@ -1,5 +1,11 @@
 <?php
     include __DIR__ . '/../header.php';
+    require_once __DIR__ . '/../../models/reservation.php';
+    require_once __DIR__ . '/../../models/restaurant.php';
+    // $cart = unserialize($_SESSION['guest']->cart);
+    // $cart['reservations'][] = new Reservation(1, 1, 1, "Yummy", 10, 9, "", 1, new Restaurant(1, "piemol", 20, "location", 100, 50, 10), 100, 1, 0, "2023-03-26 18:00:00");
+    // $_SESSION['guest']->cart = serialize($cart);
+    var_dump(unserialize($_SESSION['guest']->cart))
 ?>
 
     <div class="px-4 py-5 my-5 text-center">
