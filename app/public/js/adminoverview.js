@@ -1,72 +1,3 @@
-// Modal for insert veneu
-/*
-const insertButtonsVenue = document.querySelectorAll('.insert-button-venue');
-const insertModalVenue = document.getElementById('insertModalVenue');
-const insertFormVenue = document.getElementById('insertFormVenue');
-
-insertButtonsVenue.forEach((button) => {
-    button.addEventListener('click', (event) => {
-        insertModalVenue.style.display = 'block';
-    });
-});
-
-const closeButtonInsertVeneu = insertModalVenue.querySelector('.btn-close');
-closeButtonInsertVeneu.addEventListener('click', () => {
-    insertModalVenue.style.display = 'none';
-});
-
-const insertModalFooterVeneu = insertModalVenue.querySelector('.modal-footer');
-const insertCancelBtnVeneu = insertModalFooterVeneu.querySelector('.btn-secondary');
-insertCancelBtnVeneu.addEventListener('click', () => {
-    insertModalVenue.style.display = 'none';
-});
-
-// Modal for insert event
-const insertButtonEvent = document.querySelectorAll('.insert-button-event');
-const insertModalEvent = document.getElementById('insertModalEvent');
-const insertFormEvent = document.getElementById('insertEventForm');
-
-insertButtonEvent.forEach((button) => {
-    button.addEventListener('click', (event) => {
-        insertModalEvent.style.display = "block";
-    });
-});
-
-const closeInsertButtonEvent = insertModalEvent.querySelector('.btn-close');
-closeInsertButtonEvent.addEventListener('click', () => {
-    insertModalEvent.style.display = 'none';
-});
-
-const insertModalFooterEvent = insertModalEvent.querySelector('.modal-footer');
-const cancelInsertBtnEvent = insertModalFooterEvent.querySelector('.btn-secondary');
-cancelInsertBtnEvent.addEventListener('click', () => {
-    insertModalEvent.style.display = 'none';
-});
-
-
-// Modal for insert artist
-const insertButtonArtist = document.querySelectorAll('.insert-button-artist');
-const insertModalArtist = document.getElementById('insertModalArtist');
-const insertFormArtist = document.getElementById('insertArtistForm');
-
-insertButtonArtist.forEach((button) => {
-    button.addEventListener('click', (event) => {
-        insertModalArtist.style.display = "block";
-    });
-});
-
-const closeInsertButtonArtist = insertModalArtist.querySelector('.btn-close');
-closeInsertButtonArtist.addEventListener('click', () => {
-    insertModalArtist.style.display = 'none';
-});
-
-const insertModalFooterArtist = insertModalArtist.querySelector('.modal-footer');
-const cancelInsertBtnArtist = insertModalFooterArtist.querySelector('.btn-secondary');
-cancelInsertBtnArtist.addEventListener('click', () => {
-    insertModalArtist.style.display = 'none';
-});*/
-
-
 // Modal for edit artist
 const editButtonArtist = document.querySelectorAll('.edit-button-artist');
 const editModalArtist = document.getElementById('editModalArtist');
@@ -130,8 +61,6 @@ editCancelBtnEvent.addEventListener('click', () => {
     editModalEvent.style.display = 'none';
 });
 
-
-
 // Modal for edit veneu
 const editButtonVenue = document.querySelectorAll('.edit-button-venue');
 const editModalVenue = document.getElementById('editModalVenue');
@@ -163,4 +92,38 @@ const editModalFooterVeneu = editModalVenue.querySelector('.modal-footer');
 const cancelEditBtnVeneu = editModalFooterVeneu.querySelector('.btn-secondary');
 cancelEditBtnVeneu.addEventListener('click', () => {
     editModalVenue.style.display = 'none';
+});
+
+// Modal for edit user
+const editButtonUser = document.querySelectorAll('.edit-button-user');
+const editModalUser = document.getElementById('editModalUser');
+const editFormUser = document.getElementById('editFormUser');
+
+editButtonUser.forEach((button) => {
+    button.addEventListener('click', (event) => {
+        const row = event.target.closest('tr');
+        const id = row.querySelector('.edit-button-user').dataset.id;
+        const email = row.querySelector('td:nth-of-type(2)').innerText;
+        const name = row.querySelector('td:nth-of-type(5)').innerText;
+        const isAdmin = row.querySelector('td:nth-of-type(4)').innerText === "Yes";
+
+
+        document.getElementById('edit-id-user').value = id;
+        document.getElementById('email').value = email;      
+        document.getElementById('name-user').value = name;
+        document.getElementById('is_admin').checked = isAdmin;
+
+        editModalUser.style.display = 'block';
+    });
+});
+
+const closeEditButtonUser = editModalUser.querySelector('.btn-close');
+closeEditButtonUser.addEventListener('click', () => {
+    editModalUser.style.display = 'none';
+});
+
+const editModalFooterUser = editModalUser.querySelector('.modal-footer');
+const cancelEditBtnUser = editModalFooterUser.querySelector('.btn-secondary');
+cancelEditBtnUser.addEventListener('click', () => {
+    editModalUser.style.display = 'none';
 });

@@ -212,7 +212,7 @@ include __DIR__ . '/../header.php';
                     <td class="col-1">
                         <div class="justify-content-center align-items-center">
                             <button type="button" data-bs-toggle="modal" data-bs-target="#editModalUser"
-                                class="btn btn-primary edit-button-venue bg-primary-a text-white border-0 text-center d-inline-block fs-5 m-2"
+                                class="btn btn-primary edit-button-user bg-primary-a text-white border-0 text-center d-inline-block fs-5 m-2"
                                 data-id="<?= $user->getId() ?>"><i class="fas fa-edit"></i></button>
                         </div>
                     </td>
@@ -220,7 +220,7 @@ include __DIR__ . '/../header.php';
             <?php endforeach; ?>
             <td colspan="7" class="text-center">
                 <input type="submit" data-bs-toggle="modal" data-bs-target="#insertModalUser"
-                    class="btn btn-primary insert-button-venue bg-primary-a text-white border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
+                    class="btn btn-primary insert-button-user bg-primary-a text-white border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
                     value="INSERT" style="width: 50%;">
             </td>
         </tbody>
@@ -318,6 +318,48 @@ include __DIR__ . '/../header.php';
                         <input type="text" class="form-control" id="name-artist" name="name" required>
                     </div>
                     <input type="hidden" name="_artistMethod" value="PUT">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary fs-5" data-bs-dismiss="modal">Close</button>
+                    <input type="submit"
+                        class="btn btn-primary bg-primary-b border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
+                        value="Save">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Update User -->
+<div id="editModalUser" class="modal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered text-white">
+        <div class="modal-content bg-primary-a border border-white">
+            <div class="modal-header">
+                <h5 class="modal-title">Update User</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <form id="editFormUser" method="post" action="/adminoverview" class="d-flex justify-content-between">
+                <div class="modal-body">
+                    <input type="hidden" name="id" id="edit-id-user">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name-user" name="name" required>
+                    </div>
+                    <div class="form-group"><label for="is_admin">Is admin</label>
+                        <div class="form-check"><input type="checkbox" class="form-check-input" id="is_admin"
+                                name="is_admin" value="1"><label class="form-check-label" for="is_admin">Yes</label>
+                        </div>
+                    </div>
+                    <input type="hidden" name="_userMethod" value="PUT">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary fs-5" data-bs-dismiss="modal">Close</button>
