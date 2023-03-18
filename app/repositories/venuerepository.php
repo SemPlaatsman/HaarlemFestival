@@ -56,10 +56,10 @@ class VenueRepository extends Repository
             $stmt = $this->connection->prepare("UPDATE `venue` SET name=:name, location=:location, seats=:seats WHERE id=:id");
 
             // Bind the parameters
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->bindParam(':name', $name, PDO::PARAM_STR);
             $stmt->bindParam(':location', $location, PDO::PARAM_STR);
             $stmt->bindParam(':seats', $seats, PDO::PARAM_INT);
-            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 
             $stmt->execute();
 

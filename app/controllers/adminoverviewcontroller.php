@@ -257,6 +257,30 @@ class AdminOverviewController extends Controller
         }
     }
 
+    public function updateUser()
+    {
+        try {
+            $id = htmlspecialchars($_POST['id']);
+            $email = htmlspecialchars($_POST['email']);
+            $password = htmlspecialchars($_POST['password']);
+            $isAdmin = isset($_POST['is_admin']) ? true : false;
+            $name = htmlspecialchars($_POST['name']);
+
+            $result = $this->userservice->updateUser($id, $email, $password, $isAdmin, $name);
+
+            if ($result) {
+                // return succes response
+                header("Location: /adminoverview");
+            } else {
+                // return failed response
+                echo 'Something went wrong with the update';
+            }
+        } catch (Exception $e) {
+            // Handle the exception here
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
+
     public function deleteUser()
     {
         try {

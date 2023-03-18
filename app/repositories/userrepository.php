@@ -32,7 +32,7 @@ class UserRepository extends Repository
         }
     }
 
-    public function insertUser(string $email, string $password, DateTime $time_created, bool $isAdmin, string $name): int
+    public function insertUser(string $email, string $password, DateTime $time_created, bool $isAdmin, string $name)
     {
         try {
             // hash password
@@ -58,17 +58,32 @@ class UserRepository extends Repository
         }
     }
 
-    public function updateUser(int $id, string $name, string $email, string $password, string $date, bool $isadmin): int
+    public function updateUser(int $id, string $email, string $password, bool $isAdmin, string $name): int
     {
-        $stmnt = $this->connection->prepare("UPDATE `users` SET email=:email , password = :password, time_created = :date, name =:name WHERE id=:id;");
-        $stmnt->bindParam(':id', $name, PDO::PARAM_INT);
-        $stmnt->bindParam(':email', $email, PDO::PARAM_STR);
-        $stmnt->bindParam(':password', $password, PDO::PARAM_STR);
-        $stmnt->bindParam(':date', $date, PDO::PARAM_STR);
-        $stmnt->bindParam(':is_admin', $isadmin, PDO::PARAM_STR);
-        $stmnt->bindParam(':name', $name, PDO::PARAM_STR);
-        $stmnt->execute();
-        return $this->connection->lastInsertId();
+        try {
+            // hash password
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+            // Update a user
+            $stmnt = $this->connection->prepare("UPDATE `users` SET email=:email, password = :password, is_admin = :isAdmin, name =:name WHERE id=:id");
+
+            // Bind the parameters
+            $stmnt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmnt->bindParam(':email', $email, PDO::PARAM_STR);
+            $stmnt->bindParam(':password', $hashedPassword, PDO::PARAM_STR);
+            $stmnt->bindParam(':isAdmin', $isAdmin, PDO::PARAM_BOOL);
+            $stmnt->bindParam(':name', $name, PDO::PARAM_STR);
+
+            $stmnt->execute();
+
+            if ($stmnt->rowCount() == 0) {
+                return false;
+            }
+
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 
     public function deleteUser(int $id): int
