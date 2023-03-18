@@ -31,6 +31,10 @@ class HistoryController extends Controller {
         }
     }
 
+    public function getSchedule(?int $week, ?int $year,String $language) {
+        return $this->itemService->getSchedule($week, $year, $language);
+    }
+
     public function insertItem()
     {
         try {

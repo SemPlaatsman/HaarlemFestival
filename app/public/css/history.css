@@ -1,0 +1,36 @@
+.title {
+    font-size: 5em;
+}
+.image{
+    height: 19em;
+}
+p{
+    font-size: 1.5em;
+    
+}
+.prices p{
+    font-size: 1em;
+}
+.languagepicker{
+    border: none;
+}
+
+
+.buyButton{
+    font-size: 2em;
+}
+
+.btn-outline-primary{
+    border-radius:0;    
+    border: none;
+
+}
+.btn-check:checked + .btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check) + .btn:active{
+    background-color: var(--secondary-a);
+    /* background-color:pink; */
+
+
+}
+/* btn-check:checked {
+    border-color: ;  
+} */

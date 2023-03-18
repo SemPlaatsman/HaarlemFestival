@@ -49,4 +49,4 @@
         </div>
       </div>
     </nav>
-    <main class="main-container container-fluid row align-items-start m-0 p-0 mb-auto  text-primary-b ">
+    <main class="main-container container-fluid row align-items-start m-0 p-0 mb-auto h-100 text-primary-b ">
