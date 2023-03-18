@@ -20,6 +20,10 @@ class CartService {
         return $this->cartRepository->updateTicketDance($ticketDanceId, $nrOfPeople);
     }
 
+    public function updateTicketHistory(int $ticketHistoryId, int $nrOfPeople) : bool {
+        return $this->cartRepository->updateTicketHistory($ticketHistoryId, $nrOfPeople);
+    }
+
     public function deleteItem(int $itemId) : bool {
         return $this->cartRepository->deleteItem($itemId);
     }

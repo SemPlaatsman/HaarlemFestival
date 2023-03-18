@@ -29,8 +29,6 @@ class TicketDance extends Item {
         $this->nr_of_people = $nr_of_people;
     }
 
-    
-
     /**
      * Get the value of id
      */ 
