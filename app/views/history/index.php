@@ -18,7 +18,8 @@ new breadcrumbcontroller();
 </head>
 
 <body class="container-fluid">
-  <div class="row bg-tetiare-a mx-auto">
+  <!-- welcome tekst -->
+  <div class="row bg-tetiare-a mx-auto"> 
     <div class="col-4 d-none d-md-block">
       <img class="img-fluid rounded-circle p-2 mx-auto  image" src="https://fastly.picsum.photos/id/744/400/400.jpg?hmac=2J82-H9IdQpY6940Fkcvzr6n_bFovfAcNLtO7PwY-9Y">
     </div> <!-- image replace whit actual map image-->
@@ -28,29 +29,33 @@ new breadcrumbcontroller();
       <p> On this page you will find more information about the tour. You can check out information about the venues that are visited in the tour, when the tours are and what the prices are to get a ticket for the tour.</p>
     </div>
   </div>
+ <!-- plaatjes -->
   <div class="row bg-primary-b mx-auto">
-    <div class="col md-col-6">
+    <div class="row">
+    <div class="col-sm-12 col-md-6">
       <h1 class="title text-tetiare-a">LOCATIONS</h1>
       <p class="text-tetiare-a">During the tour you will get visit to visit nine amazing locations in Haarlem. Each of these locations has a great story behind them and an important contribution to the history of Haarlem. If you want to find out more details about a location or what the importance of a location was in the history of Haarlem you can find out more by clicking on it.</p>
     </div>
-    <div class="col  d-none d-md-block">
-      <img class="img-fluid  rounded-circle p-2 mx-auto d-inline-block image" src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE">
+    <div class="col-6 col-md-3">   
+      <img class="img-fluid  rounded-circle  mx-auto d-inline-block " src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE">
     </div>
-    <div class="col d-none d-md-block">
-      <img class="img-fluid rounded-circle p-2 mx-auto d-inline-block image" src="https://fastly.picsum.photos/id/54/400/400.jpg?hmac=bYiTE5dgf7aeX3u33wjsWzjFQLppWUPbsfVTn33OM9I">
+    <div class="col-6 col-md-3">
+      <img class="img-fluid rounded-circle mx-auto d-inline-block " src="https://fastly.picsum.photos/id/54/400/400.jpg?hmac=bYiTE5dgf7aeX3u33wjsWzjFQLppWUPbsfVTn33OM9I">
+    </div>
     </div>
     <div class="row">
-      <div class="col-3"><img class="img-fluid rounded-circle p-2 mx-auto d-inline-block image" src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE"></div>
-      <div class="col-3"> <img class="img-fluid rounded-circle p-2 mx-auto d-inline-block image" src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE"></div>
-      <div class="col-3"> <img class="img-fluid rounded-circle p-2 mx-auto d-inline-block image" src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE"></div>
-      <div class="col"> <img class="img-fluid rounded-circle p-2 mx-auto d-inline-block image" src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE"></div>
+      <div class="col-6 col-md-3 "><img class="img-fluid rounded-circle p-2 mx-auto d-inline-block " src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE"></div>
+      <div class="col-6 col-md-3"> <img class="img-fluid rounded-circle p-2 mx-auto d-inline-block " src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE"></div>
+      <div class="col-6 col-md-3"> <img class="img-fluid rounded-circle p-2 mx-auto d-inline-block " src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE"></div>
+      <div class="col-6 col-md-3"> <img class="img-fluid rounded-circle p-2 mx-auto d-inline-block " src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE"></div>
     </div>
     <div class="row justify-content-center">
-      <div class="col-3 "><img class="img-fluid rounded-circle  image" src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE"></div>
-      <div class="col-3 "><img class="img-fluid rounded-circle    image" src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE"></div>
-      <div class="col-3"><img class="img-fluid rounded-circle  image" src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE"></div>
+      <div class="col-6 col-md-3 "><img class="img-fluid rounded-circle p-2 mx-auto d-inline-block " src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE"></div>
+      <div class="col-6 col-md-3 "><img class="img-fluid rounded-circle p-2 mx-auto d-inline-block " src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE"></div>
+      <div class="col-6 col-md-3"><img class="img-fluid rounded-circle  p-2 mx-auto d-inline-block " src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE"></div>
     </div>
   </div>
+  <!--schedule-->
   <div class="row bg-tetiare-a mx-auto">
     <div class="col-sm-12  col-md-6 prices  p-5 order-1 order-lg-0">
       <h1 class="title">PRICES</h1>

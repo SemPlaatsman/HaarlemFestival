@@ -23,16 +23,16 @@
         <div class="collapse navbar-collapse" id="navbarMain">
           <ul class="navbar-nav fs-1 w-100 d-flex justify-content-center">
             <section class="w-100 d-flex flex-row justify-content-center">
-              <li class="nav-item mx-5">
+              <li class="nav-item mx-auto">
                 <a class="nav-link <?= $directory == "home" ? "active" : "" ?>" href="home">HOME</a>
               </li>
-              <li class="nav-item mx-5">
+              <li class="nav-item mx-auto">
                 <a class="nav-link <?= $directory == "yummy" ? "active" : "" ?>" href="#">YUMMY!</a>
               </li>
-              <li class="nav-item mx-5">
+              <li class="nav-item mx-auto">
                 <a class="nav-link <?= $directory == "dance" ? "active" : "" ?>" href="#">DANCE!</a>
               </li>
-              <li class="nav-item mx-5">
+              <li class="nav-item mx-auto">
                 <a class="nav-link <?= $directory == "history" ? "active" : "" ?>" href="/history">A STROLL THROUGH HISTORY</a>
               </li>
             </section>
