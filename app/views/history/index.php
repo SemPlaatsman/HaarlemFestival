@@ -20,7 +20,7 @@ new breadcrumbcontroller();
   <!-- welcome tekst -->
   <div class="row bg-tetiare-a mx-auto">
     <div class="col-4 d-none d-md-block">
-      <img class="img-fluid rounded-circle p-2 mx-auto  image" src="https://fastly.picsum.photos/id/744/400/400.jpg?hmac=2J82-H9IdQpY6940Fkcvzr6n_bFovfAcNLtO7PwY-9Y">
+      <img class="img-fluid rounded-circle p-2 mx-auto locationimage" src="img/png/history/home/routemap.png">
     </div> <!-- image replace whit actual map image-->
     <div class="col">
       <h1 class="title">WELCOME</h1>
@@ -75,11 +75,11 @@ new breadcrumbcontroller();
       </div>
       <div class="col-6 col-md-3 p-5"><img class="img-fluid rounded-circle  mx-auto d-inline-block  locationimage" src="img/png/history/home/locations/amsterdamsePoort.png"">
         </img>
-        <h1 class="caption font-druktext locationNames">AMSTERDAMSE POORT</h1>
+        <h1 class=" caption font-druktext locationNames">AMSTERDAMSE POORT</h1>
       </div>
       <div class="col-6 col-md-3 p-5"><img class="img-fluid rounded-circle  mx-auto d-inline-block  locationimage" src="img/png/history/home/locations/HofVanBakenes.png"">
         </img>
-        <h1 class="caption font-druktext locationNames">HOF VAN BAKENES</h1>
+        <h1 class=" caption font-druktext locationNames">HOF VAN BAKENES</h1>
       </div>
     </div>
   </div>
