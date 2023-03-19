@@ -60,6 +60,8 @@ class router
                         $controller->insertArtist();
                     } else if (isset($_POST['_artistMethod']) && $_POST['_artistMethod'] === 'DELETE') {
                         $controller->deleteArtist();
+                    } else if (isset($_POST['_userMethod']) && $_POST['_userMethod'] === 'PUT') {
+                        $controller->updateUser();
                     } else if (isset($_POST['_userMethod']) && $_POST['_userMethod'] === 'CREATE') {
                         $controller->insertUser();
                     } else if (isset($_POST['_userMethod']) && $_POST['_userMethod'] === 'DELETE') {

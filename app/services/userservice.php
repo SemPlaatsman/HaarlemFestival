@@ -20,14 +20,15 @@ class UserService
     public function insertUser(string $email, string $password, DateTime $time_created, bool $isAdmin, string $name)
     {
         $repository = new UserRepository();
+
         return $repository->insertUser($email, $password, $time_created, $isAdmin, $name);
     }
 
-/*
-public function updateUser(int $id, string $name, DateTime $start_date, DateTime $end_date)
-{
-$repository = new UserRepository();
-return $repository->updateEvent($id, $name, $start_date, $end_date);
-}*/
+    public function updateUser(int $id, string $email, string $password, bool $isAdmin, string $name)
+    {
+        $repository = new UserRepository();
+
+        return $repository->updateUser($id, $email, $password, $isAdmin, $name);
+    }
 }
 ?>

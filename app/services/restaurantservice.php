@@ -15,7 +15,7 @@ class RestaurantService{
         try {
             $Restaurant = $this->repository->get($id);
         } catch (Exception $e) {
-            throw new ServiceException('Error getting restaurant: ' . $e->getMessage(), 404);
+            throw new Exception('Failed to retrieve restaurant: ' . $e->getMessage());
         } 
         return $Restaurant;
     }
@@ -27,7 +27,7 @@ class RestaurantService{
         $Restaurants = $this->repository->getAll();
         return $Restaurants ?? [];
         }catch(Exception $e){
-            throw new ServiceException("An error occurred while retrieving the list of restaurants.".$e->getMessage(), 500);
+            throw new Exception('Failed to retrieve restaurants: ' . $e->getMessage());
         }
     }
 
@@ -40,8 +40,8 @@ class RestaurantService{
 
             return $Restaurant;
         } catch (Exception $e) {
-            throw new ServiceException('Failed to create restaurant: ' . $e->getMessage());
-        }
+            throw new Exception('Failed to create restaurant: ' . $e->getMessage());
+       }
 
 
     }
