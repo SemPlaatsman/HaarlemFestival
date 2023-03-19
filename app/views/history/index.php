@@ -36,13 +36,13 @@ new breadcrumbcontroller();
         <p class="text-tetiare-a">During the tour you will get visit to visit nine amazing locations in Haarlem. Each of these locations has a great story behind them and an important contribution to the history of Haarlem. If you want to find out more details about a location or what the importance of a location was in the history of Haarlem you can find out more by clicking on it.</p>
       </div>
       <div class="col-6 col-md-3 p-5">
-        <img class="img-fluid  rounded-circle  mx-auto d-inline-block " src="img/png/history/home/locations/StBravo.png">
+        <img class="img-fluid  rounded-circle  mx-auto d-inline-block locationimage" src="img/png/history/home/locations/StBravo.png">
         </img>
         <h1 class="caption font-druktext locationNames">CHURCH OF ST. BAVO</h1>
 
       </div>
-      <div class="col-6 col-md-3 p-5">
-        <img class="img-fluid rounded-circle mx-auto d-inline-block " src="img/png/history/home/locations/groteMarkt.png">
+      <div class="col-6 col-md-3 p-5 ">
+        <img class="img-fluid rounded-circle mx-auto d-inline-block locationimage" src="img/png/history/home/locations/groteMarkt.png">
         </img>
         <h1 class="caption font-druktext locationNames">GROTE MARKT</h1>
 
@@ -50,34 +50,34 @@ new breadcrumbcontroller();
     </div>
     <div class="row">
       <div class="col-6 col-md-3 p-5">
-        <img class="img-fluid rounded-circle  mx-auto d-inline-block " src="img/png/history/home/locations/dehallen.png">
+        <img class="img-fluid rounded-circle  mx-auto d-inline-block locationimage" src="img/png/history/home/locations/dehallen.png">
         </img>
         <h1 class="caption font-druktext  locationNames">DE HALLEN</h1>
       </div>
-      <div class="col-6 col-md-3 p-5"> <img class="img-fluid rounded-circle mx-auto d-inline-block " src="img/png/history/home/locations/proveniershof.png">
+      <div class="col-6 col-md-3 p-5"> <img class="img-fluid rounded-circle mx-auto d-inline-block  locationimage" src="img/png/history/home/locations/proveniershof.png">
         </img>
         <h1 class="caption font-druktext locationNames">PROVENIERSHOF</h1>
       </div>
-      <div class="col-6 col-md-3 p-5"> <img class="img-fluid rounded-circle mx-auto d-inline-block " src="img/png/history/home/locations/jopenkerk.png">
+      <div class="col-6 col-md-3 p-5"> <img class="img-fluid rounded-circle mx-auto d-inline-block  locationimage" src="img/png/history/home/locations/jopenkerk.png">
         </img>
         <h1 class="caption font-druktext locationNames">JOPENKERK</h1>
       </div>
-      <div class="col-6 col-md-3 p-5"> <img class="img-fluid rounded-circle  mx-auto d-inline-block " src="img/png/history/home/locations/waalsekerk.png">
+      <div class="col-6 col-md-3 p-5"> <img class="img-fluid rounded-circle  mx-auto d-inline-block  locationimage" src="img/png/history/home/locations/waalsekerk.png">
         </img>
         <h1 class="caption font-druktext locationNames">WAALSE KERK HAARLEM</h1>
       </div>
     </div>
     <div class="row justify-content-center">
-      <div class="col-6 col-md-3 p-5"><img class="img-fluid rounded-circle  mx-auto d-inline-block " src="img/png/history/home/locations/waalsekerk.png">
+      <div class="col-6 col-md-3 p-5"><img class="img-fluid rounded-circle  mx-auto d-inline-block locationimage" src="img/png/history/home/locations/waalsekerk.png">
         </img>
         <h1 class="caption font-druktext locationNames">MOLEN DE ADRIAAN</h1>
 
       </div>
-      <div class="col-6 col-md-3 p-5"><img class="img-fluid rounded-circle  mx-auto d-inline-block " src="img/png/history/home/locations/amsterdamsePoort.png"">
+      <div class="col-6 col-md-3 p-5"><img class="img-fluid rounded-circle  mx-auto d-inline-block  locationimage" src="img/png/history/home/locations/amsterdamsePoort.png"">
         </img>
         <h1 class="caption font-druktext locationNames">AMSTERDAMSE POORT</h1>
       </div>
-      <div class="col-6 col-md-3 p-5"><img class="img-fluid rounded-circle  mx-auto d-inline-block " src="img/png/history/home/locations/HofVanBakenes.png"">
+      <div class="col-6 col-md-3 p-5"><img class="img-fluid rounded-circle  mx-auto d-inline-block  locationimage" src="img/png/history/home/locations/HofVanBakenes.png"">
         </img>
         <h1 class="caption font-druktext locationNames">HOF VAN BAKENES</h1>
       </div>
