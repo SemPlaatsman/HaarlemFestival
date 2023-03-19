@@ -1,6 +1,9 @@
 .title {
     font-size: 5em;
 }
+.main-container{
+    height: 100%;
+}
 /* .image{
     height: 19em;
 } */

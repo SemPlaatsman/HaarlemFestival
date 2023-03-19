@@ -32,27 +32,27 @@ new breadcrumbcontroller();
  <!-- plaatjes -->
   <div class="row bg-primary-b mx-auto">
     <div class="row">
-    <div class="col-sm-12 col-md-6">
+    <div class="col-sm-12 col-md-6 p-5">
       <h1 class="title text-tetiare-a">LOCATIONS</h1>
       <p class="text-tetiare-a">During the tour you will get visit to visit nine amazing locations in Haarlem. Each of these locations has a great story behind them and an important contribution to the history of Haarlem. If you want to find out more details about a location or what the importance of a location was in the history of Haarlem you can find out more by clicking on it.</p>
     </div>
-    <div class="col-6 col-md-3">   
+    <div class="col-6 col-md-3 p-5">   
       <img class="img-fluid  rounded-circle  mx-auto d-inline-block " src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE">
     </div>
-    <div class="col-6 col-md-3">
+    <div class="col-6 col-md-3 p-5">
       <img class="img-fluid rounded-circle mx-auto d-inline-block " src="https://fastly.picsum.photos/id/54/400/400.jpg?hmac=bYiTE5dgf7aeX3u33wjsWzjFQLppWUPbsfVTn33OM9I">
     </div>
     </div>
     <div class="row">
-      <div class="col-6 col-md-3 "><img class="img-fluid rounded-circle p-2 mx-auto d-inline-block " src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE"></div>
-      <div class="col-6 col-md-3"> <img class="img-fluid rounded-circle p-2 mx-auto d-inline-block " src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE"></div>
-      <div class="col-6 col-md-3"> <img class="img-fluid rounded-circle p-2 mx-auto d-inline-block " src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE"></div>
-      <div class="col-6 col-md-3"> <img class="img-fluid rounded-circle p-2 mx-auto d-inline-block " src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE"></div>
+      <div class="col-6 col-md-3 p-5"><img class="img-fluid rounded-circle  mx-auto d-inline-block " src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE"></div>
+      <div class="col-6 col-md-3 p-5"> <img class="img-fluid rounded-circle mx-auto d-inline-block " src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE"></div>
+      <div class="col-6 col-md-3 p-5"> <img class="img-fluid rounded-circle mx-auto d-inline-block " src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE"></div>
+      <div class="col-6 col-md-3 p-5"> <img class="img-fluid rounded-circle  mx-auto d-inline-block " src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE"></div>
     </div>
     <div class="row justify-content-center">
-      <div class="col-6 col-md-3 "><img class="img-fluid rounded-circle p-2 mx-auto d-inline-block " src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE"></div>
-      <div class="col-6 col-md-3 "><img class="img-fluid rounded-circle p-2 mx-auto d-inline-block " src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE"></div>
-      <div class="col-6 col-md-3"><img class="img-fluid rounded-circle  p-2 mx-auto d-inline-block " src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE"></div>
+      <div class="col-6 col-md-3 p-5"><img class="img-fluid rounded-circle  mx-auto d-inline-block " src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE"></div>
+      <div class="col-6 col-md-3 p-5"><img class="img-fluid rounded-circle  mx-auto d-inline-block " src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE"></div>
+      <div class="col-6 col-md-3 p-5"><img class="img-fluid rounded-circle  mx-auto d-inline-block " src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE"></div>
     </div>
   </div>
   <!--schedule-->
