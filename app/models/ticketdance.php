@@ -16,6 +16,7 @@ class TicketDance extends Item {
     public function __construct(int $item_id, int $order_id, int $event_id, string $event_name, float $total_price, int $VAT, string $QR_Code, 
     int $id, int $performance_id, int $artist_id, string $artist_name, int $venue_id, string $venue_name, string $venue_location, string $start_date, string $end_date, float $ticket_price, int $nr_of_people) {
         parent::__construct($item_id, $order_id, $event_id, $event_name, $total_price, $VAT, $QR_Code);
+
         $this->id = $id;
         $this->performance_id = $performance_id;
         $this->artist_id = $artist_id;

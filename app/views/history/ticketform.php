@@ -50,6 +50,9 @@
   <input type="cancel" value="cancel" class="btn btn-secondary col-md-4">
   <input type="submit" name="submit" value="Submit" class="btn btn-primary col-md-8">
 </form>
+
+
+<!-- what the fuck is this -->
 <?php
 require_once "../vendor/autoload.php"; 
 use PHPMailer\PHPMailer\PHPMailer;
