@@ -12,7 +12,7 @@
     <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
   </head>
   <body class="d-flex flex-column bg-tetiare-a h-100">
-    <nav class="navbar navbar-expand-lg sticky-top bg-primary-a p-0">
+    <nav class="navbar navbar-expand-xxl sticky-top bg-primary-a p-0">
       <div class="container-fluid">
         <a class="navbar-brand ms-2" href="/">
           <img src="img/png/haarlem-brand.png" alt="haarlem-brand" width="185" height="54">
@@ -22,25 +22,30 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarMain">
           <ul class="navbar-nav fs-1 w-100 d-flex justify-content-center">
-            <section class="w-100 d-flex flex-row justify-content-center">
-              <li class="nav-item mx-5">
+            <section class="w-100 d-flex flex-column justify-content-center flex-xxl-row">
+              <li class="nav-item mx-0 mx-xxl-5">
                 <a class="nav-link <?= $directory == "home" ? "active" : "" ?>" href="home">HOME</a>
               </li>
-              <li class="nav-item mx-5">
+              <li class="nav-item mx-0 mx-xxl-5">
                 <a class="nav-link <?= $directory == "yummy" ? "active" : "" ?>" href="#">YUMMY!</a>
               </li>
-              <li class="nav-item mx-5">
+              <li class="nav-item mx-0 mx-xxl-5">
                 <a class="nav-link <?= $directory == "dance" ? "active" : "" ?>" href="#">DANCE!</a>
               </li>
+              <li class="nav-item mx-0 mx-xxl-5">
+                <a class="nav-link <?= $directory == "history" ? "active" : "" ?>" href="/history">A STROLL THROUGH HISTORY</a>
+              </li>
             </section>
+            <hr class="bg-tetiare-a d-flex d-xxl-none w-100">
             <li class="nav-item">
               <a class="nav-link <?= $directory == "cart" ? "active" : "" ?>" href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
             </li>
             <li class="nav-item authBtn">
-              <a class="nav-link pull-right <?= $directory == "login" ? "active" : "" ?>" href="/<?= isset($_SESSION['user']) ? "logout" : "login" ?>"><?= isset($_SESSION['user']) ? "LOGOUT" : "LOGIN" ?> <i class="fa-solid fa-arrow-right-from-bracket mx-2"></i></a>
+              <a class="nav-link float-start float-xxl-end <?= $directory == "login" ? "active" : "" ?>" href="/<?= isset($_SESSION['user']) ? "logout" : "login" ?>"><?= isset($_SESSION['user']) ? "LOGOUT" : "LOGIN" ?> <i class="fa-solid fa-arrow-right-from-bracket mx-2"></i></a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
     <main class="main-container container-fluid row align-items-center m-0 p-0 text-primary-b">
+
