@@ -1,11 +1,13 @@
-<?php 
-class User {
+<?php
+class User
+{
     private int $id;
     private string $email;
     private bool $isAdmin = false;
     private string $name;
 
-    function __construct(int $id = null, string $email = null, bool $isAdmin = null, string $name = null) {
+    function __construct(int $id = null, string $email = null, bool $isAdmin = null, string $name = null)
+    {
         $this->id = $id;
         $this->email = $email;
         $this->isAdmin = $isAdmin;
@@ -17,7 +19,7 @@ class User {
      *
      * @return int
      */
-    public function getId() : int
+    public function getId(): int
     {
         return $this->id;
     }

@@ -5,9 +5,10 @@ class Restaurant {
     private string $name;
     private int $seats;
     private string $location;
-    private int $adult_price;
-    private int $kids_price;
-    private int $reservation_fee;
+    private float $adult_price;
+    private float $kids_price;
+    private $reservation_fee;
+
 
     public function __construct($id, $name, $seats, $location, $adult_price, $kids_price, $reservation_fee) {
         $this->id = $id;
@@ -22,6 +23,7 @@ class Restaurant {
     /**
      * Get the value of id
      */ 
+
     public function getId() : int
     {
         return $this->id;
@@ -29,7 +31,7 @@ class Restaurant {
 
     /**
      * Get the value of name
-     */ 
+
     public function getName() : string
     {
         return $this->name;
@@ -38,6 +40,7 @@ class Restaurant {
     /**
      * Get the value of seats
      */ 
+
     public function getSeats() : int
     {
         return $this->seats;
@@ -46,6 +49,7 @@ class Restaurant {
     /**
      * Get the value of location
      */ 
+
     public function getLocation() : string
     {
         return $this->location;
@@ -54,10 +58,12 @@ class Restaurant {
     /**
      * Get the value of adult_price
      */ 
+
     public function getAdultPrice() : int
     {
         return $this->adult_price;
     }
+
 
     public function getAdultPriceFormatted() : string
     {
@@ -67,10 +73,12 @@ class Restaurant {
     /**
      * Get the value of kids_price
      */ 
+
     public function getKidsPrice() : int
     {
         return $this->kids_price;
     }
+
 
     public function getKidsPriceFormatted(): string
     {
@@ -80,10 +88,12 @@ class Restaurant {
     /**
      * Get the value of reservation_fee
      */ 
+
     public function getReservationFee() : int
     {
         return $this->reservation_fee;
     }
+
 
     public function getReservationFeeFormatted() : string
     {

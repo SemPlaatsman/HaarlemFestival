@@ -1,5 +1,5 @@
     </main>
-    <footer class="bg-primary-a footer">
+    <footer class="bg-primary-a footer mt-auto">
       <section class="container p-1 row mx-auto d-flex align-items-center">
         <section class="col-md-6">
           <h1 class="footer-title display-5 mb-0 mt-1">SIGN UP FOR OUR NEWSLETTER!</h1>
