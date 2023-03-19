@@ -37,12 +37,9 @@
               </li>
             </section>
             <hr class="bg-tetiare-a d-flex d-xxl-none w-100">
-            <?php (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
-            if (isset($_SESSION['user'])) { ?>
-              <li class="nav-item">
-                <a class="nav-link <?= $directory == "cart" ? "active" : "" ?>" href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
-              </li>
-            <?php } ?>
+            <li class="nav-item">
+              <a class="nav-link <?= $directory == "cart" ? "active" : "" ?>" href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
+            </li>
             <li class="nav-item authBtn">
               <a class="nav-link float-start float-xxl-end <?= $directory == "login" ? "active" : "" ?>" href="/<?= isset($_SESSION['user']) ? "logout" : "login" ?>"><?= isset($_SESSION['user']) ? "LOGOUT" : "LOGIN" ?> <i class="fa-solid fa-arrow-right-from-bracket mx-2"></i></a>
             </li>
