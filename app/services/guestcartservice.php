@@ -23,12 +23,22 @@ class GuestCartService {
     }
 
     public function updateTicketDance(int $ticketDanceId, int $nrOfPeople) {
-
+        foreach ($this->cart['ticketsDance'] as &$ticketDance) {
+            if ($ticketDance->getId() == $ticketDanceId) {
+                $ticketDance->setNrOfPeople($nrOfPeople);
+                $ticketDance->setTotalPrice(($ticketDance->getNrOfPeople() * $ticketDance->getTicketPrice()));
+            }
+        }
         $this->cartRef = serialize($this->cart);
     }
 
     public function updateTicketHistory(int $ticketHistoryId, int $nrOfPeople) {
-
+        foreach ($this->cart['ticketsHistory'] as &$ticketHistory) {
+            if ($ticketHistory->getId() == $ticketHistoryId) {
+                $ticketHistory->setNrOfPeople($nrOfPeople);
+                $ticketHistory->setTotalPrice((($ticketHistory->getNrOfPeople() % 4) * $ticketHistory->getPrice()) + (floor($ticketHistory->getNrOfPeople() / 4) * $ticketHistory->getGroupPrice()));
+            }
+        }
         $this->cartRef = serialize($this->cart);
     }
 

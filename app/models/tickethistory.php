@@ -97,6 +97,17 @@ class TicketHistory extends Item {
     }
 
     /**
+     * Set the value of nr_of_people
+     *
+     * @return  self
+     */ 
+    public function setNrOfPeople($nr_of_people) : self
+    {
+        $this->nr_of_people = $nr_of_people;
+        return $this;
+    }
+
+    /**
      * Get the value of price
      */ 
     public function getPrice()
