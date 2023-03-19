@@ -4,12 +4,32 @@
 .main-container{
     height: 100%;
 }
+.locationNames{
+    margin-left:1em;
+    width: 8em;
+    font-size: 2em;
+    color: white;
+    text-align: center;
+}
 /* .image{
     height: 19em;
 } */
 p{
     font-size: 1.5em;
     
+}
+
+.table > :not(caption) > * > * {
+    background-color: var(--primary-a);
+}
+
+.languagePickerTours{
+    /* width: 3em; */
+    height: fit-content;
+}
+.languagePickerTours img{
+ height: 2em;
+ width: 3em;
 }
 .prices p{
     font-size: 1em;

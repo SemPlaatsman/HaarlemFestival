@@ -14,12 +14,11 @@ new breadcrumbcontroller();
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>History</title>
-  <link rel="stylesheet" href="">
 </head>
 
 <body class="container-fluid">
   <!-- welcome tekst -->
-  <div class="row bg-tetiare-a mx-auto"> 
+  <div class="row bg-tetiare-a mx-auto">
     <div class="col-4 d-none d-md-block">
       <img class="img-fluid rounded-circle p-2 mx-auto  image" src="https://fastly.picsum.photos/id/744/400/400.jpg?hmac=2J82-H9IdQpY6940Fkcvzr6n_bFovfAcNLtO7PwY-9Y">
     </div> <!-- image replace whit actual map image-->
@@ -29,30 +28,59 @@ new breadcrumbcontroller();
       <p> On this page you will find more information about the tour. You can check out information about the venues that are visited in the tour, when the tours are and what the prices are to get a ticket for the tour.</p>
     </div>
   </div>
- <!-- plaatjes -->
-  <div class="row bg-primary-b mx-auto">
+  <!-- plaatjes -->
+  <div class="row bg-primary-b mx-auto pb-3">
     <div class="row">
-    <div class="col-sm-12 col-md-6 p-5">
-      <h1 class="title text-tetiare-a">LOCATIONS</h1>
-      <p class="text-tetiare-a">During the tour you will get visit to visit nine amazing locations in Haarlem. Each of these locations has a great story behind them and an important contribution to the history of Haarlem. If you want to find out more details about a location or what the importance of a location was in the history of Haarlem you can find out more by clicking on it.</p>
-    </div>
-    <div class="col-6 col-md-3 p-5">   
-      <img class="img-fluid  rounded-circle  mx-auto d-inline-block " src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE">
-    </div>
-    <div class="col-6 col-md-3 p-5">
-      <img class="img-fluid rounded-circle mx-auto d-inline-block " src="https://fastly.picsum.photos/id/54/400/400.jpg?hmac=bYiTE5dgf7aeX3u33wjsWzjFQLppWUPbsfVTn33OM9I">
-    </div>
+      <div class="col-sm-12 col-md-6 p-5">
+        <h1 class="title text-tetiare-a">LOCATIONS</h1>
+        <p class="text-tetiare-a">During the tour you will get visit to visit nine amazing locations in Haarlem. Each of these locations has a great story behind them and an important contribution to the history of Haarlem. If you want to find out more details about a location or what the importance of a location was in the history of Haarlem you can find out more by clicking on it.</p>
+      </div>
+      <div class="col-6 col-md-3 p-5">
+        <img class="img-fluid  rounded-circle  mx-auto d-inline-block " src="img/png/history/home/locations/StBravo.png">
+        </img>
+        <h1 class="caption font-druktext locationNames">CHURCH OF ST. BAVO</h1>
+
+      </div>
+      <div class="col-6 col-md-3 p-5">
+        <img class="img-fluid rounded-circle mx-auto d-inline-block " src="img/png/history/home/locations/groteMarkt.png">
+        </img>
+        <h1 class="caption font-druktext locationNames">GROTE MARKT</h1>
+
+      </div>
     </div>
     <div class="row">
-      <div class="col-6 col-md-3 p-5"><img class="img-fluid rounded-circle  mx-auto d-inline-block " src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE"></div>
-      <div class="col-6 col-md-3 p-5"> <img class="img-fluid rounded-circle mx-auto d-inline-block " src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE"></div>
-      <div class="col-6 col-md-3 p-5"> <img class="img-fluid rounded-circle mx-auto d-inline-block " src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE"></div>
-      <div class="col-6 col-md-3 p-5"> <img class="img-fluid rounded-circle  mx-auto d-inline-block " src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE"></div>
+      <div class="col-6 col-md-3 p-5">
+        <img class="img-fluid rounded-circle  mx-auto d-inline-block " src="img/png/history/home/locations/dehallen.png">
+        </img>
+        <h1 class="caption font-druktext  locationNames">DE HALLEN</h1>
+      </div>
+      <div class="col-6 col-md-3 p-5"> <img class="img-fluid rounded-circle mx-auto d-inline-block " src="img/png/history/home/locations/proveniershof.png">
+        </img>
+        <h1 class="caption font-druktext locationNames">PROVENIERSHOF</h1>
+      </div>
+      <div class="col-6 col-md-3 p-5"> <img class="img-fluid rounded-circle mx-auto d-inline-block " src="img/png/history/home/locations/jopenkerk.png">
+        </img>
+        <h1 class="caption font-druktext locationNames">JOPENKERK</h1>
+      </div>
+      <div class="col-6 col-md-3 p-5"> <img class="img-fluid rounded-circle  mx-auto d-inline-block " src="img/png/history/home/locations/waalsekerk.png">
+        </img>
+        <h1 class="caption font-druktext locationNames">WAALSE KERK HAARLEM</h1>
+      </div>
     </div>
     <div class="row justify-content-center">
-      <div class="col-6 col-md-3 p-5"><img class="img-fluid rounded-circle  mx-auto d-inline-block " src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE"></div>
-      <div class="col-6 col-md-3 p-5"><img class="img-fluid rounded-circle  mx-auto d-inline-block " src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE"></div>
-      <div class="col-6 col-md-3 p-5"><img class="img-fluid rounded-circle  mx-auto d-inline-block " src="https://fastly.picsum.photos/id/452/400/400.jpg?hmac=ERBYjvlNNqVzMZSKK2czOgTP2QRPe8PQiOLvHTsNCsE"></div>
+      <div class="col-6 col-md-3 p-5"><img class="img-fluid rounded-circle  mx-auto d-inline-block " src="img/png/history/home/locations/waalsekerk.png">
+        </img>
+        <h1 class="caption font-druktext locationNames">MOLEN DE ADRIAAN</h1>
+
+      </div>
+      <div class="col-6 col-md-3 p-5"><img class="img-fluid rounded-circle  mx-auto d-inline-block " src="img/png/history/home/locations/amsterdamsePoort.png"">
+        </img>
+        <h1 class="caption font-druktext locationNames">AMSTERDAMSE POORT</h1>
+      </div>
+      <div class="col-6 col-md-3 p-5"><img class="img-fluid rounded-circle  mx-auto d-inline-block " src="img/png/history/home/locations/HofVanBakenes.png"">
+        </img>
+        <h1 class="caption font-druktext locationNames">HOF VAN BAKENES</h1>
+      </div>
     </div>
   </div>
   <!--schedule-->
@@ -79,28 +107,28 @@ new breadcrumbcontroller();
         <div class="col">
           <div class="btn-group btn-group-justified btn-group-lg languagepicker " role="group" aria-label="language picker whit a uk, dutch and chinese flag">
             <input type="radio" class="btn-check" name="btnradio" id="ukflag" autocomplete="off" checked>
-            <label class="btn btn-outline-primary p-1 m-1" for="ukflag"><img class="img-fluid" src="https://fastly.picsum.photos/id/202/100/50.jpg?hmac=OSzNl1LnX6DV8nLYYrBuM2A0979qN2dG__jrh88pXdI"></label>
+            <label class="btn btn-outline-primary p-1 m-1 languagePickerTours" for="ukflag"><img class="img-fluid " src="/img/png/flags/BritFlag.png"></label>
 
             <input type="radio" class="btn-check" name="btnradio" id="dutchflag" autocomplete="off">
-            <label class="btn btn-outline-primary p-1 m-1" for="dutchflag"><img class="img-fluid" src="https://fastly.picsum.photos/id/202/100/50.jpg?hmac=OSzNl1LnX6DV8nLYYrBuM2A0979qN2dG__jrh88pXdI"></label>
+            <label class="btn btn-outline-primary p-1 m-1 languagePickerTours" for="dutchflag"><img class="img-fluid " src="/img/png/flags/DutcFlag.png"></label>
 
             <input type="radio" class="btn-check" name="btnradio" id="chineseflag" autocomplete="off">
-            <label class="btn btn-outline-primary p-1 m-1" for="chineseflag"><img class="img-fluid" src="https://fastly.picsum.photos/id/202/100/50.jpg?hmac=OSzNl1LnX6DV8nLYYrBuM2A0979qN2dG__jrh88pXdI"></label>
+            <label class="btn btn-outline-primary p-1 m-1 languagePickerTours" for="chineseflag"><img class="img-fluid" src="/img/png/flags/ChinFlag.png"></label>
           </div>
         </div>
       </div>
       <div class="row">
 
         <div class="table-responsive">
-          <table class="table">
+          <table class="table borderless font-druk">
             <tbody>
               <?php
               for ($i = 0; $i < 4; $i++) {
                 echo "<tr>";
-                echo "<td>THUR 26 JULY</td>";
-                echo "<td>Otto</td>";
-                echo "<td>@mdo</td>";
-                echo "<td>@mdo</td>";
+                echo "<td class='border-0 rounded-pill bg-transparent'>THUR 26 JULY</td>";
+                echo "<td class='border-0 rounded-pill bg-primary-a text-center'>Otto</td>";
+                echo "<td class='border-0 rounded-pill bg-primary-a text-center'>@mdo</td>";
+                echo "<td class='border-0 rounded-pill bg-primary-a text-center'>@mdo</td>";
                 echo "</tr>";
               }
 
