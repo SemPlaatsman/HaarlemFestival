@@ -20,7 +20,7 @@ abstract class Item {
 
     /**
      * Get the value of item_id
-     */ 
+     */
     public function getItemId()
     {
         return $this->item_id;
@@ -61,6 +61,17 @@ abstract class Item {
     public function getTotalPriceFormatted()
     {
         return "€ " . number_format($this->total_price, 2);
+    }
+
+    /**
+     * Set the value of total_price
+     *
+     * @return  self
+     */ 
+    public function setTotalPrice($total_price) : self
+    {
+        $this->total_price = $total_price;
+        return $this;
     }
 
     /**
