@@ -40,32 +40,67 @@ class router
             case 'adminoverview':
                 require_once __DIR__ . '/controllers/adminoverviewcontroller.php';
                 $controller = new AdminOverviewController();
+                $controller->index();
+                break;
+
+            case 'venue':
+                require_once __DIR__ . '/controllers/venuecontroller.php';
+                $controller = new VenueController();
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    // Check if this is an update request
                     if (isset($_POST['_venueMethod']) && $_POST['_venueMethod'] === 'PUT') {
                         $controller->updateVenue();
                     } else if (isset($_POST['_venueMethod']) && $_POST['_venueMethod'] === 'DELETE') {
                         $controller->deleteVenue();
                     } else if (isset($_POST['_venueMethod']) && $_POST['_venueMethod'] === 'CREATE') {
                         $controller->insertVenue();
-                    } else if (isset($_POST['_eventMethod']) && $_POST['_eventMethod'] === 'PUT') {
+                    }
+                } else {
+                    $controller->index();
+                }
+                break;
+
+            case 'event':
+                require_once __DIR__ . '/controllers/eventcontroller.php';
+                $controller = new EventController();
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    if (isset($_POST['_eventMethod']) && $_POST['_eventMethod'] === 'PUT') {
                         $controller->updateEvent();
                     } else if (isset($_POST['_eventMethod']) && $_POST['_eventMethod'] === 'DELETE') {
                         $controller->deleteEvent();
                     } else if (isset($_POST['_eventMethod']) && $_POST['_eventMethod'] === 'CREATE') {
                         $controller->insertEvent();
-                    } else if (isset($_POST['_artistMethod']) && $_POST['_artistMethod'] === 'PUT') {
+                    }
+                } else {
+                    $controller->index();
+                }
+                break;
+
+            case 'artist':
+                require_once __DIR__ . '/controllers/artistcontroller.php';
+                $controller = new ArtistController();
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    if (isset($_POST['_artistMethod']) && $_POST['_artistMethod'] === 'PUT') {
                         $controller->updateArtist();
-                    } else if (isset($_POST['_artistMethod']) && $_POST['_artistMethod'] === 'CREATE') {
-                        $controller->insertArtist();
                     } else if (isset($_POST['_artistMethod']) && $_POST['_artistMethod'] === 'DELETE') {
                         $controller->deleteArtist();
-                    } else if (isset($_POST['_userMethod']) && $_POST['_userMethod'] === 'PUT') {
+                    } else if (isset($_POST['_artistMethod']) && $_POST['_artistMethod'] === 'CREATE') {
+                        $controller->insertArtist();
+                    }
+                } else {
+                    $controller->index();
+                }
+                break;
+
+            case 'user':
+                require_once __DIR__ . '/controllers/usercontroller.php';
+                $controller = new UserController();
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    if (isset($_POST['_userMethod']) && $_POST['_userMethod'] === 'PUT') {
                         $controller->updateUser();
-                    } else if (isset($_POST['_userMethod']) && $_POST['_userMethod'] === 'CREATE') {
-                        $controller->insertUser();
                     } else if (isset($_POST['_userMethod']) && $_POST['_userMethod'] === 'DELETE') {
                         $controller->deleteUser();
+                    } else if (isset($_POST['_userMethod']) && $_POST['_userMethod'] === 'CREATE') {
+                        $controller->insertUser();
                     }
                 } else {
                     $controller->index();

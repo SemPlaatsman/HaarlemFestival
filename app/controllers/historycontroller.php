@@ -10,7 +10,7 @@ require_once __DIR__ . '/../services/historytourservice.php';
 require_once __DIR__ . '/../services/itemservice.php';
 
 require_once  'imageslidercontroller.php';
-require_once 'breadcrumbcontroller.php';
+//require_once 'breadcrumbcontroller.php';
 
 /**
  * Summary of HistoryController
@@ -54,49 +54,11 @@ class HistoryController extends Controller {
     }
 
 
-    // private function printschedulephp(){
-    //     $tours = $this->historyService->getToursByLang($language);
-
-    //     $dates =  array();
-    //           foreach ($tours as $row) {
-
-    //             if (!in_array($row->getDate()->format("F j"), $dates)) {
-    //               array_push($dates, $row->getDate()->format("F j"));
-    //               echo "<tr>";
-    //               echo "<td class='border-0 rounded-pill bg-transparent'>" . $row->getDate()->format("F j") . "</td>";
-
-    //               foreach ($this->schedule as $time) {
-    //                 if ($row->getDate()->format("F j") == $time->getDate()->format("F j")) {
-    //                   echo "<td class='border-0 rounded-pill bg-primary-a text-center'>" . $time->getDate()->format("H:i") . "</td>";
-    //                 }
-    //               }
-    //               echo "</tr>";
-    //             }
-    //           }
-    // }
-
-    // public function insertItem()
-    // {
-    //     try {
-    //         $id = 10;
-    //         $order_id = 2;
-    //         $event_id = 2;
-    //         $total_price = 1;
-    //         $VAT = 1;
-    //         $QR_Code = 1;
-    //         $item = new Item($id, $order_id, $event_id, $total_price, $VAT, $QR_Code);
-
-    //         $result = $this->itemService->deleteItem(10);
-
-    //         if ($result) {
-    //             // return success response
-    //             echo 'insert complete item';
-    //         } else {
-    //             // return failed response
-    //             echo 'Something went wrong with the insert';
-    //         }
-    //     } catch (Exception $e) {
-    //         echo 'Error: ' . $e->getMessage();
-    //     }
-    // }
+    public function insertItem()
+    {
+        try {
+        } catch (Exception $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
 }

@@ -5,14 +5,12 @@ class ItemRepository extends Repository {
 
     public function insertItem(Item $item):int {
         try {
-            $stmnt = $this -> connection -> prepare("INSERT INTO item (id, order_id, event_id, total_price, VAT, QR_Code) VALUES (:id, :order_id, :event_id, :total_price, :VAT, :QR_Code)");
-            $id = $item->getItemId();
+            $stmnt = $this -> connection -> prepare("INSERT INTO item (order_id, event_id, total_price, VAT, QR_Code) VALUES (:order_id, :event_id, :total_price, :VAT, :QR_Code)");
             $order_id = $item->getOrderId();
             $event_id = $item->getEventId();
             $total_price = $item->getTotalPrice();
             $VAT = $item->getVAT();
             $QR_Code = $item->getQRCode();
-            $stmnt -> bindParam(':id', $id, PDO::PARAM_STR);
             $stmnt -> bindParam(':order_id', $order_id, PDO::PARAM_STR);
             $stmnt -> bindParam(':event_id', $event_id, PDO::PARAM_STR);
             $stmnt -> bindParam(':total_price', $total_price, PDO::PARAM_STR);
@@ -22,7 +20,7 @@ class ItemRepository extends Repository {
             return $this->connection->lastInsertId();
         } catch (PDOException $e) {
             echo $e;
-            return null;
+            return $e;
         }
         
     }
@@ -54,16 +52,17 @@ class ItemRepository extends Repository {
         try {
             $stmnt = $this -> connection -> prepare("DELETE FROM item WHERE id = :id");
             $stmnt -> bindParam(':id', $id, PDO::PARAM_INT);
-            return $stmnt -> execute();
+            $stmnt -> execute();
+            return true;
         } catch (PDOException $e) {
             return false;
         }
-        
     }
+    
 
     public function getItem(int $id) : Item {
         try {
-            $stmnt = $this -> connection -> prepare("SELECT id, order_id, event_id, total_price, VAT, QR_Code FROM item WHERE id = :id");
+            $stmnt = $this -> connection -> prepare("SELECT id AS item_id, order_id, event_id, total_price, VAT, QR_Code FROM item WHERE id = :id");
             $stmnt -> bindParam(':id', $id, PDO::PARAM_INT);
             $stmnt -> setFetchMode(PDO::FETCH_CLASS, 'Item');
             $stmnt -> execute();

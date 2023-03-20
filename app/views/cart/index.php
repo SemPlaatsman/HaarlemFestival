@@ -194,7 +194,7 @@
   </table>
 </section>
 <section class="col-md-4 h-100 bg-primary-a">
-
+<h1>Hello</h1>
 </section>
 <?php
     include __DIR__ . '/../footer.php';
