@@ -31,7 +31,7 @@
 
   <fieldset class="form-group p-2 col-md-4 gx-100">
     <label class="text-tetiare-a fs-5 col-form-label" for="phonenumber">Phone</label>
-    <input class="form-control" type="phonenumber" id="phonenumber" name="phonenumber">
+    <input class="form-control" type="phonenumber" id="phonenumber" name="phonenumber" value="0612345678">
   </fieldset>
 
 

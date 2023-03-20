@@ -5,7 +5,7 @@ class TicketHistoryRepository extends ItemRepository {
 
     public function insertTicketHistory(TicketHistory $ticket_history):int {
         try {
-            $itemid = $this->insertItem($reservation);
+            $itemid = $this->insertItem($ticket_history);
             $stmnt = $this -> connection -> prepare("INSERT INTO `ticket_history`(`item_id`, `tour_id`, `nr_of_people`) VALUES (:item_id, :performance_id, :nr_of_people)");
             $tour_id = $ticket_history->getPerformanceId();
             $nr_of_people = $ticket_history->getNrOfPeople();
@@ -34,13 +34,31 @@ class TicketHistoryRepository extends ItemRepository {
             return false;
         }
     }
+
+    public function updateTicketHistory(TicketHistory $ticket_history) : bool {
+        try {
+            $this->updateItem($ticket_history);
+            $stmnt = $this -> connection -> prepare("UPDATE ticket_history SET id=:history_id, item_id=:item_id, tour_id=:tour_id, nr_of_people=:nr_of_people WHERE id=:history_id;");
+            $id = $ticket_history->getId();
+            $item_id = $ticket_history->getItemId();
+            $tour_id = $ticket_history->getTourID();
+            $nr_of_people = $ticket_history->getNrOfPeople();
+            $stmnt -> bindParam(':history_id', $id, PDO::PARAM_STR);
+            $stmnt -> bindParam(':item_id', $item_id, PDO::PARAM_STR);
+            $stmnt -> bindParam(':tour_id', $tour_id, PDO::PARAM_STR);
+            $stmnt -> bindParam(':nr_of_people', $nr_of_people, PDO::PARAM_STR);
+            return $stmnt -> execute();
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
     
 
     public function getTicketHistory(int $id) : Item {
         try {
-            $stmnt = $this -> connection -> prepare("SELECT id, order_id, event_id, total_price, VAT, QR_Code FROM item WHERE id = :id");
+            $stmnt = $this -> connection -> prepare("SELECT ticket_history.item_id AS item_id, order_id, event_id, total_price, VAT, QR_Code, ticket_history.id AS id, tour_id, nr_of_people, language, datetime, nr_of_people, employee_id FROM item JOIN ticket_history ON item.id = ticket_history.item_id JOIN history_tours ON ticket_history.tour_id = history_tours.id WHERE ticket_history.id = :id");
             $stmnt -> bindParam(':id', $id, PDO::PARAM_INT);
-            $stmnt -> setFetchMode(PDO::FETCH_CLASS, 'Item');
+            $stmnt -> setFetchMode(PDO::FETCH_CLASS, 'TicketHistory');
             $stmnt -> execute();
             $item = $stmnt -> fetch();
             return $item;
@@ -50,8 +68,8 @@ class TicketHistoryRepository extends ItemRepository {
     }
     public function getAllTicketHistory():array  {
         try {
-            $stmnt = $this -> connection -> prepare("SELECT id, order_id, event_id, total_price, VAT, QR_Code FROM item;");
-            $stmnt -> setFetchMode(PDO::FETCH_CLASS, 'Item');
+            $stmnt = $this -> connection -> prepare("SELECT ticket_history.item_id AS item_id, order_id, event_id, total_price, VAT, QR_Code, ticket_history.id AS id, tour_id, nr_of_people, language, datetime, nr_of_people, employee_id FROM item JOIN ticket_history ON item.id = ticket_history.item_id JOIN history_tours ON ticket_history.tour_id = history_tours.id");
+            $stmnt -> setFetchMode(PDO::FETCH_CLASS, 'TicketHistory');
             $stmnt -> execute();
             $items = $stmnt -> fetchAll();
             return $items;

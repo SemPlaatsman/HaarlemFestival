@@ -5,7 +5,7 @@ class TicketDanceRepository extends ItemRepository {
 
     public function insertTicketDance(TicketDance $ticket_dance):int {
         try {
-            $itemid = $this->insertItem($reservation);
+            $itemid = $this->insertItem($ticket_dance);
             $stmnt = $this -> connection -> prepare("INSERT INTO `ticket_dance`(`item_id`, `performance_id`, `nr_of_people`) VALUES (:item_id, :performance_id, :nr_of_people)");
             $performance_id = $ticket_dance->getPerformanceId();
             $nr_of_people = $ticket_dance->getNrOfPeople();
@@ -31,6 +31,24 @@ class TicketDanceRepository extends ItemRepository {
             $stmnt -> bindParam(':id', $id, PDO::PARAM_INT);
             $stmnt -> execute();
             $this->deleteItem($item_id);
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+    
+    public function updateTicketDance(TicketDance $ticket_dance) : bool {
+        try {
+            $this->updateItem($ticket_dance);
+            $stmnt = $this -> connection -> prepare("UPDATE ticket_dance SET id=:ticket_dance_id, item_id=:item_id, performance_id=:performance_id, nr_of_people=:nr_of_people WHERE id=:ticket_dance_id;");
+            $id = $ticket_dance->getId();
+            $item_id = $ticket_dance->getItemId();
+            $performance_id = $ticket_dance->getPerformanceId();
+            $nr_of_people = $ticket_dance->getNrOfPeople();
+            $stmnt -> bindParam(':ticket_dance_id', $id, PDO::PARAM_STR);
+            $stmnt -> bindParam(':performance_id', $performance_id, PDO::PARAM_STR);
+            $stmnt -> bindParam(':nr_of_people', $nr_of_people, PDO::PARAM_STR);
+            $stmnt -> bindParam(':item_id', $itemid, PDO::PARAM_STR);
+            return $stmnt -> execute();
         } catch (PDOException $e) {
             return false;
         }
