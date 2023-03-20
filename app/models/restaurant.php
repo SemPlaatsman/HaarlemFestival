@@ -1,13 +1,14 @@
 <?php
 
 class Restaurant {
-    private $id;
-    private $name;
-    private $seats;
-    private $location;
-    private $adult_price;
-    private $kids_price;
+    private int $id;
+    private string $name;
+    private int $seats;
+    private string $location;
+    private float $adult_price;
+    private float $kids_price;
     private $reservation_fee;
+
 
     public function __construct($id, $name, $seats, $location, $adult_price, $kids_price, $reservation_fee) {
         $this->id = $id;
@@ -22,15 +23,16 @@ class Restaurant {
     /**
      * Get the value of id
      */ 
-    public function getId()
+
+    public function getId() : int
     {
         return $this->id;
     }
 
     /**
      * Get the value of name
-     */ 
-    public function getName()
+
+    public function getName() : string
     {
         return $this->name;
     }
@@ -38,7 +40,8 @@ class Restaurant {
     /**
      * Get the value of seats
      */ 
-    public function getSeats()
+
+    public function getSeats() : int
     {
         return $this->seats;
     }
@@ -46,7 +49,8 @@ class Restaurant {
     /**
      * Get the value of location
      */ 
-    public function getLocation()
+
+    public function getLocation() : string
     {
         return $this->location;
     }
@@ -54,12 +58,14 @@ class Restaurant {
     /**
      * Get the value of adult_price
      */ 
-    public function getAdultPrice()
+
+    public function getAdultPrice() : int
     {
         return $this->adult_price;
     }
 
-    public function getAdultPriceFormatted()
+
+    public function getAdultPriceFormatted() : string
     {
         return "€ " . number_format($this->adult_price, 2);
     }
@@ -67,12 +73,14 @@ class Restaurant {
     /**
      * Get the value of kids_price
      */ 
-    public function getKidsPrice()
+
+    public function getKidsPrice() : int
     {
         return $this->kids_price;
     }
 
-    public function getKidsPriceFormatted()
+
+    public function getKidsPriceFormatted(): string
     {
         return "€ " . number_format($this->kids_price, 2);
     }
@@ -80,12 +88,14 @@ class Restaurant {
     /**
      * Get the value of reservation_fee
      */ 
-    public function getReservationFee()
+
+    public function getReservationFee() : int
     {
         return $this->reservation_fee;
     }
 
-    public function getReservationFeeFormatted()
+
+    public function getReservationFeeFormatted() : string
     {
         return "€ " . number_format($this->reservation_fee, 2);
     }

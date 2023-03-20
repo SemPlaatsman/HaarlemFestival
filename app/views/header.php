@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/<?= strtolower($directory); ?>.css">
     <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
   </head>
-  <body class="d-flex flex-column h-100">
+  <body class="d-flex flex-column bg-tetiare-a h-100">
     <nav class="navbar navbar-expand-lg sticky-top bg-primary-a p-0">
       <div class="container-fluid">
         <a class="navbar-brand ms-2" href="/">
@@ -23,14 +23,17 @@
         <div class="collapse navbar-collapse" id="navbarMain">
           <ul class="navbar-nav fs-1 w-100 d-flex justify-content-center">
             <section class="w-100 d-flex flex-row justify-content-center">
-              <li class="nav-item mx-5">
+              <li class="nav-item mx-auto">
                 <a class="nav-link <?= $directory == "home" ? "active" : "" ?>" href="home">HOME</a>
               </li>
-              <li class="nav-item mx-5">
+              <li class="nav-item mx-auto">
                 <a class="nav-link <?= $directory == "yummy" ? "active" : "" ?>" href="#">YUMMY!</a>
               </li>
-              <li class="nav-item mx-5">
+              <li class="nav-item mx-auto">
                 <a class="nav-link <?= $directory == "dance" ? "active" : "" ?>" href="#">DANCE!</a>
+              </li>
+              <li class="nav-item mx-auto">
+                <a class="nav-link <?= $directory == "history" ? "active" : "" ?>" href="/history">A STROLL THROUGH HISTORY</a>
               </li>
             </section>
             <?php (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
@@ -46,4 +49,5 @@
         </div>
       </div>
     </nav>
-    <main class="main-container container-fluid row align-items-center m-0 p-0 mb-auto h-100 text-primary-b">
+    <main class="main-container container-fluid row align-items-center m-0 p-0 text-primary-b">
+

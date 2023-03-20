@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../repository/restaurantrepository.php';
+require_once __DIR__ . '/../repositories/restaurantrepository.php';
 require_once __DIR__ . '/../models/restaurant.php';
 class RestaurantService{
 
@@ -35,7 +35,7 @@ class RestaurantService{
     {
 
         try {
-            $restaurantId = $this->repository->insert($Restaurant->name, $Restaurant->seats);
+            $restaurantId = $this->repository->insert($Restaurant->getName(), $Restaurant->getSeats(), $Restaurant->getLocation(), $Restaurant->getAdultPrice(), $Restaurant->getKidsPrice(), $Restaurant->getReservationFee());
             $Restaurant->id=$restaurantId;
 
             return $Restaurant;
@@ -49,7 +49,7 @@ class RestaurantService{
     function updateRestaurant(int $id, Restaurant $updatedRestaurant) : Restaurant
     {
         try{
-            $this->repository->update($id, $updatedRestaurant->name, $updatedRestaurant->seats);
+            $this->repository->update($id, $updatedRestaurant->getName(), $updatedRestaurant->getSeats(), $updatedRestaurant->getLocation(), $updatedRestaurant->getAdultPrice(), $updatedRestaurant->getKidsPrice(), $updatedRestaurant->getReservationFee());
             return $this->repository->get($id);
         }
         catch(Exception $e){
