@@ -1,6 +1,5 @@
 <?php
     include __DIR__ . '/../header.php';
-    // var_dump(unserialize($_SESSION['guest']->cart));
 ?>
 <section class="col-md-8 h-100">
   <table class="table table-hover border-primary-b">
@@ -195,7 +194,7 @@
   </table>
 </section>
 <section class="col-md-4 h-100 bg-primary-a">
-
+<h1>Hello</h1>
 </section>
 <?php
     include __DIR__ . '/../footer.php';
