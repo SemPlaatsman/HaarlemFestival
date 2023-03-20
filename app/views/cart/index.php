@@ -1,5 +1,6 @@
 <?php
     include __DIR__ . '/../header.php';
+    // var_dump(unserialize($_SESSION['guest']->cart));
 ?>
 <section class="col-md-8 h-100">
   <table class="table table-hover border-primary-b">
