@@ -107,6 +107,23 @@ class router
                 }
                 break;
 
+            case 'session':
+                require_once __DIR__ . '/controllers/sessioncontroller.php';
+                $controller = new SessionController();
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    /*if (isset($_POST['_userMethod']) && $_POST['_userMethod'] === 'PUT') {
+                    $controller->updateUser();
+                    }*/if (isset($_POST['_sessionMethod']) && $_POST['_sessionMethod'] === 'DELETE') {
+                        $controller->deleteSession();
+                    } /*else if (isset($_POST['_userMethod']) && $_POST['_userMethod'] === 'CREATE') {
+                     $controller->insertUser();
+                     }*/
+                } else {
+                    $controller->index();
+                }
+                $controller->index();
+                break;
+
             case 'captcha':
                 require_once __DIR__ . '/controllers/captchacontroller.php';
                 $controller = new captchacontroller();
