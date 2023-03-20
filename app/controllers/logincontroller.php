@@ -21,9 +21,8 @@ class LoginController extends Controller {
                     // start session if it hasn't been started yet
                     (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
                     $_SESSION['user'] = serialize($user);
-                    unset($_SESSION['guest']);
                     // redirect to dashboard
-                    header('Location: /home');
+                    header('Location: home');
                     exit();
                 }
             }

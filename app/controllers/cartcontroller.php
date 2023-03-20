@@ -23,6 +23,8 @@ class CartController extends Controller {
         if (isset($_SESSION['user'])) {         
             $model = $this->cartService->getCart(unserialize($_SESSION['user'])->getId());
         } else if (isset($_SESSION['guest'])) {
+            // uncomment to use test data
+            // $_SESSION['guest']->cart = serialize((new CartService())->getCart(1));
             $model = unserialize($_SESSION['guest']->cart);
         }
         $this->displayView($model);
