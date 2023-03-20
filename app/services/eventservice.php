@@ -3,32 +3,32 @@ require_once __DIR__ . '/../repositories/eventrepository.php';
 
 class EventService
 {
+
+    private $eventRepository;
+
+    public function __construct()
+    {
+        $this->eventRepository = new EventRepository();
+    }
+
     public function getEvent()
     {
-        $repository = new EventRepository();
-
-        return $repository->getEvent();
+        return $this->eventRepository->getEvent();
     }
 
     public function insertEvent(string $name, DateTime $start_date, DateTime $end_date)
     {
-        $repository = new EventRepository();
-
-        return $repository->insertEvent($name, $start_date, $end_date);
+        return $this->eventRepository->insertEvent($name, $start_date, $end_date);
     }
 
     public function updateEvent(int $id, string $name, DateTime $start_date, DateTime $end_date)
     {
-        $repository = new EventRepository();
-
-        return $repository->updateEvent($id, $name, $start_date, $end_date);
+        return $this->eventRepository->updateEvent($id, $name, $start_date, $end_date);
     }
 
     public function deleteEvent(int $id)
     {
-        $repository = new EventRepository();
-
-        return $repository->deleteEvent($id);
+        return $this->eventRepository->deleteEvent($id);
     }
 }
 ?>
