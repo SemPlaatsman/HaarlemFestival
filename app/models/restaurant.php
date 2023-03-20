@@ -31,7 +31,7 @@ class Restaurant {
 
     /**
      * Get the value of name
-
+     */
     public function getName() : string
     {
         return $this->name;
