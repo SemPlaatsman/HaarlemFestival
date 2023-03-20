@@ -33,7 +33,6 @@ class RestaurantService{
 
     function createRestaurant(Restaurant $Restaurant) : Restaurant
     {
-        print_r($Restaurant);
 
         try {
             $restaurantId = $this->repository->insert($Restaurant->getName(), $Restaurant->getSeats(), $Restaurant->getLocation(), $Restaurant->getAdultPrice(), $Restaurant->getKidsPrice(), $Restaurant->getReservationFee());

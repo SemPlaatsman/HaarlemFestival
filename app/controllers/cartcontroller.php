@@ -2,22 +2,29 @@
 require_once __DIR__ . '/controller.php';
 require_once __DIR__ . '/../models/user.php';
 require_once __DIR__ . '/../services/cartservice.php';
+require_once __DIR__ . '/../services/guestcartservice.php';
 
 class CartController extends Controller {
     private $cartService;
 
     function __construct() {
-        $this->cartService = new CartService();
+        (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
+        $this->cartService = isset($_SESSION['user']) ? new CartService() : new GuestCartService($_SESSION['guest']->cart);
     }
 
     public function index() {
         $model = [];
+        
         if ($_SERVER["REQUEST_METHOD"] === 'POST' && !empty($_POST)) {
             $this->handlePOST($model);
         }
 
         (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
-        $model = $this->cartService->getCart(unserialize($_SESSION['user'])->getId());
+        if (isset($_SESSION['user'])) {         
+            $model = $this->cartService->getCart(unserialize($_SESSION['user'])->getId());
+        } else if (isset($_SESSION['guest'])) {
+            $model = unserialize($_SESSION['guest']->cart);
+        }
         $this->displayView($model);
     }
 

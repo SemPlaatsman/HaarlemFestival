@@ -1,0 +1,64 @@
+.title {
+    font-size: 5em;
+}
+.main-container{
+    height: 100%;
+}
+.locationNames{
+    margin-left:1em;
+    width: 8em;
+    font-size: 2em;
+    color: white;
+    text-align: center;
+}
+.locationimage{
+    height: 20em;
+    width: 20em;
+   
+}
+/* .image{
+    height: 19em;
+} */
+p{
+    font-size: 1.5em;
+    
+}
+
+.table > :not(caption) > * > * {
+    background-color: var(--primary-a);
+}
+
+.languagePickerTours{
+    /* width: 3em; */
+    height: fit-content;
+}
+.languagePickerTours img{
+ height: 2em;
+ width: 3em;
+}
+.prices p{
+    font-size: 1em;
+}
+.languagepicker{
+    border: none;
+}
+
+
+.buyButton{
+    font-size: 2em;
+}
+
+.btn-outline-primary{
+    border-radius:0;    
+    border: none;
+
+}
+.btn-check:checked + .btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check) + .btn:active{
+    background-color: var(--secondary-a);
+    /* background-color:pink; */
+
+
+}
+/* btn-check:checked {
+    border-color: ;  
+} */
