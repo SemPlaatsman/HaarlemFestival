@@ -13,6 +13,7 @@ new breadcrumbcontroller();
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
   <title>History</title>
 </head>
 
@@ -142,26 +143,6 @@ new breadcrumbcontroller();
 
     </div>
   </div>
-
-
-
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    $(document).ready(function() {
-      // Hide the modal form by default
-      $('#history-ticket-form').hide();
-
-      // Show the modal form when the button is clicked
-      $('.insert-button-venue').click(function() {
-        $('#history-ticket-form').show();
-      });
-
-      // Hide the modal form when the "cancel" button is clicked
-      $('#history-ticket-form input[type="cancel"]').click(function() {
-        $('#history-ticket-form').hide();
-      });
-    });
-  </script>
 
 </body>
 

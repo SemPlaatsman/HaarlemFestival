@@ -6,7 +6,7 @@ class TicketDanceService
     private $ticketDanceRepository;
 
     function __construct() {
-        $this->ticketDanceRepository = new ReservationRepository();
+        $this->ticketDanceRepository = new TicketDanceRepository();
     }
 
     public function insertTicketDance(TicketDance $ticketDance):int 

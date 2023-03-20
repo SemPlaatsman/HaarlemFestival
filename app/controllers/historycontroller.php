@@ -3,7 +3,7 @@ require_once __DIR__ . '/controller.php';
 require_once __DIR__ . '/../models/item.php';
 require_once __DIR__ . '/../services/itemservice.php';
 require_once  'imageslidercontroller.php';
-require_once 'breadcrumbcontroller.php';
+//require_once 'breadcrumbcontroller.php';
 
 class HistoryController extends Controller {
     private $itemService;
