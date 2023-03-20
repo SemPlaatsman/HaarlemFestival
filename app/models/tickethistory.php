@@ -12,6 +12,9 @@ class TicketHistory extends Item {
     private float $price;
     private float $group_price;
 
+
+    //maybe implement the tour object into this class
+
     public function __construct(int $item_id, int $order_id, int $event_id, string $event_name, float $total_price, int $VAT, string $QR_Code, 
     int $id, int $tour_id, string $language, string $datetime, string $gathering_location, int $employee_id, string $employee_name, int $nr_of_people, float $price, float $group_price) {
         parent::__construct($item_id, $order_id, $event_id, $event_name, $total_price, $VAT, $QR_Code);
