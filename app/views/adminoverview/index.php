@@ -1,61 +1,22 @@
 <?php include __DIR__ . '/../header.php'; ?>
-
+<header class="d-flex justify-content-center py-3 bg-primary-b fs-5">
+    <ul class="nav nav-pills">
+        <li class="nav-item"><a href="/adminoverview" class="nav-link text-tetiare-a bg-tetiare-a mx-0 mx-xxl-5"
+                aria-current="page">Overview</a>
+        </li>
+        <li class="nav-item"><a href="/venue" class="nav-link text-tetiare-a mx-0 mx-xxl-5">Venues</a></li>
+        <li class="nav-item"><a href="/event" class="nav-link text-tetiare-a mx-0 mx-xxl-5">Events</a></li>
+        <li class="nav-item"><a href="/artist" class="nav-link text-tetiare-a mx-0 mx-xxl-5">Artists</a></li>
+        <li class="nav-item"><a href="/user" class="nav-link text-tetiare-a mx-0 mx-xxl-5">Users</a></li>
+    </ul>
+</header>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2">
-            <div class="d-flex flex-column flex-shrink-0 p-3 bg-light">
-                <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-                    <span class="fs-4">Sidebar</span>
-                </a>
-                <hr>
-                <ul class="nav nav-pills flex-column mb-auto">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link active" aria-current="page">
-                            <svg class="bi me-2" width="16" height="16">
-                                <use xlink:href="#home"></use>
-                            </svg>
-                            Overview
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link link-dark">
-                            <svg class="bi me-2" width="16" height="16">
-                                <use xlink:href="#speedometer2"></use>
-                            </svg>
-                            Venues
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link link-dark">
-                            <svg class="bi me-2" width="16" height="16">
-                                <use xlink:href="#table"></use>
-                            </svg>
-                            Events
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link link-dark">
-                            <svg class="bi me-2" width="16" height="16">
-                                <use xlink:href="#grid"></use>
-                            </svg>
-                            Artists
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link link-dark">
-                            <svg class="bi me-2" width="16" height="16">
-                                <use xlink:href="#people-circle"></use>
-                            </svg>
-                            Users
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="col-3">
+        <div class="col-12">
             <div class="row">
-                <div class="col-md-12">
-                    <table class="table table-bordered w-100 bg-primary-b m-auto border border-white text-tetiare-a">
+                <div class="col">
+                    <table
+                        class="table table-bordered w-100 bg-primary-b m-auto mt-3 border border-white text-tetiare-a">
                         <thead class="text-center">
                             <tr>
                                 <th colspan="7" class="fs-3">Venues</th>
@@ -87,7 +48,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col-md-12">
+                <div class="col">
                     <table
                         class="table table-bordered w-100 bg-primary-b m-auto mt-3 border border-white text-tetiare-a">
                         <thead class="text-center">
@@ -121,7 +82,9 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col-md-12">
+            </div>
+            <div class="row">
+                <div class="col">
                     <table
                         class="table table-bordered w-100 bg-primary-b m-auto mt-3 border border-white text-tetiare-a">
                         <thead class="text-center">
@@ -147,7 +110,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col-md-12">
+                <div class="col">
                     <table
                         class="table table-bordered w-100 bg-primary-b m-auto mt-3 border border-white text-tetiare-a">
                         <thead class="text-center">
@@ -184,6 +147,46 @@
                             <?php endforeach; ?>
                         </tbody>
                     </table>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <table
+                            class="table table-bordered w-100 bg-primary-b m-auto mt-3 border border-white text-tetiare-a">
+                            <thead class="text-center">
+                                <tr>
+                                    <th colspan="7" class="fs-3">Sessions</th>
+                                </tr>
+                                <tr>
+                                    <th class="col-1">ID</th>
+                                    <th class="col-3">Restaurant name</th>
+                                    <th class="col-3">Day of week</th>
+                                    <th class="col-3">Opening time</th>
+                                    <th class="col-3">Closing time</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                <?php foreach ($model['session'] as $session): ?>
+                                    <tr>
+                                        <td class="align-middle">
+                                            <?= $session->getId() ?>
+                                        </td>
+                                        <td class="align-middle">
+                                            <?= $session->getRestaurant_name() ?>
+                                        </td>
+                                        <td class="align-middle">
+                                            <?= $session->getDay_of_week() ?>
+                                        </td>
+                                        <td class="align-middle">
+                                            <?= $session->getOpening_time()->format('H:i:s') ?>
+                                        </td>
+                                        <td class="align-middle">
+                                            <?= $session->getClosing_time()->format('H:i:s') ?>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
