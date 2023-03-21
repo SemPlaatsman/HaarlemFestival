@@ -141,9 +141,9 @@ class router
                 break;
 
             case 'api':
-            // require __DIR__ . '/apiControllers/apiController.php';
-            // $api = new api();
-            // break;
+                // require __DIR__ . '/apiControllers/apiController.php';
+                // $api = new api();
+                // break;
 
             case 'history':
                 require_once __DIR__ . '/controllers/historycontroller.php';
@@ -151,23 +151,37 @@ class router
 
                 $controller->index();
                 break;
-                case 'history/schedule':
-                    require_once __DIR__ . '/controllers/historycontroller.php';
-                    $controller = new HistoryController();
-                    // print_r($_POST['language']);
+            case 'history/schedule':
+                require_once __DIR__ . '/controllers/historycontroller.php';
+                $controller = new HistoryController();
+                // print_r($_POST['language']);
 
-                    if(isset($_POST['language']) ){
+                if (isset($_POST['language'])) {
                     $controller->getSchedule($_POST['language']);
-                    
-                    }
-                    else{
-                        http_response_code(404);
-                        echo "404 Not Found";
-                        }
+                } else {
+                    http_response_code(404);
+                    echo "404 Not Found";
+                }
 
-                    break;
-
-
+                break;
+            case 'history/StBravo':
+                break;
+            case 'history/GroteMarkt':
+                break;
+            case 'history/DeHallen':
+                break;
+            case 'history/Proveniershof':
+                break;
+            case 'history/JopenKerk':
+                break;
+            case 'history/WaalseKerk':
+                break;
+            case 'history/MolenAdriaan':
+                break;
+            case 'history/AmsterdamPoort':
+                break;
+            case 'history/HofBakenes':
+                break;
             case '401':
                 http_response_code(401);
                 break;
@@ -195,5 +209,3 @@ class router
         return $uri;
     }
 }
-
-?>
