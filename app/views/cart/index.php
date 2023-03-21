@@ -193,8 +193,28 @@
     </tbody>
   </table>
 </section>
-<section class="col-md-4 h-100 bg-primary-a">
-<h1>Hello</h1>
+<section class="col-md-4 h-100 bg-primary-a fs-2 font-druktext d-flex align-items-start flex-column">
+  <dl class="row">
+    <dt class="col-md-8"><?= count($model['reservations']); ?>x YUMMY!</dt>
+    <dd class="col-md-4"><span class="font-roboto">€ </span><?= number_format($model['paymentTotals']['reservations'], 2) ?></dd>
+    <dt class="col-md-8"><?= count($model['ticketsDance']); ?>x DANCE!</dt>
+    <dd class="col-md-4"><span class="font-roboto">€ </span><?= number_format($model['paymentTotals']['ticketsDance'], 2) ?></dd>
+    <dt class="col-md-8"><?= count($model['ticketsHistory']); ?>x A STROLL THROUGH HISTORY</dt>
+    <dd class="col-md-4"><span class="font-roboto">€ </span><?= number_format($model['paymentTotals']['ticketsHistory'], 2) ?></dd>
+    <hr class="form-hr m-0 p-0 my-3">
+    <dt class="col-md-8">TOTAL</dt>
+    <dd class="col-md-4"><span class="font-roboto">€ </span><?= number_format($model['paymentTotals']['ticketsDance'], 2) ?></dd>
+  </dl>
+  <section class="row justify-content-around mt-auto mb-2 col-md-12">
+    <?php (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
+    if (isset($_SESSION['user'])) { ?>
+    <a href="/checkout" class="btn btn-primary-b rounded-0 fs-3 text-tetiare-a col-md-11">GO TO CHECKOUT <i class="fa-solid fa-arrow-right fa-md hover-beat"></i></a>
+    <?php } else { ?>
+    <p class="text-center text-primary-b font-druktext">Payment requires an account!</p>
+    <a href="/register" class="btn btn-primary-b rounded-0 fs-3 text-tetiare-a col-md-5">REGISTER</a>
+    <a href="/login" class="btn btn-primary-b rounded-0 fs-3 text-tetiare-a col-md-5">LOGIN</a>
+    <?php } ?>
+  </section>
 </section>
 <?php
     include __DIR__ . '/../footer.php';
