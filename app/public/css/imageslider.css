@@ -1,7 +1,9 @@
-.caption{
-    /* top: 0rem; */
+.imageslider .caption{
+    top: 6rem;
     bottom: auto;
-    left: 0rem;
+    left: -76rem;
     right: 0rem;
-    margin-top: -100px;
+}
+.imageslider{
+    height: 35rem;
 }
