@@ -3,32 +3,31 @@ require_once __DIR__ . '/../repositories/venuerepository.php';
 
 class VenueService
 {
+    private $venueRepository;
+
+    public function __construct()
+    {
+        $this->venueRepository = new VenueRepository();
+    }
+
     public function getVenue()
     {
-        $repository = new VenueRepository();
-
-        return $repository->getVenue();
+        return $this->venueRepository->getVenue();
     }
 
     public function insertVenue(string $name, string $address, int $seats)
     {
-        $repository = new VenueRepository();
-
-        return $repository->insertVenue($name, $address, $seats);
+        return $this->venueRepository->insertVenue($name, $address, $seats);
     }
 
     public function updateVenue(int $id, string $name, string $address, int $seats)
     {
-        $repository = new VenueRepository();
-
-        return $repository->updateVenue($id, $name, $address, $seats);
+        return $this->venueRepository->updateVenue($id, $name, $address, $seats);
     }
 
     public function deleteVenue(int $id)
     {
-        $repository = new VenueRepository();
-
-        return $repository->deleteVenue($id);
+        return $this->venueRepository->deleteVenue($id);
     }
 }
 ?>

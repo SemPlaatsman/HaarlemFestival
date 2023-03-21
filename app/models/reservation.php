@@ -8,7 +8,7 @@ class Reservation extends Item {
     private float $final_check;
     private int $nr_of_adults;
     private int $nr_of_kids;
-    private string $datetime;
+    private DateTime $datetime;
 
     public function __construct(int $item_id = null, int $order_id = null, int $event_id = null, string $event_name = null, float $total_price = null, int $VAT = null, string $QR_Code = null, 
     int $id = null, Restaurant $restaurant = null, float $final_check = null, int $nr_of_adults = null, int $nr_of_kids = null, string $datetime = null) {
@@ -19,9 +19,8 @@ class Reservation extends Item {
             $this->final_check = $final_check;
             $this->nr_of_adults = $nr_of_adults;
             $this->nr_of_kids = $nr_of_kids;
-            $this->datetime = $datetime;
+            $this->datetime = DateTime::createFromFormat('Y-m-d H:i:s', $datetime);
         }
-        
     }
 
     /**
@@ -33,11 +32,35 @@ class Reservation extends Item {
     }
 
     /**
+     * Set the value of id
+     *
+     * @return  self
+     */ 
+    public function setId($id) : self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
      * Get the value of restaurant
      */ 
     public function getRestaurant()
     {
         return $this->restaurant;
+    }
+
+    /**
+     * Set the value of restaurant
+     *
+     * @return  self
+     */ 
+    public function setRestaurant($restaurant) : self
+    {
+        $this->restaurant = $restaurant;
+
+        return $this;
     }
     
     /**
@@ -120,71 +143,15 @@ class Reservation extends Item {
      *
      * @return  self
      */ 
-    public function setDatetime($datetime)
+    public function setDatetime($datetime) : self
     {
         $this->datetime = DateTime::createFromFormat('Y-m-d H:i:s', $datetime);
 
         return $this;
     }
 
-    /**
-     * Set the value of id
-     *
-     * @return  self
-     */ 
-    public function setId($id)
-    {
-        $this->id = $id;
+    
 
-        return $this;
-    }
-
-    /**
-     * Set the value of restaurant
-     *
-     * @return  self
-     */ 
-    public function setRestaurant($restaurant)
-    {
-        $this->restaurant = $restaurant;
-
-        return $this;
-    }
-
-    /**
-     * Set the value of final_check
-     *
-     * @return  self
-     */ 
-    public function setFinal_check($final_check)
-    {
-        $this->final_check = $final_check;
-
-        return $this;
-    }
-
-        /**
-         * Set the value of nr_of_adults
-         *
-         * @return  self
-         */ 
-        public function setNr_of_adults($nr_of_adults)
-        {
-                $this->nr_of_adults = $nr_of_adults;
-
-                return $this;
-        }
-
-    /**
-     * Set the value of nr_of_kids
-     *
-     * @return  self
-     */ 
-    public function setNr_of_kids($nr_of_kids)
-    {
-        $this->nr_of_kids = $nr_of_kids;
-
-        return $this;
-    }
+    
 }
 ?>

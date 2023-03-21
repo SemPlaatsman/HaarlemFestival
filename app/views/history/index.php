@@ -33,54 +33,83 @@ new breadcrumbcontroller();
   <div class="row bg-primary-b mx-auto pb-3">
     <div class="row">
       <div class="col-sm-12 col-md-6 p-5">
+
         <h1 class="title text-tetiare-a">LOCATIONS</h1>
         <p class="text-tetiare-a">During the tour you will get visit to visit nine amazing locations in Haarlem. Each of these locations has a great story behind them and an important contribution to the history of Haarlem. If you want to find out more details about a location or what the importance of a location was in the history of Haarlem you can find out more by clicking on it.</p>
+
       </div>
       <div class="col-6 col-md-3 p-5">
-        <img class="img-fluid  rounded-circle  mx-auto d-inline-block locationimage" src="img/png/history/home/locations/StBravo.png">
-        </img>
-        <h1 class="caption font-druktext locationNames">CHURCH OF ST. BAVO</h1>
-
+        <a class="text-decoration-none" href="history/StBravo">
+          <img class="img-fluid  rounded-circle  mx-auto d-inline-block locationimage" src="img/png/history/home/locations/StBravo.png">
+          </img>
+          <h1 class="caption font-druktext locationNames">CHURCH OF ST. BAVO</h1>
+        </a>
       </div>
       <div class="col-6 col-md-3 p-5 ">
-        <img class="img-fluid rounded-circle mx-auto d-inline-block locationimage" src="img/png/history/home/locations/groteMarkt.png">
-        </img>
-        <h1 class="caption font-druktext locationNames">GROTE MARKT</h1>
-
+        <a class="text-decoration-none" href="history/GroteMarkt">
+          <img class="img-fluid rounded-circle mx-auto d-inline-block locationimage" src="img/png/history/home/locations/groteMarkt.png">
+          </img>
+          <h1 class="caption font-druktext locationNames">GROTE MARKT</h1>
+        </a>
       </div>
     </div>
     <div class="row">
       <div class="col-6 col-md-3 p-5">
-        <img class="img-fluid rounded-circle  mx-auto d-inline-block locationimage" src="img/png/history/home/locations/dehallen.png">
-        </img>
-        <h1 class="caption font-druktext  locationNames">DE HALLEN</h1>
+        <a class="text-decoration-none" href="history/DeHallen">
+          <img class="img-fluid rounded-circle  mx-auto d-inline-block locationimage" src="img/png/history/home/locations/dehallen.png">
+          </img>
+          <h1 class="caption font-druktext  locationNames">DE HALLEN</h1>
+        </a>
       </div>
-      <div class="col-6 col-md-3 p-5"> <img class="img-fluid rounded-circle mx-auto d-inline-block  locationimage" src="img/png/history/home/locations/proveniershof.png">
-        </img>
-        <h1 class="caption font-druktext locationNames">PROVENIERSHOF</h1>
+      <div class="col-6 col-md-3 p-5">
+        <a class="text-decoration-none" href="history/GroteMarkt">
+
+          <img class="img-fluid rounded-circle mx-auto d-inline-block  locationimage" src="img/png/history/home/locations/proveniershof.png">
+          </img>
+          <h1 class="caption font-druktext locationNames">PROVENIERSHOF</h1>
+        </a>
       </div>
-      <div class="col-6 col-md-3 p-5"> <img class="img-fluid rounded-circle mx-auto d-inline-block  locationimage" src="img/png/history/home/locations/jopenkerk.png">
-        </img>
-        <h1 class="caption font-druktext locationNames">JOPENKERK</h1>
+      <div class="col-6 col-md-3 p-5">
+        <a class="text-decoration-none" href="history/JopenKerk">
+
+          <img class="img-fluid rounded-circle mx-auto d-inline-block  locationimage" src="img/png/history/home/locations/jopenkerk.png">
+          </img>
+          <h1 class="caption font-druktext locationNames">JOPENKERK</h1>
+        </a>
       </div>
-      <div class="col-6 col-md-3 p-5"> <img class="img-fluid rounded-circle  mx-auto d-inline-block  locationimage" src="img/png/history/home/locations/waalsekerk.png">
-        </img>
-        <h1 class="caption font-druktext locationNames">WAALSE KERK HAARLEM</h1>
+      <div class="col-6 col-md-3 p-5">
+        <a class="text-decoration-none" href="history/WaalseKerk">
+
+          <img class="img-fluid rounded-circle  mx-auto d-inline-block  locationimage" src="img/png/history/home/locations/waalsekerk.png">
+          </img>
+          <h1 class="caption font-druktext locationNames">WAALSE KERK HAARLEM</h1>
+        </a>
       </div>
     </div>
     <div class="row justify-content-center">
-      <div class="col-6 col-md-3 p-5"><img class="img-fluid rounded-circle  mx-auto d-inline-block locationimage" src="img/png/history/home/locations/waalsekerk.png">
-        </img>
-        <h1 class="caption font-druktext locationNames">MOLEN DE ADRIAAN</h1>
+      <div class="col-6 col-md-3 p-5">
+        <a class="text-decoration-none" href="history/MolenAdriaan">
 
+          <img class="img-fluid rounded-circle  mx-auto d-inline-block locationimage" src="img/png/history/home/locations/waalsekerk.png">
+          </img>
+          <h1 class="caption font-druktext locationNames">MOLEN DE ADRIAAN</h1>
+        </a>
       </div>
-      <div class="col-6 col-md-3 p-5"><img class="img-fluid rounded-circle  mx-auto d-inline-block  locationimage" src="img/png/history/home/locations/amsterdamsePoort.png"">
+      <div class="col-6 col-md-3 p-5">
+        <a class="text-decoration-none" href="history/AmsterdamPoort">
+
+          <img class="img-fluid rounded-circle  mx-auto d-inline-block  locationimage" src="img/png/history/home/locations/amsterdamsePoort.png"">
         </img>
         <h1 class=" caption font-druktext locationNames">AMSTERDAMSE POORT</h1>
+        </a>
       </div>
-      <div class="col-6 col-md-3 p-5"><img class="img-fluid rounded-circle  mx-auto d-inline-block  locationimage" src="img/png/history/home/locations/HofVanBakenes.png"">
-        </img>
+      <div class="col-6 col-md-3 p-5">
+        <a class="text-decoration-none" href="history/HofBakenes">
+
+          <img class="img-fluid rounded-circle  mx-auto d-inline-block  locationimage" src="img/png/history/home/locations/HofVanBakenes.png"">
+          </img>
         <h1 class=" caption font-druktext locationNames">HOF VAN BAKENES</h1>
+        </a>
       </div>
     </div>
   </div>
@@ -122,18 +151,8 @@ new breadcrumbcontroller();
 
         <div class="table-responsive">
           <table class="table borderless font-druk">
-            <tbody>
-              <?php
-              for ($i = 0; $i < 4; $i++) {
-                echo "<tr>";
-                echo "<td class='border-0 rounded-pill bg-transparent'>THUR 26 JULY</td>";
-                echo "<td class='border-0 rounded-pill bg-primary-a text-center'>Otto</td>";
-                echo "<td class='border-0 rounded-pill bg-primary-a text-center'>@mdo</td>";
-                echo "<td class='border-0 rounded-pill bg-primary-a text-center'>@mdo</td>";
-                echo "</tr>";
-              }
-
-              ?>
+            <tbody id="tourschedule">
+              
 
             </tbody>
           </table>
@@ -143,6 +162,7 @@ new breadcrumbcontroller();
 
     </div>
   </div>
+
 
 </body>
 
