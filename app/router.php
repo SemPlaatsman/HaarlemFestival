@@ -165,23 +165,18 @@ class router
 
                 break;
             case 'history/StBravo':
-                break;
             case 'history/GroteMarkt':
-                break;
             case 'history/DeHallen':
-                break;
             case 'history/Proveniershof':
-                break;
             case 'history/JopenKerk':
-                break;
             case 'history/WaalseKerk':
-                break;
             case 'history/MolenAdriaan':
-                break;
             case 'history/AmsterdamPoort':
-                break;
             case 'history/HofBakenes':
+                require_once __DIR__ . '/controllers/historydetailcontroller.php';
+                $controller = new HistoryDetailController("Stbravo");
                 break;
+
             case '401':
                 http_response_code(401);
                 break;
