@@ -8,6 +8,8 @@
         <li class="nav-item"><a href="/event" class="nav-link text-tetiare-a mx-0 mx-xxl-5">Events</a></li>
         <li class="nav-item"><a href="/artist" class="nav-link text-tetiare-a mx-0 mx-xxl-5">Artists</a></li>
         <li class="nav-item"><a href="/user" class="nav-link text-tetiare-a mx-0 mx-xxl-5">Users</a></li>
+        <li class="nav-item"><a href="/openinghour" class="nav-link text-tetiare-a mx-0 mx-xxl-5">Opening hours</a></li>
+        <li class="nav-item"><a href="/restaurant" class="nav-link text-tetiare-a mx-0 mx-xxl-5">Restaurants</a></li>
     </ul>
 </header>
 <div class="container-fluid">
@@ -154,7 +156,7 @@
                             class="table table-bordered w-100 bg-primary-b m-auto mt-3 border border-white text-tetiare-a">
                             <thead class="text-center">
                                 <tr>
-                                    <th colspan="7" class="fs-3">Sessions</th>
+                                    <th colspan="7" class="fs-3">Opening hours</th>
                                 </tr>
                                 <tr>
                                     <th class="col-1">ID</th>
@@ -165,22 +167,68 @@
                                 </tr>
                             </thead>
                             <tbody class="text-center">
-                                <?php foreach ($model['session'] as $session): ?>
+                                <?php foreach ($model['openinghour'] as $openinghour): ?>
                                     <tr>
                                         <td class="align-middle">
-                                            <?= $session->getId() ?>
+                                            <?= $openinghour->getId() ?>
                                         </td>
                                         <td class="align-middle">
-                                            <?= $session->getRestaurant_name() ?>
+                                            <?= $openinghour->getRestaurant_name() ?>
                                         </td>
                                         <td class="align-middle">
-                                            <?= $session->getDay_of_week() ?>
+                                            <?= $openinghour->getDay_of_week() ?>
                                         </td>
                                         <td class="align-middle">
-                                            <?= $session->getOpening_time()->format('H:i:s') ?>
+                                            <?= $openinghour->getOpening_time()->format('H:i:s') ?>
                                         </td>
                                         <td class="align-middle">
-                                            <?= $session->getClosing_time()->format('H:i:s') ?>
+                                            <?= $openinghour->getClosing_time()->format('H:i:s') ?>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col">
+                        <table
+                            class="table table-bordered w-100 bg-primary-b m-auto mt-3 border border-white text-tetiare-a">
+                            <thead class="text-center">
+                                <tr>
+                                    <th colspan="7" class="fs-3">Restaurants</th>
+                                </tr>
+                                <tr>
+                                    <th class="col-1">ID</th>
+                                    <th class="col-3">Name</th>
+                                    <th class="col-1">Seats</th>
+                                    <th class="col-3">Location</th>
+                                    <th class="col-1">Adult price</th>
+                                    <th class="col-1">Kids price</th>
+                                    <th class="col-3">Reservation fee</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                <?php foreach ($model['restaurant'] as $restaurant): ?>
+                                    <tr>
+                                        <td class="align-middle">
+                                            <?= $restaurant->getId() ?>
+                                        </td>
+                                        <td class="align-middle">
+                                            <?= $restaurant->getName() ?>
+                                        </td>
+                                        <td class="align-middle">
+                                            <?= $restaurant->getSeats() ?>
+                                        </td>
+                                        <td class="align-middle">
+                                            <?= $restaurant->getLocation() ?>
+                                        </td>
+                                        <td class="align-middle">
+                                            <?= $restaurant->getAdultPrice() ?>
+                                        </td>
+                                        <td class="align-middle">
+                                            <?= $restaurant->getKidsPrice() ?>
+                                        </td>
+                                        <td class="align-middle">
+                                            <?= $restaurant->getReservationFee() ?>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

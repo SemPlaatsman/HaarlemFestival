@@ -1,6 +1,6 @@
 <?php
 
-class Session
+class OpeningHour
 {
     private int $id;
     // FOREIGN KEY restaurant_id
