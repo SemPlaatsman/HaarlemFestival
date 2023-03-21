@@ -21,3 +21,9 @@
     background-color: var(--tetiare-a);
     opacity: 100%;
 }
+
+@media only screen and (max-width: 768px) {
+  .main-container {
+      height: auto;
+  }
+}

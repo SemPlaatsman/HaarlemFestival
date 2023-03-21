@@ -4,9 +4,9 @@
  * 
  * @param array $model
  */
-class Controller
+abstract class Controller
 {
-    function displayView($model = [])
+    protected function displayView($model = [])
     {
         $directory = strtolower(substr(get_class($this), 0, -10));
         $view = strtolower(debug_backtrace()[1]['function']);
