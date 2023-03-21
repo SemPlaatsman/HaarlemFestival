@@ -22,7 +22,7 @@ class LoginController extends Controller {
                     (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
                     $_SESSION['user'] = serialize($user);
                     // redirect to dashboard
-                    header('Location: home');
+                    header('Location: /home');
                     exit();
                 }
             }
