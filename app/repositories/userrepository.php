@@ -129,4 +129,84 @@ class UserRepository extends Repository
             return false;
         }
     }
+
+    public function deleteKey(string $key)
+    {
+        try {
+            $stmt = $this->connection->prepare("DELETE FROM `password_reset_temp` WHERE `key`=:key");
+            $stmt->bindParam(':key', $key, PDO::PARAM_INT);
+            $stmt->execute();
+
+            if ($stmt->rowCount() === 0) {
+                // Failed to delete the record
+                return false;
+            }
+
+            return true;
+        } catch (PDOException $e) {
+            // Handle the exception
+            return false;
+        }
+    }
+
+    public function checkResetKey(string $email, string $key) : bool{
+        try {
+            $stmt = $this->connection->prepare("SELECT expDate FROM password_reset_temp WHERE `key`=:key AND email=:email");
+            $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+            $stmt->bindParam(':key', $key, PDO::PARAM_STR);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC)[0] ?? null;
+            if (!empty($result) && (isset($result['expDate']))) {
+                $currentDate = date("Y-m-d H:i:s");
+                return $result['expDate'] >= $currentDate;
+            }
+            return false;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+    
+
+    public function resetPassword(string $email, string $password)
+    {
+        try {
+            // hash password
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+            // Update a user
+            $stmnt = $this->connection->prepare("UPDATE `users` SET email=:email, password = :password WHERE email=:email");
+
+            // Bind the parameters
+            $stmnt->bindParam(':email', $email, PDO::PARAM_STR);
+            $stmnt->bindParam(':password', $hashedPassword, PDO::PARAM_STR);
+
+            $stmnt->execute();
+
+            if ($stmnt->rowCount() == 0) {
+                return false;
+            }
+
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    public function addResetTocken(string $email, string $key, string $expDate){
+        try {
+            
+            // Create a reset token
+            $stmt = $this->connection->prepare("INSERT INTO `password_reset_temp` (`email`, `key`, `expDate`) VALUES ( :email, :key, :expDate)");
+
+            // Bind the parameters
+            $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+            $stmt->bindParam(':key', $key, PDO::PARAM_STR);
+            $stmt->bindParam(':expDate', $expDate, PDO::PARAM_STR);
+            
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
 }

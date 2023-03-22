@@ -199,6 +199,12 @@ class router
                 $controller->index();
                 break;
 
+            case 'resetpassword':
+                require_once __DIR__ . '/controllers/resetpasswordcontroller.php';
+                $controller = new ResetPasswordController();
+                $controller->index();
+                break;
+
 
             case '401':
                 http_response_code(401);

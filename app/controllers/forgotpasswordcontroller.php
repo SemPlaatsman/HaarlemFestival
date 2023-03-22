@@ -39,12 +39,13 @@ class ForgotPasswordController extends Controller {
         $key = md5($email);
         $addKey = substr(md5(uniqid(rand(),1)),3,10);
         $key = $key . $addKey;
+        $this->userService->addResetTocken($email, $key, $expDate);
 
         $output='<p>Dear user,</p>';
         $output.='<p>Please click on the following link to reset your password.</p>';
         $output.='<p>-------------------------------------------------------------</p>';
-        $output.='<p><a href="localhost/forgotpassword?key='.$key.'&email='.$email.'&action=reset" target="_blank">
-        localhost/forgotpassword?key='.$key.'&email='.$email.'&action=reset</a></p>';		
+        $output.='<p><a href="localhost/resetpassword?key='.$key.'&email='.$email.'&action=reset" target="_blank">
+        localhost/resetpassword?key='.$key.'&email='.$email.'&action=reset</a></p>';		
         $output.='<p>-------------------------------------------------------------</p>';
         $output.='<p>Please be sure to copy the entire link into your browser.
         The link will expire after 1 day for security reason.</p>';
@@ -71,7 +72,6 @@ class ForgotPasswordController extends Controller {
         $mail->Body = $body;
         $mail->AddAddress($email, 'Recipient Name');
         $mail->Send();
-        echo("test");
         if(!$mail->Send()){
             echo "Mailer Error: " . $mail->ErrorInfo;
         }
