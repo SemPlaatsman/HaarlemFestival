@@ -3,7 +3,7 @@ include __DIR__ . '/../header.php';
 ?>
 <!-- temp -->
 <?php
-new imageslidercontroller();
+new imageslidercontroller("A STROLL THROUGH history");
 new breadcrumbcontroller();
 
 ?>
