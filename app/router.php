@@ -36,6 +36,16 @@ class router
                 $controller = new CartController();
                 $controller->index();
                 break;
+            
+            case 'checkout':
+                if (!(str_ends_with($_SERVER['HTTP_REFERER'], "cart") && isset($_SESSION['user']))) {
+                    http_response_code(404);
+                    die();
+                }
+                require_once __DIR__ . '/controllers/checkoutcontroller.php';
+                $controller = new CheckoutController();
+                $controller->index();
+                break;
 
             case 'adminoverview':
                 require_once __DIR__ . '/controllers/adminoverviewcontroller.php';
@@ -107,17 +117,17 @@ class router
                 }
                 break;
 
-            case 'session':
-                require_once __DIR__ . '/controllers/sessioncontroller.php';
-                $controller = new SessionController();
+            case 'openinghour':
+                require_once __DIR__ . '/controllers/openinghourcontroller.php';
+                $controller = new OpeningHourController();
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    /*if (isset($_POST['_userMethod']) && $_POST['_userMethod'] === 'PUT') {
-                    $controller->updateUser();
-                    }*/if (isset($_POST['_sessionMethod']) && $_POST['_sessionMethod'] === 'DELETE') {
-                        $controller->deleteSession();
-                    } /*else if (isset($_POST['_userMethod']) && $_POST['_userMethod'] === 'CREATE') {
-                     $controller->insertUser();
-                     }*/
+                    if (isset($_POST['_openingHourMethod']) && $_POST['_openingHourMethod'] === 'PUT') {
+                        $controller->updateOpeningHour();
+                    } else if (isset($_POST['_openingHourMethod']) && $_POST['_openingHourMethod'] === 'DELETE') {
+                        $controller->deleteOpeningHour();
+                    } else if (isset($_POST['_openingHourMethod']) && $_POST['_openingHourMethod'] === 'CREATE') {
+                        $controller->insertOpeningHour();
+                    }
                 } else {
                     $controller->index();
                 }
@@ -168,21 +178,20 @@ class router
 
                 $controller->index();
                 break;
-                case 'history/schedule':
-                    require_once __DIR__ . '/controllers/historycontroller.php';
-                    $controller = new HistoryController();
-                    // print_r($_POST['language']);
+            case 'history/schedule':
+                require_once __DIR__ . '/controllers/historycontroller.php';
+                $controller = new HistoryController();
+                // print_r($_POST['language']);
 
-                    if(isset($_POST['language']) ){
+                if (isset($_POST['language'])) {
                     $controller->getSchedule($_POST['language']);
-                    
-                    }
-                    else{
-                        http_response_code(404);
-                        echo "404 Not Found";
-                        }
 
-                    break;
+                } else {
+                    http_response_code(404);
+                    echo "404 Not Found";
+                }
+
+                break;
 
 
             case '401':

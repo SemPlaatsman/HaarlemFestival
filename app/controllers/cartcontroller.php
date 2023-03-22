@@ -27,6 +27,9 @@ class CartController extends Controller {
             // $_SESSION['guest']->cart = serialize((new CartService())->getCart(1));
             $model = unserialize($_SESSION['guest']->cart);
         }
+
+        $this->addPaymentTotals($model);
+
         $this->displayView($model);
     }
 
@@ -52,6 +55,17 @@ class CartController extends Controller {
             $itemId = $_POST['deleteItemId'];
             $this->cartService->deleteItem($itemId);
         }
+    }
+
+    private function addPaymentTotals(&$model) {
+        $paymentTotals = [];
+        foreach ($model as $eventItems) {
+            $paymentTotals += [array_keys($model, $eventItems, true)[0] => 0];
+            foreach($eventItems as $eventItem) {
+                $paymentTotals[array_keys($model, $eventItems, true)[0]] += $eventItem->getTotalPrice();
+            }
+        }
+        $model += ['paymentTotals' => $paymentTotals];
     }
 }
 ?>
