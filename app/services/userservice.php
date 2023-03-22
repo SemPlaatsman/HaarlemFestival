@@ -29,4 +29,8 @@ class UserService
     {
         return $this->userRepository->updateUser($id, $email, $password, $isAdmin, $name);
     }
+
+    public function getUserByEmail(string $email){
+        return $this->userRepository->getUserByEmail($email);
+    }
 }

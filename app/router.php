@@ -193,6 +193,12 @@ class router
 
                 break;
 
+            case 'forgotpassword':
+                require_once __DIR__ . '/controllers/forgotpasswordcontroller.php';
+                $controller = new ForgotPasswordController();
+                $controller->index();
+                break;
+
 
             case '401':
                 http_response_code(401);
