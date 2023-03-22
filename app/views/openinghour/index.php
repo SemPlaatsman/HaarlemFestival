@@ -72,8 +72,8 @@ include __DIR__ . '/../header.php';
                 <?php endforeach; ?>
                 <td colspan="7" class="text-center">
                     <input type="submit" data-bs-toggle="modal" data-bs-target="#insertModalOpeningHour"
-                        class="btn btn-primary insert-button-opening-hour bg-primary-a text-white border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
-                        value="INSERT" style="width: 50%;">
+                        class="btn btn-primary insert-button-opening-hour bg-primary-a text-white border-0 text-center text-decoration-none d-inline-block fs-5 m-2 w-50"
+                        value="INSERT">
                 </td>
             </tbody>
         </table>

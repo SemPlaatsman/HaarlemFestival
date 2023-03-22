@@ -36,7 +36,7 @@ class router
                 $controller = new CartController();
                 $controller->index();
                 break;
-            
+
             case 'checkout':
                 if (!(str_ends_with($_SERVER['HTTP_REFERER'], "cart") && isset($_SESSION['user']))) {
                     http_response_code(404);
@@ -127,6 +127,23 @@ class router
                         $controller->deleteOpeningHour();
                     } else if (isset($_POST['_openingHourMethod']) && $_POST['_openingHourMethod'] === 'CREATE') {
                         $controller->insertOpeningHour();
+                    }
+                } else {
+                    $controller->index();
+                }
+                $controller->index();
+                break;
+
+            case 'restaurant':
+                require_once __DIR__ . '/controllers/restaurantcontroller.php';
+                $controller = new RestaurantController();
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    if (isset($_POST['_restaurantMethod']) && $_POST['_restaurantMethod'] === 'PUT') {
+                        $controller->updateRestaurant();
+                    } else if (isset($_POST['_restaurantMethod']) && $_POST['_restaurantMethod'] === 'DELETE') {
+                        $controller->deleteRestaurant();
+                    } else if (isset($_POST['_restaurantMethod']) && $_POST['_restaurantMethod'] === 'CREATE') {
+                        $controller->insertRestaurant();
                     }
                 } else {
                     $controller->index();
