@@ -34,7 +34,7 @@ new breadcrumbcontroller();
                 <p>Experience a unique culinary journey at Jopenkerk's 1st-floor restaurant, where craft beer and food come together in perfect harmony. Enjoy specially crafted dishes expertly paired with the restaurant's selection of beers, or choose from a carefully curated wine list. Please note that the restaurant is not wheelchair accessible, so please call in advance for any special needs.</p>
             </div>
             <div class="col">
-                <img class="VisualContainer" src="https://fastly.picsum.photos/id/609/736/479.jpg?hmac=1v_n7ASpQppYiP4NYuE_GpCG61-kA0O0N_AQ87uwGCU">
+                <img class="VisualContainer" src="<?php echo $this->basedir?>">
             </div>
         </div>
         <div class="row bg-primary-b p-5">

@@ -2,14 +2,18 @@
 require_once __DIR__ . '/controller.php';
 require_once  'imageslidercontroller.php';
 require_once 'breadcrumbcontroller.php';
+
 class HistoryDetailController extends Controller {
-    function __construct(string $page) {
+    public $basedir="/img/png/history/detail/";
+
+    function __construct() {
 
     }
-    public function index() {
+    public function index(string $page) {
        
      
-      
+        $this->basedir.=$page;
+
         $this->displayView();
 
 

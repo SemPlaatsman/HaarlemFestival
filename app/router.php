@@ -174,8 +174,8 @@ class router
             case 'history/AmsterdamPoort':
             case 'history/HofBakenes':
                 require_once __DIR__ . '/controllers/historydetailcontroller.php';
-                $controller = new HistoryDetailController("Stbravo");
-                $controller->index();
+                $controller = new HistoryDetailController();
+                $controller->index("Stbravo");
                 break;
 
             case '401':
