@@ -31,12 +31,6 @@ class ResetPasswordController extends Controller {
             
         }
     }
-
-    public function ceckKey(string $email, string $key) {
-        if($this->userService->checkResetKey('5409281211028dde74f1da3dc11b88c28c45ea9038', 'janjaap.vanlaar2001@gmail.com')){
-            $this->displayView();
-        }
-    }
 }
 
 ?>
