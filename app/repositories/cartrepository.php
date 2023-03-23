@@ -123,7 +123,7 @@ class CartRepository extends Repository
         $query->bindParam(':ticket_dance_id', $ticketDanceId, PDO::PARAM_INT);
         $query->bindParam(':nr_of_people', $nrOfPeople, PDO::PARAM_INT);
         $query->execute();
-        return boolval($query->rowCount() > 0);
+        return $query->rowCount() > 0;
     }
 
     public function updateTicketHistory(int $ticketHistoryId, int $nrOfPeople) : bool {
@@ -134,14 +134,14 @@ class CartRepository extends Repository
         $query->bindParam(':ticket_history_id', $ticketHistoryId, PDO::PARAM_INT);
         $query->bindParam(':nr_of_people', $nrOfPeople, PDO::PARAM_INT);
         $query->execute();
-        return boolval($query->rowCount() > 0);
+        return $query->rowCount() > 0;
     }
 
     public function deleteItem($itemId) : bool {
         $query = $this->connection->prepare("DELETE FROM `item` WHERE `id` = :id LIMIT 1");
         $query->bindParam(":id", $itemId, PDO::PARAM_INT);
         $query->execute();
-        return boolval($query->rowCount() > 0);
+        return $query->rowCount() > 0;
     }
 }
 ?>
