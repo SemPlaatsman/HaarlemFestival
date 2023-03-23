@@ -20,7 +20,7 @@ class CartController extends Controller {
         }
 
         (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
-        if (isset($_SESSION['user'])) {         
+        if (isset($_SESSION['user'])) {
             $model = $this->cartService->getCart(unserialize($_SESSION['user'])->getId());
         } else if (isset($_SESSION['guest'])) {
             // uncomment to use test data

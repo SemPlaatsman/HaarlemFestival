@@ -50,7 +50,7 @@ class UserController extends Controller
     public function updateUser()
     {
         try {
-            $id = htmlspecialchars($_POST['id']);
+            $id = $_POST['id'];
             $email = htmlspecialchars($_POST['email']);
             $password = htmlspecialchars($_POST['password']);
             $isAdmin = isset($_POST['is_admin']);
@@ -74,7 +74,7 @@ class UserController extends Controller
     public function deleteUser()
     {
         try {
-            $id = htmlspecialchars($_POST['id']);
+            $id = $_POST['id'];
 
             $result = $this->userservice->deleteUser($id);
             if ($result) {

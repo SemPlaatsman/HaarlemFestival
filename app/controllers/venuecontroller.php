@@ -49,7 +49,7 @@ class VenueController extends Controller
     public function updateVenue()
     {
         try {
-            $id = htmlspecialchars($_POST['id']);
+            $id = $_POST['id'];
             $name = htmlspecialchars($_POST['name']);
             $location = htmlspecialchars($_POST['location']);
             $seats = htmlspecialchars($_POST['seats']);
@@ -72,7 +72,7 @@ class VenueController extends Controller
     public function deleteVenue()
     {
         try {
-            $id = htmlspecialchars($_POST['id']);
+            $id = $_POST['id'];
             $result = $this->venueService->deleteVenue($id);
             if ($result) {
                 // return success response
