@@ -1,22 +1,26 @@
 <?php
 require_once __DIR__ . '/controller.php';
 require_once __DIR__ . '/../services/userservice.php';
+require_once __DIR__ . '/../services/loginservice.php';
 require_once __DIR__ . '/emailgenerator.php';
 
 class RegistrationController extends Controller {
     private $userService;
     private $emailGenerator;
+    private $loginService;
 
     function __construct() {
         $this->userService = new UserService();
+        $this->loginService = new LoginService();
         $this->emailGenerator = new EmailGenerator();
     }
 
     public function index() {
-        $this->displayView();
         if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST)) {
+            
             $this->handlePost();
         }
+        $this->displayView();
     }
 
     public function handlePost() {
@@ -41,8 +45,15 @@ class RegistrationController extends Controller {
                 $body = $output; 
                 $subject = "Registration - visithaarlem.nl";
                 $this->emailGenerator->generate($body, $subject, $email);
-                header('Location: home');
-                exit();
+                $user = $this->loginService->validateUser($email, $password1);
+                if ($user != null) {
+                    // start session if it hasn't been started yet
+                    (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
+                    $_SESSION['user'] = serialize($user);
+                    // redirect to dashboard
+                    header('Location: home');
+                    exit();
+                }
             }
         }
     }

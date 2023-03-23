@@ -33,6 +33,8 @@ class ForgotPasswordController extends Controller {
         $key = md5($email);
         $addKey = substr(md5(uniqid(rand(),1)),3,10);
         $key = $key . $addKey;
+        header('Location: login');
+        exit();
         $this->userService->addResetTocken($email, $key, $expDate);
 
         $output='<p>Dear user,</p>';
