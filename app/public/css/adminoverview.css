@@ -1,7 +1,0 @@
-body {
-    background-color: var(--tetiare-a); /* -> bg-tetiare-a */
-}
-
-table.table {
-    max-width: 1200px;
-}

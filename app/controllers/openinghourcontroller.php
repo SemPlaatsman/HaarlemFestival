@@ -59,7 +59,7 @@ class OpeningHourController extends Controller
     public function updateOpeningHour()
     {
         try {
-            $id = htmlspecialchars($_POST['id']);
+            $id = $_POST['id'];
             $dayOfWeek = intval($_POST['day_of_week']);
 
             $openingTimeStr = htmlspecialchars($_POST['opening_time']);
@@ -86,7 +86,7 @@ class OpeningHourController extends Controller
     public function deleteOpeningHour()
     {
         try {
-            $id = htmlspecialchars($_POST['id']);
+            $id = $_POST['id'];
             $result = $this->openinghourservice->deleteOpeningHour($id);
             if ($result) {
                 // return success response
