@@ -1,12 +1,15 @@
 <?php
 require_once __DIR__ . '/controller.php';
 require_once __DIR__ . '/../services/userservice.php';
+require_once __DIR__ . '/emailgenerator.php';
 
 class RegistrationController extends Controller {
     private $userService;
+    private $emailGenerator;
 
     function __construct() {
         $this->userService = new UserService();
+        $this->emailGenerator = new EmailGenerator();
     }
 
     public function index() {
@@ -27,6 +30,17 @@ class RegistrationController extends Controller {
                 $currentDatetime = date('Y-m-d H:i:s');
                 $time_created = DateTime::createFromFormat('Y-m-d H:i:s', $currentDatetime);
                 $this->userService->insertUser($email, $password1, $time_created, $isAdmin, $name);
+                $output="<p>Dear ".$name.",</p>";
+                $output.='<p>Thank you for registrating at the haarlem festival site.</p>';
+                $output.='<p>You can login at:</p>';
+                $output.='<p><a href="localhost">
+                localhost</a></p>';
+                $output.='<p>If you did not register at our site please contact us.</p>';  	
+                $output.='<p>Kind regards,</p>';
+                $output.='<p>The festival Team</p>';
+                $body = $output; 
+                $subject = "Registration - visithaarlem.nl";
+                $this->emailGenerator->generate($body, $subject, $email);
                 header('Location: home');
                 exit();
             }
