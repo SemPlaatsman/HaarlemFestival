@@ -11,8 +11,8 @@ class ResetPasswordController extends Controller {
 
     public function index() {
         if (isset($_GET["key"]) && isset($_GET["email"]) && isset($_GET["action"]) && ($_GET["action"]=="reset") && !isset($_POST["action"])){
-            $key = $_GET["key"];
-            $email = $_GET["email"];
+            $key = htmlspecialchars($_GET["key"]);
+            $email = htmlspecialchars($_GET["email"]);
             if($this->userService->checkResetKey($email, $key)){
                 $this->displayView();
                 if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST)) {
@@ -22,6 +22,7 @@ class ResetPasswordController extends Controller {
                         if($password1 == $password2){
                             $this->userService->resetPassword($email, $password1);
                             $this->userService->deleteKey($key);
+                            exit();
                         }
                     }
                 }
