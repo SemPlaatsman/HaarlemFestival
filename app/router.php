@@ -37,13 +37,9 @@ class router
                 $controller->index();
                 break;
 
-            case 'checkout':
-                if (!(str_ends_with($_SERVER['HTTP_REFERER'], "cart") && isset($_SESSION['user']))) {
-                    http_response_code(404);
-                    die();
-                }
-                require_once __DIR__ . '/controllers/checkoutcontroller.php';
-                $controller = new CheckoutController();
+            case 'molliewebhook':
+                require_once __DIR__ . '/controllers/molliewebhookcontroller.php';
+                $controller = new MollieWebhookController();
                 $controller->index();
                 break;
 
