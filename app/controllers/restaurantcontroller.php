@@ -1,22 +1,22 @@
 <?php
 require_once __DIR__ . '/controller.php';
-require_once __DIR__ . '/../services/venueservice.php';
+require_once __DIR__ . '/../services/restaurantservice.php';
 
-class VenueController extends Controller
+class RestaurantController extends Controller
 {
-    private $venueService;
+    private $restaurantservice;
 
     function __construct()
     {
-        $this->venueService = new VenueService();
+        $this->restaurantservice = new RestaurantService();
     }
 
     public function index()
     {
         try {
-            $venue = $this->venueService->getVenue();
+            $restaurant = $this->restaurantservice->getRestaurants();
             $data = [
-                'venue' => $venue
+                'restaurant' => $restaurant
             ];
             $this->displayView($data);
         } catch (Exception $e) {
@@ -24,18 +24,21 @@ class VenueController extends Controller
         }
     }
 
-    public function insertVenue()
+    public function insertRestaurant()
     {
         try {
             $name = htmlspecialchars($_POST['name']);
-            $location = htmlspecialchars($_POST['location']);
             $seats = htmlspecialchars($_POST['seats']);
+            $location = htmlspecialchars($_POST['location']);
+            $adultPrice = htmlspecialchars($_POST['adult_price']);
+            $kidsPrice = htmlspecialchars($_POST['kids_price']);
+            $reservationFee = htmlspecialchars($_POST['reservation_fee']);
 
-            $result = $this->venueService->insertVenue($name, $location, $seats);
+            $result = $this->restaurantservice->createRestaurant($name, $seats, $location, $adultPrice, $kidsPrice, $reservationFee);
 
             if ($result) {
                 // redirect to the same page with a success query parameter
-                header("Location: /venue");
+                header("Location: /restaurant");
                 exit;
             } else {
                 // return failed response
@@ -46,37 +49,41 @@ class VenueController extends Controller
         }
     }
 
-    public function updateVenue()
+    public function updateRestaurant()
     {
         try {
             $id = $_POST['id'];
             $name = htmlspecialchars($_POST['name']);
-            $location = htmlspecialchars($_POST['location']);
             $seats = htmlspecialchars($_POST['seats']);
+            $location = htmlspecialchars($_POST['location']);
+            $adultPrice = htmlspecialchars($_POST['adult_price']);
+            $kidsPrice = htmlspecialchars($_POST['kids_price']);
+            $reservationFee = htmlspecialchars($_POST['reservation_fee']);
 
-            $result = $this->venueService->updateVenue($id, $name, $location, $seats);
+            $result = $this->restaurantservice->updateRestaurant($id, $name, $seats, $location, $adultPrice, $kidsPrice, $reservationFee);
 
             if ($result) {
-                // return succes response
-                header("Location: /venue");
+                // redirect to the same page with a success query parameter
+                header("Location: /restaurant");
+                exit;
             } else {
                 // return failed response
                 echo 'Something went wrong with the update';
             }
         } catch (Exception $e) {
-            // Handle the exception here
             echo 'Error: ' . $e->getMessage();
         }
     }
 
-    public function deleteVenue()
+    public function deleteRestaurant()
     {
         try {
             $id = $_POST['id'];
-            $result = $this->venueService->deleteVenue($id);
+            $result = $this->restaurantservice->deleteRestaurant($id);
+
             if ($result) {
                 // return success response
-                header("Location: /venue");
+                header("Location: /restaurant");
             } else {
                 // return failed response
                 echo 'Something went wrong with the deletion';
@@ -86,5 +93,5 @@ class VenueController extends Controller
             echo 'Error: ' . $e->getMessage();
         }
     }
-
 }
+?>
