@@ -1,7 +1,4 @@
 <?php
-
-use Mpdf\Tag\Em;
-
 require_once __DIR__ . '/controller.php';
 require_once __DIR__ . '/../models/user.php';
 require_once __DIR__ . '/../services/cartservice.php';
@@ -23,7 +20,7 @@ class CartController extends Controller {
         }
 
         (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
-        if (isset($_SESSION['user'])) {         
+        if (isset($_SESSION['user'])) {
             $model = $this->cartService->getCart(unserialize($_SESSION['user'])->getId());
         } else if (isset($_SESSION['guest'])) {
             // uncomment to use test data
