@@ -1,4 +1,7 @@
 <?php
+
+use Mpdf\Tag\Em;
+
 require_once __DIR__ . '/controller.php';
 require_once __DIR__ . '/../models/user.php';
 require_once __DIR__ . '/../services/cartservice.php';
