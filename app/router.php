@@ -218,6 +218,11 @@ class router
                 $controller->index();
                 break;
 
+            case 'registration':
+                require_once __DIR__ . '/controllers/registrationcontroller.php';
+                $controller = new RegistrationController();
+                $controller->index();
+                break;
 
             case '401':
                 http_response_code(401);
