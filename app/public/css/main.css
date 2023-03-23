@@ -350,6 +350,12 @@ p {
     30%, 80% { transform: scale(1.25, 1.25); }
 }
 
+/* Custom hover second-header adminoverview */
+.second-header:hover {
+    color: var(--primary-b);
+    background-color: var(--tetiare-a);
+}
+
 /* Custom buttons based on the design provided in the following CodePen: https://codepen.io/ondrejsvestka/pen/NjxgVR */
 
 .btn.btn-tetiare-a {
