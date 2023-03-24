@@ -9,8 +9,8 @@ include __DIR__ . '/../header.php';
         <li><a href="/venue" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">VENUES</a></li>
         <li><a href="/event" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">EVENTS</a></li>
         <li><a href="/artist" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">ARTISTS</a></li>
-        <li><a href="/user" class="bg-light nav-item nav-link text-primary-b mx-0 mx-xxl-5">USERS</a></li>
-        <li><a href="/openinghour" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">OPENING
+        <li><a href="/user" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">USERS</a></li>
+        <li><a href="/openinghour" class="bg-light nav-item nav-link text-primary-b mx-0 mx-xxl-5">OPENING
                 HOURS</a></li>
         <li><a href="/restaurant" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">RESTAURANTS</a>
         </li>
@@ -22,41 +22,41 @@ include __DIR__ . '/../header.php';
         <table class="table table-bordered w-100 bg-primary-b mt-3 mb-3 border border-white text-tetiare-a">
             <thead class="text-center">
                 <tr>
-                    <th colspan="7" class="fs-3">Users</th>
+                    <th colspan="7" class="fs-3">Opening hours</th>
                 </tr>
                 <tr>
                     <th class="col-1">ID</th>
-                    <th class="col-3">Email</th>
-                    <th class="col-3">Time created</th>
-                    <th class="col-1">Is admin</th>
-                    <th class="col-3">Name</th>
+                    <th class="col-3">Restaurant name</th>
+                    <th class="col-3">Day of week</th>
+                    <th class="col-3">Opening time</th>
+                    <th class="col-3">Closing time</th>
                     <th>Delete</th>
                     <th>Edit</th>
                 </tr>
             </thead>
             <tbody class="text-center">
-                <?php foreach ($model['user'] as $user): ?>
+                <?php foreach ($model['openinghour'] as $openingHour): ?>
                     <tr>
                         <td class="align-middle">
-                            <?= $user->getId() ?>
+                            <?= $openingHour->getId() ?>
                         </td>
                         <td class="align-middle">
-                            <?= $user->getEmail() ?>
+                            <?= $openingHour->getRestaurant_name() ?>
                         </td>
                         <td class="align-middle">
-                            <?= $user->getTime_created()->format('Y-m-d H:i:s') ?>
+                            <?= $openingHour->getDay_of_week() ?>
                         </td>
                         <td class="align-middle">
-                            <?= $user->getIsAdmin() == 1 ? 'Yes' : 'No' ?>
+                            <?= $openingHour->getOpening_time()->format('H:i:s') ?>
                         </td>
                         <td class="align-middle">
-                            <?= $user->getName() ?>
+                            <?= $openingHour->getClosing_time()->format('H:i:s') ?>
                         </td>
                         <td class="col-1">
                             <div class="justify-content-center align-items-center">
-                                <form method="post" action="/user">
-                                    <input type="hidden" name="id" value="<?= $user->getId() ?>">
-                                    <input type="hidden" name="_userMethod" value="DELETE">
+                                <form method="post" action="/openinghour">
+                                    <input type="hidden" name="id" value="<?= $openingHour->getId() ?>">
+                                    <input type="hidden" name="_openingHourMethod" value="DELETE">
                                     <button type="submit"
                                         class="btn btn-danger bg-primary-a text-white border-0 text-center d-inline-block fs-5 m-2"><i
                                             class="fas fa-trash-alt"></i></button>
@@ -65,16 +65,16 @@ include __DIR__ . '/../header.php';
                         </td>
                         <td class="col-1">
                             <div class="justify-content-center align-items-center">
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#editModalUser"
-                                    class="btn btn-primary edit-button-user bg-primary-a text-white border-0 text-center d-inline-block fs-5 m-2"
-                                    data-id="<?= $user->getId() ?>"><i class="fas fa-edit"></i></button>
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#editModalOpeningHour"
+                                    class="btn btn-primary edit-button-opening-hour bg-primary-a text-white border-0 text-center d-inline-block fs-5 m-2"
+                                    data-id="<?= $openingHour->getId() ?>"><i class="fas fa-edit"></i></button>
                             </div>
                         </td>
                     </tr>
                 <?php endforeach; ?>
                 <td colspan="7" class="text-center">
-                    <input type="submit" data-bs-toggle="modal" data-bs-target="#insertModalUser"
-                        class="btn btn-primary insert-button-user bg-primary-a text-white border-0 text-center text-decoration-none d-inline-block fs-5 m-2 w-50"
+                    <input type="submit" data-bs-toggle="modal" data-bs-target="#insertModalOpeningHour"
+                        class="btn btn-primary insert-button-opening-hour bg-primary-a text-white border-0 text-center text-decoration-none d-inline-block fs-5 m-2 w-50"
                         value="INSERT">
                 </td>
             </tbody>
@@ -82,37 +82,44 @@ include __DIR__ . '/../header.php';
     </div>
 </div>
 
-<!-- Modal Insert User -->
-<div id="insertModalUser" class="modal fade" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+<!-- Modal Insert Opening hour -->
+<div id="insertModalOpeningHour" class="modal fade" tabindex="-1" aria-labelledby="openingHourModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered text-white">
         <div class="modal-content bg-primary-a border border-white">
             <div class="modal-header">
-                <h5 class="modal-title">Insert User</h5>
+                <h5 class="modal-title">Insert opening hours</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                     aria-label="Close"></button>
             </div>
-            <form id="insertEventForm" method="post" action="/user" class="d-flex justify-content-between">
+            <form id="insertFormOpeningHour" method="post" action="/openinghour" class="d-flex justify-content-between">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
+                        <label for="name">Restaurant name</label><br>
+                        <select name="restaurant_id" id="restaurant_id">
+                            <?php foreach ($model['restaurant'] as $restaurant): ?>
+                                <option value="<?= $restaurant->getId() ?>">
+                                    <?= $restaurant->getName() ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
+                        <label for="day-of-week">Day of the week</label>
+                        <input type="text" class="form-control" id="day-of-week-opening-hour" name="day_of_week"
+                            required>
                     </div>
                     <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
+                        <label for="opening-time">Opening time</label>
+                        <input type="time" class="form-control" id="opening-time-opening-hour" name="opening_time"
+                            step="1" required>
                     </div>
                     <div class="form-group">
-                        <label for="is_admin">Is admin</label>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="is_admin" name="is_admin" value="1">
-                            <label class="form-check-label" for="is_admin">Yes</label>
-                        </div>
+                        <label for="closing-time">Closing time</label>
+                        <input type="time" class="form-control" id="closing-time-opening-hour" name="closing_time"
+                            step="1" required>
                     </div>
-                    <input type="hidden" name="_userMethod" value="CREATE">
+                    <input type="hidden" name="_openingHourMethod" value="CREATE">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary fs-5" data-bs-dismiss="modal">Close</button>
@@ -125,37 +132,34 @@ include __DIR__ . '/../header.php';
     </div>
 </div>
 
-
-<!-- Modal Update User -->
-<div id="editModalUser" class="modal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+<!-- Modal Update Opening hour -->
+<div id="editModalOpeningHour" class="modal" tabindex="-1" aria-labelledby="openingHourModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered text-white">
         <div class="modal-content bg-primary-a border border-white">
             <div class="modal-header">
-                <h5 class="modal-title">Update User</h5>
+                <h5 class="modal-title">Update Opening hours</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                     aria-label="Close"></button>
             </div>
-            <form id="editFormUser" method="post" action="/user" class="d-flex justify-content-between">
+            <form id="editFormOpeningHour" method="post" action="/openinghour" class="d-flex justify-content-between">
                 <div class="modal-body">
-                    <input type="hidden" name="id" id="edit-id-user">
+                    <input type="hidden" name="id" id="edit-id-opening-hour">
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
+                        <label for="day-of-week">Day of the week</label>
+                        <input type="text" class="form-control" id="day-of-week-opening-hour" name="day_of_week"
+                            required>
                     </div>
                     <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name-user" name="name" required>
+                        <label for="opening-time">Opening time</label>
+                        <input type="time" class="form-control" id="opening-time-opening-hour" name="opening_time"
+                            step="1" required>
                     </div>
-                    <div class="form-group"><label for="is_admin">Is admin</label>
-                        <div class="form-check"><input type="checkbox" class="form-check-input" id="is_admin"
-                                name="is_admin" value="1"><label class="form-check-label" for="is_admin">Yes</label>
-                        </div>
+                    <div class="form-group">
+                        <label for="closing-time">Closing time</label>
+                        <input type="time" class="form-control" id="closing-time-opening-hour" name="closing_time"
+                            step="1" required>
                     </div>
-                    <input type="hidden" name="_userMethod" value="PUT">
+                    <input type="hidden" name="_openingHourMethod" value="PUT">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary fs-5" data-bs-dismiss="modal">Close</button>
@@ -167,6 +171,7 @@ include __DIR__ . '/../header.php';
         </div>
     </div>
 </div>
+
 
 <?php
 include __DIR__ . '/../footer.php';

@@ -17,7 +17,17 @@ class CartController extends Controller {
         }
 
         (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
-        $model = $this->cartService->getCart(unserialize($_SESSION['user'])->getId());
+        if (isset($_SESSION['user'])) {
+            $model = $this->cartService->getCart(unserialize($_SESSION['user'])->getId());
+        } else if (isset($_SESSION['guest'])) {
+            // uncomment to use test data
+            // $_SESSION['guest']->cart = serialize((new CartService())->getCart(1));
+            $model = unserialize($_SESSION['guest']->cart);
+        }
+
+        $this->addPaymentTotals($model);
+
+
         $this->displayView($model);
     }
 
@@ -43,6 +53,17 @@ class CartController extends Controller {
             $itemId = $_POST['deleteItemId'];
             $this->cartService->deleteItem($itemId);
         }
+    }
+
+    private function addPaymentTotals(&$model) {
+        $paymentTotals = [];
+        foreach ($model as $eventItems) {
+            $paymentTotals += [array_keys($model, $eventItems, true)[0] => 0];
+            foreach($eventItems as $eventItem) {
+                $paymentTotals[array_keys($model, $eventItems, true)[0]] += $eventItem->getTotalPrice();
+            }
+        }
+        $model += ['paymentTotals' => $paymentTotals];
     }
 }
 ?>

@@ -340,6 +340,22 @@ p {
     font-family: DrukText;
 }
 
+.hover-beat:hover {
+    transform-origin: 50% 50%;
+    animation: 2s ease 0s infinite beat;
+}
+
+@keyframes beat {
+    0%, 50%, 100% { transform: scale(1, 1); }
+    30%, 80% { transform: scale(1.25, 1.25); }
+}
+
+/* Custom hover second-header adminoverview */
+.second-header:hover {
+    color: var(--primary-b);
+    background-color: var(--tetiare-a);
+}
+
 /* Custom buttons based on the design provided in the following CodePen: https://codepen.io/ondrejsvestka/pen/NjxgVR */
 
 .btn.btn-tetiare-a {

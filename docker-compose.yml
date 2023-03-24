@@ -25,6 +25,7 @@ services:
                 cd /app &&
                 chmod u+rw  /var/cache &&
                 composer install &&
+                composer update &&
                 php-fpm"
 
                  
