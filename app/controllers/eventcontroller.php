@@ -52,7 +52,7 @@ class EventController extends Controller
     public function updateEvent()
     {
         try {
-            $id = htmlspecialchars($_POST['id']);
+            $id = $_POST['id'];
             $name = htmlspecialchars($_POST['name']);
 
             $dateStrStart = htmlspecialchars($_POST['start_date']);
@@ -79,7 +79,7 @@ class EventController extends Controller
     public function deleteEvent()
     {
         try {
-            $id = htmlspecialchars($_POST['id']);
+            $id = $_POST['id'];
             $result = $this->eventService->deleteEvent($id);
             if ($result) {
                 // return success response

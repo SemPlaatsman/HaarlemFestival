@@ -37,6 +37,12 @@ class router
                 $controller->index();
                 break;
 
+            case 'molliewebhook':
+                require_once __DIR__ . '/controllers/molliewebhookcontroller.php';
+                $controller = new MollieWebhookController();
+                $controller->index();
+                break;
+
             case 'adminoverview':
                 require_once __DIR__ . '/controllers/adminoverviewcontroller.php';
                 $controller = new AdminOverviewController();
@@ -107,6 +113,40 @@ class router
                 }
                 break;
 
+            case 'openinghour':
+                require_once __DIR__ . '/controllers/openinghourcontroller.php';
+                $controller = new OpeningHourController();
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    if (isset($_POST['_openingHourMethod']) && $_POST['_openingHourMethod'] === 'PUT') {
+                        $controller->updateOpeningHour();
+                    } else if (isset($_POST['_openingHourMethod']) && $_POST['_openingHourMethod'] === 'DELETE') {
+                        $controller->deleteOpeningHour();
+                    } else if (isset($_POST['_openingHourMethod']) && $_POST['_openingHourMethod'] === 'CREATE') {
+                        $controller->insertOpeningHour();
+                    }
+                } else {
+                    $controller->index();
+                }
+                $controller->index();
+                break;
+
+            case 'restaurant':
+                require_once __DIR__ . '/controllers/restaurantcontroller.php';
+                $controller = new RestaurantController();
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    if (isset($_POST['_restaurantMethod']) && $_POST['_restaurantMethod'] === 'PUT') {
+                        $controller->updateRestaurant();
+                    } else if (isset($_POST['_restaurantMethod']) && $_POST['_restaurantMethod'] === 'DELETE') {
+                        $controller->deleteRestaurant();
+                    } else if (isset($_POST['_restaurantMethod']) && $_POST['_restaurantMethod'] === 'CREATE') {
+                        $controller->insertRestaurant();
+                    }
+                } else {
+                    $controller->index();
+                }
+                $controller->index();
+                break;
+
             case 'captcha':
                 require_once __DIR__ . '/controllers/captchacontroller.php';
                 $controller = new captchacontroller();
@@ -158,10 +198,30 @@ class router
 
                 if (isset($_POST['language'])) {
                     $controller->getSchedule($_POST['language']);
+
                 } else {
                     http_response_code(404);
                     echo "404 Not Found";
                 }
+
+                break;
+
+            case 'forgotpassword':
+                require_once __DIR__ . '/controllers/forgotpasswordcontroller.php';
+                $controller = new ForgotPasswordController();
+                $controller->index();
+                break;
+
+            case 'resetpassword':
+                require_once __DIR__ . '/controllers/resetpasswordcontroller.php';
+                $controller = new ResetPasswordController();
+                $controller->index();
+                break;
+
+            case 'registration':
+                require_once __DIR__ . '/controllers/registrationcontroller.php';
+                $controller = new RegistrationController();
+                $controller->index();
 
                 break;
             case 'history/StBravo':

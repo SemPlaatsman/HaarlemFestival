@@ -37,7 +37,6 @@ class EventRepository extends Repository
             // Create a venue
             $stmt = $this->connection->prepare("INSERT INTO `event` (name, start_date, end_date) VALUES (:name, :start_date, :end_date)");
 
-
             // Bind the parameters
             $formattedStart_Date = $start_date->format('Y-m-d');
             $formattedEnd_Date = $end_date->format('Y-m-d');

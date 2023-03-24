@@ -1,6 +1,7 @@
 <?php
 
-class Restaurant {
+class Restaurant
+{
     private int $id;
     private string $name;
     private int $seats;
@@ -9,8 +10,9 @@ class Restaurant {
     private float $kids_price;
     private $reservation_fee;
 
+    public function __construct($id, $name, $seats, $location, $adult_price, $kids_price, $reservation_fee)
+    {
 
-    public function __construct($id, $name, $seats, $location, $adult_price, $kids_price, $reservation_fee) {
         $this->id = $id;
         $this->name = $name;
         $this->seats = $seats;
@@ -22,6 +24,7 @@ class Restaurant {
 
     /**
      * Get the value of id
+
      */ 
 
     public function getId() : int
@@ -31,8 +34,9 @@ class Restaurant {
 
     /**
      * Get the value of name
+     */
+    public function getName(): string
 
-    public function getName() : string
     {
         return $this->name;
     }
@@ -65,6 +69,7 @@ class Restaurant {
     }
 
 
+
     public function getAdultPriceFormatted() : string
     {
         return "€ " . number_format($this->adult_price, 2);
@@ -93,6 +98,7 @@ class Restaurant {
     {
         return $this->reservation_fee;
     }
+
 
 
     public function getReservationFeeFormatted() : string
