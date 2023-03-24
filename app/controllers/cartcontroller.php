@@ -2,19 +2,16 @@
 require_once __DIR__ . '/controller.php';
 require_once __DIR__ . '/../models/user.php';
 require_once __DIR__ . '/../services/cartservice.php';
-require_once __DIR__ . '/../services/guestcartservice.php';
 
 class CartController extends Controller {
     private $cartService;
 
     function __construct() {
-        (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
-        $this->cartService = isset($_SESSION['user']) ? new CartService() : new GuestCartService($_SESSION['guest']->cart);
+        $this->cartService = new CartService();
     }
 
     public function index() {
         $model = [];
-        
         if ($_SERVER["REQUEST_METHOD"] === 'POST' && !empty($_POST)) {
             $this->handlePOST($model);
         }
@@ -29,6 +26,7 @@ class CartController extends Controller {
         }
 
         $this->addPaymentTotals($model);
+
 
         $this->displayView($model);
     }

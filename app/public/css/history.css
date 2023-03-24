@@ -2,7 +2,7 @@
     font-size: 5em;
 }
 .main-container{
-    height: 100%;
+    height: fit-content;
 }
 .locationNames{
     margin-left:1em;
@@ -10,6 +10,7 @@
     font-size: 2em;
     color: white;
     text-align: center;
+    margin-top: -3em;
 }
 .locationimage{
     height: 20em;

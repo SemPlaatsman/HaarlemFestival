@@ -446,3 +446,7 @@ p {
 .form-rightside {
     float: right;
 }
+
+body {
+    min-height: 100vh;
+}
