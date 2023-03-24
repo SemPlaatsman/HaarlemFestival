@@ -1,8 +1,10 @@
 .imageslider .caption{
     top: 6rem;
     bottom: auto;
-    left: -76rem;
+    left: 0rem;
     right: 0rem;
+    text-align: left;
+    padding-left: 0.5em;
 }
 .imageslider{
     height: 35rem;

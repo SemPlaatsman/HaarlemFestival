@@ -165,17 +165,49 @@ class router
 
                 break;
             case 'history/StBravo':
+                require_once __DIR__ . '/controllers/historydetailcontroller.php';
+                $controller = new HistoryDetailController();
+                $controller->index("StBravo");
+                break;
             case 'history/GroteMarkt':
+                require_once __DIR__ . '/controllers/historydetailcontroller.php';
+                $controller = new HistoryDetailController();
+                $controller->index("GroteMarkt");
+                break;
             case 'history/DeHallen':
-            case 'history/Proveniershof':
+                require_once __DIR__ . '/controllers/historydetailcontroller.php';
+                $controller = new HistoryDetailController();
+                $controller->index("DeHallen");
+                break;
+            case 'history/ProveniersHof':
+                require_once __DIR__ . '/controllers/historydetailcontroller.php';
+                $controller = new HistoryDetailController();
+                $controller->index("Proveniershof");
+                break;
             case 'history/JopenKerk':
+                require_once __DIR__ . '/controllers/historydetailcontroller.php';
+                $controller = new HistoryDetailController();
+                $controller->index("Jopenkerk");
+                break;
             case 'history/WaalseKerk':
+                require_once __DIR__ . '/controllers/historydetailcontroller.php';
+                $controller = new HistoryDetailController();
+                $controller->index("WaalseKerk");
+                break;
             case 'history/MolenAdriaan':
+                require_once __DIR__ . '/controllers/historydetailcontroller.php';
+                $controller = new HistoryDetailController();
+                $controller->index("MolenAdriaan");
+                break;
             case 'history/AmsterdamPoort':
+                require_once __DIR__ . '/controllers/historydetailcontroller.php';
+                $controller = new HistoryDetailController();
+                $controller->index("AmsterdamPoort");
+                break;
             case 'history/HofBakenes':
                 require_once __DIR__ . '/controllers/historydetailcontroller.php';
                 $controller = new HistoryDetailController();
-                $controller->index("Stbravo");
+                $controller->index("HofBakenes");
                 break;
 
             case '401':

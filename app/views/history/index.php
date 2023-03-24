@@ -2,11 +2,7 @@
 include __DIR__ . '/../header.php';
 ?>
 <!-- temp -->
-<?php
-new imageslidercontroller("A STROLL THROUGH history");
-new breadcrumbcontroller();
 
-?>
 <html lang="en">
 
 <head>
@@ -16,7 +12,11 @@ new breadcrumbcontroller();
   
   <title>History</title>
 </head>
+<?php
+new imageslidercontroller("A STROLL THROUGH HISTORY");
+new breadcrumbcontroller();
 
+?>
 <body class="container-fluid">
   <!-- welcome tekst -->
   <div class="row bg-tetiare-a mx-auto">

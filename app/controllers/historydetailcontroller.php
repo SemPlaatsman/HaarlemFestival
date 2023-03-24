@@ -5,7 +5,7 @@ require_once 'breadcrumbcontroller.php';
 
 class HistoryDetailController extends Controller {
     public $basedir="/img/png/history/detail/";
-
+    public $title;
     function __construct() {
 
     }
@@ -13,7 +13,7 @@ class HistoryDetailController extends Controller {
        
      
         $this->basedir.=$page;
-
+        $this->title = $page;
         $this->displayView();
 
 

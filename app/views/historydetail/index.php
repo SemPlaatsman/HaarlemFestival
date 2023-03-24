@@ -1,12 +1,16 @@
 <?php
 include __DIR__ . '/../header.php';
-new imageslidercontroller("JOPENKERK");
-new breadcrumbcontroller();
+
 ?>
 <html>
 
 <body>
+<?php
+  
+  new imageslidercontroller( $this->title);
+  new breadcrumbcontroller();
 
+?>
     <div class="container">
         <div class="row  p-5">
             <div class="col">
@@ -15,12 +19,17 @@ new breadcrumbcontroller();
                     This former church has been transformed into a brewery, café, and restaurant all in one. For an extra special visit, come during the week when you can watch the brewers in action while sipping on a craft beer or enjoying a meal.</p>
             </div>
             <div class="col">
-                <img class="VisualContainer" src="<?php echo $this->basedir?>1.png">
+                <div class="ratio ratio-16x9">
+                    <img class="VisualContainer" src="<?php echo $this->basedir ?>1.png">
+                </div>
             </div>
         </div>
         <div class="row bg-primary-b p-5">
             <div class="col">
-                <img class="VisualContainer" src="<?php echo $this->basedir?>2.png">
+
+                <div class="ratio ratio-16x9">
+                    <img class="VisualContainer" src="<?php echo $this->basedir ?>2.png">
+                </div>
             </div>
             <div class="col text-tetiare-a">
                 <h1>HISTORY</h1>
@@ -34,7 +43,9 @@ new breadcrumbcontroller();
                 <p>Experience a unique culinary journey at Jopenkerk's 1st-floor restaurant, where craft beer and food come together in perfect harmony. Enjoy specially crafted dishes expertly paired with the restaurant's selection of beers, or choose from a carefully curated wine list. Please note that the restaurant is not wheelchair accessible, so please call in advance for any special needs.</p>
             </div>
             <div class="col">
-                <img class="VisualContainer" src="<?php echo $this->basedir?>3.png">
+                <div class="ratio ratio-16x9">
+                    <img class="VisualContainer" src="<?php echo $this->basedir ?>3.png">
+                </div>
             </div>
         </div>
         <div class="row bg-primary-b p-5">
