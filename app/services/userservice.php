@@ -29,4 +29,29 @@ class UserService
     {
         return $this->userRepository->updateUser($id, $email, $password, $isAdmin, $name);
     }
+
+    public function getUserByEmail(string $email)
+    {
+        return $this->userRepository->getUserByEmail($email);
+    }
+
+    public function checkResetKey(string $email, string $key)
+    {
+        return $this->userRepository->checkResetKey($email, $key);
+    }
+
+    public function resetPassword(string $email, string $password)
+    {
+        return $this->userRepository->resetPassword($email, $password);
+    }
+
+    public function addResetTocken(string $email, string $key, string $expDate)
+    {
+        return $this->userRepository->addResetTocken($email, $key, $expDate);
+    }
+    
+    public function deleteKey(string $email)
+    {
+        return $this->userRepository->deleteKey($email);
+    }
 }

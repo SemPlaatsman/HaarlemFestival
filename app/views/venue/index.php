@@ -1,6 +1,19 @@
 <?php
 include __DIR__ . '/../header.php';
 ?>
+<header class="d-flex justify-content-center py-3 bg-primary-b fs-5">
+    <ul class="nav nav-pills">
+        <li class="nav-item"><a href="/adminoverview" class="nav-link text-tetiare-a bg-tetiare-a mx-0 mx-xxl-5"
+                aria-current="page">Overview</a>
+        </li>
+        <li class="nav-item"><a href="/venue" class="nav-link text-tetiare-a mx-0 mx-xxl-5">Venues</a></li>
+        <li class="nav-item"><a href="/event" class="nav-link text-tetiare-a mx-0 mx-xxl-5">Events</a></li>
+        <li class="nav-item"><a href="/artist" class="nav-link text-tetiare-a mx-0 mx-xxl-5">Artists</a></li>
+        <li class="nav-item"><a href="/user" class="nav-link text-tetiare-a mx-0 mx-xxl-5">Users</a></li>
+        <li class="nav-item"><a href="/openinghour" class="nav-link text-tetiare-a mx-0 mx-xxl-5">Opening hours</a></li>
+        <li class="nav-item"><a href="/restaurant" class="nav-link text-tetiare-a mx-0 mx-xxl-5">Restaurants</a></li>
+    </ul>
+</header>
 
 <div class="row container">
     <div class="col-md-12">
@@ -55,8 +68,8 @@ include __DIR__ . '/../header.php';
                 <?php endforeach; ?>
                 <td colspan="7" class="text-center">
                     <input type="submit" data-bs-toggle="modal" data-bs-target="#insertModalVenue"
-                        class="btn btn-primary insert-button-venue bg-primary-a text-white border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
-                        value="INSERT" style="width: 50%;">
+                        class="btn btn-primary insert-button-venue bg-primary-a text-white border-0 text-center text-decoration-none d-inline-block fs-5 m-2 w-50"
+                        value="INSERT">
                 </td>
             </tbody>
         </table>

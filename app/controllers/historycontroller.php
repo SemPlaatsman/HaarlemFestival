@@ -10,7 +10,7 @@ require_once __DIR__ . '/../services/historytourservice.php';
 require_once __DIR__ . '/../services/itemservice.php';
 
 require_once  'imageslidercontroller.php';
-//require_once 'breadcrumbcontroller.php';
+require_once 'breadcrumbcontroller.php';
 
 /**
  * Summary of HistoryController

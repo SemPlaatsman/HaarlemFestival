@@ -113,17 +113,34 @@ class router
                 }
                 break;
 
-            case 'session':
-                require_once __DIR__ . '/controllers/sessioncontroller.php';
-                $controller = new SessionController();
+            case 'openinghour':
+                require_once __DIR__ . '/controllers/openinghourcontroller.php';
+                $controller = new OpeningHourController();
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    /*if (isset($_POST['_userMethod']) && $_POST['_userMethod'] === 'PUT') {
-                    $controller->updateUser();
-                    }*/if (isset($_POST['_sessionMethod']) && $_POST['_sessionMethod'] === 'DELETE') {
-                        $controller->deleteSession();
-                    } /*else if (isset($_POST['_userMethod']) && $_POST['_userMethod'] === 'CREATE') {
-                     $controller->insertUser();
-                     }*/
+                    if (isset($_POST['_openingHourMethod']) && $_POST['_openingHourMethod'] === 'PUT') {
+                        $controller->updateOpeningHour();
+                    } else if (isset($_POST['_openingHourMethod']) && $_POST['_openingHourMethod'] === 'DELETE') {
+                        $controller->deleteOpeningHour();
+                    } else if (isset($_POST['_openingHourMethod']) && $_POST['_openingHourMethod'] === 'CREATE') {
+                        $controller->insertOpeningHour();
+                    }
+                } else {
+                    $controller->index();
+                }
+                $controller->index();
+                break;
+
+            case 'restaurant':
+                require_once __DIR__ . '/controllers/restaurantcontroller.php';
+                $controller = new RestaurantController();
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    if (isset($_POST['_restaurantMethod']) && $_POST['_restaurantMethod'] === 'PUT') {
+                        $controller->updateRestaurant();
+                    } else if (isset($_POST['_restaurantMethod']) && $_POST['_restaurantMethod'] === 'DELETE') {
+                        $controller->deleteRestaurant();
+                    } else if (isset($_POST['_restaurantMethod']) && $_POST['_restaurantMethod'] === 'CREATE') {
+                        $controller->insertRestaurant();
+                    }
                 } else {
                     $controller->index();
                 }
@@ -174,21 +191,32 @@ class router
 
                 $controller->index();
                 break;
-                case 'history/schedule':
-                    require_once __DIR__ . '/controllers/historycontroller.php';
-                    $controller = new HistoryController();
-                    // print_r($_POST['language']);
+            case 'history/schedule':
+                require_once __DIR__ . '/controllers/historycontroller.php';
+                $controller = new HistoryController();
+                // print_r($_POST['language']);
 
-                    if(isset($_POST['language']) ){
+                if (isset($_POST['language'])) {
                     $controller->getSchedule($_POST['language']);
-                    
-                    }
-                    else{
-                        http_response_code(404);
-                        echo "404 Not Found";
-                        }
 
-                    break;
+                } else {
+                    http_response_code(404);
+                    echo "404 Not Found";
+                }
+
+                break;
+
+            case 'forgotpassword':
+                require_once __DIR__ . '/controllers/forgotpasswordcontroller.php';
+                $controller = new ForgotPasswordController();
+                $controller->index();
+                break;
+
+            case 'resetpassword':
+                require_once __DIR__ . '/controllers/resetpasswordcontroller.php';
+                $controller = new ResetPasswordController();
+                $controller->index();
+                break;
 
 
             case '401':
