@@ -28,7 +28,7 @@ class CartController extends Controller {
             // $_SESSION['guest']->cart = serialize((new CartService())->getCart(1));
             $model = unserialize($_SESSION['guest']->cart);
         }
-        
+
         $this->addPaymentTotals($model);
 
         if (isset($_POST['mollie'])) {
@@ -68,7 +68,8 @@ class CartController extends Controller {
         $mollie = new \Mollie\Api\MollieApiClient();
         $mollie->setApiKey($mollieAPIKey);
 
-        $orderId = count($model['reservations']) > 0 ? $model['reservations'][0]->getItemId() : (count($model['ticketsDance']) > 0 ? $model['ticketsDance'][0]->getItemId() : (count($model['ticketsHistory']) > 0 ? $model['ticketsHistory'][0]->getItemId() : null));
+        $orderId = count($model['reservations'] ?? []) > 0 ? $model['reservations'][0]->getItemId() : (count($model['ticketsDance'] ?? []) > 0 ? $model['ticketsDance'][0]->getItemId() : (count($model['ticketsHistory'] ?? []) > 0 ? $model['ticketsHistory'][0]->getItemId() : null));
+        $description = (count($model['reservations'] ?? []) > 0 ? count($model['reservations']) . "x Yummy! " : "") . (count($model['ticketsDance'] ?? []) > 0 ? count($model['ticketsDance']) . "x DANCE! " : "") . (count($model['ticketsHistory'] ?? []) > 0 ? count($model['ticketsHistory']) . "x A Stroll Through History " : "");
 
         if (!is_null($orderId)) {
             $payment = $mollie->payments->create([
@@ -76,7 +77,7 @@ class CartController extends Controller {
                     "currency" => "EUR",
                     "value" => number_format(($model['paymentTotals']['reservations'] ?? 0) + ($model['paymentTotals']['ticketsDance'] ?? 0) + ($model['paymentTotals']['ticketsHistory'] ?? 0), 2)
                 ],
-                "description" => "knoflookkaas",
+                "description" => $description,
                 "cancelUrl" => "https://e886-62-131-85-104.eu.ngrok.io/cart",
                 "redirectUrl" => "https://e886-62-131-85-104.eu.ngrok.io/cart",
                 "webhookUrl" => "https://e886-62-131-85-104.eu.ngrok.io/molliewebhook",
