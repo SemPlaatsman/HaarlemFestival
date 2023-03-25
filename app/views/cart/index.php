@@ -207,8 +207,13 @@
   </dl>
   <section class="row justify-content-around mt-auto mb-2 col-md-12">
     <?php (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
-    if (isset($_SESSION['user'])) { ?>
-      <button class="btn btn-primary-b rounded-0 fs-3 text-tetiare-a col-md-11">GO TO CHECKOUT <i class="fa-solid fa-arrow-right fa-md hover-beat"></i></button>
+    if (isset($_SESSION['user'])) { if ((count($model['reservations']) + count($model['ticketsDance']) + count($model['ticketsHistory'])) > 0) { ?>
+      <form method="POST" id="checkoutForm">
+        <button type="submit" class="btn btn-primary-b rounded-0 fs-3 text-tetiare-a col-md-12" name="mollie">GO TO CHECKOUT <i class="fa-solid fa-arrow-right fa-md hover-beat"></i></button>
+      </form>
+    <?php } else {?>
+      <button class="btn btn-primary-b rounded-0 fs-3 text-tetiare-a col-md-11 pe-none">NO ITEMS IN YOUR CART!</button>
+    <?php } ?>
     <?php } else { ?>
       <p class="text-center text-primary-b font-druktext">Payment requires an account!</p>
       <a href="/register" class="btn btn-primary-b rounded-0 fs-3 text-tetiare-a col-md-5">REGISTER</a>

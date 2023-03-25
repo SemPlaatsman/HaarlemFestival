@@ -3,6 +3,7 @@ require_once __DIR__ . '/controller.php';
 require_once __DIR__ . '/../models/user.php';
 require_once __DIR__ . '/../services/cartservice.php';
 require_once __DIR__ . '/../services/guestcartservice.php';
+require_once __DIR__ . '/../vendor/mollie/mollie-api-php/src/MollieApiClient.php';
 
 class CartController extends Controller {
     private $cartService;
@@ -15,7 +16,7 @@ class CartController extends Controller {
     public function index() {
         $model = [];
         
-        if ($_SERVER["REQUEST_METHOD"] === 'POST' && !empty($_POST)) {
+        if ($_SERVER["REQUEST_METHOD"] === 'POST' && !empty($_POST) && !isset($_POST['mollie'])) {
             $this->handlePOST($model);
         }
 
@@ -27,8 +28,12 @@ class CartController extends Controller {
             // $_SESSION['guest']->cart = serialize((new CartService())->getCart(1));
             $model = unserialize($_SESSION['guest']->cart);
         }
-
+        
         $this->addPaymentTotals($model);
+
+        if (isset($_POST['mollie'])) {
+            $this->handleMollie($model);
+        }
 
         $this->displayView($model);
     }
@@ -54,6 +59,32 @@ class CartController extends Controller {
         } else if (isset($_POST['deleteItemId'])) {
             $itemId = $_POST['deleteItemId'];
             $this->cartService->deleteItem($itemId);
+        }
+    }
+
+    private function handleMollie(&$model) {
+        include __DIR__ . '/../config/dbconfig.php';
+        require_once __DIR__ . "/../vendor/autoload.php";
+        $mollie = new \Mollie\Api\MollieApiClient();
+        $mollie->setApiKey($mollieAPIKey);
+
+        $orderId = count($model['reservations']) > 0 ? $model['reservations'][0]->getItemId() : (count($model['ticketsDance']) > 0 ? $model['ticketsDance'][0]->getItemId() : (count($model['ticketsHistory']) > 0 ? $model['ticketsHistory'][0]->getItemId() : null));
+
+        if (!is_null($orderId)) {
+            $payment = $mollie->payments->create([
+                "amount" => [
+                    "currency" => "EUR",
+                    "value" => number_format(($model['paymentTotals']['reservations'] ?? 0) + ($model['paymentTotals']['ticketsDance'] ?? 0) + ($model['paymentTotals']['ticketsHistory'] ?? 0), 2)
+                ],
+                "description" => "knoflookkaas",
+                "cancelUrl" => "https://e886-62-131-85-104.eu.ngrok.io/cart",
+                "redirectUrl" => "https://e886-62-131-85-104.eu.ngrok.io/cart",
+                "webhookUrl" => "https://e886-62-131-85-104.eu.ngrok.io/molliewebhook",
+                "metadata" => [
+                    "orderId" => $orderId
+                ]
+            ]);
+            header("Location: " . $payment->getCheckoutUrl(), true, 303);
         }
     }
 
