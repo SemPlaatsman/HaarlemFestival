@@ -2,22 +2,23 @@
 include __DIR__ . '/../header.php';
 ?>
 <header class="d-flex justify-content-center py-3 bg-primary-b fs-5">
-    <ul class="nav nav-pills">
-        <li class="nav-item"><a href="/adminoverview" class="nav-link text-tetiare-a bg-tetiare-a mx-0 mx-xxl-5"
-                aria-current="page">Overview</a>
+    <ul class="nav nav-pills fw-bold">
+        <li><a href="/adminoverview" class="second-header nav-item nav-link text-tetiare-a bg-tetiare-a mx-0 mx-xxl-5"
+                aria-current="page">OVERVIEW</a>
         </li>
-        <li class="nav-item"><a href="/venue" class="nav-link text-tetiare-a mx-0 mx-xxl-5">Venues</a></li>
-        <li class="nav-item"><a href="/event" class="nav-link text-tetiare-a mx-0 mx-xxl-5">Events</a></li>
-        <li class="nav-item"><a href="/artist" class="nav-link text-tetiare-a mx-0 mx-xxl-5">Artists</a></li>
-        <li class="nav-item"><a href="/user" class="nav-link text-tetiare-a mx-0 mx-xxl-5">Users</a></li>
-        <li class="nav-item"><a href="/openinghour" class="nav-link text-tetiare-a mx-0 mx-xxl-5">Opening hours</a></li>
-        <li class="nav-item"><a href="/restaurant" class="nav-link text-tetiare-a mx-0 mx-xxl-5">Restaurants</a></li>
+        <li><a href="/venue" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">VENUES</a></li>
+        <li><a href="/event" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">EVENTS</a></li>
+        <li><a href="/artist" class="bg-light nav-item nav-link text-primary-b mx-0 mx-xxl-5">ARTISTS</a></li>
+        <li><a href="/user" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">USERS</a></li>
+        <li><a href="/openinghour" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">OPENING
+                HOURS</a></li>
+        <li><a href="/restaurant" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">RESTAURANTS</a>
+        </li>
     </ul>
 </header>
-
 <div class="row container">
-    <div class="col-md-12">
-        <table class="table table-bordered w-100 bg-primary-b m-auto mt-3 border border-white text-tetiare-a">
+    <div class="col-md-10 mx-auto">
+        <table class="table table-bordered w-150 bg-primary-b m-auto mt-3 mb-3 border border-white text-tetiare-a">
             <thead class="text-center">
                 <tr>
                     <th colspan="7" class="fs-3">Artist</th>
