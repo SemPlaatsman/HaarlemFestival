@@ -9,7 +9,8 @@ class CartController extends Controller {
     private $cartService;
 
     function __construct() {
-        $this->cartService = new CartService();
+        (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
+        $this->cartService = isset($_SESSION['user']) ? new CartService() : new GuestCartService($_SESSION['guest']->cart);
     }
 
     public function index() {
@@ -20,7 +21,9 @@ class CartController extends Controller {
         }
 
         (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
-        if (isset($_SESSION['user'])) {
+        if ($_SERVER["REQUEST_METHOD"] === 'GET' && isset($_GET['cart'])) {
+            var_dump($this->decodeCartLink($model, $_GET['cart']));
+        } else if (isset($_SESSION['user'])) {
             $model = $this->cartService->getCart(unserialize($_SESSION['user'])->getId());
         } else if (isset($_SESSION['guest'])) {
             // uncomment to use test data
@@ -29,11 +32,22 @@ class CartController extends Controller {
         }
 
         $this->addPaymentTotals($model);
+        $this->addCartLink($model);
 
         if (isset($_POST['mollie'])) {
             $this->handleMollie($model);
         }
 
+        // $var = $model['reservations'][0];
+        // var_dump($model['reservations'][0]);
+
+        // $var = str_replace('(', '', $var);
+        // $array = explode(')', $var);
+        // array_pop($array);
+        // var_dump($array);
+
+        // $array = explode(', ', $var);
+        // var_dump($array);
         $this->displayView($model);
     }
 
@@ -85,6 +99,37 @@ class CartController extends Controller {
                 ]
             ]);
             header("Location: " . $payment->getCheckoutUrl(), true, 303);
+        }
+    }
+
+    private function addCartLink(&$model) {
+        $cartLink = "";
+        foreach ($model as $eventItems) if (count($eventItems) > 0 && array_keys($model, $eventItems, true)[0] !== 'paymentTotals') {
+            $cartLink .= array_keys($model, $eventItems, true)[0];
+            foreach ($eventItems as $eventItem) {
+                $cartLink .= "(" . $eventItem . ")";
+            }
+        }
+        $model += ['link' => $cartLink];
+    }
+
+    private function decodeCartLink(&$model, string $link) {
+        $model += ['reservations' => []];
+        $model += ['ticketsDance' => []];
+        $model += ['ticketsHistory' => []];
+        $splitLink = preg_split('/(reservations|ticketsDance|ticketsHistory)/', $link, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+        foreach ($model as $key => $eventItems) {
+            // var_dump($splitLink[array_search($key, $splitLink) + 1]);
+            $linkIndex = array_search($key, $splitLink);
+            if (!is_bool($linkIndex)) {
+                $linkEventItemsString = str_replace('(', '', $splitLink[$linkIndex + 1]);
+                $linkEventItems = explode(')', $linkEventItemsString);
+                array_pop($linkEventItems);
+                foreach ($linkEventItems as $linkEventItem) {
+                    echo($linkEventItem);
+                    var_dump(explode('; ', $linkEventItem));
+                }
+            }
         }
     }
 

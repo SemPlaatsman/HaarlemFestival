@@ -12,9 +12,7 @@ class TicketHistory extends Item {
     private float $price;
     private float $group_price;
 
-
     //maybe implement the tour object into this class
-
 
     public function __construct(int $item_id = null, int $order_id = null, int $event_id = null, string $event_name = null, float $total_price = null, int $VAT = null, string $QR_Code = null, 
     int $id = null, int $tour_id = null, string $language = null, string $datetime = null, string $gathering_location = null, int $employee_id = null, 
@@ -32,6 +30,17 @@ class TicketHistory extends Item {
             $this->price = $price;
             $this->group_price = $group_price;
         }
+    }
+
+    /**
+     * Method to get a string with all variables of the current class
+     */
+    public function __toString() : string {
+        $outputString = "";
+        foreach ($this as $key => $value) {
+            $outputString .= (($value instanceof DateTime) ? date_format($value, 'Y-m-d H:i:s') : $value) . '; ';
+        }
+        return rtrim($outputString, '; ');
     }
 
     /**

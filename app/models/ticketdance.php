@@ -33,6 +33,17 @@ class TicketDance extends Item {
     }
 
     /**
+     * Method to get a string with all variables of the current class
+     */
+    public function __toString() : string {
+        $outputString = "";
+        foreach ($this as $key => $value) {
+            $outputString .= (($value instanceof DateTime) ? date_format($value, 'Y-m-d H:i:s') : $value) . '; ';
+        }
+        return rtrim($outputString, '; ');
+    }
+
+    /**
      * Get the value of id
      */ 
     public function getId()
