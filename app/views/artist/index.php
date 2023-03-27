@@ -37,7 +37,7 @@ include __DIR__ . '/../header.php';
                             <?= $artist->getId() ?>
                         </td>
                         <td class="align-middle">
-                            <?= $artist->name ?>
+                            <?= $artist->getName() ?>
                         </td>
                         <td class="col-1">
                             <div class="d-flex justify-content-center align-items-center">
