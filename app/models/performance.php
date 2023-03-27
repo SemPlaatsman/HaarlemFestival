@@ -3,12 +3,12 @@ require_once __DIR__ . '/artist.php';
 require_once __DIR__ . '/venue.php';
 
 class Performance {
-    protected int $id;
-    protected Artist $artist;
-    protected Venue $venue;
-    protected Datetime $start_date;
-    protected Datetime $end_date;
-    protected float $price;
+    private int $id;
+    private Artist $artist;
+    private Venue $venue;
+    private Datetime $start_date;
+    private Datetime $end_date;
+    private float $price;
 
     public function __construct(int $id, Artist $artist, Venue $venue, string $start_date, string $end_date, float $price) 
     {
