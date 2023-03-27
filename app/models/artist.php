@@ -1,7 +1,7 @@
 <?php
     class Artist {
-       public int $id;
-       public string $name;
+       private int $id;
+       private string $name;
 
        function __construct(int $id, string $name) {
          $this->id = $id;
