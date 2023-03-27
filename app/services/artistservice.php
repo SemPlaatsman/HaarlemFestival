@@ -4,43 +4,52 @@ require_once __DIR__ . '/../repositories/artistrepository.php';
 class ArtistService
 {
 
+    private $repository;
+
+    function __construct()
+    {
+        $this->repository = new ArtistRepository();
+    }
+
     function getArtist(int $id): Artist
     {
-        $repository = new ArtistRepository();
-
-        return $repository->get($id);
+        return $this->repository->get($id);
     }
+
+    /*function getArtists(): array
+    {
+    $repository = new ArtistRepository();
+    if (!$repository->getAll()) {
+    //echo "null";
+    return [];
+    }
+    return $repository->getAll();
+    }*/
 
     function getArtists(): array
     {
-        $repository = new ArtistRepository();
-        if (!$repository->getAll()) {
-            //echo "null";
-            return [];
+        try {
+            $artists = $this->repository->getAll();
+            return $artists ?? [];
+        } catch (Exception $e) {
+            throw new Exception('Failed to retrieve artists: ' . $e->getMessage());
         }
-
-
-        return $repository->getAll();
     }
 
-    function createArtist(Artist $artist): bool
+
+    function createArtist(string $name): bool
     {
-        $repository = new ArtistRepository();
-        return $repository->insert($artist->name);
+        return $this->repository->insert($name);
     }
 
-    function updateArtist(Artist $artist): bool
+    function updateArtist(int $id, string $name): bool
     {
-        $repository = new ArtistRepository();
-        return $repository->update($artist->id, $artist->name);
+        return $this->repository->update($id, $name);
     }
 
     function deleteArtist(int $id): bool
     {
-        $repository = new ArtistRepository();
-        return $repository->delete($id);
+        return $this->repository->delete($id);
     }
-
-
 
 }
