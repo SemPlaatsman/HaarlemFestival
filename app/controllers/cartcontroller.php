@@ -22,7 +22,8 @@ class CartController extends Controller {
 
         (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
         if ($_SERVER["REQUEST_METHOD"] === 'GET' && isset($_GET['cart'])) {
-            var_dump($this->decodeCartLink($model, $_GET['cart']));
+            var_dump($_GET['cart']);
+            $this->decodeCartLink($model, $_GET['cart']);
         } else if (isset($_SESSION['user'])) {
             $model = $this->cartService->getCart(unserialize($_SESSION['user'])->getId());
         } else if (isset($_SESSION['guest'])) {
@@ -105,9 +106,9 @@ class CartController extends Controller {
     private function addCartLink(&$model) {
         $cartLink = "";
         foreach ($model as $eventItems) if (count($eventItems) > 0 && array_keys($model, $eventItems, true)[0] !== 'paymentTotals') {
-            $cartLink .= array_keys($model, $eventItems, true)[0];
+            // $cartLink .= array_keys($model, $eventItems, true)[0];
             foreach ($eventItems as $eventItem) {
-                $cartLink .= "(" . $eventItem . ")";
+                $cartLink .= "(" . $eventItem->getLink() . ")";
             }
         }
         $model += ['link' => $cartLink];
@@ -117,37 +118,61 @@ class CartController extends Controller {
         $model += ['reservations' => []];
         $model += ['ticketsDance' => []];
         $model += ['ticketsHistory' => []];
-        $splitLink = preg_split('/(reservations|ticketsDance|ticketsHistory)/', $link, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
-        foreach ($model as $key => $eventItems) {
-            $linkIndex = array_search($key, $splitLink);
-            if (!is_bool($linkIndex)) {
-                $linkEventItemsString = str_replace('(', '', $splitLink[$linkIndex + 1]);
-                $linkEventItems = explode(')', $linkEventItemsString);
-                array_pop($linkEventItems);
-                foreach ($linkEventItems as $linkEventItem) {
-                    $linkEventItemArray = explode('; ', $linkEventItem);
-                    switch ($key) {
-                        case 'reservations':
-                            require_once __DIR__ . '/../models/reservation.php';
-                            require_once __DIR__ . '/../models/restaurant.php';
-                            $model[$key][] = new Reservation(intval($linkEventItemArray[12]), intval($linkEventItemArray[13]), intval($linkEventItemArray[14]), $linkEventItemArray[15], floatval($linkEventItemArray[16]), 
-                            intval($linkEventItemArray[17]), $linkEventItemArray[18], intval($linkEventItemArray[0]), new Restaurant(intval($linkEventItemArray[1]), $linkEventItemArray[2], intval($linkEventItemArray[3]),
-                            $linkEventItemArray[4], floatval($linkEventItemArray[5]), floatval($linkEventItemArray[6]), floatval($linkEventItemArray[7])), intval($linkEventItemArray[8]), intval($linkEventItemArray[9]), 
-                            intval($linkEventItemArray[10]), intval($linkEventItemArray[11]));
-                            break;
-                        case 'ticketsDance':
-                            require_once __DIR__ . '/../models/ticketdance.php';
-                            $model[$key][] = new TicketDance();
-                            break;
-                        case 'ticketsHistory':
-                            require_once __DIR__ . '/../models/tickethistory.php';
-                            $model[$key][] = new TicketHistory();
-                            break;
-                    }
-                }
+        $linkEventItemsString = str_replace('(', '', $link);
+        $linkEventItems = explode(')', $linkEventItemsString);
+        array_pop($linkEventItems);
+        foreach ($linkEventItems as $linkEventItem) {
+            $linkEventItemArray = explode(';', $linkEventItem);
+            var_dump($linkEventItemArray);
+            switch (end($linkEventItemArray)) {
+                case 1: if (count($linkEventItemArray) == 5) {
+                    
+                    } break;
+                case 2: if (count($linkEventItemArray) == 3) {
+
+                    } break;
+                case 3: if (count($linkEventItemArray) == 3) {
+
+                    } break;
             }
         }
     }
+
+    // private function decodeCartLink(&$model, string $link) {
+    //     $model += ['reservations' => []];
+    //     $model += ['ticketsDance' => []];
+    //     $model += ['ticketsHistory' => []];
+    //     $splitLink = preg_split('/(reservations|ticketsDance|ticketsHistory)/', $link, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+    //     foreach ($model as $key => $eventItems) {
+    //         $linkIndex = array_search($key, $splitLink);
+    //         if (!is_bool($linkIndex)) {
+    //             $linkEventItemsString = str_replace('(', '', $splitLink[$linkIndex + 1]);
+    //             $linkEventItems = explode(')', $linkEventItemsString);
+    //             array_pop($linkEventItems);
+    //             foreach ($linkEventItems as $linkEventItem) {
+    //                 $linkEventItemArray = explode('; ', $linkEventItem);
+    //                 switch ($key) {
+    //                     case 'reservations':
+    //                         require_once __DIR__ . '/../models/reservation.php';
+    //                         require_once __DIR__ . '/../models/restaurant.php';
+    //                         $model[$key][] = new Reservation(intval($linkEventItemArray[12]), intval($linkEventItemArray[13]), intval($linkEventItemArray[14]), $linkEventItemArray[15], floatval($linkEventItemArray[16]), 
+    //                         intval($linkEventItemArray[17]), $linkEventItemArray[18], intval($linkEventItemArray[0]), new Restaurant(intval($linkEventItemArray[1]), $linkEventItemArray[2], intval($linkEventItemArray[3]),
+    //                         $linkEventItemArray[4], floatval($linkEventItemArray[5]), floatval($linkEventItemArray[6]), floatval($linkEventItemArray[7])), intval($linkEventItemArray[8]), intval($linkEventItemArray[9]), 
+    //                         intval($linkEventItemArray[10]), intval($linkEventItemArray[11]));
+    //                         break;
+    //                     case 'ticketsDance':
+    //                         require_once __DIR__ . '/../models/ticketdance.php';
+    //                         $model[$key][] = new TicketDance();
+    //                         break;
+    //                     case 'ticketsHistory':
+    //                         require_once __DIR__ . '/../models/tickethistory.php';
+    //                         $model[$key][] = new TicketHistory();
+    //                         break;
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 
     private function addPaymentTotals(&$model) {
         $paymentTotals = [];

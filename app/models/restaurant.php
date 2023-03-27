@@ -12,7 +12,6 @@ class Restaurant
 
     public function __construct($id, $name, $seats, $location, $adult_price, $kids_price, $reservation_fee)
     {
-
         $this->id = $id;
         $this->name = $name;
         $this->seats = $seats;
@@ -20,17 +19,6 @@ class Restaurant
         $this->adult_price = $adult_price;
         $this->kids_price = $kids_price;
         $this->reservation_fee = $reservation_fee;
-    }
-
-    /**
-     * Method to get a string with all variables of the current class
-     */
-    public function __toString() : string {
-        $outputString = "";
-        foreach ($this as $key => $value) {
-            $outputString .= (($value instanceof DateTime) ? date_format($value, 'Y-m-d H:i:s') : $value) . '; ';
-        }
-        return rtrim($outputString, '; ');
     }
 
     /**

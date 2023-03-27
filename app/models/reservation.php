@@ -24,14 +24,10 @@ class Reservation extends Item {
     }
 
     /**
-     * Method to get a string with all variables of the current class
+     * Method to get a string with all the variables needed to replicate this object
      */
-    public function __toString() : string {
-        $outputString = "";
-        foreach ($this as $key => $value) {
-            $outputString .= (($value instanceof DateTime) ? date_format($value, 'Y-m-d H:i:s') : $value) . '; ';
-        }
-        return rtrim($outputString, '; ');
+    public function getLink() : string {
+        return $this->getRestaurant()->getId() . ";" . $this->getNrOfAdults() . ";" . $this->getNrOfKids() . ";" . $this->getDatetimeFormatted() . ";" . $this->getEventId();
     }
 
     /**
