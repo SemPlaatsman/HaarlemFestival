@@ -8,7 +8,7 @@
         $password = $_POST['password'];
         $confirmpassword = $_POST['confirmpassword'];
         if ($password != $confirmpassword) {
-            $password_error = "<p class='text-center invalid-feedback text-light fs-6 p-1 my-0 mt-3 bg-danger rounded'>Passwords do not match!</p>";
+            $password_error = "<p class='text-center invalid-feedback text-light fs-6 p-1 my-0 mt-3 bg-danger rounded'>Invalid email/password combination!</p>";
         }
     }
 ?>
