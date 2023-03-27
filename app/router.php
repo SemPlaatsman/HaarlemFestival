@@ -185,6 +185,12 @@ class router
                 // $api = new api();
                 // break;
 
+            case 'dance':
+                require_once __DIR__ . '/controllers/dancecontroller.php';
+                $controller = new DanceController();
+                $controller->index();
+                break;
+
             case 'history':
                 require_once __DIR__ . '/controllers/historycontroller.php';
                 $controller = new HistoryController();
