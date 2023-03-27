@@ -2,9 +2,9 @@
 require_once __DIR__ . '/tour.php';
 
 class TicketHistory extends Item {
-    protected int $id;
-    protected Tour $tour;
-    protected int $nr_of_people;
+    private int $id;
+    private Tour $tour;
+    private int $nr_of_people;
 
     public function __construct(int $item_id = null, int $order_id = null, int $event_id = null, string $event_name = null, float $total_price = null, int $VAT = null, string $QR_Code = null, 
     int $id = null, Tour $tour, int $nr_of_people = null) {

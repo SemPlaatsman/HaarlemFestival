@@ -151,7 +151,56 @@ class CartRepository extends Repository
     }
 
     public function getRestaurant(int $restaurantId) : Restaurant {
-        
+        $query = $this->connection->prepare("SELECT `id`, `name`, `seats`, `location`, `adult_price`, `kids_price`, `reservation_fee` FROM `restaurant` WHERE `id` = :id LIMIT 1;");
+        $query->bindParam(":id", $restaurantId, PDO::PARAM_INT);
+        $query->execute();
+        $query->setFetchMode(PDO::FETCH_CLASS, 'Restaurant');
+
+        // if rowMapper function is already loaded, don't load it again
+        if (!function_exists('rowMapperRestaurant')) {
+            // rowMapper based on this stackoverflow post: https://stackoverflow.com/questions/12368035/pdo-fetch-class-pass-results-to-constructor-as-parameters
+            function rowMapperRestaurant(int $id, string $name, int $seats, string $location, float $adult_price, float $kids_price, float $reservation_fee) {
+                return new Restaurant($id, $name, $seats, $location, $adult_price, $kids_price, $reservation_fee);
+            }
+        }
+
+        return $query->fetchAll(PDO::FETCH_FUNC, 'rowMapperRestaurant')[0];
+    }
+
+    public function getPerformance(int $performanceId) : Performance {
+        $query = $this->connection->prepare("SELECT `performance`.`id`, `artist_id`, `artist`.`name`, `venue_id`, `venue`.`name`, `venue`.`location`, " . 
+        "`venue`.`seats`, `start_date`, `end_date`, `price` FROM `performance` JOIN `artist` ON `artist`.`id` = `performance`.`artist_id` " . 
+        "JOIN `venue` ON `venue`.`id`	= `performance`.`venue_id` WHERE `performance`.`id` = :id LIMIT 1;");
+        $query->bindParam(":id", $performanceId, PDO::PARAM_INT);
+        $query->execute();
+        $query->setFetchMode(PDO::FETCH_CLASS, 'Performance');
+
+        // if rowMapper function is already loaded, don't load it again
+        if (!function_exists('rowMapperPerformance')) {
+            // rowMapper based on this stackoverflow post: https://stackoverflow.com/questions/12368035/pdo-fetch-class-pass-results-to-constructor-as-parameters
+            function rowMapperPerformance(int $id, int $artist_id, string $artist_name, int $venue_id, string $venue_name, string $venue_location, int $venue_seats, string $start_date, string $end_date, float $price) {
+                return new Performance($id, new Artist($artist_id, $artist_name), new Venue($venue_id, $venue_name, $venue_location, $venue_seats), $start_date, $end_date, $price);
+            }
+        }
+
+        return $query->fetchAll(PDO::FETCH_FUNC, 'rowMapperPerformance')[0];
+    }
+
+    public function getTour(int $tourId) : Tour {
+        $query = $this->connection->prepare("SELECT `id`, `language`, `datetime`, `gathering_location`, `employee_id`, `employee_name`, `capacity`, `price`, `group_price` FROM `history_tours` WHERE `id` = :id LIMIT 1;");
+        $query->bindParam(":id", $tourId, PDO::PARAM_INT);
+        $query->execute();
+        $query->setFetchMode(PDO::FETCH_CLASS, 'Tour');
+
+        // if rowMapper function is already loaded, don't load it again
+        if (!function_exists('rowMapperTour')) {
+            // rowMapper based on this stackoverflow post: https://stackoverflow.com/questions/12368035/pdo-fetch-class-pass-results-to-constructor-as-parameters
+            function rowMapperTour(int $id, string $language, string $datetime, string $gathering_location, int $employee_id, string $employee_name, int $capacity, float $price, float $group_price) {
+                return new Tour($id, $language, $datetime, $gathering_location, $employee_id, $employee_name, $capacity, $price, $group_price);
+            }
+        }
+
+        return $query->fetchAll(PDO::FETCH_FUNC, 'rowMapperTour')[0];
     }
 }
 ?>
