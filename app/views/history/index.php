@@ -3,7 +3,7 @@ include __DIR__ . '/../header.php';
 ?>
 <!-- temp -->
 <?php
-new imageslidercontroller();
+new imageslidercontroller("A STROLL THROUGH history");
 new breadcrumbcontroller();
 
 ?>
@@ -62,7 +62,7 @@ new breadcrumbcontroller();
         </a>
       </div>
       <div class="col-6 col-md-3 p-5">
-        <a class="text-decoration-none" href="history/GroteMarkt">
+        <a class="text-decoration-none" href="history/ProveniersHof">
 
           <img class="img-fluid rounded-circle mx-auto d-inline-block  locationimage" src="img/png/history/home/locations/proveniershof.png">
           </img>
@@ -90,7 +90,7 @@ new breadcrumbcontroller();
       <div class="col-6 col-md-3 p-5">
         <a class="text-decoration-none" href="history/MolenAdriaan">
 
-          <img class="img-fluid rounded-circle  mx-auto d-inline-block locationimage" src="img/png/history/home/locations/waalsekerk.png">
+          <img class="img-fluid rounded-circle  mx-auto d-inline-block locationimage" src="img/png/history/home/locations/molenDeAdriaan.png">
           </img>
           <h1 class="caption font-druktext locationNames">MOLEN DE ADRIAAN</h1>
         </a>

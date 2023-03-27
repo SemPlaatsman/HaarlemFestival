@@ -181,9 +181,9 @@ class router
                 break;
 
             case 'api':
-            // require __DIR__ . '/apiControllers/apiController.php';
-            // $api = new api();
-            // break;
+                // require __DIR__ . '/apiControllers/apiController.php';
+                // $api = new api();
+                // break;
 
             case 'dance':
                 require_once __DIR__ . '/controllers/dancecontroller.php';
@@ -224,6 +224,25 @@ class router
                 $controller->index();
                 break;
 
+            case 'registration':
+                require_once __DIR__ . '/controllers/registrationcontroller.php';
+                $controller = new RegistrationController();
+                $controller->index();
+
+                break;
+            case 'history/StBravo':
+            case 'history/GroteMarkt':
+            case 'history/DeHallen':
+            case 'history/Proveniershof':
+            case 'history/JopenKerk':
+            case 'history/WaalseKerk':
+            case 'history/MolenAdriaan':
+            case 'history/AmsterdamPoort':
+            case 'history/HofBakenes':
+                require_once __DIR__ . '/controllers/historydetailcontroller.php';
+                $controller = new HistoryDetailController();
+                $controller->index("Stbravo");
+                break;
 
             case '401':
                 http_response_code(401);
@@ -252,5 +271,3 @@ class router
         return $uri;
     }
 }
-
-?>
