@@ -24,6 +24,7 @@ class CartController extends Controller {
         if ($_SERVER["REQUEST_METHOD"] === 'GET' && isset($_GET['cart'])) {
             var_dump($_GET['cart']);
             $this->decodeCartLink($model, $_GET['cart']);
+            var_dump($model['reservations']);
         } else if (isset($_SESSION['user'])) {
             $model = $this->cartService->getCart(unserialize($_SESSION['user'])->getId());
         } else if (isset($_SESSION['guest'])) {
@@ -92,9 +93,9 @@ class CartController extends Controller {
                     "value" => number_format(($model['paymentTotals']['reservations'] ?? 0) + ($model['paymentTotals']['ticketsDance'] ?? 0) + ($model['paymentTotals']['ticketsHistory'] ?? 0), 2)
                 ],
                 "description" => $description,
-                "cancelUrl" => "https://e886-62-131-85-104.eu.ngrok.io/cart",
-                "redirectUrl" => "https://e886-62-131-85-104.eu.ngrok.io/cart",
-                "webhookUrl" => "https://e886-62-131-85-104.eu.ngrok.io/molliewebhook",
+                "cancelUrl" => "https://17a8-145-81-195-218.eu.ngrok.io/cart",
+                "redirectUrl" => "https://17a8-145-81-195-218.eu.ngrok.io/cart",
+                "webhookUrl" => "https://17a8-145-81-195-218.eu.ngrok.io/molliewebhook",
                 "metadata" => [
                     "orderId" => $orderId
                 ]
@@ -122,19 +123,27 @@ class CartController extends Controller {
         $linkEventItems = explode(')', $linkEventItemsString);
         array_pop($linkEventItems);
         foreach ($linkEventItems as $linkEventItem) {
-            $linkEventItemArray = explode(';', $linkEventItem);
-            var_dump($linkEventItemArray);
-            switch (end($linkEventItemArray)) {
-                case 1: if (count($linkEventItemArray) == 5) {
-                    
-                    } break;
-                case 2: if (count($linkEventItemArray) == 3) {
-
-                    } break;
-                case 3: if (count($linkEventItemArray) == 3) {
-
-                    } break;
+            try {
+                $linkEventItemArray = explode(';', $linkEventItem);
+                var_dump($linkEventItemArray);
+                switch (end($linkEventItemArray)) {
+                    case 1: if (count($linkEventItemArray) == 5) {
+                        $restaurant = new Reservation(null, null, $linkEventItemArray[4], null, null, 9, "QR_Code", null, $this->cartService->getRestaurant($linkEventItemArray[0]), null, intval($linkEventItemArray[1]), intval($linkEventItemArray[2]), $linkEventItemArray[3]);
+                        $restaurant->setTotalPrice();
+                        $restaurant->setFinalCheck();
+                        $model['reservations'][] = $restaurant;
+                        } break;
+                    case 2: if (count($linkEventItemArray) == 3) {
+    
+                        } break;
+                    case 3: if (count($linkEventItemArray) == 3) {
+    
+                        } break;
+                }
+            } catch (Exception $e) {
+                continue;
             }
+            
         }
     }
 

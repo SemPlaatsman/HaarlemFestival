@@ -11,8 +11,6 @@ class UserService
 
     public function getUser()
     {
-        $repository = new UserRepository();
-
         return $this->userRepository->getUser();
     }
 

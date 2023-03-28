@@ -9,15 +9,13 @@ class Item {
     protected string $QR_Code;
 
     public function __construct(int $item_id = null, int $order_id = null, int $event_id = null, string $event_name = null, float $total_price = null, int $VAT = null, string $QR_Code = null) {
-        if($item_id!=null){
-            $this->item_id = $item_id;
-            $this->order_id = $order_id;
-            $this->event_id = $event_id;
-            $this->event_name = $event_name;
-            $this->total_price = $total_price;
-            $this->VAT = $VAT;
-            $this->QR_Code = $QR_Code;
-        }
+        $this->item_id = $item_id ?? 0;
+        $this->order_id = $order_id ?? 0;
+        $this->event_id = $event_id ?? 0;
+        $this->event_name = $event_name ?? "";
+        $this->total_price = $total_price ?? 0;
+        $this->VAT = $VAT ?? 0;
+        $this->QR_Code = $QR_Code ?? "";
     }
 
     /**
