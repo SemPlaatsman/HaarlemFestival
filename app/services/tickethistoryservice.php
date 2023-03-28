@@ -6,12 +6,12 @@ class TicketHistoryService
     private $ticketHistoryRepository;
 
     function __construct() {
-        $this->ticketHistoryRepository = new ReservationRepository();
+        $this->ticketHistoryRepository = new TicketHistoryRepository();
     }
 
-    public function insertTicketHistory(TicketHistory $ticketHistory):int 
+    public function insertTicketHistory(TicketHistory $ticketHistory) 
     {
-        return $this->ticketHistoryRepository->insertTicketHistory($reservation);
+        return $this->ticketHistoryRepository->insertTicketHistory($ticketHistory);
     }
 
     public function deleteTicketHistory(int $id) : bool
@@ -21,7 +21,7 @@ class TicketHistoryService
 
     public function updateTicketHistory(TicketHistory $ticketHistory):bool 
     {
-        return $this->ticketHistoryRepository->updateTicketHistory($id);
+        return $this->ticketHistoryRepository->updateTicketHistory($ticketHistory);
     }
 
     public function getTicketHistory(int $id) : Item
@@ -31,7 +31,7 @@ class TicketHistoryService
 
     function getAllTicketHistory() : array 
     {
-        return $this->ticketHistoryRepository->getAllReservations();
+        return $this->ticketHistoryRepository->getAllTicketHistory();
     }
 }
 ?>
