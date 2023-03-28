@@ -21,7 +21,7 @@ class ReservationService
 
     public function updateReservation(Reservation $reservation):bool 
     {
-        return $this->reservationRepository->updateReservation($id);
+        return $this->reservationRepository->updateReservation($reservation);
     }
 
     public function getReservation(int $id) : Item

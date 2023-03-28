@@ -3,13 +3,13 @@ require_once __DIR__ . '/repository.php';
 require_once __DIR__ . '/../models/tickethistory.php';
 class TicketHistoryRepository extends ItemRepository {
 
-    public function insertTicketHistory(TicketHistory $ticket_history):int {
+    public function insertTicketHistory(TicketHistory $ticket_history) {
         try {
             $itemid = $this->insertItem($ticket_history);
             $stmnt = $this -> connection -> prepare("INSERT INTO `ticket_history`(`item_id`, `tour_id`, `nr_of_people`) VALUES (:item_id, :performance_id, :nr_of_people)");
-            $tour_id = $ticket_history->getPerformanceId();
+            $tour_id = $ticket_history->getTour()->getId();
             $nr_of_people = $ticket_history->getNrOfPeople();
-            $stmnt -> bindParam(':tour_id', $performance_id, PDO::PARAM_STR);
+            $stmnt -> bindParam(':tour_id', $tour_id, PDO::PARAM_STR);
             $stmnt -> bindParam(':nr_of_people', $nr_of_people, PDO::PARAM_STR);
             $stmnt -> bindParam(':item_id', $itemid, PDO::PARAM_STR);
             $stmnt -> execute();
@@ -41,7 +41,7 @@ class TicketHistoryRepository extends ItemRepository {
             $stmnt = $this -> connection -> prepare("UPDATE ticket_history SET id=:history_id, item_id=:item_id, tour_id=:tour_id, nr_of_people=:nr_of_people WHERE id=:history_id;");
             $id = $ticket_history->getId();
             $item_id = $ticket_history->getItemId();
-            $tour_id = $ticket_history->getTourID();
+            $tour_id = $ticket_history->getTour()->getId();
             $nr_of_people = $ticket_history->getNrOfPeople();
             $stmnt -> bindParam(':history_id', $id, PDO::PARAM_STR);
             $stmnt -> bindParam(':item_id', $item_id, PDO::PARAM_STR);
@@ -78,7 +78,7 @@ class TicketHistoryRepository extends ItemRepository {
                 }
             }
 
-            $ticketsHistory = $stmnt->fetchAll(PDO::FETCH_FUNC, 'rowMapperTicketHistory');
+            $ticketsHistory = $stmnt->fetch(PDO::FETCH_FUNC, 'rowMapperTicketHistory');
             return $ticketsHistory;
         } catch (PDOException $e) {
             return null;
