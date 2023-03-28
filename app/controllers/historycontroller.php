@@ -44,10 +44,11 @@ class HistoryController extends Controller {
         header("Content-type: application/json; charset=utf-8");
         $tours = $this->historyService->getToursByLang($language);
         $data = array();
-        
         foreach ($tours as $tour) {
+
            array_push($data,$tour->toObject());
         }
+
         echo json_encode($data);
 
     }
