@@ -24,6 +24,13 @@ class Reservation extends Item {
     }
 
     /**
+     * Method to get a string with all the variables needed to replicate this object
+     */
+    public function getLink() : string {
+        return $this->getRestaurant()->getId() . ";" . $this->getNrOfAdults() . ";" . $this->getNrOfKids() . ";" . $this->getDatetimeFormatted() . ";" . $this->getEventId();
+    }
+
+    /**
      * Get the value of id
      */ 
     public function getId()
@@ -149,9 +156,5 @@ class Reservation extends Item {
 
         return $this;
     }
-
-    
-
-    
 }
 ?>

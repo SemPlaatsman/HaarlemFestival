@@ -12,7 +12,6 @@ class Restaurant
 
     public function __construct($id, $name, $seats, $location, $adult_price, $kids_price, $reservation_fee)
     {
-
         $this->id = $id;
         $this->name = $name;
         $this->seats = $seats;
@@ -24,9 +23,7 @@ class Restaurant
 
     /**
      * Get the value of id
-
      */ 
-
     public function getId() : int
     {
         return $this->id;

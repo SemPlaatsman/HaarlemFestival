@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/css/<?= strtolower($directory); ?>.css">
     <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
   </head>
-  <body class="d-flex flex-column bg-tetiare-a">
+  <body class="d-flex flex-column bg-tetiare-a h-100">
     <nav class="navbar navbar-expand-xxl sticky-top bg-primary-a p-0">
       <div class="container-fluid">
         <a class="navbar-brand ms-2" href="/">
