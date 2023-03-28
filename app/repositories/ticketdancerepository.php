@@ -57,25 +57,64 @@ class TicketDanceRepository extends ItemRepository {
 
     public function getTicketDance(int $id) : Item {
         try {
-            $stmnt = $this -> connection -> prepare("SELECT ticket_dance.item_id AS item_id, order_id, event_id, total_price, VAT, QR_Code, ticket_dance.id AS id, performance.id AS performance_id, artist.id AS artist_id, artist.name AS artist_name, venue.id AS venue_id, venue.name AS venue_name, start_date, end_date, nr_of_people " .
-            "FROM item JOIN ticket_dance ON item.id = ticket_dance.item_id JOIN performance ON ticket_dance.performance_id = performance.id JOIN artist ON artist.id =performance.artist_id JOIN venue ON venue.id = performance.venue_id WHERE ticket_dance.id = :id");
-            $stmnt -> bindParam(':id', $id, PDO::PARAM_INT);
-            $stmnt -> setFetchMode(PDO::FETCH_CLASS, 'TicketDance');
-            $stmnt -> execute();
-            $item = $stmnt -> fetch();
-        return $item;
+            $stmnt = $this->connection->prepare("SELECT ticket_dance.item_id, item.order_id, item.event_id, " .
+            "(SELECT event.name FROM `event` WHERE event.id = item.event_id) as 'event_name', item.total_price, " .
+            "item.VAT, item.QR_Code, ticket_dance.id, ticket_dance.performance_id, performance.artist_id, " .
+            "(SELECT name FROM `artist` WHERE artist.id = performance.artist_id) as 'artist_name', performance.venue_id, " .
+            "(SELECT venue.name FROM `venue` WHERE venue.id = performance.venue_id) as 'venue_name', " . 
+            "(SELECT venue.location FROM `venue` WHERE venue.id = performance.venue_id) as 'venue_location', " .
+            "performance.start_date, performance.end_date, performance.price as 'ticket_price', ticket_dance.nr_of_people " .
+            "FROM `item` JOIN ticket_dance ON ticket_dance.item_id = item.id JOIN `performance` ON performance.id = ticket_dance.performance_id " .
+            "WHERE ticket_dance.id = :id;");
+            $stmnt->bindParam(":id", $id, PDO::PARAM_INT);
+            $stmnt->execute();
+            $stmnt->setFetchMode(PDO::FETCH_CLASS, 'TicketDance');
+
+            // if rowMapper function is already loaded, don't load it again
+            if (!function_exists('rowMapperTicketDance')) {
+                // rowMapper based on this stackoverflow post: https://stackoverflow.com/questions/12368035/pdo-fetch-class-pass-results-to-constructor-as-parameters
+                function rowMapperTicketDance(int $item_id, int $order_id, int $event_id, string $event_name, float $total_price, int $VAT, string $QR_Code,
+                    int $id, int $performance_id, int $artist_id, string $artist_name, int $venue_id, string $venue_name, string $venue_location, 
+                    string $start_date, string $end_date, $ticket_price, int $nr_of_people) {
+                    return new TicketDance($item_id, $order_id, $event_id, $event_name, $total_price, $VAT, $QR_Code, 
+                        $id, $performance_id, $artist_id, $artist_name, $venue_id, $venue_name, $venue_location, $start_date, 
+                        $end_date, $ticket_price, $nr_of_people);
+                }
+            }
+
+            $ticketsDance = $stmnt->fetchAll(PDO::FETCH_FUNC, 'rowMapperTicketDance');
+            return $ticketsDance;
         } catch (PDOException $e) {
             return null;
         }
     }
     public function getAllTicketsDance():array  {
         try {
-            $stmnt = $this -> connection -> prepare("SELECT ticket_dance.item_id AS item_id, order_id, event_id, total_price, VAT, QR_Code, ticket_dance.id AS id, performance.id AS performance_id, artist.id AS artist_id, artist.name AS artist_name, venue.id AS venue_id, venue.name AS venue_name, start_date, end_date, nr_of_people " .
-            "FROM item JOIN ticket_dance ON item.id = ticket_dance.item_id JOIN performance ON ticket_dance.performance_id = performance.id JOIN artist ON artist.id =performance.artist_id JOIN venue ON venue.id = performance.venue_id");
-            $stmnt -> setFetchMode(PDO::FETCH_CLASS, 'TicketDance');
-            $stmnt -> execute();
-            $items = $stmnt -> fetchAll();
-            return $items;
+            $stmnt = $this->connection->prepare("SELECT ticket_dance.item_id, item.order_id, item.event_id, " .
+            "(SELECT event.name FROM `event` WHERE event.id = item.event_id) as 'event_name', item.total_price, " .
+            "item.VAT, item.QR_Code, ticket_dance.id, ticket_dance.performance_id, performance.artist_id, " .
+            "(SELECT name FROM `artist` WHERE artist.id = performance.artist_id) as 'artist_name', performance.venue_id, " .
+            "(SELECT venue.name FROM `venue` WHERE venue.id = performance.venue_id) as 'venue_name', " . 
+            "(SELECT venue.location FROM `venue` WHERE venue.id = performance.venue_id) as 'venue_location', " .
+            "performance.start_date, performance.end_date, performance.price as 'ticket_price', ticket_dance.nr_of_people " .
+            "FROM `item` JOIN ticket_dance ON ticket_dance.item_id = item.id JOIN `performance` ON performance.id = ticket_dance.performance_id;");
+            $stmnt->bindParam(":id", $id, PDO::PARAM_INT);
+            $stmnt->execute();
+            $stmnt->setFetchMode(PDO::FETCH_CLASS, 'TicketDance');
+
+            // if rowMapper function is already loaded, don't load it again
+            if (!function_exists('rowMapperTicketDance')) {
+                // rowMapper based on this stackoverflow post: https://stackoverflow.com/questions/12368035/pdo-fetch-class-pass-results-to-constructor-as-parameters
+                function rowMapperTicketDance(int $item_id, int $order_id, int $event_id, string $event_name, float $total_price, int $VAT, string $QR_Code,
+                    int $id, int $performance_id, int $artist_id, string $artist_name, int $venue_id, string $venue_name, string $venue_location, 
+                    string $start_date, string $end_date, $ticket_price, int $nr_of_people) {
+                    return new TicketDance($item_id, $order_id, $event_id, $event_name, $total_price, $VAT, $QR_Code, 
+                        $id, $performance_id, $artist_id, $artist_name, $venue_id, $venue_name, $venue_location, $start_date, 
+                        $end_date, $ticket_price, $nr_of_people);
+                }
+            }
+            $ticketsDance = $query->fetchAll(PDO::FETCH_FUNC, 'rowMapperTicketDance');
+            return $ticketsDance;
         } catch (PDOException $e) {
             return null;
         }
