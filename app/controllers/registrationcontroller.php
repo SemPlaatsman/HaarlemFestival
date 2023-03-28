@@ -8,11 +8,13 @@ class RegistrationController extends Controller {
     private $userService;
     private $emailGenerator;
     private $loginService;
+    public $passwordError;
 
     function __construct() {
         $this->userService = new UserService();
         $this->loginService = new LoginService();
         $this->emailGenerator = new EmailGenerator();
+        $this->passwordError = "";
     }
 
     public function index() {
@@ -83,11 +85,12 @@ class RegistrationController extends Controller {
 
     function validatePassword($password, $confirmpassword) {
         // Check if the password meets your validation criteria
-        return false;
         if (strlen($password) < 8) {
-            return false;
+            $this->passwordError = "<p class='text-center invalid-feedback text-light fs-6 p-1 my-0 mt-3 bg-danger rounded'>Password must be at least 8 characters!</p>";
         }
-        return true;
+        else if ($password != $confirmpassword) {
+            $this->passwordError = "<p class='text-center invalid-feedback text-light fs-6 p-1 my-0 mt-3 bg-danger rounded'>Passwords do not match!</p>";
+        }
     }
 }
 ?>
