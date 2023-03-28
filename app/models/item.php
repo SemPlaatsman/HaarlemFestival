@@ -12,10 +12,10 @@ class Item {
         $this->item_id = $item_id ?? 0;
         $this->order_id = $order_id ?? 0;
         $this->event_id = $event_id ?? 0;
-        $this->event_name = $event_name;
+        $this->event_name = $event_name ?? "";
         $this->total_price = $total_price ?? 0;
         $this->VAT = $VAT ?? 0;
-        $this->QR_Code = $QR_Code;
+        $this->QR_Code = $QR_Code ?? "";
     }
 
     /**

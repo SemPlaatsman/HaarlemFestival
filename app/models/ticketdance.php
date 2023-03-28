@@ -24,6 +24,21 @@ class TicketDance extends Item {
     }
 
     /**
+     * Set the value of total_price
+     *
+     * @return  self
+     */ 
+    public function setTotalPrice($total_price = null) : self
+    {
+        if (isset($total_price)) {
+            $this->total_price = $total_price;
+        } else {
+            $this->total_price = ($this->nr_of_people * $this->performance->getPrice());
+        }
+        return $this;
+    }
+
+    /**
      * Get the value of id
      */ 
     public function getId()
