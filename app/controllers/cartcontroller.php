@@ -126,7 +126,7 @@ class CartController extends Controller {
             var_dump($linkEventItemArray);
             switch (end($linkEventItemArray)) {
                 case 1: if (count($linkEventItemArray) == 5) {
-                    
+                    $model['reservations']
                     } break;
                 case 2: if (count($linkEventItemArray) == 3) {
 
