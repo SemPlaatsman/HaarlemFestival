@@ -28,11 +28,11 @@
                 <a href="/user" class="btn bg-primary-b text-tetiare-a btn-lg btn-block">USERS</a>
                 <a href="/openinghour" class="btn bg-primary-b text-tetiare-a btn-lg btn-block">OPENING HOURS</a>
                 <a href="/restaurant" class="btn bg-primary-b text-tetiare-a btn-lg btn-block">RESTAURANTS</A>
+
             </div>
         </div>
     </div>
 </div>
-
 
 <?php
 include __DIR__ . '/../footer.php';

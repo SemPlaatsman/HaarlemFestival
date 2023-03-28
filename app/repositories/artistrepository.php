@@ -28,21 +28,51 @@ class ArtistRepository extends Repository
         return $stmnt->execute();
     }
 
-    public function get(int $id): Artist
+    /*public function get(int $id): Artist
     {
-        $stmnt = $this->connection->prepare("SELECT `id` `name` FROM artist WHERE id = :id");
-        $stmnt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmnt->setFetchMode(PDO::FETCH_CLASS, 'Artist');
-        $stmnt->execute();
-        $artist = $stmnt->fetch();
-        return $artist;
+    $stmnt = $this->connection->prepare("SELECT `id`, `name` FROM artist WHERE id = :id");
+    $stmnt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmnt->setFetchMode(PDO::FETCH_CLASS, 'Artist');
+    $stmnt->execute();
+    $artist = $stmnt->fetch();
+    return $artist;
     }
     public function getAll(): array
     {
+    $stmnt = $this->connection->prepare("SELECT `id` ,`name` FROM artist;");
+    $stmnt->setFetchMode(PDO::FETCH_CLASS, 'Artist');
+    $stmnt->execute();
+    $artist = $stmnt->fetchAll();
+    return $artist;
+    }*/
+
+
+
+    public function get(int $id): Artist
+    {
+        $stmnt = $this->connection->prepare("SELECT `id`, `name` FROM artist WHERE id = :id");
+        $stmnt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmnt->setFetchMode(PDO::FETCH_ASSOC);
+        $stmnt->execute();
+        $artist = $stmnt->fetch();
+        $artistObject = new Artist($artist["id"], $artist["name"]);
+        if ($artist === false) {
+            throw new Exception('Artist not found');
+        }
+        return $artistObject;
+    }
+
+    public function getAll(): array
+    {
+        $artists = array();
         $stmnt = $this->connection->prepare("SELECT `id` ,`name` FROM artist;");
-        $stmnt->setFetchMode(PDO::FETCH_CLASS, 'Artist');
+        $stmnt->setFetchMode(PDO::FETCH_ASSOC);
         $stmnt->execute();
         $artist = $stmnt->fetchAll();
-        return $artist;
+        foreach ($artist as $row) {
+            $artistObject = new Artist($row['id'], $row['name']);
+            array_push($artists, $artistObject);
+        }
+        return $artists;
     }
 }

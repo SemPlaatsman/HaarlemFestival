@@ -23,8 +23,8 @@ class Restaurant
 
     /**
      * Get the value of id
-     */
-    public function getId(): int
+     */ 
+    public function getId() : int
     {
         return $this->id;
     }
@@ -33,46 +33,54 @@ class Restaurant
      * Get the value of name
      */
     public function getName(): string
+
     {
         return $this->name;
     }
 
     /**
      * Get the value of seats
-     */
-    public function getSeats(): int
+     */ 
+
+    public function getSeats() : int
     {
         return $this->seats;
     }
 
     /**
      * Get the value of location
-     */
-    public function getLocation(): string
+     */ 
+
+    public function getLocation() : string
     {
         return $this->location;
     }
 
     /**
      * Get the value of adult_price
-     */
-    public function getAdultPrice(): int
+     */ 
+
+    public function getAdultPrice() : int
     {
         return $this->adult_price;
     }
 
-    public function getAdultPriceFormatted(): string
+
+
+    public function getAdultPriceFormatted() : string
     {
         return "€ " . number_format($this->adult_price, 2);
     }
 
     /**
      * Get the value of kids_price
-     */
-    public function getKidsPrice(): int
+     */ 
+
+    public function getKidsPrice() : int
     {
         return $this->kids_price;
     }
+
 
     public function getKidsPriceFormatted(): string
     {
@@ -81,13 +89,16 @@ class Restaurant
 
     /**
      * Get the value of reservation_fee
-     */
-    public function getReservationFee(): int
+     */ 
+
+    public function getReservationFee() : int
     {
         return $this->reservation_fee;
     }
 
-    public function getReservationFeeFormatted(): string
+
+
+    public function getReservationFeeFormatted() : string
     {
         return "€ " . number_format($this->reservation_fee, 2);
     }

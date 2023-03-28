@@ -2,8 +2,13 @@
 require_once __DIR__ . '/repository.php';
 require_once __DIR__ . '/../models/item.php';
 require_once __DIR__ . '/../models/reservation.php';
+require_once __DIR__ . '/../models/restaurant.php';
 require_once __DIR__ . '/../models/ticketdance.php';
+require_once __DIR__ . '/../models/performance.php';
+require_once __DIR__ . '/../models/artist.php';
+require_once __DIR__ . '/../models/venue.php';
 require_once __DIR__ . '/../models/tickethistory.php';
+require_once __DIR__ . '/../models/tour.php';
 
 class CartRepository extends Repository
 {
@@ -21,8 +26,8 @@ class CartRepository extends Repository
         $query = $this->connection->prepare("SELECT ticket_history.item_id, item.order_id, item.event_id, " .
             "(SELECT event.name FROM `event` WHERE event.id = item.event_id) as 'event_name', item.total_price, " .
             "item.VAT, item.QR_Code, ticket_history.id, ticket_history.tour_id, history_tours.language, history_tours.datetime, " . 
-            "history_tours.gathering_location, history_tours.employee_id, history_tours.employee_name, " . 
-            "ticket_history.nr_of_people, history_tours.price, history_tours.group_price " .
+            "history_tours.gathering_location, history_tours.employee_id, history_tours.employee_name, history_tours.capacity, " . 
+            "history_tours.price, history_tours.group_price, ticket_history.nr_of_people " .
             "FROM `item` JOIN `ticket_history` ON ticket_history.item_id = item.id JOIN `history_tours` ON history_tours.id = ticket_history.tour_id " .
             "WHERE order_id = (SELECT order_id FROM `orders` WHERE user_id = :user_id AND time_payed IS NULL AND payment_status = 0);");
         $query->bindParam(":user_id", $userId, PDO::PARAM_INT);
@@ -34,9 +39,9 @@ class CartRepository extends Repository
             // rowMapper based on this stackoverflow post: https://stackoverflow.com/questions/12368035/pdo-fetch-class-pass-results-to-constructor-as-parameters
             function rowMapperTicketHistory(int $item_id, int $order_id, int $event_id, string $event_name, float $total_price, int $VAT, string $QR_Code,
                 int $id, int $tour_id, string $language, string $datetime, string $gathering_location, int $employee_id, 
-                string $employee_name, int $nr_of_people, float $price, float $group_price) {
-                return new TicketHistory($item_id, $order_id, $event_id, $event_name, $total_price, $VAT, $QR_Code, $id, $tour_id, 
-                    $language, $datetime, $gathering_location, $employee_id, $employee_name, $nr_of_people, $price, $group_price);
+                string $employee_name, int $capacity, float $price, float $group_price, int $nr_of_people) {
+                return new TicketHistory($item_id, $order_id, $event_id, $event_name, $total_price, $VAT, $QR_Code, $id, new Tour($tour_id, 
+                    $language, $datetime, $gathering_location, $employee_id, $employee_name, $capacity, $price, $group_price), $nr_of_people);
             }
         }
 
@@ -51,7 +56,8 @@ class CartRepository extends Repository
             "item.VAT, item.QR_Code, ticket_dance.id, ticket_dance.performance_id, performance.artist_id, " .
             "(SELECT name FROM `artist` WHERE artist.id = performance.artist_id) as 'artist_name', performance.venue_id, " .
             "(SELECT venue.name FROM `venue` WHERE venue.id = performance.venue_id) as 'venue_name', " . 
-            "(SELECT venue.location FROM `venue` WHERE venue.id = performance.venue_id) as 'venue_location', " .
+            "(SELECT venue.location FROM `venue` WHERE venue.id = performance.venue_id) as 'venue_location', " . 
+            "(SELECT venue.seats FROM `venue` WHERE venue.id = performance.venue_id) as 'venue_seats', " .
             "performance.start_date, performance.end_date, performance.price as 'ticket_price', ticket_dance.nr_of_people " .
             "FROM `item` JOIN ticket_dance ON ticket_dance.item_id = item.id JOIN `performance` ON performance.id = ticket_dance.performance_id " .
             "WHERE order_id = (SELECT order_id FROM `orders` WHERE user_id = :user_id AND time_payed IS NULL AND payment_status = 0);");
@@ -63,11 +69,11 @@ class CartRepository extends Repository
         if (!function_exists('rowMapperTicketDance')) {
             // rowMapper based on this stackoverflow post: https://stackoverflow.com/questions/12368035/pdo-fetch-class-pass-results-to-constructor-as-parameters
             function rowMapperTicketDance(int $item_id, int $order_id, int $event_id, string $event_name, float $total_price, int $VAT, string $QR_Code,
-                int $id, int $performance_id, int $artist_id, string $artist_name, int $venue_id, string $venue_name, string $venue_location, 
+                int $id, int $performance_id, int $artist_id, string $artist_name, int $venue_id, string $venue_name, string $venue_location, $venue_seats, 
                 string $start_date, string $end_date, $ticket_price, int $nr_of_people) {
                 return new TicketDance($item_id, $order_id, $event_id, $event_name, $total_price, $VAT, $QR_Code, 
-                    $id, $performance_id, $artist_id, $artist_name, $venue_id, $venue_name, $venue_location, $start_date, 
-                    $end_date, $ticket_price, $nr_of_people);
+                    $id, new Performance($performance_id, new Artist($artist_id, $artist_name), new Venue($venue_id, $venue_name, $venue_location, $venue_seats), $start_date, 
+                    $end_date, $ticket_price), $nr_of_people);
             }
         }
 
@@ -142,6 +148,59 @@ class CartRepository extends Repository
         $query->bindParam(":id", $itemId, PDO::PARAM_INT);
         $query->execute();
         return $query->rowCount() > 0;
+    }
+
+    public function getRestaurant(int $restaurantId) : Restaurant {
+        $query = $this->connection->prepare("SELECT `id`, `name`, `seats`, `location`, `adult_price`, `kids_price`, `reservation_fee` FROM `restaurant` WHERE `id` = :id LIMIT 1;");
+        $query->bindParam(":id", $restaurantId, PDO::PARAM_INT);
+        $query->execute();
+        $query->setFetchMode(PDO::FETCH_CLASS, 'Restaurant');
+
+        // if rowMapper function is already loaded, don't load it again
+        if (!function_exists('rowMapperRestaurant')) {
+            // rowMapper based on this stackoverflow post: https://stackoverflow.com/questions/12368035/pdo-fetch-class-pass-results-to-constructor-as-parameters
+            function rowMapperRestaurant(int $id, string $name, int $seats, string $location, float $adult_price, float $kids_price, float $reservation_fee) {
+                return new Restaurant($id, $name, $seats, $location, $adult_price, $kids_price, $reservation_fee);
+            }
+        }
+
+        return $query->fetchAll(PDO::FETCH_FUNC, 'rowMapperRestaurant')[0];
+    }
+
+    public function getPerformance(int $performanceId) : Performance {
+        $query = $this->connection->prepare("SELECT `performance`.`id`, `artist_id`, `artist`.`name`, `venue_id`, `venue`.`name`, `venue`.`location`, " . 
+        "`venue`.`seats`, `start_date`, `end_date`, `price` FROM `performance` JOIN `artist` ON `artist`.`id` = `performance`.`artist_id` " . 
+        "JOIN `venue` ON `venue`.`id`	= `performance`.`venue_id` WHERE `performance`.`id` = :id LIMIT 1;");
+        $query->bindParam(":id", $performanceId, PDO::PARAM_INT);
+        $query->execute();
+        $query->setFetchMode(PDO::FETCH_CLASS, 'Performance');
+
+        // if rowMapper function is already loaded, don't load it again
+        if (!function_exists('rowMapperPerformance')) {
+            // rowMapper based on this stackoverflow post: https://stackoverflow.com/questions/12368035/pdo-fetch-class-pass-results-to-constructor-as-parameters
+            function rowMapperPerformance(int $id, int $artist_id, string $artist_name, int $venue_id, string $venue_name, string $venue_location, int $venue_seats, string $start_date, string $end_date, float $price) {
+                return new Performance($id, new Artist($artist_id, $artist_name), new Venue($venue_id, $venue_name, $venue_location, $venue_seats), $start_date, $end_date, $price);
+            }
+        }
+
+        return $query->fetchAll(PDO::FETCH_FUNC, 'rowMapperPerformance')[0];
+    }
+
+    public function getTour(int $tourId) : Tour {
+        $query = $this->connection->prepare("SELECT `id`, `language`, `datetime`, `gathering_location`, `employee_id`, `employee_name`, `capacity`, `price`, `group_price` FROM `history_tours` WHERE `id` = :id LIMIT 1;");
+        $query->bindParam(":id", $tourId, PDO::PARAM_INT);
+        $query->execute();
+        $query->setFetchMode(PDO::FETCH_CLASS, 'Tour');
+
+        // if rowMapper function is already loaded, don't load it again
+        if (!function_exists('rowMapperTour')) {
+            // rowMapper based on this stackoverflow post: https://stackoverflow.com/questions/12368035/pdo-fetch-class-pass-results-to-constructor-as-parameters
+            function rowMapperTour(int $id, string $language, string $datetime, string $gathering_location, int $employee_id, string $employee_name, int $capacity, float $price, float $group_price) {
+                return new Tour($id, $language, $datetime, $gathering_location, $employee_id, $employee_name, $capacity, $price, $group_price);
+            }
+        }
+
+        return $query->fetchAll(PDO::FETCH_FUNC, 'rowMapperTour')[0];
     }
 }
 ?>

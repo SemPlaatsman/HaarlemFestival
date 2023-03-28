@@ -34,15 +34,15 @@ include __DIR__ . '/../header.php';
                 <?php foreach ($model['artist'] as $artist): ?>
                     <tr>
                         <td class="align-middle">
-                            <?= $artist->id ?>
+                            <?= $artist->getId() ?>
                         </td>
                         <td class="align-middle">
-                            <?= $artist->name ?>
+                            <?= $artist->getName() ?>
                         </td>
                         <td class="col-1">
                             <div class="d-flex justify-content-center align-items-center">
                                 <form method="post" action="/artist">
-                                    <input type="hidden" name="id" value="<?= $artist->id ?>">
+                                    <input type="hidden" name="id" value="<?= $artist->getId() ?>">
                                     <input type="hidden" name="_artistMethod" value="DELETE">
                                     <button type="submit"
                                         class="btn btn-danger mr-1 bg-primary-a text-white border-0 text-center text-decoration-none d-inline-block fs-5 m-2"><i
@@ -54,7 +54,7 @@ include __DIR__ . '/../header.php';
                             <div class="d-flex justify-content-center align-items-center">
                                 <button type="button" data-bs-toggle="modal" data-bs-target="#editModalArtist"
                                     class="btn btn-primary edit-button-artist bg-primary-a text-white border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
-                                    data-id="<?= $artist->id ?>"><i class="fas fa-edit"></i></button>
+                                    data-id="<?= $artist->getId() ?>"><i class="fas fa-edit"></i></button>
                             </div>
                         </td>
                     </tr>

@@ -25,43 +25,45 @@
         <article class="modal fade" id="modalYummy-<?= $reservation->getId(); ?>" tabindex="-1" aria-labelledby="modelYummyLabel-<?= $reservation->getId(); ?>" aria-hidden="true">
           <section class="modal-dialog modal-xl">
             <article class="modal-content bg-primary-b text-tetiare-a">
-              <form method="POST" id="editYummyForm-<?= $reservation->getId(); ?>"></form>
-              <form method="POST" id="deleteYummyForm-<?= $reservation->getId(); ?>" onsubmit='return confirm("Are you sure you wish to remove a reservation for <?= $reservation->getRestaurant()->getName(); ?> at <?= $reservation->getDatetimeFormatted(); ?>?");'></form>
-              <section class="modal-header border-tetiare-a">
-                <h5 class="modal-title" id="modelYummyLabel-<?= $reservation->getId(); ?>">RESERVATION DETAILS</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-              </section>
-              <section class="modal-body">
-                <input required type="hidden" name="editYummyId" form="editYummyForm-<?= $reservation->getId(); ?>" value="<?= $reservation->getId(); ?>">
-                <input required type="hidden" name="deleteItemId" form="deleteYummyForm-<?= $reservation->getId(); ?>" value="<?= $reservation->getItemId(); ?>">
-                <dl class="row mb-0">
-                  <dt class="text-sm-start text-md-end col-md-2">Restaurant:</dt>
-                  <dd class="text-sm-start text-md-start col-md-10"><?= $reservation->getRestaurant()->getName(); ?></dd>
-                  <dt class="text-sm-start text-md-end col-md-2">Location:</dt>
-                  <dd class="text-sm-start text-md-start col-md-10"><?= $reservation->getRestaurant()->getLocation(); ?></dd>
-                  <hr class="form-hr">
-                  <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" title="<?= $reservation->getRestaurant()->getAdultPriceFormatted(); ?> p.p.">Adults:</u></dt>
-                  <dd class="text-sm-start text-md-start col-md-4"><input required class="border border-2 border-tetiare-a" type="number" min="0" max="8" name="editYummyNrOfAdults" form="editYummyForm-<?= $reservation->getId(); ?>" value="<?= $reservation->getNrOfAdults(); ?>"></dd>
-                  <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" title="<?= $reservation->getRestaurant()->getKidsPriceFormatted(); ?> p.p.">Kids:</u></dt>
-                  <dd class="text-sm-start text-md-start col-md-4"><input required class="border border-2 border-tetiare-a" type="number" min="0" max="8" name="editYummyNrOfKids" form="editYummyForm-<?= $reservation->getId(); ?>" value="<?= $reservation->getNrOfKids(); ?>"></dd>
-                  <dt class="text-sm-start text-md-end col-md-2">Date & time:</dt>
-                  <dd class="text-sm-start text-md-start col-md-10"><input required class="border border-2 border-tetiare-a" type="datetime-local" name="editYummyDatetime" form="editYummyForm-<?= $reservation->getId(); ?>" value="<?= date_format($reservation->getDatetime(), 'Y-m-d\TH:i'); ?>"></dd>
-                  <hr class="form-hr">
-                  <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" title="This fee is subtracted from the final check at <?= $reservation->getRestaurant()->getName(); ?>!">Fee (p.p.):</u></dt>
-                  <dd class="text-sm-start text-md-start col-md-4"><?= $reservation->getRestaurant()->getReservationFeeFormatted(); ?></dd>
-                  <dt class="text-sm-start text-md-end col-md-2">VAT:</dt>
-                  <dd class="text-sm-start text-md-start col-md-4"><?= $reservation->getVATFormatted(); ?></dd>
-                  <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<?= $reservation->getNrOfAdults(); ?> * <?= $reservation->getRestaurant()->getAdultPrice(); ?> + <?= $reservation->getNrOfKids(); ?> * <?= $reservation->getRestaurant()->getKidsPrice(); ?> = <?= "€ " . number_format($reservation->getFinalCheck() + $reservation->getTotalPrice(), 2); ?><br><?= ($reservation->getFinalCheck() + $reservation->getTotalPrice()); ?> - <?= $reservation->getTotalPrice(); ?> = <?= $reservation->getFinalCheckFormatted(); ?>">Final check:</u></dt>
-                  <dd class="text-sm-start text-md-start col-md-4"><?= $reservation->getFinalCheckFormatted(); ?></dd>
-                  <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" title="<?= ($reservation->getNrOfAdults() + $reservation->getNrOfKids()); ?> * <?= $reservation->getRestaurant()->getReservationFee(); ?> = <?= $reservation->getTotalPriceFormatted(); ?>">Total price:</u></dt>
-                  <dd class="text-sm-start text-md-start col-md-4"><?= $reservation->getTotalPriceFormatted(); ?></dd>
-                </dl>
-              </section>
-              <section class="modal-footer border-tetiare-a">
-                <button type="submit" class="btn btn-primary-b btn-bg-same me-auto" form="deleteYummyForm-<?= $reservation->getId(); ?>"><i class="fa-solid fa-trash-can fs-3"></i></button>
-                <button type="button" class="btn btn-primary-b btn-bg-same" data-bs-dismiss="modal">CLOSE</button>
-                <button type="submit" form="editYummyForm-<?= $reservation->getId(); ?>" class="btn btn-tetiare-a">SAVE CHANGES</button>
-              </section>
+              <form role="form" method="POST" id="editYummyForm-<?= $reservation->getId(); ?>">
+                <form role="form" method="POST" id="deleteYummyForm-<?= $reservation->getId(); ?>" onsubmit='return confirm("Are you sure you wish to remove a reservation for <?= $reservation->getRestaurant()->getName(); ?> at <?= $reservation->getDatetimeFormatted(); ?>?");'>
+                  <section class="modal-header border-tetiare-a">
+                    <h5 class="modal-title" id="modelYummyLabel-<?= $reservation->getId(); ?>">RESERVATION DETAILS</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </section>
+                  <section class="modal-body">
+                    <input required type="hidden" name="editYummyId" form="editYummyForm-<?= $reservation->getId(); ?>" value="<?= $reservation->getId(); ?>">
+                    <input required type="hidden" name="deleteItemId" form="deleteYummyForm-<?= $reservation->getId(); ?>" value="<?= $reservation->getItemId(); ?>">
+                    <dl class="row mb-0">
+                      <dt class="text-sm-start text-md-end col-md-2">Restaurant:</dt>
+                      <dd class="text-sm-start text-md-start col-md-10"><?= $reservation->getRestaurant()->getName(); ?></dd>
+                      <dt class="text-sm-start text-md-end col-md-2">Location:</dt>
+                      <dd class="text-sm-start text-md-start col-md-10"><?= $reservation->getRestaurant()->getLocation(); ?></dd>
+                      <hr class="form-hr">
+                      <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" title="<?= $reservation->getRestaurant()->getAdultPriceFormatted(); ?> p.p.">Adults:</u></dt>
+                      <dd class="text-sm-start text-md-start col-md-4"><input required class="border border-2 border-tetiare-a" type="number" min="0" max="8" name="editYummyNrOfAdults" form="editYummyForm-<?= $reservation->getId(); ?>" value="<?= $reservation->getNrOfAdults(); ?>"></dd>
+                      <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" title="<?= $reservation->getRestaurant()->getKidsPriceFormatted(); ?> p.p.">Kids:</u></dt>
+                      <dd class="text-sm-start text-md-start col-md-4"><input required class="border border-2 border-tetiare-a" type="number" min="0" max="8" name="editYummyNrOfKids" form="editYummyForm-<?= $reservation->getId(); ?>" value="<?= $reservation->getNrOfKids(); ?>"></dd>
+                      <dt class="text-sm-start text-md-end col-md-2">Date & time:</dt>
+                      <dd class="text-sm-start text-md-start col-md-10"><input required class="border border-2 border-tetiare-a" type="datetime-local" name="editYummyDatetime" form="editYummyForm-<?= $reservation->getId(); ?>" value="<?= date_format($reservation->getDatetime(), 'Y-m-d\TH:i'); ?>"></dd>
+                      <hr class="form-hr">
+                      <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" title="This fee is subtracted from the final check at <?= $reservation->getRestaurant()->getName(); ?>!">Fee (p.p.):</u></dt>
+                      <dd class="text-sm-start text-md-start col-md-4"><?= $reservation->getRestaurant()->getReservationFeeFormatted(); ?></dd>
+                      <dt class="text-sm-start text-md-end col-md-2">VAT:</dt>
+                      <dd class="text-sm-start text-md-start col-md-4"><?= $reservation->getVATFormatted(); ?></dd>
+                      <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<?= $reservation->getNrOfAdults(); ?> * <?= $reservation->getRestaurant()->getAdultPrice(); ?> + <?= $reservation->getNrOfKids(); ?> * <?= $reservation->getRestaurant()->getKidsPrice(); ?> = <?= "€ " . number_format($reservation->getFinalCheck() + $reservation->getTotalPrice(), 2); ?><br><?= ($reservation->getFinalCheck() + $reservation->getTotalPrice()); ?> - <?= $reservation->getTotalPrice(); ?> = <?= $reservation->getFinalCheckFormatted(); ?>">Final check:</u></dt>
+                      <dd class="text-sm-start text-md-start col-md-4"><?= $reservation->getFinalCheckFormatted(); ?></dd>
+                      <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" title="<?= ($reservation->getNrOfAdults() + $reservation->getNrOfKids()); ?> * <?= $reservation->getRestaurant()->getReservationFee(); ?> = <?= $reservation->getTotalPriceFormatted(); ?>">Total price:</u></dt>
+                      <dd class="text-sm-start text-md-start col-md-4"><?= $reservation->getTotalPriceFormatted(); ?></dd>
+                    </dl>
+                  </section>
+                  <section class="modal-footer border-tetiare-a">
+                    <button type="submit" class="btn btn-primary-b btn-bg-same me-auto" form="deleteYummyForm-<?= $reservation->getId(); ?>"><i class="fa-solid fa-trash-can fs-3"></i></button>
+                    <button type="button" class="btn btn-primary-b btn-bg-same" data-bs-dismiss="modal">CLOSE</button>
+                    <button type="submit" form="editYummyForm-<?= $reservation->getId(); ?>" class="btn btn-tetiare-a">SAVE CHANGES</button>
+                  </section>
+                </form>
+              </form>
             </article>
           </section>
         </article>
@@ -83,17 +85,17 @@
     <tbody>
       <?php foreach ($model['ticketsDance'] as $ticketDance) { ?>
         <tr role="button" data-bs-toggle="modal" data-bs-target="#modalDance-<?= $ticketDance->getId(); ?>">
-          <th scope="row" class="fw-normal"><?= $ticketDance->getArtistName(); ?></th>
-          <td><?= $ticketDance->getVenueName(); ?></td>
+          <th scope="row" class="fw-normal"><?= $ticketDance->getPerformance()->getArtist()->getName(); ?></th>
+          <td><?= $ticketDance->getPerformance()->getVenue()->getName(); ?></td>
           <td><?= $ticketDance->getNrOfPeople(); ?></td>
-          <td><?= $ticketDance->getStartDateFormatted(); ?></td>
+          <td><?= $ticketDance->getPerformance()->getStartDateFormatted(); ?></td>
           <td><?= $ticketDance->getTotalPriceFormatted(); ?></td>
         </tr>
         <article class="modal fade" id="modalDance-<?= $ticketDance->getId(); ?>" tabindex="-2" aria-labelledby="modelDanceLabel-<?= $ticketDance->getId(); ?>" aria-hidden="true">
           <section class="modal-dialog modal-xl">
             <article class="modal-content bg-primary-b text-tetiare-a">
               <form method="POST" id="editDanceForm-<?= $ticketDance->getId(); ?>"></form>
-              <form method="POST" id="deleteDanceForm-<?= $ticketDance->getId(); ?>" onsubmit='return confirm("Are you sure you wish to remove your tickets for <?= $ticketDance->getArtistName(); ?> at <?= $ticketDance->getStartDateFormatted(); ?>?");'></form>
+              <form method="POST" id="deleteDanceForm-<?= $ticketDance->getId(); ?>" onsubmit='return confirm("Are you sure you wish to remove your tickets for <?= $ticketDance->getPerformance()->getArtist()->getName(); ?> at <?= $ticketDance->getPerformance()->getStartDateFormatted(); ?>?");'></form>
               <section class="modal-header border-tetiare-a">
                 <h5 class="modal-title" id="modelDanceLabel-<?= $ticketDance->getId(); ?>">TICKET DANCE DETAILS</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -103,21 +105,21 @@
                 <input required type="hidden" name="deleteItemId" form="deleteDanceForm-<?= $ticketDance->getId(); ?>" value="<?= $ticketDance->getItemId(); ?>">
                 <dl class="row mb-0">
                   <dt class="text-sm-start text-md-end col-md-2">Artist:</dt>
-                  <dd class="text-sm-start text-md-start col-md-4"><?= $ticketDance->getArtistName(); ?></dd>
+                  <dd class="text-sm-start text-md-start col-md-4"><?= $ticketDance->getPerformance()->getArtist()->getName(); ?></dd>
                   <dt class="text-sm-start text-md-end col-md-2">Venue:</dt>
-                  <dd class="text-sm-start text-md-start col-md-4"><?= $ticketDance->getVenueName(); ?></dd>
+                  <dd class="text-sm-start text-md-start col-md-4"><?= $ticketDance->getPerformance()->getVenue()->getName(); ?></dd>
                   <dt class="text-sm-start text-md-end col-md-2">Location:</dt>
-                  <dd class="text-sm-start text-md-start col-md-10"><?= $ticketDance->getVenueLocation(); ?></dd>
+                  <dd class="text-sm-start text-md-start col-md-10"><?= $ticketDance->getPerformance()->getVenue()->getLocation(); ?></dd>
                   <dt class="text-sm-start text-md-end col-md-2">Start date & time:</dt>
-                  <dd class="text-sm-start text-md-start col-md-4"><?= $ticketDance->getStartDateFormatted(); ?></dd>
+                  <dd class="text-sm-start text-md-start col-md-4"><?= $ticketDance->getPerformance()->getStartDateFormatted(); ?></dd>
                   <dt class="text-sm-start text-md-end col-md-2">End date & time:</dt>
-                  <dd class="text-sm-start text-md-start col-md-4"><?= $ticketDance->getEndDateFormatted(); ?></dd>
+                  <dd class="text-sm-start text-md-start col-md-4"><?= $ticketDance->getPerformance()->getEndDateFormatted(); ?></dd>
                   <hr class="form-hr">
-                  <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" title="<?= $ticketDance->getTicketPriceFormatted(); ?> p.p.">Nr of people:</u></dt>
+                  <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" title="<?= $ticketDance->getPerformance()->getPriceFormatted(); ?> p.p.">Nr of people:</u></dt>
                   <dd class="text-sm-start text-md-start col-md-4"><input required class="border border-2 border-tetiare-a" type="number" min="0" max="24" name="editDanceNrOfPeople" form="editDanceForm-<?= $ticketDance->getId(); ?>" value="<?= $ticketDance->getNrOfPeople(); ?>"></dd>
                   <dt class="text-sm-start text-md-end col-md-2">VAT:</dt>
                   <dd class="text-sm-start text-md-start col-md-4"><?= $ticketDance->getVATFormatted(); ?></dd>
-                  <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" title="<?= $ticketDance->getNrOfPeople(); ?> * <?= $ticketDance->getTicketPrice(); ?> = <?= $ticketDance->getTotalPriceFormatted(); ?>">Total price:</u></dt>
+                  <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" title="<?= $ticketDance->getNrOfPeople(); ?> * <?= $ticketDance->getPerformance()->getPrice(); ?> = <?= $ticketDance->getTotalPriceFormatted(); ?>">Total price:</u></dt>
                   <dd class="text-sm-start text-md-start col-md-10"><?= $ticketDance->getTotalPriceFormatted(); ?></dd>
                 </dl>
               </section>
@@ -146,16 +148,16 @@
     <tbody>
       <?php foreach ($model['ticketsHistory'] as $ticketHistory) { ?>
         <tr role="button" data-bs-toggle="modal" data-bs-target="#modalHistory-<?= $ticketHistory->getId(); ?>">
-          <th scope="row" class="fw-normal"><?= $ticketHistory->getGatheringLocation(); ?></th>
-          <td><?= $ticketHistory->getDatetimeFormatted(); ?></td>
-          <td><?= $ticketHistory->getLanguage(); ?></td>
+          <th scope="row" class="fw-normal"><?= $ticketHistory->getTour()->getGatheringLocation(); ?></th>
+          <td><?= $ticketHistory->getTour()->getDatetimeFormatted(); ?></td>
+          <td><?= $ticketHistory->getTour()->getLanguage(); ?></td>
           <td><?= $ticketHistory->getTotalPriceFormatted(); ?></td>
         </tr>
         <article class="modal fade" id="modalHistory-<?= $ticketHistory->getId(); ?>" tabindex="-3" aria-labelledby="modelHistoryLabel-<?= $ticketHistory->getId(); ?>" aria-hidden="true">
           <section class="modal-dialog modal-xl">
             <article class="modal-content bg-primary-b text-tetiare-a">
               <form method="POST" id="editHistoryForm-<?= $ticketHistory->getId(); ?>"></form>
-              <form method="POST" id="deleteHistoryForm-<?= $ticketHistory->getId(); ?>" onsubmit='return confirm("Are you sure you wish to delete your tour tickets for <?= $ticketHistory->getNrOfPeople(); ?> people in <?= $ticketHistory->getLanguage(); ?>?");'></form>
+              <form method="POST" id="deleteHistoryForm-<?= $ticketHistory->getId(); ?>" onsubmit='return confirm("Are you sure you wish to delete your tour tickets for <?= $ticketHistory->getNrOfPeople(); ?> people in <?= $ticketHistory->getTour()->getLanguage(); ?>?");'></form>
               <section class="modal-header border-tetiare-a">
                 <h5 class="modal-title" id="modelHistoryLabel-<?= $ticketHistory->getId(); ?>">TICKET HISTORY DETAILS</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -165,19 +167,19 @@
                 <input required type="hidden" name="deleteItemId" form="deleteHistoryForm-<?= $ticketHistory->getId(); ?>" value="<?= $ticketHistory->getItemId(); ?>">
                 <dl class="row mb-0">
                   <dt class="text-sm-start text-md-end col-md-2">Gathering location:</dt>
-                  <dd class="text-sm-start text-md-start col-md-4"><?= $ticketHistory->getGatheringLocation(); ?></dd>
+                  <dd class="text-sm-start text-md-start col-md-4"><?= $ticketHistory->getTour()->getGatheringLocation(); ?></dd>
                   <dt class="text-sm-start text-md-end col-md-2">Date & time:</dt>
-                  <dd class="text-sm-start text-md-start col-md-4"><?= $ticketHistory->getDatetimeFormatted(); ?></dd>
+                  <dd class="text-sm-start text-md-start col-md-4"><?= $ticketHistory->getTour()->getDatetimeFormatted(); ?></dd>
                   <dt class="text-sm-start text-md-end col-md-2">Employee:</dt>
-                  <dd class="text-sm-start text-md-start col-md-4"><?= $ticketHistory->getEmployeeName(); ?></dd>
+                  <dd class="text-sm-start text-md-start col-md-4"><?= $ticketHistory->getTour()->getEmployeeName(); ?></dd>
                   <dt class="text-sm-start text-md-end col-md-2">Language:</dt>
-                  <dd class="text-sm-start text-md-start col-md-4"><?= $ticketHistory->getLanguage(); ?></dd>
+                  <dd class="text-sm-start text-md-start col-md-4"><?= $ticketHistory->getTour()->getLanguage(); ?></dd>
                   <hr class="form-hr">
-                  <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="Individual price: <?= $ticketHistory->getPriceFormatted(); ?><br>Group price: <?= $ticketHistory->getGroupPriceFormatted(); ?>">Nr of people:</u></dt>
+                  <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="Individual price: <?= $ticketHistory->getTour()->getPriceFormatted(); ?><br>Group price: <?= $ticketHistory->getTour()->getGroupPriceFormatted(); ?>">Nr of people:</u></dt>
                   <dd class="text-sm-start text-md-start col-md-4"><input required class="border border-2 border-tetiare-a" type="number" name="editHistoryNrOfPeople" min="0" max="12" form="editHistoryForm-<?= $ticketHistory->getId(); ?>" value="<?= $ticketHistory->getNrOfPeople(); ?>"></dd>
                   <dt class="text-sm-start text-md-end col-md-2">VAT:</dt>
                   <dd class="text-sm-start text-md-start col-md-4"><?= $ticketHistory->getVATFormatted(); ?></dd>
-                  <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" title="<?= $ticketHistory->getNrOfPeople() % 4; ?> * <?= $ticketHistory->getPrice(); ?> + <?= floor($ticketHistory->getNrOfPeople() / 4); ?> * <?= $ticketHistory->getGroupPrice(); ?> = <?= $ticketHistory->getTotalPriceFormatted(); ?>">Total price:</u></dt>
+                  <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" title="<?= $ticketHistory->getNrOfPeople() % 4; ?> * <?= $ticketHistory->getTour()->getPrice(); ?> + <?= floor($ticketHistory->getNrOfPeople() / 4); ?> * <?= $ticketHistory->getTour()->getGroupPrice(); ?> = <?= $ticketHistory->getTotalPriceFormatted(); ?>">Total price:</u></dt>
                   <dd class="text-sm-start text-md-start col-md-4"><?= $ticketHistory->getTotalPriceFormatted(); ?></dd>
                 </dl>
               </section>
@@ -207,8 +209,13 @@
   </dl>
   <section class="row justify-content-around mt-auto mb-2 col-md-12">
     <?php (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
-    if (isset($_SESSION['user'])) { ?>
-      <button class="btn btn-primary-b rounded-0 fs-3 text-tetiare-a col-md-11">GO TO CHECKOUT <i class="fa-solid fa-arrow-right fa-md hover-beat"></i></button>
+    if (isset($_SESSION['user'])) { if ((count($model['reservations']) + count($model['ticketsDance']) + count($model['ticketsHistory'])) > 0) { ?>
+      <form method="POST" id="checkoutForm">
+        <button type="submit" class="btn btn-primary-b rounded-0 fs-3 text-tetiare-a col-md-12" name="mollie">GO TO CHECKOUT <i class="fa-solid fa-arrow-right fa-md hover-beat"></i></button>
+      </form>
+    <?php } else {?>
+      <button class="btn btn-primary-b rounded-0 fs-3 text-tetiare-a col-md-11 pe-none">NO ITEMS IN YOUR CART!</button>
+    <?php } ?>
     <?php } else { ?>
       <p class="text-center text-primary-b font-druktext">Payment requires an account!</p>
       <a href="/register" class="btn btn-primary-b rounded-0 fs-3 text-tetiare-a col-md-5">REGISTER</a>

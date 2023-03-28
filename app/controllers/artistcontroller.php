@@ -16,7 +16,7 @@ class ArtistController extends Controller
         try {
             $artist = $this->artistservice->getArtists();
             $data = [
-                'artist' => $artist,
+                'artist' => $artist
             ];
             $this->displayView($data);
         } catch (Exception $e) {
@@ -27,11 +27,9 @@ class ArtistController extends Controller
     public function insertArtist()
     {
         try {
-            //$name = htmlspecialchars($_POST['name']);
-            $artist = new Artist();
-            $artist->name = htmlspecialchars($_POST['name']);
+            $name = htmlspecialchars($_POST['name']);
 
-            $result = $this->artistservice->createArtist($artist);
+            $result = $this->artistservice->createArtist($name);
 
             if ($result) {
                 // return success response
@@ -48,11 +46,10 @@ class ArtistController extends Controller
     public function updateArtist()
     {
         try {
-            $artist = new Artist();
-            $artist->id = intval($_POST['id']);
-            $artist->name = htmlspecialchars($_POST['name']);
+            $id = $_POST['id'];
+            $name = htmlspecialchars($_POST['name']);
 
-            $result = $this->artistservice->updateArtist($artist);
+            $result = $this->artistservice->updateArtist($id, $name);
 
             if ($result) {
                 // return succes response
@@ -70,7 +67,7 @@ class ArtistController extends Controller
     public function deleteArtist()
     {
         try {
-            $id = htmlspecialchars($_POST['id']);
+            $id = $_POST['id'];
 
             $result = $this->artistservice->deleteArtist($id);
             if ($result) {

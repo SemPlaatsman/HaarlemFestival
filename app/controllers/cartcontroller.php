@@ -3,6 +3,7 @@ require_once __DIR__ . '/controller.php';
 require_once __DIR__ . '/../models/user.php';
 require_once __DIR__ . '/../services/cartservice.php';
 require_once __DIR__ . '/../services/guestcartservice.php';
+require_once __DIR__ . '/../vendor/mollie/mollie-api-php/src/MollieApiClient.php';
 
 class CartController extends Controller {
     private $cartService;
@@ -14,13 +15,16 @@ class CartController extends Controller {
 
     public function index() {
         $model = [];
-        
-        if ($_SERVER["REQUEST_METHOD"] === 'POST' && !empty($_POST)) {
+
+        if ($_SERVER["REQUEST_METHOD"] === 'POST' && !empty($_POST) && !isset($_POST['mollie'])) {
             $this->handlePOST($model);
         }
 
         (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
-        if (isset($_SESSION['user'])) {
+        if ($_SERVER["REQUEST_METHOD"] === 'GET' && isset($_GET['cart'])) {
+            var_dump($_GET['cart']);
+            $this->decodeCartLink($model, $_GET['cart']);
+        } else if (isset($_SESSION['user'])) {
             $model = $this->cartService->getCart(unserialize($_SESSION['user'])->getId());
         } else if (isset($_SESSION['guest'])) {
             // uncomment to use test data
@@ -29,7 +33,22 @@ class CartController extends Controller {
         }
 
         $this->addPaymentTotals($model);
+        $this->addCartLink($model);
 
+        if (isset($_POST['mollie'])) {
+            $this->handleMollie($model);
+        }
+
+        // $var = $model['reservations'][0];
+        // var_dump($model['reservations'][0]);
+
+        // $var = str_replace('(', '', $var);
+        // $array = explode(')', $var);
+        // array_pop($array);
+        // var_dump($array);
+
+        // $array = explode(', ', $var);
+        // var_dump($array);
         $this->displayView($model);
     }
 
@@ -56,6 +75,104 @@ class CartController extends Controller {
             $this->cartService->deleteItem($itemId);
         }
     }
+
+    private function handleMollie(&$model) {
+        include __DIR__ . '/../config/dbconfig.php';
+        require_once __DIR__ . "/../vendor/autoload.php";
+        $mollie = new \Mollie\Api\MollieApiClient();
+        $mollie->setApiKey($mollieAPIKey);
+
+        $orderId = count($model['reservations'] ?? []) > 0 ? $model['reservations'][0]->getItemId() : (count($model['ticketsDance'] ?? []) > 0 ? $model['ticketsDance'][0]->getItemId() : (count($model['ticketsHistory'] ?? []) > 0 ? $model['ticketsHistory'][0]->getItemId() : null));
+        $description = (count($model['reservations'] ?? []) > 0 ? count($model['reservations']) . "x Yummy! " : "") . (count($model['ticketsDance'] ?? []) > 0 ? count($model['ticketsDance']) . "x DANCE! " : "") . (count($model['ticketsHistory'] ?? []) > 0 ? count($model['ticketsHistory']) . "x A Stroll Through History " : "");
+
+        if (!is_null($orderId)) {
+            $payment = $mollie->payments->create([
+                "amount" => [
+                    "currency" => "EUR",
+                    "value" => number_format(($model['paymentTotals']['reservations'] ?? 0) + ($model['paymentTotals']['ticketsDance'] ?? 0) + ($model['paymentTotals']['ticketsHistory'] ?? 0), 2)
+                ],
+                "description" => $description,
+                "cancelUrl" => "https://e886-62-131-85-104.eu.ngrok.io/cart",
+                "redirectUrl" => "https://e886-62-131-85-104.eu.ngrok.io/cart",
+                "webhookUrl" => "https://e886-62-131-85-104.eu.ngrok.io/molliewebhook",
+                "metadata" => [
+                    "orderId" => $orderId
+                ]
+            ]);
+            header("Location: " . $payment->getCheckoutUrl(), true, 303);
+        }
+    }
+
+    private function addCartLink(&$model) {
+        $cartLink = "";
+        foreach ($model as $eventItems) if (count($eventItems) > 0 && array_keys($model, $eventItems, true)[0] !== 'paymentTotals') {
+            // $cartLink .= array_keys($model, $eventItems, true)[0];
+            foreach ($eventItems as $eventItem) {
+                $cartLink .= "(" . $eventItem->getLink() . ")";
+            }
+        }
+        $model += ['link' => $cartLink];
+    }
+
+    private function decodeCartLink(&$model, string $link) {
+        $model += ['reservations' => []];
+        $model += ['ticketsDance' => []];
+        $model += ['ticketsHistory' => []];
+        $linkEventItemsString = str_replace('(', '', $link);
+        $linkEventItems = explode(')', $linkEventItemsString);
+        array_pop($linkEventItems);
+        foreach ($linkEventItems as $linkEventItem) {
+            $linkEventItemArray = explode(';', $linkEventItem);
+            var_dump($linkEventItemArray);
+            switch (end($linkEventItemArray)) {
+                case 1: if (count($linkEventItemArray) == 5) {
+                    
+                    } break;
+                case 2: if (count($linkEventItemArray) == 3) {
+
+                    } break;
+                case 3: if (count($linkEventItemArray) == 3) {
+
+                    } break;
+            }
+        }
+    }
+
+    // private function decodeCartLink(&$model, string $link) {
+    //     $model += ['reservations' => []];
+    //     $model += ['ticketsDance' => []];
+    //     $model += ['ticketsHistory' => []];
+    //     $splitLink = preg_split('/(reservations|ticketsDance|ticketsHistory)/', $link, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+    //     foreach ($model as $key => $eventItems) {
+    //         $linkIndex = array_search($key, $splitLink);
+    //         if (!is_bool($linkIndex)) {
+    //             $linkEventItemsString = str_replace('(', '', $splitLink[$linkIndex + 1]);
+    //             $linkEventItems = explode(')', $linkEventItemsString);
+    //             array_pop($linkEventItems);
+    //             foreach ($linkEventItems as $linkEventItem) {
+    //                 $linkEventItemArray = explode('; ', $linkEventItem);
+    //                 switch ($key) {
+    //                     case 'reservations':
+    //                         require_once __DIR__ . '/../models/reservation.php';
+    //                         require_once __DIR__ . '/../models/restaurant.php';
+    //                         $model[$key][] = new Reservation(intval($linkEventItemArray[12]), intval($linkEventItemArray[13]), intval($linkEventItemArray[14]), $linkEventItemArray[15], floatval($linkEventItemArray[16]), 
+    //                         intval($linkEventItemArray[17]), $linkEventItemArray[18], intval($linkEventItemArray[0]), new Restaurant(intval($linkEventItemArray[1]), $linkEventItemArray[2], intval($linkEventItemArray[3]),
+    //                         $linkEventItemArray[4], floatval($linkEventItemArray[5]), floatval($linkEventItemArray[6]), floatval($linkEventItemArray[7])), intval($linkEventItemArray[8]), intval($linkEventItemArray[9]), 
+    //                         intval($linkEventItemArray[10]), intval($linkEventItemArray[11]));
+    //                         break;
+    //                     case 'ticketsDance':
+    //                         require_once __DIR__ . '/../models/ticketdance.php';
+    //                         $model[$key][] = new TicketDance();
+    //                         break;
+    //                     case 'ticketsHistory':
+    //                         require_once __DIR__ . '/../models/tickethistory.php';
+    //                         $model[$key][] = new TicketHistory();
+    //                         break;
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 
     private function addPaymentTotals(&$model) {
         $paymentTotals = [];
