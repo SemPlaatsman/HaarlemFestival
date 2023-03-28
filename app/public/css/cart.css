@@ -1,0 +1,29 @@
+.main-container {
+    height: 100%;
+    background-color: var(--tetiare-a);
+}
+
+.cart-header {
+    font-size: 48pt;
+    border-bottom: 4px solid var(--primary-b); 
+    line-height: 0.1em;
+    margin-top: 50px;
+    margin-bottom: 25px;
+}
+
+.cart-header > .hr-background {
+    padding: 0 10px;
+}
+
+.form-hr {
+    margin-top: 10px;
+    height: 1px;
+    background-color: var(--tetiare-a);
+    opacity: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+  .main-container {
+      height: auto;
+  }
+}

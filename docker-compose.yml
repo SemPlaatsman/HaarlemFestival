@@ -4,15 +4,33 @@ services:
         image: nginx:latest
         ports:
             - "80:80"
+            - "81:81"
         volumes:
             - ./nginx.conf:/etc/nginx/nginx.conf
             - ./app:/app
+            - ./api:/api
+
     php:
         build:
             context: .
             dockerfile: PHP.Dockerfile
         volumes:
             - ./app:/app
+            - ./api:/api
+
+        stdin_open: true
+        tty: true
+        command: >
+                bash -c "
+                cd /app &&
+                chmod u+rw  /var/cache &&
+                composer install &&
+                composer update &&
+                php-fpm"
+
+                 
+     
+        
     mysql:
         image: mariadb:latest
         environment:

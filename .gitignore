@@ -8,3 +8,14 @@
 /httpRequests/
 
 config/
+dbconfig.php
+
+#composer 
+app/vendor/
+/vendor
+.DS_Store
+app/.DS_Store
+app/public/.DS_Store
+app/public/img/.DS_Store
+app/public/img/png/.DS_Store
+app/public/img/png/history/.DS_Store

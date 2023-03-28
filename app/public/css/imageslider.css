@@ -1,0 +1,9 @@
+.imageslider .caption{
+    top: 6rem;
+    bottom: auto;
+    left: -76rem;
+    right: 0rem;
+}
+.imageslider{
+    height: 35rem;
+}
