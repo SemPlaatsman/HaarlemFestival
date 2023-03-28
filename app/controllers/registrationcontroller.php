@@ -32,7 +32,7 @@ class RegistrationController extends Controller {
                 $name = htmlspecialchars($_POST['name']);
                 $password = htmlspecialchars($_POST['password']);
                 $confirmpassword = htmlspecialchars($_POST['confirmpassword']);
-                if($password == $confirmpassword && $this->userService->getUserByEmail($email)!=null){
+                if($password == $confirmpassword && $this->userService->getUserByEmail($email)==null){
                     $isAdmin = false;
                     $currentDatetime = date('Y-m-d H:i:s');
                     $time_created = DateTime::createFromFormat('Y-m-d H:i:s', $currentDatetime);
@@ -50,7 +50,7 @@ class RegistrationController extends Controller {
                     $this->emailGenerator->generate($body, $subject, $email);
                     $user = $this->loginService->validateUser($email, $password);
                     if ($user != null) {
-                        // start session if it hasn't been started yet
+                        // start session if it hasn't been started 
                         (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
                         $_SESSION['user'] = serialize($user);
                         // redirect to dashboard
