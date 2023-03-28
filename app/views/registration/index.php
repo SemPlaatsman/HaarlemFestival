@@ -7,9 +7,7 @@
     if (isset($_POST['submit'])) {
         $password = $_POST['password'];
         $confirmpassword = $_POST['confirmpassword'];
-        if ($password != $confirmpassword) {
-            $password_error = "<p class='text-center invalid-feedback text-light fs-6 p-1 my-0 mt-3 bg-danger rounded'>Invalid email/password combination!</p>";
-        }
+        $this->validatePassword($password, $confirmpassword);
     }
 ?>
 <section class="container-fluid row align-items-center m-0 p-0 bg-tetiare-a">
@@ -38,7 +36,7 @@
         <hr class="invisible">
         <hr class="custom-hr bg-black opacity-100">
         <input class="btn btn-primary-b fs-3 <?= (isset($_POST['email']) && isset($_POST['name']) && isset($_POST['password']) && isset($_POST['confirmpassword'])) ? "is-invalid" : "" ?>" type="submit" value="CREATE ACCOUNT" name="submit" />
-        <?php echo($password_error) ?>
+        <?php echo($this->passwordError) ?>
     </form>
 </section>
 <?php
