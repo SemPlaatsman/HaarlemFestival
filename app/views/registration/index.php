@@ -27,7 +27,7 @@
         </fieldset>
         <fieldset class="form-group p-2">
             <label class="text-primary-b fs-5" for="passwordTwoField">Confirm password</label>
-            <input class="w-100" id="confirmpassword" type="password" name="confirmpassword" placeholder="password" value="<?= $_POST['confirmpassword'] ?? "" ?> " required/>
+            <input class="w-100" id="confirmpassword" type="password" name="confirmpassword" placeholder="password" value="<?= $_POST['confirmpassword'] ?? "" ?>" required/>
             
         </fieldset>
         <fieldset action="validate/Hcaptcha" method="post">
