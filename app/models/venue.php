@@ -7,12 +7,14 @@ class Venue
     private string $location;
     private int $seats;
 
-    function __construct(int $id, string $name, string $location, int $seats) {
-        $this->id = $id;
-        $this->name = $name;
-        $this->location = $location;
-        $this->seats = $seats;
+    function __construct(int $id = null, string $name = null, string $location = null, int $seats = null)
+    {
+        $this->id = $id ?? 0;
+        $this->name = $name ?? '';
+        $this->location = $location ?? '';
+        $this->seats = $seats ?? 0;
     }
+
 
     /**
      * @return int
