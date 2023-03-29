@@ -11,7 +11,7 @@ class TicketDanceService
 
     public function insertTicketDance(TicketDance $ticketDance):int 
     {
-        return $this->ticketDanceRepository->insertTicketDance($reservation);
+        return $this->ticketDanceRepository->insertTicketDance($ticketDance);
     }
 
     public function deleteTicketDance(int $id) : bool
@@ -21,7 +21,7 @@ class TicketDanceService
 
     public function updateTicketDance(TicketDance $ticketDance):bool 
     {
-        return $this->ticketDanceRepository->updateTicketDance($id);
+        return $this->ticketDanceRepository->updateTicketDance($ticketDance);
     }
 
     public function getTicketDance(int $id) : Item
