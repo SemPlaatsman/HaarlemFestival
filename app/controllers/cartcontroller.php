@@ -134,10 +134,14 @@ class CartController extends Controller {
                         $model['reservations'][] = $restaurant;
                         } break;
                     case 2: if (count($linkEventItemArray) == 3) {
-    
+                        $ticketDance = new TicketDance(null, null, $linkEventItemArray[2], null, null, 9, "QR_Code", null, $this->cartService->getPerformance($linkEventItemArray[0]), intval($linkEventItemArray[1]));
+                        $ticketDance->setTotalPrice();
+                        $model['ticketDance'][] = $ticketDance;
                         } break;
                     case 3: if (count($linkEventItemArray) == 3) {
-    
+                        $ticketHistory = new TicketHistory(null, null, $linkEventItemArray[2], null, null, 9, "QR_Code", null, $this->cartService->getTour($linkEventItemArray[0]), intval($linkEventItemArray[1]));
+                        $ticketHistory->setTotalPrice();
+                        $model['ticketHistory'][] = $ticketHistory;
                         } break;
                 }
             } catch (Exception $e) {
