@@ -1,10 +1,12 @@
 <?php
 
 class GuestCartService {
+    private $cartRepository;
     private $cartRef;
     private $cart;
 
     public function __construct(&$cart) {
+        $this->cartRepository = new CartRepository();
         $this->cartRef = &$cart;
         $this->cart = unserialize($this->cartRef);
     }

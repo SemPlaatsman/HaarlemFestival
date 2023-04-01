@@ -37,7 +37,7 @@ class CartService {
     }
 
     public function getTour(int $tourId) : Tour {
-        return $this->getTour($tourId);
+        return $this->cartRepository->getTour($tourId);
     }
 }
 ?>
