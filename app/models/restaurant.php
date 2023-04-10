@@ -8,7 +8,7 @@ class Restaurant
     private string $location;
     private float $adult_price;
     private float $kids_price;
-    private $reservation_fee;
+    private float $reservation_fee;
 
     public function __construct($id, $name, $seats, $location, $adult_price, $kids_price, $reservation_fee)
     {
@@ -60,7 +60,7 @@ class Restaurant
      * Get the value of adult_price
      */ 
 
-    public function getAdultPrice() : int
+    public function getAdultPrice() : float
     {
         return $this->adult_price;
     }
@@ -76,7 +76,7 @@ class Restaurant
      * Get the value of kids_price
      */ 
 
-    public function getKidsPrice() : int
+    public function getKidsPrice() : float
     {
         return $this->kids_price;
     }
@@ -91,7 +91,7 @@ class Restaurant
      * Get the value of reservation_fee
      */ 
 
-    public function getReservationFee() : int
+    public function getReservationFee() : float
     {
         return $this->reservation_fee;
     }

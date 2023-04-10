@@ -27,5 +27,17 @@ class CartService {
     public function deleteItem(int $itemId) : bool {
         return $this->cartRepository->deleteItem($itemId);
     }
+
+    public function getRestaurant(int $restaurantId) : Restaurant {
+        return $this->cartRepository->getRestaurant($restaurantId);
+    }
+
+    public function getPerformance(int $performanceId) : Performance {
+        return $this->cartRepository->getPerformance($performanceId);
+    }
+
+    public function getTour(int $tourId) : Tour {
+        return $this->getTour($tourId);
+    }
 }
 ?>
