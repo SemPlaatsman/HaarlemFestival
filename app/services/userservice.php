@@ -50,7 +50,7 @@ class UserService
     {
         return $this->userRepository->addResetTocken($email, $key, $expDate);
     }
-    
+
     public function deleteKey(string $email)
     {
         return $this->userRepository->deleteKey($email);

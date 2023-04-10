@@ -1,0 +1,26 @@
+.section-with-background-2 {
+    background-image: url("../img/png/dance/other/Background-Black-1.png");
+    background-repeat: no-repeat;
+    background-position: top right;
+}
+
+.section-with-background-1 {
+    background-image: url("../img/png/dance/other/Background-Black-2.png");
+    background-repeat: no-repeat;
+}
+
+.title-banner-light-purple, .title-banner-acid-yellow {
+    font-size: 9rem;
+}
+
+.title-banner-acid-yellow {
+    margin-left: 40px;
+}
+
+.concert-heart-image {
+    margin-top: 30rem;
+}
+
+.position-up {
+    margin-top: -15rem;
+}
