@@ -2,14 +2,17 @@
 require_once __DIR__ . '/controller.php';
 require_once __DIR__ . '/../services/loginservice.php';
 
-class LoginController extends Controller {
+class LoginController extends Controller
+{
     private $loginService;
 
-    function __construct() {
+    function __construct()
+    {
         $this->loginService = new LoginService();
     }
 
-    public function index() {
+    public function index()
+    {
         // handle POST
         if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST)) {
             // login process
@@ -30,7 +33,8 @@ class LoginController extends Controller {
         $this->displayView();
     }
 
-    public function validateUser(string $email, string $password) : ?User {
+    public function validateUser(string $email, string $password): ?User
+    {
         return $this->loginService->validateUser($email, $password);
     }
 }
