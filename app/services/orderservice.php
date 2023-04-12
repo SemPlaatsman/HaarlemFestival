@@ -11,5 +11,9 @@ class OrderService {
     public function completeOrder(int $orderId) : bool {
         return $this->orderRepository->completeOrder($orderId);
     }
+
+    public function getOrderHistory(int $startID =null , int $endID =null) : array {
+        return $this->orderRepository->getPayedOrderHistory();
+    }
 }
 ?>

@@ -31,6 +31,10 @@
                 <a href="/restaurant" class="btn bg-primary-b text-tetiare-a btn-lg btn-block">RESTAURANTS</A>
                 <a href="/reservation" class="btn bg-primary-b text-tetiare-a btn-lg btn-block">RESERVATIONS</A>
             </div>
+            <!-- temporarily -->
+            <a href="/download/income" class="btn bg-primary-b text-tetiare-a btn-lg btn-block">download a excel of the earnings</a>
+
+
         </div>
     </div>
 </div>

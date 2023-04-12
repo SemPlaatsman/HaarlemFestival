@@ -188,6 +188,7 @@ INSERT INTO `pages` (`id`, `url`, `body_markup`) VALUES
 (2, '', 'In Haarlem a charming and tasty food festival called “Yummy!” is taking place. Here you can try loads of new dishes in various restaurants. \r\nBe sure to mark your calendars and plan your trip today!'),
 (3, '', 'The city of Haarlem has a rich history and a lot of beautiful sites to see.\r\nFor a limited time only the event, A stroll through history will take place. During this event, a guide will take you to see Haarlem\'s most important sites.'),
 (4, '', 'Do you want to have a wild night out with friends or family?\r\nYoung or old you are all welcome to the Haarlem DANCE event where amazing DJ’s from around the world will be performing in our best venues.'),
+
 (5, '', 'Do you want to learn all about the amazing professor Teyler? Come to the Teyler museum for an interactive museum experience.'),
 (6, '', 'Each dotted location on the map represents an event with Purple - DANCE! venues, Yellow - YUMMY restaurants, Red - Teylers museum and Blue - Historic buildings.\r\nBe sure to visit the St.-Bavokerk in the heart of Haarlem since most of the culinary industry and various historic sites are located around it.\r\nNo matter what your interests may be, there is something on this map for everyone so start exploring the vibrant city of Haarlem today!'),
 (7, '', 'Caprera openluchttheater in the far left corner can be reached by going with the car following the N208 or by cycling 16 minutes through Midden Duin and Daalseweg.'),

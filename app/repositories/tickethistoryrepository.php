@@ -92,7 +92,7 @@ class TicketHistoryRepository extends ItemRepository {
             "history_tours.gathering_location, history_tours.employee_id, history_tours.employee_name, " . 
             "ticket_history.nr_of_people, history_tours.price, history_tours.group_price " .
             "FROM `item` JOIN `ticket_history` ON ticket_history.item_id = item.id JOIN `history_tours` ON history_tours.id = ticket_history.tour_id ");
-            $stmnt->bindParam(":id", $id, PDO::PARAM_INT);
+            // $stmnt->bindParam(":id", $id, PDO::PARAM_INT);
             $stmnt->execute();
             $stmnt->setFetchMode(PDO::FETCH_CLASS, 'TicketHistory');
 
