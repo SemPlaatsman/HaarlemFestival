@@ -12,6 +12,7 @@
     // $cart['ticketsHistory'][] = new TicketHistory(6, 1, 3, "History", 120, 9, "", 2,);
     // $_SESSION['guest']->cart = serialize($cart);
     // var_dump(unserialize($_SESSION['guest']->cart))
+    var_dump(new DateTime());
 ?>
     <div class="px-4 py-5 my-5 text-center">
         <img class="d-block mx-auto mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">

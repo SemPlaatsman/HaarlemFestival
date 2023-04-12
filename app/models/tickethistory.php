@@ -9,11 +9,9 @@ class TicketHistory extends Item {
     public function __construct(int $item_id = null, int $order_id = null, int $event_id = null, string $event_name = null, float $total_price = null, int $VAT = null, string $QR_Code = null, 
     int $id = null, Tour $tour, int $nr_of_people = null) {
         parent::__construct($item_id, $order_id, $event_id, $event_name, $total_price, $VAT, $QR_Code);
-        if($id != null){
-            $this->id = $id;
-            $this->tour = $tour;
-            $this->nr_of_people = $nr_of_people;
-        }
+        isset($id) ? $this->id = $id : null;
+        $this->tour = $tour;
+        $this->nr_of_people = $nr_of_people;
     }
 
     /**
