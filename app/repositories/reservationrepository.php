@@ -21,6 +21,7 @@ class ReservationRepository extends ItemRepository {
             $stmnt -> bindParam(':nr_of_kids', $nr_of_kids, PDO::PARAM_STR);
             $stmnt -> bindParam(':datetime', $datetime, PDO::PARAM_STR);
             $stmnt -> execute();
+            return $itemid;
         } catch (PDOException $e) {
             echo $e;
             return null;
@@ -92,7 +93,7 @@ class ReservationRepository extends ItemRepository {
                 }
             }
 
-            $reservations = $stmnt->fetchAll(PDO::FETCH_FUNC, 'rowMapperReservation');
+            $reservations = $stmnt->fetch(PDO::FETCH_FUNC, 'rowMapperReservation');
             return $reservations;
         } catch (PDOException $e) {
             echo($e);

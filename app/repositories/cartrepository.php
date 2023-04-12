@@ -202,5 +202,17 @@ class CartRepository extends Repository
 
         return $query->fetchAll(PDO::FETCH_FUNC, 'rowMapperTour')[0];
     }
+
+    public function addReservationToCart(Reservation $reservation) {
+
+    }
+
+    public function addTicketDanceToCart(TicketDance $reservation) {
+        
+    }
+
+    public function addTicketHistoryToCart(TicketHistory $reservation) {
+        
+    }
 }
 ?>
