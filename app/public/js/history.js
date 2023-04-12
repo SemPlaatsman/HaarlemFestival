@@ -1,5 +1,5 @@
 let tourschedule = document.getElementById('tourschedule');
-let ukButton = document.getElementById('ukButton');
+let ukButton = document.getElementById('ukflag');
 let nlButton = document.getElementById('dutchflag');
 let enButton = document.getElementById('chineseflag');
 Gettourschedule(0);
@@ -54,10 +54,14 @@ async function Gettourschedule(taal) {
 }
 
 function printSchedule(tabledata){
+    tourschedule.innerHTML = '';
     let html = '';
+    let lastDate = new Date();
     for (let i = 0; i < tabledata.length; i++) {
+        if(tabledata[i][0].getDate() != lastDate.getDate()){
         html += '<tr>';
         const date = new Date(tabledata[i][0]);
+        lastDate = date;
         const weekDay = date.toLocaleString('default', { weekday: 'long' });
         const month = date.toLocaleString('default', { month: 'short' });
         const day = date.toLocaleString('default', { day: '2-digit' });
@@ -71,6 +75,7 @@ function printSchedule(tabledata){
             html += "<td class='border-0 rounded-pill bg-primary-a text-center'>" + hour + " " + minutes + "</td>";
         }
         html += "</tr>";
+        }
 
     }
     tourschedule.innerHTML = html;

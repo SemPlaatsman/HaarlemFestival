@@ -137,7 +137,7 @@ new breadcrumbcontroller();
         <div class="col">
           <div class="btn-group btn-group-justified btn-group-lg languagepicker " role="group" aria-label="language picker whit a uk, dutch and chinese flag">
             <input type="radio" class="btn-check" name="btnradio" id="ukflag" autocomplete="off" checked>
-            <label class="btn btn-outline-primary p-1 m-1 languagePickerTours" for="ukflag"><img class="img-fluid " src="/img/png/flags/BritFlag.png"></label>
+            <label class="btn btn-outline-primary p-1 m-1 languagePickerTours" for="ukflag"><img class="img-fluid" src="/img/png/flags/BritFlag.png"></label>
 
             <input type="radio" class="btn-check" name="btnradio" id="dutchflag" autocomplete="off">
             <label class="btn btn-outline-primary p-1 m-1 languagePickerTours" for="dutchflag"><img class="img-fluid " src="/img/png/flags/DutcFlag.png"></label>
