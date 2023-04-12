@@ -14,7 +14,6 @@ class ResetPasswordController extends Controller {
             $key = htmlspecialchars($_GET["key"]);
             $email = htmlspecialchars($_GET["email"]);
             if($this->userService->checkResetKey($email, $key)){
-                $this->displayView();
                 if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST)) {
                     if (!empty($_POST['password1']) && !empty($_POST['password2']) && isset($_POST['password1']) && isset($_POST['password2'])) {
                         $password1 = htmlspecialchars($_POST['password1']);
@@ -27,6 +26,7 @@ class ResetPasswordController extends Controller {
                         }
                     }
                 }
+                $this->displayView();
             }
             
         }

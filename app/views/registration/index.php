@@ -2,16 +2,6 @@
     include __DIR__ . '/../header.php';
 ?>
 <script src='https://www.hCaptcha.com/1/api.js' async defer></script>
-<?php
-    $password_error = "";
-    if (isset($_POST['submit'])) {
-        $password = $_POST['password'];
-        $confirmpassword = $_POST['confirmpassword'];
-        if ($password != $confirmpassword) {
-            $password_error = "<p class='text-center invalid-feedback text-light fs-6 p-1 my-0 mt-3 bg-danger rounded'>Invalid email/password combination!</p>";
-        }
-    }
-?>
 <section class="container-fluid row align-items-center m-0 p-0 bg-tetiare-a">
     <form class="col-md-4 mx-auto row align-content-start vh-50 was-validated" method="POST" id="registrion-form">
         <h1 class="text-center text-primary-b display-2">REGISTER</h1>
@@ -29,7 +19,7 @@
         </fieldset>
         <fieldset class="form-group p-2">
             <label class="text-primary-b fs-5" for="passwordTwoField">Confirm password</label>
-            <input class="w-100" id="confirmpassword" type="password" name="confirmpassword" placeholder="password" value="<?= $_POST['confirmpassword'] ?? "" ?> " required/>
+            <input class="w-100" id="confirmpassword" type="password" name="confirmpassword" placeholder="password" value="<?= $_POST['confirmpassword'] ?? "" ?>" required/>
             
         </fieldset>
         <fieldset action="validate/Hcaptcha" method="post">
@@ -38,7 +28,7 @@
         <hr class="invisible">
         <hr class="custom-hr bg-black opacity-100">
         <input class="btn btn-primary-b fs-3 <?= (isset($_POST['email']) && isset($_POST['name']) && isset($_POST['password']) && isset($_POST['confirmpassword'])) ? "is-invalid" : "" ?>" type="submit" value="CREATE ACCOUNT" name="submit" />
-        <?php echo($password_error) ?>
+        <?php echo($this->inputError) ?>
     </form>
 </section>
 <?php

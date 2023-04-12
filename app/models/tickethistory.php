@@ -9,11 +9,9 @@ class TicketHistory extends Item {
     public function __construct(int $item_id = null, int $order_id = null, int $event_id = null, string $event_name = null, float $total_price = null, int $VAT = null, string $QR_Code = null, 
     int $id = null, Tour $tour, int $nr_of_people = null) {
         parent::__construct($item_id, $order_id, $event_id, $event_name, $total_price, $VAT, $QR_Code);
-        if($id != null){
-            $this->id = $id;
-            $this->tour = $tour;
-            $this->nr_of_people = $nr_of_people;
-        }
+        isset($id) ? $this->id = $id : null;
+        $this->tour = $tour;
+        $this->nr_of_people = $nr_of_people;
     }
 
     /**
@@ -21,6 +19,21 @@ class TicketHistory extends Item {
      */
     public function getLink() : string {
         return $this->getTour()->getId() . ";" . $this->getNrOfPeople() . ";" . $this->getEventId();
+    }
+
+    /**
+     * Set the value of total_price
+     *
+     * @return  self
+     */ 
+    public function setTotalPrice($total_price = null) : self
+    {
+        if (isset($total_price)) {
+            $this->total_price = $total_price;
+        } else {
+            $this->total_price = (($this->nr_of_people % 4) * $this->tour->getPrice()) + (floor($this->nr_of_people / 4) * $this->tour->getGroupPrice());
+        }
+        return $this;
     }
 
     /**

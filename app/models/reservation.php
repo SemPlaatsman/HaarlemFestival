@@ -13,21 +13,34 @@ class Reservation extends Item {
     public function __construct(int $item_id = null, int $order_id = null, int $event_id = null, string $event_name = null, float $total_price = null, int $VAT = null, string $QR_Code = null, 
     int $id = null, Restaurant $restaurant = null, float $final_check = null, int $nr_of_adults = null, int $nr_of_kids = null, string $datetime = null) {
         parent::__construct($item_id, $order_id, $event_id, $event_name, $total_price, $VAT, $QR_Code);
-        if($id != null){
-            $this->id = $id;
-            $this->restaurant = $restaurant;
-            $this->final_check = $final_check;
-            $this->nr_of_adults = $nr_of_adults;
-            $this->nr_of_kids = $nr_of_kids;
-            $this->datetime = DateTime::createFromFormat('Y-m-d H:i:s', $datetime);
-        }
+        isset($id) ? $this->id = $id : null;
+        $this->restaurant = $restaurant;
+        isset($final_check) ? $this->final_check = $final_check : null;
+        isset($nr_of_adults) ? $this->nr_of_adults = $nr_of_adults : null;
+        isset($nr_of_kids) ? $this->nr_of_kids = $nr_of_kids : null;
+        $this->datetime = DateTime::createFromFormat('Y-m-d H:i:s', $datetime);
     }
 
     /**
      * Method to get a string with all the variables needed to replicate this object
      */
     public function getLink() : string {
-        return $this->getRestaurant()->getId() . ";" . $this->getNrOfAdults() . ";" . $this->getNrOfKids() . ";" . $this->getDatetimeFormatted() . ";" . $this->getEventId();
+        return $this->getRestaurant()->getId() . ";" . $this->getNrOfAdults() . ";" . $this->getNrOfKids() . ";" . date_format($this->getDatetime(), 'Y-m-d H:i:s') . ";" . $this->getEventId();
+    }
+
+    /**
+     * Set the value of total_price
+     *
+     * @return  self
+     */ 
+    public function setTotalPrice($total_price = null) : self
+    {
+        if (isset($total_price)) {
+            $this->total_price = $total_price;
+        } else {
+            $this->total_price = ($this->nr_of_adults + $this->nr_of_kids) * $this->restaurant->getReservationFee();
+        }
+        return $this;
     }
 
     /**
@@ -88,9 +101,13 @@ class Reservation extends Item {
      *
      * @return  self
      */ 
-    public function setFinalCheck($final_check) : self
+    public function setFinalCheck($final_check = null) : self
     {
-        $this->final_check = $final_check;
+        if (isset($final_check)) {
+            $this->final_check = $final_check;
+        } else {
+            $this->final_check = ($this->nr_of_adults * $this->restaurant->getAdultPrice()) + ($this->nr_of_kids * $this->restaurant->getKidsPrice()) - $this->getTotalPrice();
+        }
         return $this;
     }
 
