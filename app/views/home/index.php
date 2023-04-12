@@ -13,40 +13,7 @@ include __DIR__ . '/../header.php';
 // $_SESSION['guest']->cart = serialize($cart);
 // var_dump(unserialize($_SESSION['guest']->cart))
 ?>
-<div class="px-4 py-5 my-5 text-center">
-    <img class="d-block mx-auto mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
-    <h1 class="display-5 fw-bold">Centered hero</h1>
 
-    <!--- paragraph 1 --->
-    <div class="col-lg-6 mx-auto">
-        <?php foreach ($model as $page) { ?>
-        <?php if ($page->getId() === 1) { ?>
-        <p class="lead mb-4" data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>">
-            <?= $page->getBody_markup(); ?>
-        </p>
-        <button type="button" class="btn btn-primary" onclick="openEditorModal(<?= $page->getId() ?>)">Open
-            Editor</button>
-        <?php } ?>
-        <?php } ?>
-    </div>
-
-    <!--- paragraph 2 --->
-    <div class="col-lg-6 mx-auto">
-        <?php foreach ($model as $page) { ?>
-        <?php if ($page->getId() === 2) { ?>
-        <p class="lead mb-4" data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>">
-            <?= $page->getBody_markup(); ?>
-        </p>
-
-        <button type="button" class="btn btn-primary" onclick="openEditorModal(<?= $page->getId() ?>)">Open
-            Editor</button>
-        <?php } ?>
-        <?php } ?>
-    </div>
-    <?php
-    include __DIR__ . '/../modalwysiwyg.php';
-    ?>
-</div>
 <?php
 include __DIR__ . '/../footer.php';
 ?>

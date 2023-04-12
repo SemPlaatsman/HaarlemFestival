@@ -12,6 +12,7 @@
                 HOURS</a></li>
         <li><a href="/restaurant" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">RESTAURANTS</a>
         </li>
+        <li><a href="/reservation" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">RESERVATIONS</a></li>
     </ul>
 </header>
 <div class="container-fluid mt-5">
@@ -28,7 +29,7 @@
                 <a href="/user" class="btn bg-primary-b text-tetiare-a btn-lg btn-block">USERS</a>
                 <a href="/openinghour" class="btn bg-primary-b text-tetiare-a btn-lg btn-block">OPENING HOURS</a>
                 <a href="/restaurant" class="btn bg-primary-b text-tetiare-a btn-lg btn-block">RESTAURANTS</A>
-
+                <a href="/reservation" class="btn bg-primary-b text-tetiare-a btn-lg btn-block">RESERVATIONS</A>
             </div>
             <!-- temporarily -->
             <a href="/download/income" class="btn bg-primary-b text-tetiare-a btn-lg btn-block">download a excel of the earnings</a>

@@ -14,9 +14,9 @@ class RestaurantController extends Controller
     public function index()
     {
         try {
-            $restaurant = $this->restaurantservice->getRestaurants();
+            $restaurants = $this->restaurantservice->getRestaurants();
             $data = [
-                'restaurant' => $restaurant
+                'restaurant' => $restaurants
             ];
             $this->displayView($data);
         } catch (Exception $e) {

@@ -146,6 +146,12 @@ class router
                 }
                 $controller->index();
                 break;
+            
+            case 'reservation':
+                require_once __DIR__ . '/controllers/reservationcontroller.php';
+                $controller = new ReservationController();
+                $controller->index();
+                break;
 
             case 'captcha':
                 require_once __DIR__ . '/controllers/captchacontroller.php';

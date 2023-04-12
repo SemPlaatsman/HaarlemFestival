@@ -14,6 +14,7 @@ include __DIR__ . '/../header.php';
                 HOURS</a></li>
         <li><a href="/restaurant" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">RESTAURANTS</a>
         </li>
+        <li><a href="/reservation" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">RESERVATIONS</a></li>
     </ul>
 </header>
 <div class="row container">

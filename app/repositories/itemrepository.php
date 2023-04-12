@@ -54,7 +54,8 @@ class ItemRepository extends Repository {
         try {
             $stmnt = $this -> connection -> prepare("DELETE FROM item WHERE id = :id");
             $stmnt -> bindParam(':id', $id, PDO::PARAM_INT);
-            return $stmnt -> execute();
+            $stmnt -> execute();
+            return boolval($stmnt->rowCount());
         } catch (PDOException $e) {
             return false;
         }

@@ -29,7 +29,7 @@
           <section class="modal-dialog modal-xl">
             <article class="modal-content bg-primary-b text-tetiare-a">
               <?php if (isset($_GET['cart'])) { ?>
-                <form role="form" method="POST" id="addYummyForm-<?= $reservation->getId(); ?>"></form>
+                <!-- <form role="form" method="POST" id="addYummyForm-<?= $reservation->getId(); ?>"></form> -->
               <?php } else { ?>
                 <form role="form" method="POST" id="editYummyForm-<?= $reservation->getId(); ?>"></form>
                 <form role="form" method="POST" id="deleteYummyForm-<?= $reservation->getId(); ?>" onsubmit='return confirm("Are you sure you wish to remove a reservation for <?= $reservation->getRestaurant()->getName(); ?> at <?= $reservation->getDatetimeFormatted(); ?>?");'></form>
@@ -76,7 +76,7 @@
                 <?php if (!isset($_GET['cart'])) { ?>
                   <button type="submit" form="editYummyForm-<?= $reservation->getId(); ?>" class="btn btn-tetiare-a">SAVE CHANGES</button>
                 <?php } else { ?>
-                  <button type="submit" form="addYummyForm-<?= $reservation->getId(); ?>" class="btn btn-tetiare-a">ADD TO OWN CART</button>
+                  <!-- <button type="submit" form="addYummyForm-<?= $reservation->getId(); ?>" class="btn btn-tetiare-a">ADD TO OWN CART</button> -->
                 <?php } ?>
               </section>
             </article>
@@ -110,7 +110,7 @@
           <section class="modal-dialog modal-xl">
             <article class="modal-content bg-primary-b text-tetiare-a">
             <?php if (isset($_GET['cart'])) { ?>
-              <form role="form" method="POST" id="addDanceForm-<?= $ticketDance->getId(); ?>"></form>
+              <!-- <form role="form" method="POST" id="addDanceForm-<?= $ticketDance->getId(); ?>"></form> -->
             <?php } else { ?>
               <form role="form" method="POST" id="editDanceForm-<?= $ticketDance->getId(); ?>"></form>
               <form role="form" method="POST" id="deleteDanceForm-<?= $ticketDance->getId(); ?>" onsubmit='return confirm("Are you sure you wish to remove your tickets for <?= $ticketDance->getPerformance()->getArtist()->getName(); ?> at <?= $ticketDance->getPerformance()->getStartDateFormatted(); ?>?");'></form>
@@ -154,7 +154,7 @@
                 <?php if (!isset($_GET['cart'])) { ?>
                   <button type="submit" form="editDanceForm-<?= $ticketDance->getId(); ?>" class="btn btn-tetiare-a">SAVE CHANGES</button>
                 <?php } else { ?>
-                  <button type="submit" form="addDanceForm-<?= $ticketDance->getId(); ?>" class="btn btn-tetiare-a">ADD TO OWN CART</button>
+                  <!-- <button type="submit" form="addDanceForm-<?= $ticketDance->getId(); ?>" class="btn btn-tetiare-a">ADD TO OWN CART</button> -->
                 <?php } ?>
               </section>
             </article>
@@ -186,7 +186,7 @@
           <section class="modal-dialog modal-xl">
             <article class="modal-content bg-primary-b text-tetiare-a">
               <?php if (isset($_GET['cart'])) { ?>
-                <form role="form" method="POST" id="addHistoryForm-<?= $ticketHistory->getId(); ?>"></form>
+                <!-- <form role="form" method="POST" id="addHistoryForm-<?= $ticketHistory->getId(); ?>"></form> -->
               <?php } else { ?>
                 <form role="form" method="POST" id="editHistoryForm-<?= $ticketHistory->getId(); ?>"></form>
                 <form role="form" method="POST" id="deleteHistoryForm-<?= $ticketHistory->getId(); ?>" onsubmit='return confirm("Are you sure you wish to delete your tour tickets for <?= $ticketHistory->getNrOfPeople(); ?> people in <?= $ticketHistory->getTour()->getLanguage(); ?>?");'></form>
@@ -228,7 +228,7 @@
                 <?php if (!isset($_GET['cart'])) { ?>
                   <button type="submit" form="editHistoryForm-<?= $ticketHistory->getId(); ?>" class="btn btn-tetiare-a">SAVE CHANGES</button>
                 <?php } else { ?>
-                  <button type="submit" form="addHistoryForm-<?= $ticketHistory->getId(); ?>" class="btn btn-tetiare-a">ADD TO OWN CART</button>
+                  <!-- <button type="submit" form="addHistoryForm-<?= $ticketHistory->getId(); ?>" class="btn btn-tetiare-a">ADD TO OWN CART</button> -->
                 <?php }?>
               </section>
             </article>
