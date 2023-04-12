@@ -101,7 +101,7 @@ class ReservationRepository extends ItemRepository {
         }
     }
 
-    public function getReservationsForOrder(int $orderId) : Array {
+    public function getReservationsForOrder(int $orderId) : array {
         try {
             $stmnt = $this->connection->prepare("SELECT reservation.item_id, item.order_id, item.event_id, " . 
             "(SELECT event.name FROM `event` WHERE event.id = item.event_id) as 'event_name', item.total_price, item.VAT, " . 
@@ -126,7 +126,7 @@ class ReservationRepository extends ItemRepository {
                 }
             }
 
-            $reservations = $stmnt->fetch(PDO::FETCH_FUNC, 'rowMapperReservation');
+            $reservations = $stmnt->fetchAll(PDO::FETCH_FUNC, 'rowMapperReservation');
             return $reservations;
         } catch (PDOException $e) {
             echo($e);

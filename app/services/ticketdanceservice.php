@@ -33,5 +33,10 @@ class TicketDanceService
     {
         return $this->ticketDanceRepository->getAllTicketsDance();
     }
+
+    public function getTicketDanceForOrder(int $orderId) : array
+    {
+        return $this->ticketDanceRepository->getTicketDanceForOrder($orderId);
+    }
 }
 ?>
