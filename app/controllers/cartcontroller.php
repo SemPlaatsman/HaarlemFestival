@@ -151,7 +151,7 @@ class CartController extends Controller {
         $model += ['paymentTotals' => $paymentTotals];
     }
 
-    private function addToCartByLink(int $linkItemId, string $link ) {
+    private function addToCartByLink(int $linkItemId, string $link) {
         
     }
 }
