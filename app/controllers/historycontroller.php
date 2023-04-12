@@ -59,8 +59,10 @@ class HistoryController extends Controller
         $data = array();
 
         foreach ($tours as $tour) {
-            array_push($data, $tour->toObject());
+
+           array_push($data,$tour->toObject());
         }
+
         echo json_encode($data);
 
     }
