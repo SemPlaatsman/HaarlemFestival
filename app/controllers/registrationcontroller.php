@@ -8,13 +8,13 @@ class RegistrationController extends Controller {
     private $userService;
     private $emailGenerator;
     private $loginService;
-    public $passwordError;
+    public $inputError;
 
     function __construct() {
         $this->userService = new UserService();
         $this->loginService = new LoginService();
         $this->emailGenerator = new EmailGenerator();
-        $this->passwordError = "";
+        $this->inputError = "";
     }
 
     public function index() {
@@ -32,7 +32,8 @@ class RegistrationController extends Controller {
                 $name = htmlspecialchars($_POST['name']);
                 $password = htmlspecialchars($_POST['password']);
                 $confirmpassword = htmlspecialchars($_POST['confirmpassword']);
-                if($password == $confirmpassword && $this->userService->getUserByEmail($email)==null){
+                $inputChecked = $this->checkInput($password, $confirmpassword, $email);
+                if($inputChecked){
                     $isAdmin = false;
                     $currentDatetime = date('Y-m-d H:i:s');
                     $time_created = DateTime::createFromFormat('Y-m-d H:i:s', $currentDatetime);
@@ -59,6 +60,9 @@ class RegistrationController extends Controller {
                     }
                 }
             }
+            else{
+                $this->inputError = "<p class='text-center invalid-feedback text-light fs-6 p-1 my-0 mt-3 bg-danger rounded'>Please fill in the hCaptcha</p>";
+            }
         }
     }
 
@@ -83,14 +87,21 @@ class RegistrationController extends Controller {
         }
     }
 
-    function validatePassword($password, $confirmpassword) {
+    function checkInput($password, $confirmpassword, $email) {
         // Check if the password meets your validation criteria
+        if($this->userService->getUserByEmail($email)!=null){
+            $this->inputError = "<p class='text-center invalid-feedback text-light fs-6 p-1 my-0 mt-3 bg-danger rounded'>There is already an email for this account</p>";
+            return false;
+        }
         if (strlen($password) < 8) {
-            $this->passwordError = "<p class='text-center invalid-feedback text-light fs-6 p-1 my-0 mt-3 bg-danger rounded'>Password must be at least 8 characters!</p>";
+            $this->inputError = "<p class='text-center invalid-feedback text-light fs-6 p-1 my-0 mt-3 bg-danger rounded'>Password must be at least 8 characters!</p>";
+            return false;
         }
         else if ($password != $confirmpassword) {
-            $this->passwordError = "<p class='text-center invalid-feedback text-light fs-6 p-1 my-0 mt-3 bg-danger rounded'>Passwords do not match!</p>";
+            $this->inputError = "<p class='text-center invalid-feedback text-light fs-6 p-1 my-0 mt-3 bg-danger rounded'>Passwords do not match!</p>";
+            return false;
         }
+        return true;
     }
 }
 ?>
