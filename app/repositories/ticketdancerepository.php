@@ -78,8 +78,8 @@ class TicketDanceRepository extends ItemRepository {
                     int $id, int $performance_id, int $artist_id, string $artist_name, int $venue_id, string $venue_name, string $venue_location, 
                     string $start_date, string $end_date, $ticket_price, int $nr_of_people) {
                     return new TicketDance($item_id, $order_id, $event_id, $event_name, $total_price, $VAT, $QR_Code, 
-                        $id, $performance_id, $artist_id, $artist_name, $venue_id, $venue_name, $venue_location, $start_date, 
-                        $end_date, $ticket_price, $nr_of_people);
+                        $id, new Performance($performance_id, new Artist($artist_id, $artist_name), new Venue($venue_id, $venue_name, $venue_location), $start_date, 
+                        $end_date, $ticket_price), $nr_of_people);
                 }
             }
 
@@ -100,7 +100,7 @@ class TicketDanceRepository extends ItemRepository {
             "(SELECT venue.location FROM `venue` WHERE venue.id = performance.venue_id) as 'venue_location', " .
             "performance.start_date, performance.end_date, performance.price as 'ticket_price', ticket_dance.nr_of_people " .
             "FROM `item` JOIN ticket_dance ON ticket_dance.item_id = item.id JOIN `performance` ON performance.id = ticket_dance.performance_id " .
-            "WHERE ticket_dance.id = :id;");
+            "WHERE item.order_id = :id;");
             $stmnt->bindParam(":orderId", $orderId, PDO::PARAM_INT);
             $stmnt->execute();
             $stmnt->setFetchMode(PDO::FETCH_CLASS, 'TicketDance');
@@ -112,14 +112,15 @@ class TicketDanceRepository extends ItemRepository {
                     int $id, int $performance_id, int $artist_id, string $artist_name, int $venue_id, string $venue_name, string $venue_location, 
                     string $start_date, string $end_date, $ticket_price, int $nr_of_people) {
                     return new TicketDance($item_id, $order_id, $event_id, $event_name, $total_price, $VAT, $QR_Code, 
-                        $id, $performance_id, $artist_id, $artist_name, $venue_id, $venue_name, $venue_location, $start_date, 
-                        $end_date, $ticket_price, $nr_of_people);
+                        $id, new Performance($performance_id, new Artist($artist_id, $artist_name), new Venue($venue_id, $venue_name, $venue_location), $start_date, 
+                        $end_date, $ticket_price), $nr_of_people);
                 }
             }
 
             $ticketsDance = $stmnt->fetchAll(PDO::FETCH_FUNC, 'rowMapperTicketDance');
             return $ticketsDance;
         } catch (PDOException $e) {
+            
             return null;
         }
     }
@@ -134,7 +135,6 @@ class TicketDanceRepository extends ItemRepository {
             "(SELECT venue.location FROM `venue` WHERE venue.id = performance.venue_id) as 'venue_location', " .
             "performance.start_date, performance.end_date, performance.price as 'ticket_price', ticket_dance.nr_of_people " .
             "FROM `item` JOIN ticket_dance ON ticket_dance.item_id = item.id JOIN `performance` ON performance.id = ticket_dance.performance_id;");
-            $stmnt->bindParam(":id", $id, PDO::PARAM_INT);
             $stmnt->execute();
             $stmnt->setFetchMode(PDO::FETCH_CLASS, 'TicketDance');
 
@@ -145,13 +145,14 @@ class TicketDanceRepository extends ItemRepository {
                     int $id, int $performance_id, int $artist_id, string $artist_name, int $venue_id, string $venue_name, string $venue_location, 
                     string $start_date, string $end_date, $ticket_price, int $nr_of_people) {
                     return new TicketDance($item_id, $order_id, $event_id, $event_name, $total_price, $VAT, $QR_Code, 
-                        $id, $performance_id, $artist_id, $artist_name, $venue_id, $venue_name, $venue_location, $start_date, 
-                        $end_date, $ticket_price, $nr_of_people);
+                        $id, new Performance($performance_id, new Artist($artist_id, $artist_name), new Venue($venue_id, $venue_name, $venue_location), $start_date, 
+                        $end_date, $ticket_price), $nr_of_people);
                 }
             }
             $ticketsDance = $stmnt->fetchAll(PDO::FETCH_FUNC, 'rowMapperTicketDance');
             return $ticketsDance;
         } catch (PDOException $e) {
+            echo($e);
             return null;
         }
     }

@@ -1,12 +1,23 @@
 <?php
 require_once "../vendor/autoload.php"; 
+require_once __DIR__ . '/../services/reservationservice.php';
+require_once __DIR__ . '/../services/ticketdanceservice.php';
+require_once __DIR__ . '/../services/tickethistoryservice.php';
+require_once __DIR__ . '/../services/orderservice.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use Fpdf\Fpdf;
+define('EURO',chr(128));
 
 class EmailGenerator {
 
-    function __construct() {
+    private $reservationService;
 
+    function __construct() {
+        $this->reservationService = new ReservationService();
+        $this->ticketDanceService = new TicketDanceService();
+        $this->ticketHistoryService = new TicketHistoryService();
+        $this->orderService = new OrderService();
     }
 
 
@@ -30,4 +41,112 @@ class EmailGenerator {
         }
     }
 
+    function sentEmailWithTickets(string $recipient, int $orderId){
+        $invoice = $this->makeInvoicePdf($orderId);
+        $mail = new PHPMailer();
+        $mail->isSMTP();                                             
+        $mail->Host       = 'smtp-relay.sendinblue.com';                        
+        $mail->SMTPAuth   = true;                                   
+        $mail->Username   = 'janjaapvanlaar@gmail.com';                   
+        $mail->Password   = 'V5JKvcpqUnz0GX6W';                     
+        $mail->SMTPSecure = 'tls';                                  
+        $mail->Port       = 587;                                    
+        $mail->setFrom('Haarlem@festival.nl', 'Haarlem festival');
+        $mail->IsHTML(true);
+        $mail->Subject = "Ticket haarlem festival";
+        $mail->Body = $body;
+        $mail->AddAddress($recipient, 'Recipient Name');
+        $mail->addStringAttachment($invoice->Output("S",'invoice.pdf'), 'invoice.pdf', $encoding = 'base64', $type = 'application/pdf');
+        $mail->Send();
+        if(!$mail->Send()){
+            echo "Mailer Error: " . $mail->ErrorInfo;
+        }
+    }
+
+    function makeInvoicePdf(int $orderId)
+    {
+        $reservations = $this->reservationService->getReservationsForOrder(1);
+        $ticketsDance = $this->ticketDanceService->getAllTicketsDance(1);
+        $ticketsHistory = $this->ticketHistoryService->getTicketHistoryForOrder(1);
+        $pdf = new Fpdf();
+        $pdf->AddPage();
+        $pdf->SetFont('Arial','B',24);
+        $pdf->Cell(40,10, "Invoice");
+        $pdf->Ln(20);
+        $pdf->SetFont('Arial','B',16);
+        $pdf->Cell(40,10, "Reservations:");
+        $pdf->Ln(10);
+        $pdf->SetFont('Arial', '', 11);
+        //print reservations
+        foreach($reservations as $reservation){
+            $current_y = $pdf->GetY();
+            $current_x = $pdf->GetX();
+            $pdf->MultiCell(40,5, "Restaurant: \n" .$reservation->getRestaurant()->getName(), 0);
+            $current_x= $current_x + 40;
+            $pdf->SetXY($current_x, $current_y);
+            $pdf->MultiCell(40,5, "Date: \n" . $reservation->getDatetimeFormatted(), 0);
+            $current_x= $current_x + 40;
+            $pdf->SetXY($current_x, $current_y);
+            $pdf->MultiCell(40,5, "Nr of adults: \n" . $reservation->getNrOfAdults(), 0);
+            $current_x= $current_x + 40;
+            $pdf->SetXY($current_x, $current_y);
+            $pdf->MultiCell(80,5, "Nr of kids: \n" . $reservation->getNrOfKids(), 0);
+            $current_x= $current_x + 40;
+            $pdf->SetXY($current_x, $current_y);
+            $pdf->MultiCell(40,5, "Price: \n". EURO . $reservation->getTotalPrice(), 0);
+            $pdf->Ln(10);
+        }
+        $pdf->Ln(20);
+        $pdf->SetFont('Arial','B',16);
+        $pdf->Cell(40,10, "Tickets DANCE!:");
+        $pdf->Ln(10);
+        $pdf->SetFont('Arial', '', 11);
+        //print dance tickets
+        foreach($ticketsDance as $ticket){
+            $current_y = $pdf->GetY();
+            $current_x = $pdf->GetX();
+            $pdf->MultiCell(40,5, "Nr of people: \n" . $ticket->getNrOfPeople(), 0);
+            $current_x= $current_x + 40;
+            $pdf->SetXY($current_x, $current_y);
+            $pdf->MultiCell(40,5, "Venue: \n" . $ticket->getPerformance()->getVenue()->getName(), 0);
+            $current_x= $current_x + 40;
+            $pdf->SetXY($current_x, $current_y);
+            $pdf->MultiCell(40,5, "Start: \n" . $ticket->getPerformance()->getStartDateFormatted(), 0);
+            $current_x= $current_x + 40;
+            $pdf->SetXY($current_x, $current_y);
+            $pdf->MultiCell(40,5, "End: \n" . $ticket->getPerformance()->getEndDateFormatted(), 0);
+            
+            $current_x= $current_x + 40;
+            $pdf->SetXY($current_x, $current_y);
+            $pdf->MultiCell(40,5, "Price: \n". EURO . $ticket->getTotalPrice(), 0);
+            $pdf->Ln(10);
+        }
+        $pdf->Ln(20);
+        $pdf->SetFont('Arial','B',16);
+        $pdf->Cell(40,10, "Tickets A Stroll Through History:");
+        $pdf->Ln(10);
+        $pdf->SetFont('Arial', '', 11);
+        //print history tickets
+        foreach($ticketsHistory as $ticket){
+            $current_y = $pdf->GetY();
+            $current_x = $pdf->GetX();
+            $pdf->MultiCell(40,5, "Nr of people: \n" . $ticket->getNrOfPeople(), 0);
+            $current_x= $current_x + 40;
+            $pdf->SetXY($current_x, $current_y);
+            $pdf->MultiCell(40,5, "Language: \n" . $ticket->getTour()->getLanguage(), 0);
+            $current_x= $current_x + 40;
+            $pdf->SetXY($current_x, $current_y);
+            $pdf->MultiCell(50,5, "Start: \n" . $ticket->getTour()->getDatetimeFormatted(), 0);
+            $current_x= $current_x + 80;
+            $pdf->SetXY($current_x, $current_y);
+            $pdf->MultiCell(40,5, "Price: \n". EURO . $ticket->getTotalPrice(), 0);
+            $pdf->Ln(10);
+        }
+        $current_y = $pdf->GetY();
+        $current_x = $pdf->GetX() +160;
+        $pdf->SetXY($current_x, $current_y);
+        $pdf->MultiCell(40,5, "Total: \n". EURO . $this->orderService->getOrderPrice(1), 0);
+        
+        return $pdf;
+    }
 }

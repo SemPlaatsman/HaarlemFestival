@@ -11,5 +11,9 @@ class OrderService {
     public function completeOrder(int $orderId) : bool {
         return $this->orderRepository->completeOrder($orderId);
     }
+
+    public function getOrderPrice(int $orderId) : int {
+        return $this->orderRepository->getOrderPrice($orderId);
+    }
 }
 ?>

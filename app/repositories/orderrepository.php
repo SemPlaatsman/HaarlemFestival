@@ -9,5 +9,15 @@ class OrderRepository extends Repository
         $query->execute();
         return $query->rowCount() > 0;
     }
+
+    public function getOrderPrice(int $orderId) : int {
+        $stmnt = $this->connection->prepare("SELECT SUM(`item`.`total_price`) AS test FROM `orders` JOIN `item` ON `item`.`order_id` = `orders`.`id` WHERE `orders`.`id` = :id;");
+        $stmnt->bindParam(":id", $orderId, PDO::PARAM_INT);
+        $stmnt->setFetchMode(PDO::FETCH_NUM);
+        $stmnt->execute();
+        
+        $result = $stmnt->fetch();;
+        return $result[0];
+    }
 }
 ?>
