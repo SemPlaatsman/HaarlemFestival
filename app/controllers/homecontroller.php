@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/controller.php';
+require_once __DIR__ . '/../handler/contenthandler.php';
 require_once __DIR__ . '/../services/pageservice.php';
 
 class HomeController extends Controller
@@ -26,23 +27,7 @@ class HomeController extends Controller
 
     public function updateContent()
     {
-        try {
-            $id = htmlspecialchars($_POST['id']);
-            $new_body_markup = htmlspecialchars($_POST['body_markup']);
-
-            $result = $this->pageService->updateContent($id, $new_body_markup);
-
-            if ($result) {
-                // return succes response 
-                echo 'Update complete';
-            } else {
-                // return failed response
-                echo 'Something went wrong with the update';
-            }
-        } catch (Exception $e) {
-            // Handle the exception here
-            echo 'An error occurred: ' . $e->getMessage();
-        }
+        updateContent($this->pageService);
     }
 
 }
