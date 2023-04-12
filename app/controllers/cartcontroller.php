@@ -93,9 +93,9 @@ class CartController extends Controller {
                     "value" => number_format(($model['paymentTotals']['reservations'] ?? 0) + ($model['paymentTotals']['ticketsDance'] ?? 0) + ($model['paymentTotals']['ticketsHistory'] ?? 0), 2)
                 ],
                 "description" => $description,
-                "cancelUrl" => "https://17a8-145-81-195-218.eu.ngrok.io/cart",
-                "redirectUrl" => "https://17a8-145-81-195-218.eu.ngrok.io/cart",
-                "webhookUrl" => "https://17a8-145-81-195-218.eu.ngrok.io/molliewebhook",
+                "cancelUrl" => "https://0376-145-81-195-218.eu.ngrok.io/cart",
+                "redirectUrl" => "https://0376-145-81-195-218.eu.ngrok.io/cart",
+                "webhookUrl" => "https://0376-145-81-195-218.eu.ngrok.io/molliewebhook",
                 "metadata" => [
                     "orderId" => $orderId
                 ]
