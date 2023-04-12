@@ -63,7 +63,7 @@ class CartController extends Controller {
             $this->cartService->deleteItem($itemId);
         } else if (isset($_POST['addFromLinkId']) && isset($_GET['cart'])) {
             $linkItemId = $_POST['addFromLinkId'];
-            $this->addToCart($linkItemId, base64_decode(str_rot13($_GET['cart'])));
+            $this->addToCartByLink($linkItemId, base64_decode(str_rot13($_GET['cart'])));
         }
     }
 
