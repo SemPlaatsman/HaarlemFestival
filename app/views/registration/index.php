@@ -2,14 +2,6 @@
     include __DIR__ . '/../header.php';
 ?>
 <script src='https://www.hCaptcha.com/1/api.js' async defer></script>
-<?php
-    $password_error = "";
-    if (isset($_POST['submit'])) {
-        $password = $_POST['password'];
-        $confirmpassword = $_POST['confirmpassword'];
-        $this->validatePassword($password, $confirmpassword);
-    }
-?>
 <section class="container-fluid row align-items-center m-0 p-0 bg-tetiare-a">
     <form class="col-md-4 mx-auto row align-content-start vh-50 was-validated" method="POST" id="registrion-form">
         <h1 class="text-center text-primary-b display-2">REGISTER</h1>
@@ -36,7 +28,7 @@
         <hr class="invisible">
         <hr class="custom-hr bg-black opacity-100">
         <input class="btn btn-primary-b fs-3 <?= (isset($_POST['email']) && isset($_POST['name']) && isset($_POST['password']) && isset($_POST['confirmpassword'])) ? "is-invalid" : "" ?>" type="submit" value="CREATE ACCOUNT" name="submit" />
-        <?php echo($this->passwordError) ?>
+        <?php echo($this->inputError) ?>
     </form>
 </section>
 <?php
