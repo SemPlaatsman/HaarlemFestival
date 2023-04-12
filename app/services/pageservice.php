@@ -3,26 +3,27 @@ require_once __DIR__ . '/../repositories/pagerepository.php';
 
 class PageService
 {
-    public function insertContent(int $id, string $url, string $body_markup)
-    {
-        $repository = new PageRepository();
+    private $pageRepository;
 
-        return $repository->insertContent($id, $url, $body_markup);
+    public function __construct()
+    {
+        $this->pageRepository = new PageRepository();
+    }
+
+    public function insertContent(string $url, string $body_markup)
+    {
+        return $this->pageRepository->insertContent($url, $body_markup);
     }
 
     public function updateContent(int $id, string $body_markup)
     {
-        $repository = new PageRepository();
-
-        return $repository->updateContent($id, $body_markup);
+        return $this->pageRepository->updateContent($id, $body_markup);
     }
 
     public function getContent()
     {
-        $repository = new PageRepository();
-
-        return $repository->getContent();
+        return $this->pageRepository->getContent();
     }
-    
+
 }
 ?>

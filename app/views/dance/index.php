@@ -16,16 +16,18 @@
         <div class="row">
             <div class="col-md-4 offset-md-1">
                 <h2 class="text-center text-light-purple mt-5 m1-1 display-3">BEST NIGHT EVER!</h2>
-                <p class="text-acid-yellow mt-3 m-3 m1-3 fs-5">Welcome to our Haarlem DANCE! event where many different
-                    DJ’s from
-                    around
-                    the world will be performing in our venues to make sure you get to experience the best night ever!
-                    <br><br>
-
-                    If you want to know more about where or when they will be performing please go ahead and take a look
-                    at
-                    the schedule below.
-                </p>
+                <?php foreach ($model as $page) { ?>
+                    <?php if ($page->getId() === 26) { ?>
+                        <p class="text-acid-yellow mt-3 m-3 m1-3 fs-5" data-id="<?= $page->getId() ?>"
+                            data-url="<?= $page->getUrl() ?>">
+                            <?= $page->getBody_markup(); ?>
+                        </p>
+                        <div class="text-center">
+                            <button type="button" class="btn btn-primary" onclick="openEditorModal(<?= $page->getId() ?>)">Open
+                                Editor</button>
+                        </div>
+                    <?php } ?>
+                <?php } ?>
             </div>
             <div class="col-4">
                 <img src="img/png/dance/other/Fireworkvenue-Union.png"></img>
@@ -47,19 +49,18 @@
             <img src="img/png/dance/other/Hardwell-Component.png" class="col-md-2 offset-md-1 p-3 mb-5"></img>
             <div class="col-md-4 offset-md-2">
                 <h2 class="text-center justify-content-center text-light-purple mt-5 display-3">GET HYPED!</h2>
-                <p class="text-acid-yellow mt-3 m-3 text-end fs-5">In our venues top talented DJ’s like Hardwell,
-                    Tiësto,
-                    Martin Garrix and many more will be performing in front of you and your friends to give you a
-                    night
-                    out
-                    you won’t forget.<br><br>
-
-                    If you want to find out more about them we got two detailed pages of some Dutch DJ’s to hype you
-                    up!<br><br>
-
-                    So don’t be shy and find out more about your favourite DJ’s by visiting our pages.
-                </p>
-
+                <?php foreach ($model as $page) { ?>
+                    <?php if ($page->getId() === 27) { ?>
+                        <p class="text-acid-yellow mt-3 m-3 text-end fs-5" data-id="<?= $page->getId() ?>"
+                            data-url="<?= $page->getUrl() ?>">
+                            <?= $page->getBody_markup(); ?>
+                        </p>
+                        <div class="text-center">
+                            <button type="button" class="btn btn-primary" onclick="openEditorModal(<?= $page->getId() ?>)">Open
+                                Editor</button>
+                        </div>
+                    <?php } ?>
+                <?php } ?>
             </div>
             <div class="col-md-1">
             </div>
@@ -191,6 +192,9 @@
                 guests. </p>
         </div>
     </div>
+    <?php
+    include __DIR__ . '/../modalwysiwyg.php';
+    ?>
 </div>
 
 <?php
