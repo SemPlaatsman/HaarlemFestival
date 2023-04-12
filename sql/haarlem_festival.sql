@@ -188,6 +188,7 @@ INSERT INTO `pages` (`id`, `url`, `body_markup`) VALUES
 (1, '', 'Welcome to The Festival, a celebration of everything that has to do with food, history, dance and culture in Haarlem. First up, we have Yummy!, a delicious food festival. 
 Next up, travel back in time and visit A Stroll Through History Then we have DANCE, a high-energy dance event featuring some of the best DJ’s from around the world. 
 Finally, delve into the mysteries of the Teylers Museum with The Secret Of Professor Teyler treasure hunt! Don''t be afraid to join in and go all out!'),
+
 (2, '', 'In Haarlem a charming and tasty food festival called “Yummy!” is taking place. Here you can try loads of new dishes in various restaurants. 
 Be sure to mark your calendars and plan your trip today!'),
 (3, '', 'The city of Haarlem has a rich history and a lot of beautiful sites to see.

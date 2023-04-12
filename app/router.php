@@ -180,10 +180,17 @@ class router
                 $controller = new pdfcontroller();
                 break;
 
+
+            case 'download/income':
+                require __DIR__ . '/controllers/exceldownloadcontroller.php';
+                $controller = new excelDownloadController();
+                $controller->downloadExcel();
+                break;
+
             case 'api':
-            // require __DIR__ . '/apiControllers/apiController.php';
-            // $api = new api();
-            // break;
+                // require __DIR__ . '/apiControllers/apiController.php';
+                // $api = new api();
+                // break;
 
             case 'dance':
                 require_once __DIR__ . '/controllers/dancecontroller.php';
@@ -212,7 +219,6 @@ class router
 
                 if (isset($_POST['language'])) {
                     $controller->getSchedule($_POST['language']);
-
                 } else {
                     http_response_code(404);
                     echo "404 Not Found";
