@@ -12,7 +12,10 @@ define('EURO',chr(128));
 
 class EmailGenerator {
 
+    private $orderService;
     private $reservationService;
+    private $ticketDanceService;    
+    private $ticketHistoryService;
 
     function __construct() {
         $this->reservationService = new ReservationService();
