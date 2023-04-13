@@ -157,7 +157,7 @@ class TicketDanceRepository extends ItemRepository {
         }
     }
 
-    public function getTicketDanceForQR(string $QR_Code) : Item {
+    public function getTicketDanceForQR(string $QR_Code) {
         try {
             $stmnt = $this->connection->prepare("SELECT ticket_dance.item_id, item.order_id, item.event_id, " .
             "(SELECT event.name FROM `event` WHERE event.id = item.event_id) as 'event_name', item.total_price, " .
@@ -168,7 +168,7 @@ class TicketDanceRepository extends ItemRepository {
             "performance.start_date, performance.end_date, performance.price as 'ticket_price', ticket_dance.nr_of_people " .
             "FROM `item` JOIN ticket_dance ON ticket_dance.item_id = item.id JOIN `performance` ON performance.id = ticket_dance.performance_id " .
             "WHERE item.QR_Code = :QR_Code;");
-            $stmnt->bindParam(":item.QR_Code", $QR_Code, PDO::PARAM_INT);
+            $stmnt->bindParam(":QR_Code", $QR_Code, PDO::PARAM_STR);
             $stmnt->execute();
             $stmnt->setFetchMode(PDO::FETCH_CLASS, 'TicketDance');
 
@@ -184,8 +184,11 @@ class TicketDanceRepository extends ItemRepository {
                 }
             }
 
-            $ticketsDance = $stmnt->fetch(PDO::FETCH_FUNC, 'rowMapperTicketDance');
-            return $ticketsDance;
+            $ticketsDance = $stmnt->fetchAll(PDO::FETCH_FUNC, 'rowMapperTicketDance');
+            if(!empty($ticketsDance)){
+                return $ticketsDance[0];
+            }
+            return null;
         } catch (PDOException $e) {
             return null;
         }

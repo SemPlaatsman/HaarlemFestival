@@ -165,7 +165,7 @@ class ReservationRepository extends ItemRepository {
         }
     }
 
-    public function getReservationForQR(string $QR_Code) : Item {
+    public function getReservationForQR(string $QR_Code) {
         try {
             $stmnt = $this->connection->prepare("SELECT reservation.item_id, item.order_id, item.event_id, " . 
             "(SELECT event.name FROM `event` WHERE event.id = item.event_id) as 'event_name', item.total_price, item.VAT, " . 
@@ -174,7 +174,7 @@ class ReservationRepository extends ItemRepository {
             "restaurant.reservation_fee as 'restaurant_reservation_fee', reservation.final_check, reservation.nr_of_adults, reservation.nr_of_kids, reservation.datetime " . 
             "FROM `item` JOIN reservation ON reservation.item_id = item.id JOIN `restaurant` ON restaurant.id = reservation.restaurant_id " . 
             "WHERE item.QR_Code = :QR_Code;");
-            $stmnt->bindParam(":QR_Code", $QR_Code, PDO::PARAM_INT);
+            $stmnt->bindParam(":QR_Code", $QR_Code, PDO::PARAM_STR);
             $stmnt->execute();
             $stmnt->setFetchMode(PDO::FETCH_CLASS, 'Reservation');
 
@@ -190,8 +190,11 @@ class ReservationRepository extends ItemRepository {
                 }
             }
 
-            $reservations = $stmnt->fetch(PDO::FETCH_FUNC, 'rowMapperReservation');
-            return $reservations[0];
+            $reservations = $stmnt->fetchAll(PDO::FETCH_FUNC, 'rowMapperReservation');
+            if(!empty($reservations)){
+                return $reservations[0];
+            }
+            return null;
         } catch (PDOException $e) {
             echo($e);
             return $e;
