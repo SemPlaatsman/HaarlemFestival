@@ -42,7 +42,7 @@ class EmailGenerator {
         }
     }
 
-    function sentEmailWithTickets(string $recipient, int $orderId){
+    function sentEmailWithTickets(string $email, string $recipient, int $orderId){
         $invoice = $this->makeInvoicePdf($orderId);
         $tickets = $this->makeTicketsPdf($orderId);
         $mail = new PHPMailer();
@@ -57,7 +57,7 @@ class EmailGenerator {
         $mail->IsHTML(true);
         $mail->Subject = "Ticket haarlem festival";
         $mail->Body = "your tickets";
-        $mail->AddAddress($recipient, 'Recipient Name');
+        $mail->AddAddress($email, $recipient);
         $mail->addStringAttachment($invoice->Output("S",'invoice.pdf'), 'invoice.pdf', $encoding = 'base64', $type = 'application/pdf');
         $mail->addStringAttachment($tickets->Output("S",'tickets.pdf'), 'tickets.pdf', $encoding = 'base64', $type = 'application/pdf');
         $mail->Send();

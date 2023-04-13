@@ -3,12 +3,15 @@
 use Mollie\Api\Exceptions\ApiException;
 
 require_once __DIR__ . '/../services/orderservice.php';
+require_once __DIR__ . '/emailgenerator.php';
 
 class MollieWebhookController {
     private $orderService;
+    private $emailGenerator;
 
     function __construct() {
         $this->orderService = new OrderService();
+        $this->emailGenerator = new EmailGenerator();
     }
 
     public function index() {
@@ -24,6 +27,9 @@ class MollieWebhookController {
             if ($payment->isPaid() && ! $payment->hasRefunds() && ! $payment->hasChargebacks()) {
                 if (!$this->orderService->completeOrder($orderId)) {
                     throw new \Mollie\Api\Exceptions\ApiException('Something went wrong while completing the order!');
+                }
+                else{
+                    $this->emailGenerator->sentEmailWithTickets(unserialize($_SESSION['user'])->getEmail(), unserialize($_SESSION['user'])->getName(), $orderId);
                 }
             } else {
                 throw new \Mollie\Api\Exceptions\ApiException('Unpaid payment!');
