@@ -4,6 +4,7 @@ require_once __DIR__ . '/../services/reservationservice.php';
 require_once __DIR__ . '/../services/ticketdanceservice.php';
 require_once __DIR__ . '/../services/tickethistoryservice.php';
 require_once __DIR__ . '/../services/orderservice.php';
+require_once "../lib/phpqrcode/qrlib.php";
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use Fpdf\Fpdf;
@@ -43,6 +44,7 @@ class EmailGenerator {
 
     function sentEmailWithTickets(string $recipient, int $orderId){
         $invoice = $this->makeInvoicePdf($orderId);
+        $tickets = $this->makeTicketsPdf($orderId);
         $mail = new PHPMailer();
         $mail->isSMTP();                                             
         $mail->Host       = 'smtp-relay.sendinblue.com';                        
@@ -54,9 +56,10 @@ class EmailGenerator {
         $mail->setFrom('Haarlem@festival.nl', 'Haarlem festival');
         $mail->IsHTML(true);
         $mail->Subject = "Ticket haarlem festival";
-        $mail->Body = $body;
+        $mail->Body = "your tickets";
         $mail->AddAddress($recipient, 'Recipient Name');
         $mail->addStringAttachment($invoice->Output("S",'invoice.pdf'), 'invoice.pdf', $encoding = 'base64', $type = 'application/pdf');
+        $mail->addStringAttachment($tickets->Output("S",'tickets.pdf'), 'tickets.pdf', $encoding = 'base64', $type = 'application/pdf');
         $mail->Send();
         if(!$mail->Send()){
             echo "Mailer Error: " . $mail->ErrorInfo;
@@ -65,9 +68,9 @@ class EmailGenerator {
 
     function makeInvoicePdf(int $orderId)
     {
-        $reservations = $this->reservationService->getReservationsForOrder(1);
-        $ticketsDance = $this->ticketDanceService->getAllTicketsDance(1);
-        $ticketsHistory = $this->ticketHistoryService->getTicketHistoryForOrder(1);
+        $reservations = $this->reservationService->getReservationsForOrder($orderId);
+        $ticketsDance = $this->ticketDanceService->getAllTicketsDance($orderId);
+        $ticketsHistory = $this->ticketHistoryService->getTicketHistoryForOrder($orderId);
         $pdf = new Fpdf();
         $pdf->AddPage();
         $pdf->SetFont('Arial','B',24);
@@ -147,6 +150,91 @@ class EmailGenerator {
         $pdf->SetXY($current_x, $current_y);
         $pdf->MultiCell(40,5, "Total: \n". EURO . $this->orderService->getOrderPrice(1), 0);
         
+        return $pdf;
+    }
+
+    function makeTicketsPdf(int $orderId)
+    {
+        $reservations = $this->reservationService->getReservationsForOrder($orderId);
+        $ticketsDance = $this->ticketDanceService->getAllTicketsDance($orderId);
+        $ticketsHistory = $this->ticketHistoryService->getTicketHistoryForOrder($orderId);
+        $pdf = new Fpdf();
+        $pdf->AddPage();
+        $pdf->SetFont('Arial','B',24);
+        $pdf->Cell(40,10, "Tickets");
+        $pdf->Ln(20);
+        $pdf->SetFont('Arial','B',16);
+        $pdf->Cell(40,10, "Reservations:");
+        $pdf->Ln(10);
+        $pdf->SetFont('Arial', '', 11);
+        //print reservations
+        foreach($reservations as $reservation){
+            $current_y = $pdf->GetY();
+            $current_x = $pdf->GetX();
+            $pdf->MultiCell(40,5, "Restaurant: \n" .$reservation->getRestaurant()->getName(), 0);
+            $current_x= $current_x + 40;
+            $pdf->SetXY($current_x, $current_y);
+            $pdf->MultiCell(40,5, "Date: \n" . $reservation->getDatetimeFormatted(), 0);
+            $current_x= $current_x + 40;
+            $pdf->SetXY($current_x, $current_y);
+            $pdf->MultiCell(40,5, "Nr of adults: \n" . $reservation->getNrOfAdults(), 0);
+            $current_x= $current_x + 40;
+            $pdf->SetXY($current_x, $current_y);
+            $pdf->MultiCell(80,5, "Nr of kids: \n" . $reservation->getNrOfKids(), 0);
+            $current_x= $current_x + 40;
+            $pdf->SetXY($current_x, $current_y);
+            QRcode::png($reservation->getQRCode(), 'qrcode.png', QR_ECLEVEL_L, 5);
+            $pdf->MultiCell(0,0, $pdf->Image('qrcode.png', $pdf->GetX(), $pdf->GetY(), 20), 0,);
+            $pdf->Ln(25);
+        }
+        $pdf->Ln(20);
+        $pdf->SetFont('Arial','B',16);
+        $pdf->Cell(40,10, "Tickets DANCE!:");
+        $pdf->Ln(10);
+        $pdf->SetFont('Arial', '', 11);
+        //print dance tickets
+        foreach($ticketsDance as $ticket){
+            $current_y = $pdf->GetY();
+            $current_x = $pdf->GetX();
+            $pdf->MultiCell(40,5, "Nr of people: \n" . $ticket->getNrOfPeople(), 0);
+            $current_x= $current_x + 40;
+            $pdf->SetXY($current_x, $current_y);
+            $pdf->MultiCell(40,5, "Venue: \n" . $ticket->getPerformance()->getVenue()->getName(), 0);
+            $current_x= $current_x + 40;
+            $pdf->SetXY($current_x, $current_y);
+            $pdf->MultiCell(40,5, "Start: \n" . $ticket->getPerformance()->getStartDateFormatted(), 0);
+            $current_x= $current_x + 40;
+            $pdf->SetXY($current_x, $current_y);
+            $pdf->MultiCell(40,5, "End: \n" . $ticket->getPerformance()->getEndDateFormatted(), 0);
+            
+            $current_x= $current_x + 40;
+            $pdf->SetXY($current_x, $current_y);
+            QRcode::png($reservation->getQRCode(), 'qrcode.png', QR_ECLEVEL_L, 5);
+            $pdf->MultiCell(0,0, $pdf->Image('qrcode.png', $pdf->GetX(), $pdf->GetY(), 20), 0,);
+            $pdf->Ln(25);
+        }
+        $pdf->Ln(20);
+        $pdf->SetFont('Arial','B',16);
+        $pdf->Cell(40,10, "Tickets A Stroll Through History:");
+        $pdf->Ln(10);
+        $pdf->SetFont('Arial', '', 11);
+        //print history tickets
+        foreach($ticketsHistory as $ticket){
+            $current_y = $pdf->GetY();
+            $current_x = $pdf->GetX();
+            $pdf->MultiCell(40,5, "Nr of people: \n" . $ticket->getNrOfPeople(), 0);
+            $current_x= $current_x + 40;
+            $pdf->SetXY($current_x, $current_y);
+            $pdf->MultiCell(40,5, "Language: \n" . $ticket->getTour()->getLanguage(), 0);
+            $current_x= $current_x + 40;
+            $pdf->SetXY($current_x, $current_y);
+            $pdf->MultiCell(50,5, "Start: \n" . $ticket->getTour()->getDatetimeFormatted(), 0);
+            $current_x= $current_x + 80;
+            $pdf->SetXY($current_x, $current_y);
+            QRcode::png($reservation->getQRCode(), 'qrcode.png', QR_ECLEVEL_L, 5);
+            $pdf->MultiCell(0,0, $pdf->Image('qrcode.png', $pdf->GetX(), $pdf->GetY(), 20), 0,);
+            $pdf->Ln(25);
+        }        
         return $pdf;
     }
 }
