@@ -1,6 +1,6 @@
 <?php
 include __DIR__ . '/../header.php';
-
+(session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
 ?>
 <html>
 

@@ -1,4 +1,6 @@
-<?php include __DIR__ . '/../header.php'; ?>
+<?php include __DIR__ . '/../header.php';
+(session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
+?>
 <div class="container-fluid bg-black">
     <div class="position-relative">
         <img src="img/png/dance/banner/Banner-Component.png" class="img-fluid w-100 h-100" alt="Banner Image">
