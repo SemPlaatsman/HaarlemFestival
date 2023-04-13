@@ -158,6 +158,7 @@ class EmailGenerator {
         $reservations = $this->reservationService->getReservationsForOrder($orderId);
         $ticketsDance = $this->ticketDanceService->getAllTicketsDance($orderId);
         $ticketsHistory = $this->ticketHistoryService->getTicketHistoryForOrder($orderId);
+        $qrCodeCounter = 0;
         $pdf = new Fpdf();
         $pdf->AddPage();
         $pdf->SetFont('Arial','B',24);
@@ -183,8 +184,10 @@ class EmailGenerator {
             $pdf->MultiCell(80,5, "Nr of kids: \n" . $reservation->getNrOfKids(), 0);
             $current_x= $current_x + 40;
             $pdf->SetXY($current_x, $current_y);
-            QRcode::png($reservation->getQRCode(), 'qrcode.png', QR_ECLEVEL_L, 5);
-            $pdf->MultiCell(0,0, $pdf->Image('qrcode.png', $pdf->GetX(), $pdf->GetY(), 20), 0,);
+            QRcode::png($reservation->getQRCode(), '../qrcodes/qrcode'.$qrCodeCounter.'.png', QR_ECLEVEL_L, 5);
+            
+            $pdf->MultiCell(0,0, $pdf->Image('../qrcodes/qrcode'.$qrCodeCounter.'.png', $pdf->GetX(), $pdf->GetY(), 20), 0,);
+            $qrCodeCounter++;
             $pdf->Ln(25);
         }
         $pdf->Ln(20);
@@ -209,8 +212,9 @@ class EmailGenerator {
             
             $current_x= $current_x + 40;
             $pdf->SetXY($current_x, $current_y);
-            QRcode::png($reservation->getQRCode(), 'qrcode.png', QR_ECLEVEL_L, 5);
-            $pdf->MultiCell(0,0, $pdf->Image('qrcode.png', $pdf->GetX(), $pdf->GetY(), 20), 0,);
+            QRcode::png($ticket->getQRCode(), '../qrcodes/qrcode'.$qrCodeCounter.'.png', QR_ECLEVEL_L, 5);
+            $pdf->MultiCell(0,0, $pdf->Image('../qrcodes/qrcode'.$qrCodeCounter.'.png', $pdf->GetX(), $pdf->GetY(), 20), 0,);
+            $qrCodeCounter++;
             $pdf->Ln(25);
         }
         $pdf->Ln(20);
@@ -231,10 +235,11 @@ class EmailGenerator {
             $pdf->MultiCell(50,5, "Start: \n" . $ticket->getTour()->getDatetimeFormatted(), 0);
             $current_x= $current_x + 80;
             $pdf->SetXY($current_x, $current_y);
-            QRcode::png($reservation->getQRCode(), 'qrcode.png', QR_ECLEVEL_L, 5);
-            $pdf->MultiCell(0,0, $pdf->Image('qrcode.png', $pdf->GetX(), $pdf->GetY(), 20), 0,);
+            QRcode::png($ticket->getQRCode(), '../qrcodes/qrcode'.$qrCodeCounter.'.png', QR_ECLEVEL_L, 5);
+            $pdf->MultiCell(0,0, $pdf->Image('../qrcodes/qrcode'.$qrCodeCounter.'.png', $pdf->GetX(), $pdf->GetY(), 20), 0,);
+            $qrCodeCounter++;
             $pdf->Ln(25);
-        }        
+        }      
         return $pdf;
     }
 }
