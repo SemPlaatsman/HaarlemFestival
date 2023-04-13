@@ -1,5 +1,6 @@
 <?php
 include __DIR__ . '/../header.php';
+(session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
 // require_once __DIR__ . '/../../models/reservation.php';
 // require_once __DIR__ . '/../../models/restaurant.php';
 // require_once __DIR__ . '/../../models/ticketdance.php';
@@ -17,30 +18,31 @@ include __DIR__ . '/../header.php';
     <img class="d-block mx-auto mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
     <h1 class="display-5 fw-bold">Centered hero</h1>
 
-    <!--- paragraph 1 --->
     <div class="col-lg-6 mx-auto">
         <?php foreach ($model as $page) { ?>
-        <?php if ($page->getId() === 1) { ?>
-        <p class="lead mb-4" data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>">
-            <?= $page->getBody_markup(); ?>
-        </p>
-        <button type="button" class="btn btn-primary" onclick="openEditorModal(<?= $page->getId() ?>)">Open
-            Editor</button>
-        <?php } ?>
+            <?php if ($page->getId() === 1) { ?>
+                <p class="lead mb-4" data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>">
+                    <?= $page->getBody_markup(); ?>
+                </p>
+                <?php if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()) { ?>
+                    <button type="button" class="btn btn-primary" onclick="openEditorModal(<?= $page->getId() ?>)">Open
+                        Editor</button>
+                <?php } ?>
+            <?php } ?>
         <?php } ?>
     </div>
 
-    <!--- paragraph 2 --->
     <div class="col-lg-6 mx-auto">
         <?php foreach ($model as $page) { ?>
-        <?php if ($page->getId() === 2) { ?>
-        <p class="lead mb-4" data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>">
-            <?= $page->getBody_markup(); ?>
-        </p>
-
-        <button type="button" class="btn btn-primary" onclick="openEditorModal(<?= $page->getId() ?>)">Open
-            Editor</button>
-        <?php } ?>
+            <?php if ($page->getId() === 2) { ?>
+                <p class="lead mb-4" data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>">
+                    <?= $page->getBody_markup(); ?>
+                </p>
+                <?php if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()) { ?>
+                    <button type="button" class="btn btn-primary" onclick="openEditorModal(<?= $page->getId() ?>)">Open
+                        Editor</button>
+                <?php } ?>
+            <?php } ?>
         <?php } ?>
     </div>
     <?php

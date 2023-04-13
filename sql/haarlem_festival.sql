@@ -180,7 +180,7 @@ CREATE TABLE `pages` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `performance`
+-- Dumping data for table `pages`
 --
 
 INSERT INTO `pages` (`id`, `url`, `body_markup`) VALUES
@@ -276,7 +276,7 @@ he produced his first ever release at the age of 18 called “In Your Face”. N
 in New York City for SFX; and producing famous tracks like ‘Run the World’ with Beyoncé.'),
 (35, '', 'Afrojack is a Grammy award-winning DJ with many top 100 tracks and popular songs, including "Hey Mama," "Can''t Stop Me," and "Give Me Everything." 
 His album "Forget The World" also contributed to his success. However; his most important song, "Take Over Control" was the first song 
-to air on the radio and launch Afrojack''s career.'),
+to air on the radio and launch Afrojack''s career.')
 
 -- --------------------------------------------------------
 

@@ -32,8 +32,10 @@ new breadcrumbcontroller();
             <?= $page->getBody_markup(); ?>
           </p>
           <div class="text-center">
-            <button type="button" class="btn btn-primary" onclick="openEditorModal(<?= $page->getId() ?>)">Open
-              Editor</button>
+            <?php if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()) { ?>
+              <button type="button" class="btn btn-primary" onclick="openEditorModal(<?= $page->getId() ?>)">Open
+                Editor</button>
+            <?php } ?>
           </div>
         <?php } ?>
       <?php } ?>
@@ -51,8 +53,10 @@ new breadcrumbcontroller();
               <?= $page->getBody_markup(); ?>
             </p>
             <div class="text-center">
-              <button type="button" class="btn btn-primary" onclick="openEditorModal(<?= $page->getId() ?>)">Open
-                Editor</button>
+              <?php if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()) { ?>
+                <button type="button" class="btn btn-primary" onclick="openEditorModal(<?= $page->getId() ?>)">Open
+                  Editor</button>
+              <?php } ?>
             </div>
           <?php } ?>
         <?php } ?>
@@ -156,8 +160,10 @@ new breadcrumbcontroller();
             <?= $page->getBody_markup(); ?>
           </p>
           <div class="text-center">
-            <button type="button" class="btn btn-primary" onclick="openEditorModal(<?= $page->getId() ?>)">Open
-              Editor</button>
+            <?php if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()) { ?>
+              <button type="button" class="btn btn-primary" onclick="openEditorModal(<?= $page->getId() ?>)">Open
+                Editor</button>
+            <?php } ?>
           </div>
         <?php } ?>
       <?php } ?>
@@ -201,8 +207,6 @@ new breadcrumbcontroller();
           </table>
         </div>
       </div>
-
-
     </div>
   </div>
   <?php

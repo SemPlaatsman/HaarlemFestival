@@ -27,14 +27,10 @@ function updateContent($pageService)
         $new_body_markup = htmlspecialchars($_POST['body_markup']);
 
         $result = $pageService->updateContent($id, $new_body_markup);
-
-        if ($result) {
-            // return success response 
-            echo 'Update complete';
-        } else {
-            // return failed response
-            echo 'Something went wrong with the update';
+        if (!$result) {
+            throw new Exception('Something went wrong while trying to update the content!');
         }
+        header("Location: " . $_SERVER['HTTP_REFERER']);
     } catch (Exception $e) {
         // Handle the exception here
         echo 'An error occurred: ' . $e->getMessage();
