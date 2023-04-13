@@ -161,7 +161,7 @@ new breadcrumbcontroller();
           </div>
         <?php } ?>
       <?php } ?>
-      <input type="submit"
+      <input type="submit" data-bs-toggle="modal" data-bs-target="#historyTicketForm"
         class="btn btn-primary btn-block insert-button-venue bg-primary-a border-primary-a rounded-0 buyButton"
         value="BUY TICKETS ">
     </div>
