@@ -146,6 +146,12 @@ class router
                 }
                 $controller->index();
                 break;
+            
+            case 'reservation':
+                require_once __DIR__ . '/controllers/reservationcontroller.php';
+                $controller = new ReservationController();
+                $controller->index();
+                break;
 
             case 'captcha':
                 require_once __DIR__ . '/controllers/captchacontroller.php';
@@ -180,10 +186,17 @@ class router
                 $controller = new pdfcontroller();
                 break;
 
+
+            case 'download/income':
+                require __DIR__ . '/controllers/exceldownloadcontroller.php';
+                $controller = new excelDownloadController();
+                $controller->downloadExcel();
+                break;
+
             case 'api':
-            // require __DIR__ . '/apiControllers/apiController.php';
-            // $api = new api();
-            // break;
+                // require __DIR__ . '/apiControllers/apiController.php';
+                // $api = new api();
+                // break;
 
             case 'dance':
                 require_once __DIR__ . '/controllers/dancecontroller.php';
@@ -212,7 +225,6 @@ class router
 
                 if (isset($_POST['language'])) {
                     $controller->getSchedule($_POST['language']);
-
                 } else {
                     http_response_code(404);
                     echo "404 Not Found";

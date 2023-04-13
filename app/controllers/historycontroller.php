@@ -8,6 +8,7 @@ require_once __DIR__ . '/../models/tour.php';
 require_once __DIR__ . '/../services/historytourservice.php';
 require_once __DIR__ . '/../services/itemservice.php';
 require_once __DIR__ . '/../services/pageservice.php';
+require_once __DIR__ . '/../services/tickethistoryservice.php';
 
 require_once __DIR__ . '/../handler/contenthandler.php';
 
@@ -22,10 +23,12 @@ class HistoryController extends Controller
     private $historyService;
     private $pageService;
     protected $schedule;
+    private $ticketHistoryService;
     function __construct()
     {
         $this->historyService = new HistoryTourService();
         $this->pageService = new PageService();
+        $this->ticketHistoryService = new TicketHistoryService();
     }
 
     public function index()
@@ -36,6 +39,11 @@ class HistoryController extends Controller
             $pages = $this->pageService->getContent();
             foreach ($pages as &$encodedPage) {
                 $encodedPage->setBody_markup(htmlspecialchars_decode($encodedPage->getBody_markup()));
+            }
+            if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST)) {
+                if (!empty($_POST['family_tickets']) && empty($_POST['single_tickets']) && isset($_POST['family_tickets']) && isset($_POST['single_tickets'])){
+                    $this->insertItem();
+                }
             }
             $this->displayView($pages);
         } catch (Exception $e) {
@@ -59,12 +67,13 @@ class HistoryController extends Controller
         $data = array();
 
         foreach ($tours as $tour) {
-            array_push($data, $tour->toObject());
+
+           array_push($data,$tour->toObject());
         }
+
         echo json_encode($data);
 
     }
-
 
     public function insertItem()
     {
@@ -77,5 +86,18 @@ class HistoryController extends Controller
     public function updateContent()
     {
         updateContent($this->pageService);
+    }
+
+    public function addTicket(){
+        $singleTickets = htmlspecialchars($_POST['single_tickets']);
+        $familyTickets = htmlspecialchars($_POST['family_tickets']);
+        if($singleTickets >= 0 || $familyTickets >= 0) {
+
+        }
+        if (isset($_SESSION['user'])) {
+            $this->ticketHistoryService->insertTicketHistory();
+        } else if (isset($_SESSION['guest'])) {
+
+        }
     }
 }

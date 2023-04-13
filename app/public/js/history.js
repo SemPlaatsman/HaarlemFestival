@@ -1,6 +1,20 @@
 let tourschedule = document.getElementById('tourschedule');
+let ukButton = document.getElementById('ukflag');
+let nlButton = document.getElementById('dutchflag');
+let enButton = document.getElementById('chineseflag');
+Gettourschedule(0);
 
- Gettourschedule(0);
+ukButton.addEventListener('click', function() {
+    console.log("test");
+    Gettourschedule(0);
+});
+nlButton.addEventListener('click', function() {
+    Gettourschedule(1);
+});
+enButton.addEventListener('click', function() {
+    Gettourschedule(2);
+});
+
 async function Gettourschedule(taal) {
 
     let language = taal;
@@ -13,16 +27,17 @@ async function Gettourschedule(taal) {
 
     }).then(response => response.json()).then(data =>{
         const schedule=data;
+        console.log(schedule);
     for (let i = 0; i < schedule.length; i++) {
 
-        const date = new Date(schedule[i].date.date);
+        const date = new Date(schedule[i].datetime.date);
         const month = date.toLocaleString('default', { month: 'short' });
         const monthday = date.toLocaleString('default', { day: '2-digit' });
         let hours = [];
 
         for (let j = 0; j < schedule.length; j++) {
 
-            const date2 =  new Date(schedule[j].date.date);
+            const date2 =  new Date(schedule[j].datetime.date);
             const month2 = date.toLocaleString('default', { month: 'short' });
             const monthday2 = date2.toLocaleString('default', { day: '2-digit' });
             if (month == month2 && monthday == monthday2) {
@@ -39,10 +54,14 @@ async function Gettourschedule(taal) {
 }
 
 function printSchedule(tabledata){
+    tourschedule.innerHTML = '';
     let html = '';
+    let lastDate = new Date();
     for (let i = 0; i < tabledata.length; i++) {
+        if(tabledata[i][0].getDate() != lastDate.getDate()){
         html += '<tr>';
         const date = new Date(tabledata[i][0]);
+        lastDate = date;
         const weekDay = date.toLocaleString('default', { weekday: 'long' });
         const month = date.toLocaleString('default', { month: 'short' });
         const day = date.toLocaleString('default', { day: '2-digit' });
@@ -56,6 +75,7 @@ function printSchedule(tabledata){
             html += "<td class='border-0 rounded-pill bg-primary-a text-center'>" + hour + " " + minutes + "</td>";
         }
         html += "</tr>";
+        }
 
     }
     tourschedule.innerHTML = html;
