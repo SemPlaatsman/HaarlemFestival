@@ -33,5 +33,10 @@ class TicketHistoryService
     {
         return $this->ticketHistoryRepository->getAllTicketHistory();
     }
+
+    public function getTicketHistoryForOrder(int $orderId) : array
+    {
+        return $this->ticketHistoryRepository->getTicketHistoryForOrder($orderId);
+    }
 }
 ?>

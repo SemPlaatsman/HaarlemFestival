@@ -14,6 +14,10 @@ class OrderService {
 
     public function getOrderHistory(int $startID =null , int $endID =null) : array {
         return $this->orderRepository->getPayedOrderHistory();
+
+    public function getOrderPrice(int $orderId) : int {
+        return $this->orderRepository->getOrderPrice($orderId);
+
     }
 }
 ?>

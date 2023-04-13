@@ -29,9 +29,13 @@ class ReservationService
         return $this->reservationRepository->getReservation($id);
     }
 
-    function getAllReservations() : array 
+    public function getAllReservations() : array 
     {
         return $this->reservationRepository->getAllReservations();
+    }
+
+    public function getReservationsForOrder(int $orderId) : Array{
+        return $this->reservationRepository->getReservationsForOrder($orderId);
     }
 }
 ?>
