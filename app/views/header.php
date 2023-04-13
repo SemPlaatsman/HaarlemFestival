@@ -42,6 +42,12 @@
               <a class="nav-link <?= $directory == "history" ? "active" : "" ?>" href="/history">A STROLL THROUGH
                 HISTORY</a>
             </li>
+            <?php if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()) { ?>
+              <li class="nav-item mx-0 mx-xxl-5">
+                <a class="nav-link <?= $directory == "adminoverview" ? "active" : "" ?>"
+                  href="/adminoverview">ADMINOVERVIEW</a>
+              </li>
+            <?php } ?>
           </section>
           <hr class="bg-tetiare-a d-flex d-xxl-none w-100">
           <li class="nav-item">
