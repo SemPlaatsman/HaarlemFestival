@@ -15,16 +15,14 @@ class CartController extends Controller {
 
     public function index() {
         $model = [];
-
         if ($_SERVER["REQUEST_METHOD"] === 'POST' && !empty($_POST) && !isset($_POST['mollie'])) {
             $this->handlePOST($model);
         }
 
         (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
         if ($_SERVER["REQUEST_METHOD"] === 'GET' && isset($_GET['cart'])) {
-            var_dump($_GET['cart']);
-            $this->decodeCartLink($model, $_GET['cart']);
-            var_dump($model['reservations']);
+            // http://localhost/cart?cart=XQZ7AGfmXFtlBmV7ZvxbZGflBmV7ZwNlZl0jZl0lAvNkBQbjZQbjZQfkXFtlBmV7ZQflZQVmYGNmYGV1VQR5BwNjBwNjBmRc
+            $this->decodeCartLink($model, base64_decode(str_rot13($_GET['cart'])));
         } else if (isset($_SESSION['user'])) {
             $model = $this->cartService->getCart(unserialize($_SESSION['user'])->getId());
         } else if (isset($_SESSION['guest'])) {
@@ -35,21 +33,10 @@ class CartController extends Controller {
 
         $this->addPaymentTotals($model);
         $this->addCartLink($model);
-
+        
         if (isset($_POST['mollie'])) {
             $this->handleMollie($model);
         }
-
-        // $var = $model['reservations'][0];
-        // var_dump($model['reservations'][0]);
-
-        // $var = str_replace('(', '', $var);
-        // $array = explode(')', $var);
-        // array_pop($array);
-        // var_dump($array);
-
-        // $array = explode(', ', $var);
-        // var_dump($array);
         $this->displayView($model);
     }
 
@@ -74,6 +61,9 @@ class CartController extends Controller {
         } else if (isset($_POST['deleteItemId'])) {
             $itemId = $_POST['deleteItemId'];
             $this->cartService->deleteItem($itemId);
+        } else if (isset($_POST['addFromLinkId']) && isset($_GET['cart'])) {
+            $linkItemId = $_POST['addFromLinkId'];
+            $this->addToCartByLink($linkItemId, base64_decode(str_rot13($_GET['cart'])));
         }
     }
 
@@ -112,6 +102,7 @@ class CartController extends Controller {
                 $cartLink .= "(" . $eventItem->getLink() . ")";
             }
         }
+        $cartLink = str_rot13(base64_encode($cartLink));
         $model += ['link' => $cartLink];
     }
 
@@ -122,66 +113,32 @@ class CartController extends Controller {
         $linkEventItemsString = str_replace('(', '', $link);
         $linkEventItems = explode(')', $linkEventItemsString);
         array_pop($linkEventItems);
-        foreach ($linkEventItems as $linkEventItem) {
+        foreach ($linkEventItems as $linkEventItemIndex => $linkEventItem) {
             try {
                 $linkEventItemArray = explode(';', $linkEventItem);
-                var_dump($linkEventItemArray);
                 switch (end($linkEventItemArray)) {
                     case 1: if (count($linkEventItemArray) == 5) {
-                        $restaurant = new Reservation(null, null, $linkEventItemArray[4], null, null, 9, "QR_Code", null, $this->cartService->getRestaurant($linkEventItemArray[0]), null, intval($linkEventItemArray[1]), intval($linkEventItemArray[2]), $linkEventItemArray[3]);
+                        $restaurant = new Reservation(null, null, $linkEventItemArray[4], null, null, 9, "QR_Code", $linkEventItemIndex, $this->cartService->getRestaurant($linkEventItemArray[0]), null, intval($linkEventItemArray[1]), intval($linkEventItemArray[2]), $linkEventItemArray[3]);
                         $restaurant->setTotalPrice();
                         $restaurant->setFinalCheck();
                         $model['reservations'][] = $restaurant;
                         } break;
                     case 2: if (count($linkEventItemArray) == 3) {
-    
+                        $ticketDance = new TicketDance(null, null, $linkEventItemArray[2], null, null, 9, "QR_Code", $linkEventItemIndex, $this->cartService->getPerformance($linkEventItemArray[0]), intval($linkEventItemArray[1]));
+                        $ticketDance->setTotalPrice();
+                        $model['ticketsDance'][] = $ticketDance;
                         } break;
                     case 3: if (count($linkEventItemArray) == 3) {
-    
+                        $ticketHistory = new TicketHistory(null, null, $linkEventItemArray[2], null, null, 9, "QR_Code", $linkEventItemIndex, $this->cartService->getTour($linkEventItemArray[0]), intval($linkEventItemArray[1]));
+                        $ticketHistory->setTotalPrice();
+                        $model['ticketsHistory'][] = $ticketHistory;
                         } break;
                 }
-            } catch (Exception $e) {
+            } catch (Exception | Error $e) {
                 continue;
             }
-            
         }
     }
-
-    // private function decodeCartLink(&$model, string $link) {
-    //     $model += ['reservations' => []];
-    //     $model += ['ticketsDance' => []];
-    //     $model += ['ticketsHistory' => []];
-    //     $splitLink = preg_split('/(reservations|ticketsDance|ticketsHistory)/', $link, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
-    //     foreach ($model as $key => $eventItems) {
-    //         $linkIndex = array_search($key, $splitLink);
-    //         if (!is_bool($linkIndex)) {
-    //             $linkEventItemsString = str_replace('(', '', $splitLink[$linkIndex + 1]);
-    //             $linkEventItems = explode(')', $linkEventItemsString);
-    //             array_pop($linkEventItems);
-    //             foreach ($linkEventItems as $linkEventItem) {
-    //                 $linkEventItemArray = explode('; ', $linkEventItem);
-    //                 switch ($key) {
-    //                     case 'reservations':
-    //                         require_once __DIR__ . '/../models/reservation.php';
-    //                         require_once __DIR__ . '/../models/restaurant.php';
-    //                         $model[$key][] = new Reservation(intval($linkEventItemArray[12]), intval($linkEventItemArray[13]), intval($linkEventItemArray[14]), $linkEventItemArray[15], floatval($linkEventItemArray[16]), 
-    //                         intval($linkEventItemArray[17]), $linkEventItemArray[18], intval($linkEventItemArray[0]), new Restaurant(intval($linkEventItemArray[1]), $linkEventItemArray[2], intval($linkEventItemArray[3]),
-    //                         $linkEventItemArray[4], floatval($linkEventItemArray[5]), floatval($linkEventItemArray[6]), floatval($linkEventItemArray[7])), intval($linkEventItemArray[8]), intval($linkEventItemArray[9]), 
-    //                         intval($linkEventItemArray[10]), intval($linkEventItemArray[11]));
-    //                         break;
-    //                     case 'ticketsDance':
-    //                         require_once __DIR__ . '/../models/ticketdance.php';
-    //                         $model[$key][] = new TicketDance();
-    //                         break;
-    //                     case 'ticketsHistory':
-    //                         require_once __DIR__ . '/../models/tickethistory.php';
-    //                         $model[$key][] = new TicketHistory();
-    //                         break;
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
 
     private function addPaymentTotals(&$model) {
         $paymentTotals = [];
@@ -192,6 +149,10 @@ class CartController extends Controller {
             }
         }
         $model += ['paymentTotals' => $paymentTotals];
+    }
+
+    private function addToCartByLink(int $linkItemId, string $link) {
+        
     }
 }
 ?>

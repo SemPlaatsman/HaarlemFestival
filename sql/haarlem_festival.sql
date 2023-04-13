@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Mar 16, 2023 at 08:30 PM
--- Server version: 10.10.3-MariaDB-1:10.10.3+maria~ubu2204
--- PHP Version: 8.1.15
+-- Generation Time: Apr 12, 2023 at 08:33 PM
+-- Server version: 10.11.2-MariaDB-1:10.11.2+maria~ubu2204
+-- PHP Version: 8.1.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -179,6 +179,60 @@ CREATE TABLE `pages` (
   `body_markup` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `pages`
+--
+
+INSERT INTO `pages` (`id`, `url`, `body_markup`) VALUES
+(1, '', 'Welcome to The Festival, a celebration of everything that has to do with food, history, dance and culture in Haarlem. First up, we have Yummy!, a delicious food festival. \r\nNext up, travel back in time and visit A Stroll Through History Then we have DANCE, a high-energy dance event featuring some of the best DJ’s from around the world. \r\nFinally, delve into the mysteries of the Teylers Museum with The Secret Of Professor Teyler treasure hunt! Don\'t be afraid to join in and go all out!'),
+(2, '', 'In Haarlem a charming and tasty food festival called “Yummy!” is taking place. Here you can try loads of new dishes in various restaurants. \r\nBe sure to mark your calendars and plan your trip today!'),
+(3, '', 'The city of Haarlem has a rich history and a lot of beautiful sites to see.\r\nFor a limited time only the event, A stroll through history will take place. During this event, a guide will take you to see Haarlem\'s most important sites.'),
+(4, '', 'Do you want to have a wild night out with friends or family?\r\nYoung or old you are all welcome to the Haarlem DANCE event where amazing DJ’s from around the world will be performing in our best venues.'),
+
+(5, '', 'Do you want to learn all about the amazing professor Teyler? Come to the Teyler museum for an interactive museum experience.'),
+(6, '', 'Each dotted location on the map represents an event with Purple - DANCE! venues, Yellow - YUMMY restaurants, Red - Teylers museum and Blue - Historic buildings.\r\nBe sure to visit the St.-Bavokerk in the heart of Haarlem since most of the culinary industry and various historic sites are located around it.\r\nNo matter what your interests may be, there is something on this map for everyone so start exploring the vibrant city of Haarlem today!'),
+(7, '', 'Caprera openluchttheater in the far left corner can be reached by going with the car following the N208 or by cycling 16 minutes through Midden Duin and Daalseweg.'),
+(8, '', 'Welcome to A Stroll through History. This is an event where you will be taken on a guided tour through Haarlem. \r\nOn this tour you will visit places that are important in the history of Haarlem. On this page you will find more information about the tour. \r\nYou can check out information about the venues that are visited in the tour, \r\nwhen the tours are and what the prices are to get a ticket for the tour.'),
+(9, '', 'During the tour you will get visit to visit nine amazing locations in Haarlem. \r\nEach of these locations has a great story behind them and an important contribution to the history of Haarlem. \r\nIf you want to find out more details about a location or what the importance of a location was in the history of Haarlem you can find out more by clicking on it.'),
+(10, '', 'Due to the nature of this tour all participants must be a minimum of 12 years old and strollers are not\r\nallowed.'),
+(11, '', 'The Jopenkerk, located in the heart of Haarlem on the Gedempte Voldersgracht, offers a one-of-a-kind\r\nexperience. This former church has been transformed into a brewery, café, and restaurant all in one. For an\r\nextra special visit, come during the week when you can watch the brewers in action while sipping on a craft beer or enjoying a meal.'),
+(12, '', 'The Vestekerk, originally known as the \"Vrijzinnig Hervormde Kerk,\" was built in 1910 on Vestestraat street. In 1958, \r\nit was renamed the Jacobskerk and served as a house of worship until 1975. It was later saved from destruction by the Stichting de Hoeksteen in 2005 and converted \r\ninto the Jopenkerk in 2010, now housing a brewery, café, and restaurant for visitors to enjoy.'),
+(13, '', 'Experience a unique culinary journey at Jopenkerk\'s 1st-floor restaurant, where craft beer and food come together in perfect harmony. \r\nEnjoy specially crafted dishes expertly paired with the restaurant\'s selection of beers, or choose from a carefully curated wine list. Please note that the restaurant \r\nis not wheelchair accessible, so please call in advance for any special needs.'),
+(14, '', 'This location is located at point E on the map and will be visited after visiting the Proveniershof in the tour. \r\nThe next stop on the route will be the Waalse Kerk Haarlem.'),
+(15, '', 'The Waalse Kerk is the oldest church in Haarlem and was built in 1348. It is located at the Begijnhof. The Waalse Kerk is a small and beautiful church. \r\nThe church holds some historical gems that are certainly worth checking out if you have the opportunity.'),
+(16, '', 'The Waalse Kerk, built in 1348, is the oldest church in Haarlem. Originally a Catholic church, \r\nit was gifted to the city by the States of Holland as compensation for the damages caused by the Spanish siege. \r\nIn 1590, the City of Haarlem gave it to the French-speaking Protestants, who started holding services in their language. \r\nIt served as a refuge for Flemish Protestants who had fled from Catholic persecution in the 16th century, \r\nwith many of the 20,000 refugees who came to Haarlem worshipping at the Waalse Kerk.'),
+(17, '', 'Inside the church two mural paintings have remained intact. On the northeast side of the choir is a green tapestry. \r\nDuring the restauration it appeared that the green tapestry was fitted over a red painting. This was probably done during the 19e century.\r\nNext to the altar niche is a painting of the three Maria’s on easter morning. \r\nAt the niche the entire easter story was visible, the story that stands central in the liturgy and the church year.'),
+(18, '', 'This location is located at point E on the map and will be visited after visiting the Proveniershof in the tour. \r\nThe next stop on the route will be the Waalse Kerk Haarlem.'),
+(19, '', 'In the charming city of Haarlem, a food festival called “Yummy!” is taking place. The streets are filled with beautiful restaurants serving a variety of tasty dishes.\r\nHaarlem is a culinary city with a thriving restaurant scene that offers something for every palate; from traditional Dutch cuisine to international flavours.\r\nIt doesn’t matter where you come from or what you like; Haarlem has something for everyone! So scroll down and book a reservation for just €35,- to €45,- per person!'),
+(20, '', 'Restaurant De Ripper once started as a meeting centre but has since grown into a remarkable trainee restaurant.\r\nExperience the unique opportunity to sample straightforward good food and familiar favourites prepared by trainee chefs. Informal but professional!'),
+(21, '', 'Led by a team of five experienced culinary instructors, De Ripper\'s trainee chefs prepare a wide range of choices within a fixed-price menu to become chefs.\r\nChoose from a wide range of drinks such as coffee from Peeze, tea, soft drinks, wines, and, among other beers, beer from Jopen. For questions contact us by phone/email\r\n023 51 85 160 info@deripper.nl'),
+(22, '', 'Ripperdastraat 13-A, 2011 KG, Haarlem Just a 5 minute walk from Haarlem station!'),
+(23, '', 'is a Haarlem eatery where hospitality and quality are of great importance. In addition to the delicious drink and/or snack, \r\nwhich can be enjoyed at Coster 52°, knowledge can also be gained about the history of Haarlem. A historically delicious restaurant!'),
+(24, '', 'Coster52° is a Haarlem café restaurant that stands for local, homemade and fresh! It’s known for a menu with familiar favourites where anyone can find something tasty.\r\nAlso, don’t forget to visit their bar that’s alive until the late hours to enjoy many skillfully crafted cocktails. For questions contact us by phone/email\r\n+31 23 202 4726 info@coster52.nl'),
+(25, '', 'Lange Veerstraat 20-22, 2011 DB, Haarlem Just a 5 minute walk from Haarlem center!'),
+(26, '', 'Welcome to our Haarlem DANCE! event where many different DJ’s from around the world will be performing in our venues to make sure you get to experience the best night ever! \r\nIf you want to know more about where or when they will be performing please go ahead and take a look at the schedule below.'),
+(27, '', 'In our venues top talented DJ’s like Hardwell, Tiësto, Martin Garrix and many more will be performing in front of you and your friends to give you a night out you won’t forget. \r\nIf you want to find out more about them we got two detailed pages of some Dutch DJ’s to hype you up! \r\nSo don’t be shy and find out more about your favourite DJ’s by visiting our pages.'),
+(28, '', 'We have detailed all you need to know about Hardwell below so check it out!'),
+(29, '', 'Hardwell who’s real name is Robbert van de Corput, is a professional Dutch DJ and music producer. Robbert was born on January 7 1988 in a Dutch city called Breda. \r\nHe first gained recognition in 2009 for his bootleg of “Show Me Love vs. Be” and has since then never stopped growing to become the professional DJ he is today.'),
+(30, '', 'With his long career as a DJ, Hardwell has many highlights. He has performed on the biggest stages like Ultra Music Festival, Sunburn and Tomorrowland in front of giant crowds. \r\nWas voted the world’s number-one DJ by DJ Mag in 2013 and again in 2014. And has topped the lists many times over with great musical masterpieces like “Spaceman” and “Apollo”.'),
+(31, '', 'Hardwell has written, coproduced, and been featured in various tracks and albums, including classics like \"Off The Hook,\" \"Arcadia,\" and \"Young Again.\" \r\nHowever, his most famous track and the one that is most important to him and his fans is \"Spaceman.\" The production of \"Spaceman\" led to millions of people falling in \r\nlove with Hardwell and his big-room sound, and it is also featured in his biggest album to date, \"The Story of Hardwell.\"'),
+(32, '', 'We have detailed all you need to know about Afrojack below so check it out!'),
+(33, '', 'Afrojack Who’s real name is Nick Leonardus van de Wall is a Dutch DJ and music producer. After taking a interest in making music \r\nhe produced his first ever release at the age of 18 called “In Your Face”. Now Nick is performing with amazing artists like Beyoncé in the biggest venues.'),
+(34, '', 'Afrojack the famous Dutch DJ has a career spanning 10+ years long with winning a Grammy as an award-winning producer/songwriter/DJ, ringing the Nasdaq bell \r\nin New York City for SFX; and producing famous tracks like ‘Run the World’ with Beyoncé.'),
+(35, '', 'Afrojack is a Grammy award-winning DJ with many top 100 tracks and popular songs, including \"Hey Mama,\" \"Can\'t Stop Me,\" and \"Give Me Everything.\" \r\nHis album \"Forget The World\" also contributed to his success. However; his most important song, \"Take Over Control\" was the first song \r\nto air on the radio and launch Afrojack\'s career.');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_reset_temp`
+--
+
+CREATE TABLE `password_reset_temp` (
+  `email` varchar(250) NOT NULL,
+  `key` varchar(250) NOT NULL,
+  `expDate` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
 -- --------------------------------------------------------
 
 --
@@ -315,16 +369,6 @@ INSERT INTO `users` (`id`, `email`, `password`, `time_created`, `is_admin`, `nam
 (1, 'admin@haarlem.nl', '$2y$10$CDNiCZFRqVAQauoFYn9fUO8KN/AKh0TEjxCEXr8nBFimIVbU8ixF.', '2023-02-27 13:48:12', 1, 'admin');
 
 -- --------------------------------------------------------
-
---
--- Table structure for table `password_reset_temp`
---
-
-CREATE TABLE `password_reset_temp` (
-  `email` varchar(250) NOT NULL,
-  `key` varchar(250) NOT NULL,
-  `expDate` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Table structure for table `venue`
@@ -490,7 +534,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `performance`

@@ -1,10 +1,12 @@
 <?php
 
 class GuestCartService {
+    private $cartRepository;
     private $cartRef;
     private $cart;
 
     public function __construct(&$cart) {
+        $this->cartRepository = new CartRepository();
         $this->cartRef = &$cart;
         $this->cart = unserialize($this->cartRef);
     }
@@ -51,6 +53,18 @@ class GuestCartService {
             }
         }
         $this->cartRef = serialize($this->cart);
+    }
+
+    public function getRestaurant(int $restaurantId) : Restaurant {
+        return $this->cartRepository->getRestaurant($restaurantId);
+    }
+
+    public function getPerformance(int $performanceId) : Performance {
+        return $this->cartRepository->getPerformance($performanceId);
+    }
+
+    public function getTour(int $tourId) : Tour {
+        return $this->cartRepository->getTour($tourId);
     }
 }
 ?>

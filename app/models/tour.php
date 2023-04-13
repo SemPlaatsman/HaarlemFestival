@@ -25,7 +25,8 @@ class Tour {
     public function toObject(){
         return (object) [
             'language' => $this->language,
-            '$datetime' => $this->datetime,
+            'datetime' => $this->datetime,
+            'gathering_location' => $this->gathering_location,
             'employee_id' => $this->employee_id,
             'employee_name' => $this->employee_name,
             'capacity' => $this->capacity,

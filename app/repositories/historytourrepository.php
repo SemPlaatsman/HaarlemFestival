@@ -60,15 +60,14 @@ class HistoryTourRepository extends Repository
     public function getToursByLanguage(string $language): array
     {
         try {
-            $stmnt = $this->connection->prepare("SELECT `language`,`datetime`,`employee_id`,`employee_name`,`capacity`,`price`,`group_price` FROM `history_tours`  WHERE language = :language ORDER BY `datetime` ASC;" );
+            $stmnt = $this->connection->prepare("SELECT `id`,`language`,`datetime`,`gathering_location`,`employee_id`,`employee_name`,`capacity`,`price`,`group_price` FROM `history_tours`  WHERE language = :language ORDER BY `datetime` ASC;" );
             $stmnt->bindParam(':language', $language, PDO::PARAM_STR);
             $stmnt->execute();
             $data = $stmnt->fetchAll(PDO::FETCH_ASSOC);
             $tours = array();
 
             foreach ($data as $row) {
-                $date = new DateTime($row['datetime']);
-                $tour = new Tour($row['language'],  $date,  $row['employee_id'], $row['employee_name'], $row['capacity'], $row['price'], $row['group_price']);
+                $tour = new Tour($row['id'],$row['language'],  $row['datetime'], $row['gathering_location'] ,$row['employee_id'], $row['employee_name'], $row['capacity'], $row['price'], $row['group_price']);
                 $tours[] = $tour;
             }
             return $tours;

@@ -38,7 +38,7 @@ class ReservationRepository extends ItemRepository {
             $stmnt = $this -> connection -> prepare("DELETE FROM reservation WHERE id = :id");
             $stmnt -> bindParam(':id', $id, PDO::PARAM_INT);
             $stmnt -> execute();
-            $this->deleteItem($item_id);
+            return $this->deleteItem($item_id);
         } catch (PDOException $e) {
             return false;
         }
@@ -142,6 +142,7 @@ class ReservationRepository extends ItemRepository {
             "restaurant.location as 'restaurant_location', restaurant.adult_price as 'restaurant_adult_price', restaurant.kids_price as 'restaurant_kids_price', " . 
             "restaurant.reservation_fee as 'restaurant_reservation_fee', reservation.final_check, reservation.nr_of_adults, reservation.nr_of_kids, reservation.datetime " . 
             "FROM `item` JOIN reservation ON reservation.item_id = item.id JOIN `restaurant` ON restaurant.id = reservation.restaurant_id;");
+
             $stmnt->execute();
             $stmnt->setFetchMode(PDO::FETCH_CLASS, 'Reservation');
 
