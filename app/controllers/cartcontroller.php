@@ -4,7 +4,15 @@ require_once __DIR__ . '/../models/user.php';
 require_once __DIR__ . '/../services/cartservice.php';
 require_once __DIR__ . '/../services/guestcartservice.php';
 require_once __DIR__ . '/../vendor/mollie/mollie-api-php/src/MollieApiClient.php';
-
+/**
+ * 
+ * 
+ * REFACTOR CODE DOOR REQUESTS VIA DE URL TE STUREN
+ * 
+ * 
+ * 
+ * 
+ */
 class CartController extends Controller {
     private $cartService;
 

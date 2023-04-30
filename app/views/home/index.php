@@ -12,6 +12,7 @@ include __DIR__ . '/../header.php';
 // $cart['ticketsHistory'][] = new TicketHistory(6, 1, 3, "History", 120, 9, "", 2,);
 // $_SESSION['guest']->cart = serialize($cart);
 // var_dump(unserialize($_SESSION['guest']->cart))
+var_dump(new DateTime())
 ?>
 
 <?php
