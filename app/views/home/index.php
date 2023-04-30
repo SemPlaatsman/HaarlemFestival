@@ -1,5 +1,6 @@
 <?php
 include __DIR__ . '/../header.php';
+(session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
 // require_once __DIR__ . '/../../models/reservation.php';
 // require_once __DIR__ . '/../../models/restaurant.php';
 // require_once __DIR__ . '/../../models/ticketdance.php';
@@ -14,6 +15,38 @@ include __DIR__ . '/../header.php';
 // var_dump(unserialize($_SESSION['guest']->cart))
 var_dump(new DateTime())
 ?>
+
+
+<div class="col-lg-6 mx-auto">
+    <?php foreach ($model as $page) { ?>
+        <?php if ($page->getId() === 1) { ?>
+            <p class="lead mb-4" data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>">
+                <?= $page->getBody_markup(); ?>
+            </p>
+            <?php if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()) { ?>
+                <button type="button" class="btn btn-primary" onclick="openEditorModal(<?= $page->getId() ?>)">Open Editor</button>
+            <?php } ?>
+        <?php } ?>
+    <?php } ?>
+</div>
+
+<div class="col-lg-6 mx-auto">
+    <?php foreach ($model as $page) { ?>
+        <?php if ($page->getId() === 2) { ?>
+            <p class="lead mb-4" data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>">
+                <?= $page->getBody_markup(); ?>
+            </p>
+            <?php if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()) { ?>
+                <button type="button" class="btn btn-primary" onclick="openEditorModal(<?= $page->getId() ?>)">Open
+                    Editor</button>
+            <?php } ?>
+        <?php } ?>
+    <?php } ?>
+</div>
+<?php
+include __DIR__ . '/../modalwysiwyg.php';
+?>
+</div>
 
 <?php
 include __DIR__ . '/../footer.php';

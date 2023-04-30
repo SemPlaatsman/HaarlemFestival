@@ -12,9 +12,9 @@ include __DIR__ . '/../header.php';
         <li><a href="/user" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">USERS</a></li>
         <li><a href="/openinghour" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">OPENING
                 HOURS</a></li>
-        <li><a href="/restaurant" class="bg-light nav-item nav-link text-primary-b mx-0 mx-xxl-5">RESTAURANTS</a>
+        <li><a href="/restaurant" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">RESTAURANTS</a>
         </li>
-        <li><a href="/reservation" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">RESERVATIONS</a></li>
+        <li><a href="/reservation" class="bg-light nav-item nav-link text-primary-b mx-0 mx-xxl-5">RESERVATIONS</a></li>
     </ul>
 </header>
 
@@ -66,7 +66,8 @@ include __DIR__ . '/../header.php';
                         </td>
                         <td class="col-1">
                             <div class="justify-content-center align-items-center">
-                                <form method="post" onsubmit="return confirm('Are you sure you wish to remove a reservation for <?= $reservation->getRestaurant()->getName(); ?> at <?= $reservation->getDatetimeFormatted(); ?>?');">
+                                <form method="post"
+                                    onsubmit="return confirm('Are you sure you wish to remove a reservation for <?= $reservation->getRestaurant()->getName(); ?> at <?= $reservation->getDatetimeFormatted(); ?>?');">
                                     <input type="hidden" name="deleteId" value="<?= $reservation->getId() ?>">
                                     <button type="submit"
                                         class="btn btn-danger bg-primary-a text-white border-0 text-center d-inline-block fs-5 m-2"><i

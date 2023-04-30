@@ -1,4 +1,6 @@
-<?php include __DIR__ . '/../header.php'; ?>
+<?php include __DIR__ . '/../header.php';
+(session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
+?>
 <div class="container-fluid bg-black">
     <div class="position-relative">
         <img src="img/png/dance/banner/Banner-Component.png" class="img-fluid w-100 h-100" alt="Banner Image">
@@ -16,15 +18,17 @@
         <div class="row">
             <div class="col-md-4 offset-md-1">
                 <h2 class="text-center text-light-purple mt-5 m1-1 display-3">BEST NIGHT EVER!</h2>
-                <?php foreach ($model as $page) { ?>
+                <?php foreach ($model['pages'] as $page) { ?>
                     <?php if ($page->getId() === 26) { ?>
                         <p class="text-acid-yellow mt-3 m-3 m1-3 fs-5" data-id="<?= $page->getId() ?>"
                             data-url="<?= $page->getUrl() ?>">
                             <?= $page->getBody_markup(); ?>
                         </p>
                         <div class="text-center">
-                            <button type="button" class="btn btn-primary" onclick="openEditorModal(<?= $page->getId() ?>)">Open
-                                Editor</button>
+                            <?php if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()) { ?>
+                                <button type="button" class="btn btn-primary" onclick="openEditorModal(<?= $page->getId() ?>)">Open
+                                    Editor</button>
+                            <?php } ?>
                         </div>
                     <?php } ?>
                 <?php } ?>
@@ -49,15 +53,17 @@
             <img src="img/png/dance/other/Hardwell-Component.png" class="col-md-2 offset-md-1 p-3 mb-5"></img>
             <div class="col-md-4 offset-md-2">
                 <h2 class="text-center justify-content-center text-light-purple mt-5 display-3">GET HYPED!</h2>
-                <?php foreach ($model as $page) { ?>
+                <?php foreach ($model['pages'] as $page) { ?>
                     <?php if ($page->getId() === 27) { ?>
                         <p class="text-acid-yellow mt-3 m-3 text-end fs-5" data-id="<?= $page->getId() ?>"
                             data-url="<?= $page->getUrl() ?>">
                             <?= $page->getBody_markup(); ?>
                         </p>
                         <div class="text-center">
-                            <button type="button" class="btn btn-primary" onclick="openEditorModal(<?= $page->getId() ?>)">Open
-                                Editor</button>
+                            <?php if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()) { ?>
+                                <button type="button" class="btn btn-primary" onclick="openEditorModal(<?= $page->getId() ?>)">Open
+                                    Editor</button>
+                            <?php } ?>
                         </div>
                     <?php } ?>
                 <?php } ?>
@@ -77,107 +83,40 @@
         </div>
 
         <h1 class="text-center text-light-purple mt-5 display-2">SCHEDULE OF OUR TEAM</h1>
-        <h2 class="text-center">NOTE: All-Access pass for this day €125,00, All-Access pass for Fri, Sat, Sun:
+        <h2 class="text-center text-warning">NOTE: All-Access pass for this day €125,00, All-Access pass for Fri, Sat,
+            Sun:
             €250,00.
         </h2>
         <div class="row container align-items-center text-center mx-auto mt-3">
             <table>
                 <tbody>
-                    <tr class="border-top h3">
-                        <td class="text-light-purple">
-                            <h3>20:00 - 02:00 </h3>
-                        </td>
-                        <td class="text-dance-gradient">
-                            <h3>LICHTFABRIEK </h3>
-                        </td>
-                        <td class="text-dance-gradient">
-                            <h3>Nicky Romero/Afrojack </h3>
-                        </td>
-                        <td class="text-acid-yellow">
-                            <h3>€75,00 </h3>
-                        </td>
-                        <td colspan="7" class="text-center">
-                            <input type="submit" data-bs-toggle="modal" data-bs-target="#insertTicket"
-                                class="btn btn-primary insert-ticket bg-light-purple text-white border-0 text-center fs-5 m-2"
-                                value="ADD TO CART">
-                        </td>
-                    </tr>
-                    <tr class="border-top h3">
-                        <td class="text-light-purple">
-                            <h3>22:00 - 23:30 </h3>
-                        </td>
-                        <td class="text-dance-gradient">
-                            <h3>CLUB STALKER </h3>
-                        </td>
-                        <td class="text-dance-gradient">
-                            <h3>Tiesto </h3>
-                        </td>
-                        <td class="text-acid-yellow">
-                            <h3>€60,00 </h3>
-                        </td>
-                        <td colspan="7" class="text-center">
-                            <input type="submit" data-bs-toggle="modal" data-bs-target="#insertTicket"
-                                class="btn btn-primary insert-ticket bg-light-purple text-white border-0 text-center fs-5 m-2"
-                                value="ADD TO CART">
-                        </td>
-                    </tr>
-                    <tr class="border-top h3">
-                        <td class="text-light-purple">
-                            <h3>23:00 - 00:30 </h3>
-                        </td>
-                        <td class="text-dance-gradient">
-                            <h3>JOPENKERK </h3>
-                        </td>
-                        <td class="text-dance-gradient">
-                            <h3>Hardwell </h3>
-                        </td>
-                        <td class="text-acid-yellow">
-                            <h3>€60,00 </h3>
-                        </td>
-                        <td colspan="7" class="text-center">
-                            <input type="submit" data-bs-toggle="modal" data-bs-target="#insertTicket"
-                                class="btn btn-primary insert-ticket bg-light-purple text-white border-0 text-center fs-5 m-2"
-                                value="ADD TO CART">
-                        </td>
-                    </tr>
-                    <tr class="border-top h3">
-                        <td class="text-light-purple">
-                            <h3>22:00 - 23:30 </h3>
-                        </td>
-                        <td class="text-dance-gradient">
-                            <h3>XO THE CLUB</3>
-                        </td>
-                        <td class="text-dance-gradient">
-                            <h3>Armin van Buuren</h3>
-                        </td>
-                        <td class="text-acid-yellow">
-                            <h3>€60,00</h3>
-                        </td>
-                        <td colspan="7" class="text-center">
-                            <input type="submit" data-bs-toggle="modal" data-bs-target="#insertTicket"
-                                class="btn btn-primary insert-ticket bg-light-purple text-white border-0 text-center fs-5 m-2"
-                                value="ADD TO CART">
-                        </td>
-                    </tr>
-                    <tr class="border-top">
-                        <td class="text-light-purple">
-                            <h3>22:00 - 23:30<h3>
-                        </td>
-                        <td class="text-dance-gradient">
-                            <h3>CLUB RUIS</h3>
-                        </td>
-                        <td class="text-dance-gradient">
-                            <h3>Martin Garrix<h3>
-                        </td>
-                        <td class="text-acid-yellow">
-                            <h3>€60,00</h3>
-                        </td>
-                        <td colspan="7" class="text-center">
-                            <input type="submit" data-bs-toggle="modal" data-bs-target="#insertTicket"
-                                class="btn btn-primary insert-ticket bg-light-purple text-white border-0 text-center fs-5 m-2"
-                                value="ADD TO CART">
-                        </td>
-                    </tr>
+                    <?php foreach ($model['performances'] as $performance): ?>
+                        <tr class="border-top h3">
+                            <td class="text-light-purple">
+                                <h3>
+                                    <?= $performance->getStartDate()->format('Y-m-d H:i') ?> -
+                                    <?= $performance->getEndDate()->format('Y-m-d H:i') ?>
+                                </h3>
+                            </td>
+                            <td class="text-dance-gradient">
+                                <h3>
+                                    <?= $performance->getVenue()->getName() ?>
+                                </h3>
+                            </td>
+                            <td class="text-dance-gradient">
+                                <?= $performance->getArtist()->getName() ?>
+                            </td>
+                            <td class="text-acid-yellow">
+                                €
+                                <?= $performance->getPrice() ?>.-
+                            </td>
+                            <td colspan="7" class="text-center">
+                                <input type="submit" data-bs-toggle="modal" data-bs-target="#insertTicket"
+                                    class="btn btn-primary insert-ticket bg-light-purple text-white border-0 text-center fs-5 m-2"
+                                    value="ADD TO CART">
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
             <p class="text-white">*The capacity of the Club sessions is very limited. Availability for All-Access
