@@ -10,17 +10,17 @@ editButtonRestaurant.forEach((button) => {
         const name = row.querySelector('td:nth-of-type(2)').innerText;
         const seats = row.querySelector('td:nth-of-type(3)').innerText;
         const location = row.querySelector('td:nth-of-type(4)').innerText;
-        const adultPrice = row.querySelector('td:nth-of-type(5)').innerText;
-        const kidsPrice = row.querySelector('td:nth-of-type(6)').innerText;
-        const reservationFee = row.querySelector('td:nth-of-type(7)').innerText;
-
+        const adultPrice = row.querySelector('td:nth-of-type(5)').innerText.replace('€ ', '');
+        const kidsPrice = row.querySelector('td:nth-of-type(6)').innerText.replace('€ ', '');
+        const reservationFee = row.querySelector('td:nth-of-type(7)').innerText.replace('€ ', '');
+    
         document.getElementById('edit-id-restaurant').value = id;
-        document.getElementById('name').value = name;
-        document.getElementById('seats').value = seats;
-        document.getElementById('location').value = location;
-        document.getElementById('adult_price').value = adultPrice;
-        document.getElementById('kids_price').value = kidsPrice;
-        document.getElementById('reservation_fee').value = reservationFee;
+        document.getElementById('update-restaurant-name').value = name;
+        document.getElementById('update-restaurant-seats').value = seats;
+        document.getElementById('update-restaurant-location').value = location;
+        document.getElementById('update-restaurant-adult-price').value = adultPrice;
+        document.getElementById('update-restaurant-kids-price').value = kidsPrice;
+        document.getElementById('update-restaurant-reservation-fee').value = reservationFee;
 
         editModalRestaurant.style.display = "block";
     });

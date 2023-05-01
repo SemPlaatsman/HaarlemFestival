@@ -14,7 +14,8 @@ include __DIR__ . '/../header.php';
                 HOURS</a></li>
         <li><a href="/restaurant" class="bg-light nav-item nav-link text-primary-b mx-0 mx-xxl-5">RESTAURANTS</a>
         </li>
-        <li><a href="/reservation" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">RESERVATIONS</a></li>
+        <li><a href="/reservation" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">RESERVATIONS</a>
+        </li>
     </ul>
 </header>
 
@@ -105,27 +106,31 @@ include __DIR__ . '/../header.php';
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
+                        <input type="text" class="form-control" id="insert-restaurant-name" name="name" required>
                     </div>
                     <div class="form-group">
                         <label for="seats">Seats</label>
-                        <input type="number" class="form-control" id="seats" name="seats" required>
+                        <input type="number" class="form-control" id="insert-restaurant-seats" name="seats" required>
                     </div>
                     <div class="form-group">
                         <label for="location">Location</label>
-                        <input type="text" class="form-control" id="location" name="location" required>
+                        <input type="text" class="form-control" id="insert-restaurant-location" name="location"
+                            required>
                     </div>
                     <div class="form-group">
                         <label for="adult_price">Adult price</label>
-                        <input type="number" class="form-control" id="adult_price" name="adult_price" required>
+                        <input type="number" class="form-control" id="insert-restaurant-adult-price" name="adult_price"
+                            required>
                     </div>
                     <div class="form-group">
                         <label for="kids_price">Kids price</label>
-                        <input type="number" class="form-control" id="kids_price" name="kids_price" required>
+                        <input type="number" class="form-control" id="insert-restaurant-kids-price" name="kids_price"
+                            required>
                     </div>
                     <div class="form-group">
                         <label for="reservation_fee">Reservation fee</label>
-                        <input type="number" class="form-control" id="reservation_fee" name="reservation_fee" required>
+                        <input type="number" class="form-control" id="insert-restaurant-reservation-fee"
+                            name="reservation_fee" required>
                     </div>
                     <input type="hidden" name="_restaurantMethod" value="CREATE">
                 </div>
@@ -154,27 +159,31 @@ include __DIR__ . '/../header.php';
                     <input type="hidden" name="id" id="edit-id-restaurant">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
+                        <input type="text" class="form-control" id="update-restaurant-name" name="name" required>
                     </div>
                     <div class="form-group">
                         <label for="seats">Seats</label>
-                        <input type="number" class="form-control" id="seats" name="seats" required>
+                        <input type="number" class="form-control" id="update-restaurant-seats" name="seats" required>
                     </div>
                     <div class="form-group">
                         <label for="location">Location</label>
-                        <input type="text" class="form-control" id="location" name="location" required>
+                        <input type="text" class="form-control" id="update-restaurant-location" name="location"
+                            required>
                     </div>
                     <div class="form-group">
                         <label for="adult_price">Adult price</label>
-                        <input type="number" class="form-control" id="adult_price" name="adult_price" required>
+                        <input type="number" class="form-control" id="update-restaurant-adult-price" name="adult_price"
+                            required>
                     </div>
                     <div class="form-group">
                         <label for="kids_price">Kids price</label>
-                        <input type="number" class="form-control" id="kids_price" name="kids_price" required>
+                        <input type="number" class="form-control" id="update-restaurant-kids-price" name="kids_price"
+                            required>
                     </div>
                     <div class="form-group">
                         <label for="reservation_fee">Reservation fee</label>
-                        <input type="number" class="form-control" id="reservation_fee" name="reservation_fee" required>
+                        <input type="number" class="form-control" id="update-restaurant-reservation-fee"
+                            name="reservation_fee" required>
                     </div>
                     <input type="hidden" name="_restaurantMethod" value="PUT">
                 </div>

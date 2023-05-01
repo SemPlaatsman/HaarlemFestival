@@ -14,7 +14,8 @@ include __DIR__ . '/../header.php';
                 HOURS</a></li>
         <li><a href="/restaurant" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">RESTAURANTS</a>
         </li>
-        <li><a href="/reservation" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">RESERVATIONS</a></li>
+        <li><a href="/reservation" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">RESERVATIONS</a>
+        </li>
     </ul>
 </header>
 
@@ -92,15 +93,15 @@ include __DIR__ . '/../header.php';
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name-venue" name="name" required>
+                        <input type="text" class="form-control" id="insert-name-venue" name="name" required>
                     </div>
                     <div class="form-group">
                         <label for="location">Location</label>
-                        <input type="text" class="form-control" id="location-venue" name="location" required>
+                        <input type="text" class="form-control" id="insert-location-venue" name="location" required>
                     </div>
                     <div class="form-group">
                         <label for="seats">Number of Seats</label>
-                        <input type="number" class="form-control" id="seats-venue" name="seats" required>
+                        <input type="number" class="form-control" id="insert-seats-venue" name="seats" required>
                     </div>
                     <input type="hidden" name="_venueMethod" value="CREATE">
                 </div>
@@ -129,15 +130,15 @@ include __DIR__ . '/../header.php';
                     <input type="hidden" name="id" id="edit-id-venue">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name-venue" name="name" required>
+                        <input type="text" class="form-control" id="update-name-venue" name="name" required>
                     </div>
                     <div class="form-group">
                         <label for="location">Location</label>
-                        <input type="text" class="form-control" id="location-venue" name="location" required>
+                        <input type="text" class="form-control" id="update-location-venue" name="location" required>
                     </div>
                     <div class="form-group">
                         <label for="seats">Number of Seats</label>
-                        <input type="number" class="form-control" id="seats-venue" name="seats" required>
+                        <input type="number" class="form-control" id="update-seats-venue" name="seats" required>
                     </div>
                     <input type="hidden" name="_venueMethod" value="PUT">
                 </div>

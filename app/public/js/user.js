@@ -13,9 +13,9 @@ editButtonUser.forEach((button) => {
 
 
         document.getElementById('edit-id-user').value = id;
-        document.getElementById('email').value = email;      
-        document.getElementById('name-user').value = name;
-        document.getElementById('is_admin').checked = isAdmin;
+        document.getElementById('update-user-email').value = email;      
+        document.getElementById('update-user-name').value = name;
+        document.getElementById('update-user-is-admin').checked = isAdmin;
 
         editModalUser.style.display = 'block';
     });

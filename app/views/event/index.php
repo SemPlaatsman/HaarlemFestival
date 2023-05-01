@@ -14,7 +14,8 @@ include __DIR__ . '/../header.php';
                 HOURS</a></li>
         <li><a href="/restaurant" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">RESTAURANTS</a>
         </li>
-        <li><a href="/reservation" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">RESERVATIONS</a></li>
+        <li><a href="/reservation" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">RESERVATIONS</a>
+        </li>
     </ul>
 </header>
 <div class="row container">
@@ -91,15 +92,15 @@ include __DIR__ . '/../header.php';
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
+                        <input type="text" class="form-control" id="insert-event-name" name="name" required>
                     </div>
                     <div class="form-group">
                         <label for="start_date">Start Date</label>
-                        <input type="date" class="form-control" id="start_date" name="start_date" required>
+                        <input type="date" class="form-control" id="insert-event-start-date" name="start_date" required>
                     </div>
                     <div class="form-group">
                         <label for="end_date">End Date</label>
-                        <input type="date" class="form-control" id="end_date" name="end_date" required>
+                        <input type="date" class="form-control" id="insert-event-end-date" name="end_date" required>
                     </div>
                     <input type="hidden" name="_eventMethod" value="CREATE">
                 </div>
@@ -128,15 +129,15 @@ include __DIR__ . '/../header.php';
                     <input type="hidden" name="id" id="edit-id-event">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
+                        <input type="text" class="form-control" id="update-event-name" name="name" required>
                     </div>
                     <div class="form-group">
                         <label for="start_date">Start Date</label>
-                        <input type="date" class="form-control" id="start_date" name="start_date" required>
+                        <input type="date" class="form-control" id="update-event-start-date" name="start_date" required>
                     </div>
                     <div class="form-group">
                         <label for="end_date">End Date</label>
-                        <input type="date" class="form-control" id="end_date" name="end_date" required>
+                        <input type="date" class="form-control" id="update-event-end-date" name="end_date" required>
                     </div>
                     <input type="hidden" name="_eventMethod" value="PUT">
                 </div>
