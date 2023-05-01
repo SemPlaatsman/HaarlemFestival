@@ -66,7 +66,8 @@ include __DIR__ . '/../header.php';
                         </td>
                         <td class="col-1">
                             <div class="justify-content-center align-items-center">
-                                <form method="post" onsubmit="return confirm('Are you sure you wish to remove a reservation for <?= $reservation->getRestaurant()->getName(); ?> at <?= $reservation->getDatetimeFormatted(); ?>?');">
+                                <form method="post"
+                                    onsubmit="return confirm('Are you sure you wish to remove a reservation for <?= $reservation->getRestaurant()->getName(); ?> at <?= $reservation->getDatetimeFormatted(); ?>?');">
                                     <input type="hidden" name="deleteId" value="<?= $reservation->getId() ?>">
                                     <button type="submit"
                                         class="btn btn-danger bg-primary-a text-white border-0 text-center d-inline-block fs-5 m-2"><i
