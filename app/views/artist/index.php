@@ -14,7 +14,8 @@ include __DIR__ . '/../header.php';
                 HOURS</a></li>
         <li><a href="/restaurant" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">RESTAURANTS</a>
         </li>
-        <li><a href="/reservation" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">RESERVATIONS</a></li>
+        <li><a href="/reservation" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">RESERVATIONS</a>
+        </li>
     </ul>
 </header>
 <div class="row container">
@@ -83,7 +84,7 @@ include __DIR__ . '/../header.php';
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
+                        <input type="text" class="form-control" id="insert-artist-name" name="name" required>
                     </div>
                     <input type="hidden" name="_artistMethod" value="CREATE">
                 </div>
@@ -112,7 +113,7 @@ include __DIR__ . '/../header.php';
                     <input type="hidden" name="id" id="edit-id-artist">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name-artist" name="name" required>
+                        <input type="text" class="form-control" id="update-artist-name" name="name" required>
                     </div>
                     <input type="hidden" name="_artistMethod" value="PUT">
                 </div>
