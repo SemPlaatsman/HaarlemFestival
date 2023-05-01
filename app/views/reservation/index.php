@@ -12,9 +12,9 @@ include __DIR__ . '/../header.php';
         <li><a href="/user" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">USERS</a></li>
         <li><a href="/openinghour" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">OPENING
                 HOURS</a></li>
-        <li><a href="/restaurant" class="bg-light nav-item nav-link text-primary-b mx-0 mx-xxl-5">RESTAURANTS</a>
+        <li><a href="/restaurant" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">RESTAURANTS</a>
         </li>
-        <li><a href="/reservation" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">RESERVATIONS</a></li>
+        <li><a href="/reservation" class="bg-light nav-item nav-link text-primary-b mx-0 mx-xxl-5">RESERVATIONS</a></li>
     </ul>
 </header>
 
