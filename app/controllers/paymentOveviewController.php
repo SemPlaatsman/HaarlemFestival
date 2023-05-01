@@ -3,8 +3,8 @@ require_once __DIR__ . '/controller.php';
 require_once __DIR__ . '/../services/orderservice.php';
 
 class PaymentOveviewController extends Controller {
-    private $orderService;
-
+    public $orderService;
+    
     function __construct() {
         $this->orderService = new OrderService();
     }

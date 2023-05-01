@@ -1,4 +1,7 @@
 <?php
+
+use Shuchkin\SimpleXLSXGen;
+
 require_once '../vendor/autoload.php';
 require_once __DIR__ . '/../services/orderservice.php';
 
@@ -8,6 +11,8 @@ class excelDownloadController
 
     public function downloadExcel()
     {
+
+
         $totalPrice = 0;
         $orderService = new OrderService();
         $orders = $orderService->getOrderHistory();
@@ -18,7 +23,7 @@ class excelDownloadController
             array_push($costs, array($order->getWhen_event(), $order->getWhere_event(), $order->getWhat_event(), $order->getTotal_price() . ' €', $order->getVAT() . '%'));
         }
         array_push($costs, array('Total Price', '', '', $totalPrice . ' €', ''));
-        $xlsx = Shuchkin\SimpleXLSXGen::fromArray($costs);
+        $xlsx = SimpleXLSXGen::fromArray($costs);
         $xlsx->downloadAs('orderHistory.xlsx');
     }
 
