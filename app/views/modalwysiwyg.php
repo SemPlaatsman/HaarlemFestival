@@ -13,7 +13,6 @@
                     <input type="hidden" name="id" id="editor-modal-id" />
                     <textarea name="body_markup" id="editor" rows="10"></textarea>
                 </div>
-
                 <input type="hidden" name="_updateContent" value="PUT">
                 <div class="modal-footer">
                     <button type="button" class="close btn btn-secondary" data-bs-dismiss="modal">Close</button>

@@ -19,7 +19,8 @@ include __DIR__ . '/../adminSubheader.php';
                 <a href="/reservation" class="btn bg-primary-b text-tetiare-a btn-lg btn-block">RESERVATIONS</A>
             </div>
             <!-- temporarily -->
-            <a href="/download/income" class="btn bg-primary-b text-tetiare-a btn-lg btn-block">download a excel of the earnings</a>
+            <a href="/download/income" class="btn bg-primary-b text-tetiare-a btn-lg btn-block mt-3">download a excel of
+                the earnings</a>
 
 
         </div>

@@ -46,7 +46,12 @@ class router
             case 'adminoverview':
                 require_once __DIR__ . '/controllers/adminoverviewcontroller.php';
                 $controller = new AdminOverviewController();
-                $controller->index();
+                if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()) {
+                    $controller->index();
+                } else {
+                    http_response_code(404);
+                    echo "404 Not Found";
+                }
                 break;
 
             case 'venue':
@@ -61,7 +66,12 @@ class router
                         $controller->insertVenue();
                     }
                 } else {
-                    $controller->index();
+                    if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()) {
+                        $controller->index();
+                    } else {
+                        http_response_code(404);
+                        echo "404 Not Found";
+                    }
                 }
                 break;
 
@@ -77,7 +87,12 @@ class router
                         $controller->insertEvent();
                     }
                 } else {
-                    $controller->index();
+                    if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()) {
+                        $controller->index();
+                    } else {
+                        http_response_code(404);
+                        echo "404 Not Found";
+                    }
                 }
                 break;
 
@@ -93,7 +108,12 @@ class router
                         $controller->insertArtist();
                     }
                 } else {
-                    $controller->index();
+                    if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()) {
+                        $controller->index();
+                    } else {
+                        http_response_code(404);
+                        echo "404 Not Found";
+                    }
                 }
                 break;
 
@@ -109,7 +129,12 @@ class router
                         $controller->insertUser();
                     }
                 } else {
-                    $controller->index();
+                    if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()) {
+                        $controller->index();
+                    } else {
+                        http_response_code(404);
+                        echo "404 Not Found";
+                    }
                 }
                 break;
 
@@ -125,9 +150,13 @@ class router
                         $controller->insertOpeningHour();
                     }
                 } else {
-                    $controller->index();
+                    if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()) {
+                        $controller->index();
+                    } else {
+                        http_response_code(404);
+                        echo "404 Not Found";
+                    }
                 }
-                $controller->index();
                 break;
 
             case 'restaurant':
@@ -142,15 +171,24 @@ class router
                         $controller->insertRestaurant();
                     }
                 } else {
-                    $controller->index();
+                    if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()) {
+                        $controller->index();
+                    } else {
+                        http_response_code(404);
+                        echo "404 Not Found";
+                    }
                 }
-                $controller->index();
                 break;
-            
+
             case 'reservation':
                 require_once __DIR__ . '/controllers/reservationcontroller.php';
                 $controller = new ReservationController();
-                $controller->index();
+                if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()) {
+                    $controller->index();
+                } else {
+                    http_response_code(404);
+                    echo "404 Not Found";
+                }
                 break;
             case 'paymentOveview'   :
                 require_once __DIR__ . '/controllers/paymentOveviewController.php';
@@ -199,9 +237,9 @@ class router
                 break;
 
             case 'api':
-                // require __DIR__ . '/apiControllers/apiController.php';
-                // $api = new api();
-                // break;
+            // require __DIR__ . '/apiControllers/apiController.php';
+            // $api = new api();
+            // break;
 
             case 'dance':
                 require_once __DIR__ . '/controllers/dancecontroller.php';
