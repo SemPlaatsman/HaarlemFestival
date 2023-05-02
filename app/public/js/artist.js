@@ -11,7 +11,7 @@ editButtonArtist.forEach((button) => {
         const name = row.querySelector('td:nth-of-type(2)').innerText;
 
         document.getElementById('edit-id-artist').value = id;
-        document.getElementById('name-artist').value = name;
+        document.getElementById('update-artist-name').value = name;
 
         editModalArtist.style.display = "block";
     });
