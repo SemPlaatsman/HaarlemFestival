@@ -45,15 +45,7 @@ class CartService {
     }
 
     public function addToCart(Item $item) : bool {
-        switch ($item) {
-            case $item instanceof Reservation:
-                return $this->cartRepository->addReservationToCart($item);
-            case $item instanceof TicketDance:
-                return $this->cartRepository->addTicketDanceToCart($item);
-            case $item instanceof TicketHistory:
-                return $this->cartRepository->addTicketHistoryToCart($item);
-        }
-        return false;
+        return $this->cartRepository->addItemToCart($item);
     }
 }
 ?>
