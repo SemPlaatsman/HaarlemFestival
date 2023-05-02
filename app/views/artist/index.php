@@ -2,6 +2,7 @@
 include __DIR__ . '/../header.php';
 include __DIR__ . '/../adminSubheader.php';
 ?>
+
 <div class="row container">
     <div class="col-md-10 mx-auto">
         <table class="table table-bordered w-150 bg-primary-b m-auto mt-3 mb-3 border border-white text-tetiare-a">
@@ -68,7 +69,7 @@ include __DIR__ . '/../adminSubheader.php';
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
+                        <input type="text" class="form-control" id="insert-artist-name" name="name" required>
                     </div>
                     <input type="hidden" name="_artistMethod" value="CREATE">
                 </div>
@@ -97,7 +98,7 @@ include __DIR__ . '/../adminSubheader.php';
                     <input type="hidden" name="id" id="edit-id-artist">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name-artist" name="name" required>
+                        <input type="text" class="form-control" id="update-artist-name" name="name" required>
                     </div>
                     <input type="hidden" name="_artistMethod" value="PUT">
                 </div>

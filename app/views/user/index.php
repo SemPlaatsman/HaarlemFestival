@@ -2,6 +2,7 @@
 include __DIR__ . '/../header.php';
 include __DIR__ . '/../adminSubheader.php';
 ?>
+
 <div class="row container">
     <div class="col-md-10 mx-auto">
         <table class="table table-bordered w-100 bg-primary-b mt-3 mb-3 border border-white text-tetiare-a">
@@ -80,20 +81,21 @@ include __DIR__ . '/../adminSubheader.php';
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
+                        <input type="email" class="form-control" id="insert-user-email" name="email" required>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
+                        <input type="password" class="form-control" id="insert-user-password" name="password" required>
                     </div>
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
+                        <input type="text" class="form-control" id="insert-user-name" name="name" required>
                     </div>
                     <div class="form-group">
                         <label for="is_admin">Is admin</label>
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="is_admin" name="is_admin" value="1">
+                            <input type="checkbox" class="form-check-input" id="insert-user-is-admin" name="is_admin"
+                                value="1">
                             <label class="form-check-label" for="is_admin">Yes</label>
                         </div>
                     </div>
@@ -125,19 +127,20 @@ include __DIR__ . '/../adminSubheader.php';
                     <input type="hidden" name="id" id="edit-id-user">
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
+                        <input type="email" class="form-control" id="update-user-email" name="email" required>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
+                        <input type="password" class="form-control" id="update-user-password" name="password" required>
                     </div>
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name-user" name="name" required>
+                        <input type="text" class="form-control" id="update-user-name" name="name" required>
                     </div>
                     <div class="form-group"><label for="is_admin">Is admin</label>
-                        <div class="form-check"><input type="checkbox" class="form-check-input" id="is_admin"
-                                name="is_admin" value="1"><label class="form-check-label" for="is_admin">Yes</label>
+                        <div class="form-check"><input type="checkbox" class="form-check-input"
+                                id="update-user-is-admin" name="is_admin" value="1"><label class="form-check-label"
+                                for="is_admin">Yes</label>
                         </div>
                     </div>
                     <input type="hidden" name="_userMethod" value="PUT">

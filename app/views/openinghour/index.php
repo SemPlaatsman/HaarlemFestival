@@ -2,6 +2,7 @@
 include __DIR__ . '/../header.php';
 include __DIR__ . '/../adminSubheader.php';
 ?>
+
 <div class="row container">
     <div class="col-md-10 mx-auto">
         <table class="table table-bordered w-100 bg-primary-b mt-3 mb-3 border border-white text-tetiare-a">
@@ -91,18 +92,18 @@ include __DIR__ . '/../adminSubheader.php';
                     </div>
                     <div class="form-group">
                         <label for="day-of-week">Day of the week</label>
-                        <input type="text" class="form-control" id="day-of-week-opening-hour" name="day_of_week"
+                        <input type="text" class="form-control" id="insert-day-of-week-opening-hour" name="day_of_week"
                             required>
                     </div>
                     <div class="form-group">
                         <label for="opening-time">Opening time</label>
-                        <input type="time" class="form-control" id="opening-time-opening-hour" name="opening_time"
-                            step="1" required>
+                        <input type="time" class="form-control" id="insert-opening-time-opening-hour"
+                            name="opening_time" step="1" required>
                     </div>
                     <div class="form-group">
                         <label for="closing-time">Closing time</label>
-                        <input type="time" class="form-control" id="closing-time-opening-hour" name="closing_time"
-                            step="1" required>
+                        <input type="time" class="form-control" id="insert-closing-time-opening-hour"
+                            name="closing_time" step="1" required>
                     </div>
                     <input type="hidden" name="_openingHourMethod" value="CREATE">
                 </div>
@@ -131,18 +132,17 @@ include __DIR__ . '/../adminSubheader.php';
                     <input type="hidden" name="id" id="edit-id-opening-hour">
                     <div class="form-group">
                         <label for="day-of-week">Day of the week</label>
-                        <input type="text" class="form-control" id="day-of-week-opening-hour" name="day_of_week"
-                            required>
+                        <input type="text" class="form-control" id="update-day-of-week" name="day_of_week" required>
                     </div>
                     <div class="form-group">
                         <label for="opening-time">Opening time</label>
-                        <input type="time" class="form-control" id="opening-time-opening-hour" name="opening_time"
-                            step="1" required>
+                        <input type="time" class="form-control" id="update-opening-time-opening-hour"
+                            name="opening_time" step="1" required>
                     </div>
                     <div class="form-group">
                         <label for="closing-time">Closing time</label>
-                        <input type="time" class="form-control" id="closing-time-opening-hour" name="closing_time"
-                            step="1" required>
+                        <input type="time" class="form-control" id="update-closing-time-opening-hour"
+                            name="closing_time" step="1" required>
                     </div>
                     <input type="hidden" name="_openingHourMethod" value="PUT">
                 </div>
