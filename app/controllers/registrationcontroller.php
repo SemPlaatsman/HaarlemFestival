@@ -20,12 +20,12 @@ class RegistrationController extends Controller {
     public function index() {
         if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST)) {
             
-            $this->handlePost();
+            $this->register();
         }
         $this->displayView();
     }
 
-    public function handlePost() {
+    public function register() {
         if (!empty($_POST['email']) && !empty($_POST['name']) && !empty($_POST['password']) && !empty($_POST['confirmpassword']) && isset($_POST['email']) && isset($_POST['name']) && isset($_POST['password']) && isset($_POST['confirmpassword'])) {
             if ($this->Hcaptcha()){
                 $email = htmlspecialchars($_POST['email']);
