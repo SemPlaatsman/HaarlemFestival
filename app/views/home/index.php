@@ -15,6 +15,9 @@ include __DIR__ . '/../header.php';
 // var_dump(unserialize($_SESSION['guest']->cart))
 ?>
 
+<form action="/wduaihdwhuafw" method="POST">
+    <button type="submit">SUBMIT</button>
+</form>
 
 <div class="col-lg-6 mx-auto">
     <?php foreach ($model as $page) { ?>
