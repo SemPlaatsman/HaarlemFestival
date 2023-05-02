@@ -258,6 +258,11 @@ class router
                     echo "404 Not Found";
                 }
                 break;
+            case 'paymentOveview'   :
+                require_once __DIR__ . '/controllers/paymentOveviewController.php';
+                $controller = new PaymentOveviewController();
+                $controller->index();
+                break;
 
             case 'captcha':
                 require_once __DIR__ . '/controllers/captchacontroller.php';
@@ -271,11 +276,11 @@ class router
                 $controller->Hcaptcha();
                 break;
 
-            case 'validate/Gcaptcha':
-                require_once __DIR__ . '/controllers/validatecontroller.php';
-                $controller = new validateController();
-                $controller->Gcaptcha();
-                break;
+            // case 'validate/Gcaptcha':
+            //     require_once __DIR__ . '/controllers/validatecontroller.php';
+            //     $controller = new validateController();
+            //     $controller->Gcaptcha();
+            //     break;
 
             case 'qr':
                 require_once __DIR__ . '/controllers/QrGeneratorScanner.php';

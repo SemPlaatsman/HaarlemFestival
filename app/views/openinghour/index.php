@@ -1,22 +1,7 @@
 <?php
 include __DIR__ . '/../header.php';
+include __DIR__ . '/../adminSubheader.php';
 ?>
-<header class="d-flex justify-content-center py-3 bg-primary-b fs-5">
-    <ul class="nav nav-pills fw-bold">
-        <li><a href="/adminoverview" class="second-header nav-item nav-link text-tetiare-a bg-tetiare-a mx-0 mx-xxl-5"
-                aria-current="page">OVERVIEW</a>
-        </li>
-        <li><a href="/venue" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">VENUES</a></li>
-        <li><a href="/event" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">EVENTS</a></li>
-        <li><a href="/artist" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">ARTISTS</a></li>
-        <li><a href="/user" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">USERS</a></li>
-        <li><a href="/openinghour" class="bg-light nav-item nav-link text-primary-b mx-0 mx-xxl-5">OPENING
-                HOURS</a></li>
-        <li><a href="/restaurant" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">RESTAURANTS</a>
-        </li>
-        <li><a href="/reservation" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">RESERVATIONS</a></li>
-    </ul>
-</header>
 
 <div class="row container">
     <div class="col-md-10 mx-auto">
@@ -107,18 +92,18 @@ include __DIR__ . '/../header.php';
                     </div>
                     <div class="form-group">
                         <label for="day-of-week">Day of the week</label>
-                        <input type="text" class="form-control" id="day-of-week-opening-hour" name="day_of_week"
+                        <input type="text" class="form-control" id="insert-day-of-week-opening-hour" name="day_of_week"
                             required>
                     </div>
                     <div class="form-group">
                         <label for="opening-time">Opening time</label>
-                        <input type="time" class="form-control" id="opening-time-opening-hour" name="opening_time"
-                            step="1" required>
+                        <input type="time" class="form-control" id="insert-opening-time-opening-hour"
+                            name="opening_time" step="1" required>
                     </div>
                     <div class="form-group">
                         <label for="closing-time">Closing time</label>
-                        <input type="time" class="form-control" id="closing-time-opening-hour" name="closing_time"
-                            step="1" required>
+                        <input type="time" class="form-control" id="insert-closing-time-opening-hour"
+                            name="closing_time" step="1" required>
                     </div>
                     <input type="hidden" name="_openingHourMethod" value="CREATE">
                 </div>
@@ -147,18 +132,17 @@ include __DIR__ . '/../header.php';
                     <input type="hidden" name="id" id="edit-id-opening-hour">
                     <div class="form-group">
                         <label for="day-of-week">Day of the week</label>
-                        <input type="text" class="form-control" id="day-of-week-opening-hour" name="day_of_week"
-                            required>
+                        <input type="text" class="form-control" id="update-day-of-week" name="day_of_week" required>
                     </div>
                     <div class="form-group">
                         <label for="opening-time">Opening time</label>
-                        <input type="time" class="form-control" id="opening-time-opening-hour" name="opening_time"
-                            step="1" required>
+                        <input type="time" class="form-control" id="update-opening-time-opening-hour"
+                            name="opening_time" step="1" required>
                     </div>
                     <div class="form-group">
                         <label for="closing-time">Closing time</label>
-                        <input type="time" class="form-control" id="closing-time-opening-hour" name="closing_time"
-                            step="1" required>
+                        <input type="time" class="form-control" id="update-closing-time-opening-hour"
+                            name="closing_time" step="1" required>
                     </div>
                     <input type="hidden" name="_openingHourMethod" value="PUT">
                 </div>

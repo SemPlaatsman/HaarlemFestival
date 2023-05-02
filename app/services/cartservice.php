@@ -45,7 +45,7 @@ class CartService {
     }
 
     public function addToCart(Item $item) : bool {
-        switch (true) {
+        switch ($item) {
             case $item instanceof Reservation:
                 return $this->cartRepository->addReservationToCart($item);
             case $item instanceof TicketDance:

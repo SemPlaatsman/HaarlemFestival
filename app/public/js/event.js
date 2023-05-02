@@ -12,9 +12,9 @@ editButtonEvent.forEach((button) => {
         const end_date = row.querySelector('td:nth-of-type(4)').innerText;
 
         document.getElementById('edit-id-event').value = id;
-        document.getElementById('name').value = name;
-        document.getElementById('start_date').value = start_date;
-        document.getElementById('end_date').value = end_date;
+        document.getElementById('update-event-name').value = name;
+        document.getElementById('update-event-start-date').value = start_date;
+        document.getElementById('update-event-end-date').value = end_date;
 
         editModalEvent.style.display = "block";
     });
