@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/controller.php';
 require_once __DIR__ . '/../services/orderservice.php';
+require_once __DIR__ . '/../controllers/exceldownloadcontroller.php';
 
 class PaymentOveviewController extends Controller {
     public $orderService;
@@ -23,6 +24,14 @@ class PaymentOveviewController extends Controller {
 
 
 
+    }
+    public function Download(){
+        $excelDownloader = new excelDownloadController();
+        if(isset($_GET['columns'])){
+        $columns = explode(',',$_GET['columns']);
+        $excelDownloader->downloadExcel($columns);
+        };
+        // $excelDownloader->downloadExcel();
     }
 
 }

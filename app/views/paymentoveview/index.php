@@ -6,41 +6,39 @@ include __DIR__ . '/../adminSubheader.php';
 <div class="row container">
     <div class="col-md-10 mx-auto">
         <table class="table table-bordered w-100 bg-primary-b mt-3 mb-3 border border-white text-tetiare-a">
-            <thead class="text-center">
+            <thead class="text-center" id="SelectableColumns">
                 <tr>
-                    <th colspan="7" class="fs-3">PAYMENT HISTORY</th>
+                    <th colspan="7" class="fs-3">ORDERS</th>
                 </tr>
                 <tr>
                     <th class="col-1" id="IdColumn">
-                        <input class="form-check-input" type="radio" name="idOption" id="idOption">
+                        <input class="form-check-input" type="checkbox" name="idOption" id="idOption" onclick="CheckboxListener()">
                         <label class="form-check-label" for="idOption">ID</label>
                     </th>
                     <th class="col-3" id="WHenColumn">
-                        <input class="form-check-input" type="radio" name="idOption" id="idOption">
-                        <label class="form-check-label" for="idOption">When</label>
+                        <input class="form-check-input" type="checkbox" name="WhenOption" id="WhenOption" onclick="CheckboxListener()">
+                        <label class="form-check-label" for="WhenOption">When</label>
                     </th>
                     <th class="col-3" id="WhereColumn">
-                        <input class="form-check-input" type="radio" name="idOption" id="idOption">
-                        <label class="form-check-label" for="idOption">Where</label>
+                        <input class="form-check-input" type="checkbox" name="WhereOption" id="WhereOption" onclick="CheckboxListener()">
+                        <label class="form-check-label" for="WhereOption">Where</label>
                     </th>
                     <th class="col-3" id="WhatColumn">
-                        <input class="form-check-input" type="radio" name="idOption" id="idOption">
-                        <label class="form-check-label" for="idOption">What</label>
+                        <input class="form-check-input" type="checkbox" name="WhatOption" id="WhatOption" onclick="CheckboxListener()">
+                        <label class="form-check-label" for="WhatOption">What</label>
                     </th>
                     <th class="col-3" id="Total">
-                        <input class="form-check-input" type="radio" name="idOption" id="idOption">
-                        <label class="form-check-label" for="idOption">Total Price</label>
+                        <input class="form-check-input" type="checkbox" name="TotalOption" id="TotalOption" onclick="CheckboxListener()">
+                        <label class="form-check-label" for="TotalOption">Total Price</label>
                     </th>
                     <th class="col-3" id="VatColumn">
-                        <input class="form-check-input" type="radio" name="idOption" id="idOption">
-                        <label class="form-check-label" for="idOption">VAT</label>
+                        <input class="form-check-input" type="checkbox" name="VatOption" id="VatOption" onclick="CheckboxListener()">
+                        <label class="form-check-label" for="VatOption">VAT</label>
                     </th>
-
-
                 </tr>
             </thead>
 
-            <body class="text-center">
+            <body class="text-center" id="table">
 
                 <?php
                 foreach ($model["orderhistory"] as $order) : ?>
@@ -68,85 +66,10 @@ include __DIR__ . '/../adminSubheader.php';
 
             </body>
         </table>
+        <input type="button" id="download" class="btn bg-primary-b text-tetiare-a btn-lg btn-block d-none" value="DOWNLOAD EXCEL">
     </div>
 </div>
 
-<!-- Modal Insert -->
-<div id="insertModalOpeningHour" class="modal fade" tabindex="-1" aria-labelledby="openingHourModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered text-white">
-        <div class="modal-content bg-primary-a border border-white">
-            <div class="modal-header">
-                <h5 class="modal-title">Insert opening hours</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form id="insertFormOpeningHour" method="post" action="/openinghour" class="d-flex justify-content-between">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="name">Restaurant name</label><br>
-                        <select name="restaurant_id" id="restaurant_id">
-                            <?php foreach ($model['restaurant'] as $restaurant) : ?>
-                                <option value="<?= $restaurant->getId() ?>">
-                                    <?= $restaurant->getName() ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="day-of-week">Day of the week</label>
-                        <input type="text" class="form-control" id="day-of-week-opening-hour" name="day_of_week" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="opening-time">Opening time</label>
-                        <input type="time" class="form-control" id="opening-time-opening-hour" name="opening_time" step="1" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="closing-time">Closing time</label>
-                        <input type="time" class="form-control" id="closing-time-opening-hour" name="closing_time" step="1" required>
-                    </div>
-                    <input type="hidden" name="_openingHourMethod" value="CREATE">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary fs-5" data-bs-dismiss="modal">Close</button>
-                    <input type="submit" class="btn btn-primary bg-primary-b border-0 text-center text-decoration-none d-inline-block fs-5 m-2" value="Insert">
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Update -->
-<div id="editModal" class="modal" tabindex="-1" aria-labelledby="openingHourModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered text-white">
-        <div class="modal-content bg-primary-a border border-white">
-            <div class="modal-header">
-                <h5 class="modal-title">Update Opening hours</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form id="editFormOpeningHour" method="post" action="/openinghour" class="d-flex justify-content-between">
-                <div class="modal-body">
-                    <input type="hidden" name="id" id="edit-id-opening-hour">
-                    <div class="form-group">
-                        <label for="day-of-week">Day of the week</label>
-                        <input type="text" class="form-control" id="day-of-week-opening-hour" name="day_of_week" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="opening-time">Opening time</label>
-                        <input type="time" class="form-control" id="opening-time-opening-hour" name="opening_time" step="1" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="closing-time">Closing time</label>
-                        <input type="time" class="form-control" id="closing-time-opening-hour" name="closing_time" step="1" required>
-                    </div>
-                    <input type="hidden" name="_openingHourMethod" value="PUT">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary fs-5" data-bs-dismiss="modal">Close</button>
-                    <input type="submit" class="btn btn-primary bg-primary-b border-0 text-center text-decoration-none d-inline-block fs-5 m-2" value="Save">
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 
 
 <?php

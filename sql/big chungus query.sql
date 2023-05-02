@@ -1,5 +1,5 @@
 #join  restaurnat
-SELECT `orders`.`id`,`time_payed`,`payment_status`, `item`.`total_price`, `item`.`total_price` , `item`.`VAT`, 
+SELECT `orders`.`id`,`time_payed`,`payment_status`, `item`.`total_price` , `item`.`VAT`, 
 `restaurant`.`name` as 'where', '' as 'who', `reservation`.`datetime` as 'when'  FROM `orders` 
 
 JOIN `item` on `item`.`order_id` = `orders`.`id`  
@@ -9,7 +9,7 @@ JOIN `restaurant` on `reservation`.`restaurant_id`  = `restaurant`.`id`
 UNION ALL
 
 #join dance
-SELECT `orders`.`id`,`time_payed`,`payment_status`, `item`.`total_price`, `item`.`total_price` , `item`.`VAT`, 
+SELECT `orders`.`id`,`time_payed`,`payment_status`, `item`.`total_price`,  `item`.`VAT`, 
 `venue`.`name` as 'where', `artist`.`name` as 'who', `performance`.`start_date` as 'when' FROM `orders` 
 
 JOIN `item` on `item`.`order_id` = `orders`.`id`  
@@ -21,7 +21,7 @@ JOIN `venue` on `performance`.`id` = `venue`.`id`
 UNION ALL
 
 #join history
-SELECT `orders`.`id`,`time_payed`,`payment_status`, `item`.`total_price`, `item`.`total_price` , `item`.`VAT`, 
+SELECT `orders`.`id`,`time_payed`,`payment_status`, `item`.`total_price`,  `item`.`VAT`, 
 `history_tours`.`gathering_location` as 'where', '' as 'who' ,`history_tours`.`datetime` as 'when'  FROM `orders` 
 
 JOIN `item` on `item`.`order_id` = `orders`.`id`  

@@ -195,6 +195,7 @@ class router
                 $controller = new PaymentOveviewController();
                 $controller->index();
                 break;
+            
 
             case 'captcha':
                 require_once __DIR__ . '/controllers/captchacontroller.php';
@@ -230,13 +231,13 @@ class router
                 break;
 
 
-            case 'download/income':
-                require __DIR__ . '/controllers/exceldownloadcontroller.php';
-                $controller = new excelDownloadController();
-                $controller->downloadExcel();
+            case 'download/orders':
+                require_once __DIR__ . '/controllers/paymentOveviewController.php';
+                $controller = new PaymentOveviewController();
+                $controller->Download();
                 break;
 
-            case 'api':
+            // case 'api':
             // require __DIR__ . '/apiControllers/apiController.php';
             // $api = new api();
             // break;
