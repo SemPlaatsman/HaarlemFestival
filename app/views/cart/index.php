@@ -31,8 +31,8 @@
               <?php if (isset($_GET['cart'])) { ?>
                 <!-- <form role="form" method="POST" id="addYummyForm-<?= $reservation->getId(); ?>"></form> -->
               <?php } else { ?>
-                <form role="form" method="POST" id="editYummyForm-<?= $reservation->getId(); ?>"></form>
-                <form role="form" method="POST" id="deleteYummyForm-<?= $reservation->getId(); ?>" onsubmit='return confirm("Are you sure you wish to remove a reservation for <?= $reservation->getRestaurant()->getName(); ?> at <?= $reservation->getDatetimeFormatted(); ?>?");'></form>
+                <form role="form" method="POST" id="editYummyForm-<?= $reservation->getId(); ?>" action="/cart/reservation/edit"></form>
+                <form role="form" method="POST" id="deleteYummyForm-<?= $reservation->getId(); ?>" action="/cart/item/delete" onsubmit='return confirm("Are you sure you wish to remove a reservation for <?= $reservation->getRestaurant()->getName(); ?> at <?= $reservation->getDatetimeFormatted(); ?>?");'></form>
               <?php } ?>
               <section class="modal-header border-tetiare-a">
                 <h5 class="modal-title" id="modelYummyLabel-<?= $reservation->getId(); ?>">RESERVATION DETAILS</h5>
@@ -112,8 +112,8 @@
             <?php if (isset($_GET['cart'])) { ?>
               <!-- <form role="form" method="POST" id="addDanceForm-<?= $ticketDance->getId(); ?>"></form> -->
             <?php } else { ?>
-              <form role="form" method="POST" id="editDanceForm-<?= $ticketDance->getId(); ?>"></form>
-              <form role="form" method="POST" id="deleteDanceForm-<?= $ticketDance->getId(); ?>" onsubmit='return confirm("Are you sure you wish to remove your tickets for <?= $ticketDance->getPerformance()->getArtist()->getName(); ?> at <?= $ticketDance->getPerformance()->getStartDateFormatted(); ?>?");'></form>
+              <form role="form" method="POST" id="editDanceForm-<?= $ticketDance->getId(); ?>" action="/cart/dance/edit"></form>
+              <form role="form" method="POST" id="deleteDanceForm-<?= $ticketDance->getId(); ?>" action="/cart/item/delete" onsubmit='return confirm("Are you sure you wish to remove your tickets for <?= $ticketDance->getPerformance()->getArtist()->getName(); ?> at <?= $ticketDance->getPerformance()->getStartDateFormatted(); ?>?");'></form>
             <?php } ?>
               <section class="modal-header border-tetiare-a">
                 <h5 class="modal-title" id="modelDanceLabel-<?= $ticketDance->getId(); ?>">TICKET DANCE DETAILS</h5>
@@ -188,8 +188,8 @@
               <?php if (isset($_GET['cart'])) { ?>
                 <!-- <form role="form" method="POST" id="addHistoryForm-<?= $ticketHistory->getId(); ?>"></form> -->
               <?php } else { ?>
-                <form role="form" method="POST" id="editHistoryForm-<?= $ticketHistory->getId(); ?>"></form>
-                <form role="form" method="POST" id="deleteHistoryForm-<?= $ticketHistory->getId(); ?>" onsubmit='return confirm("Are you sure you wish to delete your tour tickets for <?= $ticketHistory->getNrOfPeople(); ?> people in <?= $ticketHistory->getTour()->getLanguage(); ?>?");'></form>
+                <form role="form" method="POST" id="editHistoryForm-<?= $ticketHistory->getId(); ?>" action="/cart/history/edit"></form>
+                <form role="form" method="POST" id="deleteHistoryForm-<?= $ticketHistory->getId(); ?>" action="/cart/item/delete" onsubmit='return confirm("Are you sure you wish to delete your tour tickets for <?= $ticketHistory->getNrOfPeople(); ?> people in <?= $ticketHistory->getTour()->getLanguage(); ?>?");'></form>
               <?php } ?>
               <section class="modal-header border-tetiare-a">
                 <h5 class="modal-title" id="modelHistoryLabel-<?= $ticketHistory->getId(); ?>">TICKET HISTORY DETAILS</h5>

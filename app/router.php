@@ -37,9 +37,77 @@ class router
                 $controller->index();
                 break;
 
+            case 'cart/reservation/edit':
+                require_once __DIR__ . '/services/cartservice.php';
+                (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
+                $cartService = isset($_SESSION['user']) ? new CartService() : new GuestCartService($_SESSION['guest']->cart);
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+                if (isset($_POST['editYummyId']) && isset($_POST['editYummyNrOfAdults']) && isset($_POST['editYummyNrOfKids']) && isset($_POST['editYummyDatetime'])) {
+                    $reservationId = $_POST['editYummyId'];
+                    $nrOfAdults = $_POST['editYummyNrOfAdults'];
+                    $nrOfKids = $_POST['editYummyNrOfKids'];
+                    $datetime = date_format(DateTime::createFromFormat('Y-m-d\TH:i', $_POST['editYummyDatetime']), 'Y-m-d H:i:s');
+                    $cartService->updateReservation($reservationId, $nrOfAdults, $nrOfKids, $datetime);
+                }
+
+                header("Location: /cart");
+                break;
+                
+            case 'cart/dance/edit':
+                require_once __DIR__ . '/services/cartservice.php';
+                (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
+                $cartService = isset($_SESSION['user']) ? new CartService() : new GuestCartService($_SESSION['guest']->cart);
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+                if (isset($_POST['editDanceId']) && isset($_POST['editDanceNrOfPeople'])) {
+                    $ticketDanceId = $_POST['editDanceId'];
+                    $nrOfPeople = $_POST['editDanceNrOfPeople'];
+                    $cartService->updateTicketDance($ticketDanceId, $nrOfPeople);
+                }
+
+                header("Location: /cart");
+                break;
+            
+            case 'cart/history/edit':
+                require_once __DIR__ . '/services/cartservice.php';
+                (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
+                $cartService = isset($_SESSION['user']) ? new CartService() : new GuestCartService($_SESSION['guest']->cart);
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+                if (isset($_POST['editHistoryId']) && isset($_POST['editHistoryNrOfPeople'])) {
+                    $ticketHistoryId = $_POST['editHistoryId'];
+                    $nrOfPeople = $_POST['editHistoryNrOfPeople'];
+                    $cartService->updateTicketHistory($ticketHistoryId, $nrOfPeople);
+                }
+
+                header("Location: /cart");
+                break;
+
+            case 'cart/item/delete':
+                require_once __DIR__ . '/services/cartservice.php';
+                (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
+                $cartService = isset($_SESSION['user']) ? new CartService() : new GuestCartService($_SESSION['guest']->cart);
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+                if (isset($_POST['deleteItemId'])) {
+                    $itemId = $_POST['deleteItemId'];
+                    $cartService->deleteItem($itemId);
+                }
+
+                header("Location: /cart");
+                break;
+
             case 'molliewebhook':
                 require_once __DIR__ . '/controllers/molliewebhookcontroller.php';
                 $controller = new MollieWebhookController();
+                $controller->index();
+                break;
+            
+            
+            case 'yummy':
+                require_once __DIR__ . '/controllers/yummycontroller.php';
+                $controller = new YummyController();
                 $controller->index();
                 break;
 
@@ -230,11 +298,6 @@ class router
                 $controller = new excelDownloadController();
                 $controller->downloadExcel();
                 break;
-
-            case 'api':
-            // require __DIR__ . '/apiControllers/apiController.php';
-            // $api = new api();
-            // break;
 
             case 'dance':
                 require_once __DIR__ . '/controllers/dancecontroller.php';
