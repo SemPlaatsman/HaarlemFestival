@@ -17,7 +17,8 @@ include __DIR__ . '/../header.php';
                 <h1>ABOUT THE JOPENKERK</h1>
                 <?php foreach ($model as $page) { ?>
                     <?php if ($page->getId() === 11) { ?>
-                        <p data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>">
+                        <p data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>"
+                            data-body-markup="<?= $page->getBody_markup() ?>">
                             <?= $page->getBody_markup(); ?>
                         </p>
                         <div class="text-center">
@@ -46,7 +47,8 @@ include __DIR__ . '/../header.php';
                 <h1>HISTORY</h1>
                 <?php foreach ($model as $page) { ?>
                     <?php if ($page->getId() === 12) { ?>
-                        <p data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>">
+                        <p data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>"
+                            data-body-markup="<?= $page->getBody_markup() ?>">
                             <?= $page->getBody_markup(); ?>
                         </p>
                         <div class="text-center">
@@ -64,7 +66,8 @@ include __DIR__ . '/../header.php';
                 <h1>RESTAURANT</h1>
                 <?php foreach ($model as $page) { ?>
                     <?php if ($page->getId() === 13) { ?>
-                        <p data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>">
+                        <p data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>"
+                            data-body-markup="<?= $page->getBody_markup() ?>">
                             <?= $page->getBody_markup(); ?>
                         </p>
                         <div class="text-center">
@@ -93,7 +96,8 @@ include __DIR__ . '/../header.php';
                 <h1>THE JOPENKERK</h1>
                 <?php foreach ($model as $page) { ?>
                     <?php if ($page->getId() === 14) { ?>
-                        <p data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>">
+                        <p data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>"
+                            data-body-markup="<?= $page->getBody_markup() ?>">
                             <?= $page->getBody_markup(); ?>
                         </p>
                         <div class="text-center">
