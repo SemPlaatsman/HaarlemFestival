@@ -19,7 +19,8 @@ include __DIR__ . '/../header.php';
 <div class="col-lg-6 mx-auto">
     <?php foreach ($model as $page) { ?>
         <?php if ($page->getId() === 1) { ?>
-            <p class="lead mb-4" data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>">
+            <p class="lead mb-4" data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>"
+                data-body-markup="<?= $page->getBody_markup() ?>">
                 <?= $page->getBody_markup(); ?>
             </p>
             <?php if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()) { ?>
@@ -32,7 +33,8 @@ include __DIR__ . '/../header.php';
 <div class="col-lg-6 mx-auto">
     <?php foreach ($model as $page) { ?>
         <?php if ($page->getId() === 2) { ?>
-            <p class="lead mb-4" data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>">
+            <p class="lead mb-4" data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>"
+                data-body-markup="<?= $page->getBody_markup() ?>">
                 <?= $page->getBody_markup(); ?>
             </p>
             <?php if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()) { ?>
