@@ -1,9 +1,15 @@
 <?php
+
+use Mpdf\Tag\PageBreak;
+
 require_once __DIR__ . '/../repositories/cartrepository.php';
 require_once __DIR__ . '/../models/item.php';
 require_once __DIR__ . '/../models/reservation.php';
+require_once __DIR__ . '/../models/restaurant.php';
 require_once __DIR__ . '/../models/ticketdance.php';
+require_once __DIR__ . '/../models/performance.php';
 require_once __DIR__ . '/../models/tickethistory.php';
+require_once __DIR__ . '/../models/tour.php';
 
 class CartService {
     private $cartRepository;
@@ -45,7 +51,20 @@ class CartService {
     }
 
     public function addToCart(Item $item) : bool {
-        return $this->cartRepository->addItemToCart($item);
+        (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
+        $userId = unserialize($_SESSION['user'])->getId();
+        switch ($item) {
+            case $item instanceof Reservation:
+                $item->setRestaurant($this->getRestaurant($item->getRestaurant()->getId()));
+                break;
+            case $item instanceof TicketDance:
+                $item->setPerformance($this->getRestaurant($item->getPerformance()->getId()));
+                break;
+            case $item instanceof TicketHistory:
+                $item->setTour($this->getRestaurant($item->getTour()->getId()));
+                break;
+        }
+        return $this->cartRepository->addItemToCart($item, $userId);
     }
 }
 ?>

@@ -23,12 +23,12 @@ include __DIR__ . '/../header.php';
 
 // require_once __DIR__ . '/../../services/cartservice.php';
 // $cartService = new CartService();
-// $reservation = new Reservation(null, 1, 1, "Yummy!", 30, 9, "", null, new Restaurant(1, "De Ripper", 32, "Ripperdastraat 13-A, 2011 KG Haarlem", 35, 17.50, 10), 75, 3, 0, "2023-05-02 23:00:00");
+// $reservation = new Reservation(null, null, 1, "Yummy!", 30, 9, "", null, new Restaurant(1, "De Ripper", 32, "Ripperdastraat 13-A, 2011 KG Haarlem", 35, 17.50, 10), 75, 3, 0, "2023-05-02 23:00:00");
 // $ticketDance = new TicketDance(null, 1, 2, "DANCE!", 110, 9, "", null, new Performance(2, new Artist(null, null), new Venue(null, null, null, null), null, null, 110), 1);
 // $ticketHistory = new TicketHistory(null, 1, 3, "A Stroll Through History", 35, 9, "", null, new Tour(3, null, null, null, null, null, null, null, null), 2);
-// var_dump($cartService->addToCart($reservation));
-// var_dump($cartService->addToCart($ticketDance));
-// var_dump($cartService->addToCart($ticketHistory));
+// var_dump($cartService->addToCart($reservation, 2));
+// var_dump($cartService->addToCart($ticketDance, 1));
+// var_dump($cartService->addToCart($ticketHistory, 1));
 ?>
 
 <div class="col-lg-6 mx-auto">

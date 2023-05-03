@@ -111,6 +111,27 @@ class router
                 $controller->index();
                 break;
 
+            case 'yummy/addreservation':
+                require_once __DIR__ . '/models/user.php';
+                require_once __DIR__ . '/models/reservation.php';
+                require_once __DIR__ . '/models/restaurant.php';
+                require_once __DIR__ . '/services/cartservice.php';
+                (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
+                $cartService = isset($_SESSION['user']) ? new CartService() : new GuestCartService($_SESSION['guest']->cart);
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+                if ((null !== $restaurantId = $_POST['restaurant_id']) &&
+                (null !== $nrOfAdults = $_POST['adults']) &&
+                (null !== $nrOfKids = $_POST['kids']) &&
+                (null !== $date = $_POST['date']) &&
+                (null !== $time = $_POST['time'])) {
+                    $reservation = new Reservation(null, null, 1, "Yummy!", null, 9, "", null, new Restaurant($restaurantId, null, null, null, null, null, null), null, $nrOfAdults, $nrOfKids, ($date . ' ' . $time));
+                    $cartService->addToCart($reservation);
+                }
+
+                header("Location: /cart");
+                break;
+
             case 'adminoverview':
                 require_once __DIR__ . '/controllers/adminoverviewcontroller.php';
                 $controller = new AdminOverviewController();
