@@ -184,7 +184,14 @@ class router
             case 'qr/scan':
                 require_once __DIR__ . '/controllers/qrscannercontroller.php';
                 $controller = new QrScannerController();
-                $controller->index();
+                if(isset($_POST['ticket'])){
+                    $data = $_POST['ticket'];
+                    $controller->checkQRCode($data);
+                }else{
+                    $controller->index();
+                }
+                
+
                 break;
     
 

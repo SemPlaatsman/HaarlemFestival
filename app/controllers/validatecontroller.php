@@ -17,12 +17,11 @@ class validateController{
             var_dump($response);
             $responseData = json_decode($response);
             if($responseData->success) {
-                // your success code goes here
+                return true;
             } 
             else {
-                // return error to user; they did not pass
+                return false;
             }
-        
         }
 
 
