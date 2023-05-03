@@ -15,7 +15,7 @@ class YummyController extends Controller
     public function index()
     {
         try {
-            $pages = $this->pageService->getContent();
+            $pages = $this->pageService->getContent(explode("?", $_SERVER['REQUEST_URI'])[0]);
             foreach ($pages as &$encodedPage) {
                 $encodedPage->setBody_markup(htmlspecialchars_decode($encodedPage->getBody_markup()));
             }

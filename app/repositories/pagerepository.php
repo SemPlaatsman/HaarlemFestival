@@ -4,11 +4,12 @@ require_once __DIR__ . '/../models/page.php';
 
 class PageRepository extends Repository
 {
-    public function getContent()
+    public function getContent(string $url = NULL)
     {
         try {
             $pages = array();
-            $stmt = $this->connection->prepare("SELECT `id`, `url`, `body_markup` FROM `pages`");
+            $stmt = $this->connection->prepare("SELECT `id`, `url`, `body_markup` FROM `pages`" . (isset($url) ? " WHERE `url`=:url" : ""));
+            isset($url) ? $stmt->bindParam(":url", $url, PDO::PARAM_STR) : null;
 
             $stmt->execute();
 

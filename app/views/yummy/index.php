@@ -1,6 +1,6 @@
 <?php
 include __DIR__ . '/../header.php';
-var_dump($_POST);
+var_dump($model);
 ?>
 
 <?php
