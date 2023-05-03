@@ -241,16 +241,25 @@ class CartRepository extends Repository
         }
     }
 
-    public function addItemToCart(Item $item) : bool {
+    public function addItemToCart(Item $item, int $userId) : bool {
         try {
             $baseQuery = $this->connection->prepare("INSERT INTO `item` (`id`, `order_id`, `event_id`, `total_price`, `VAT`, `QR_Code`) VALUES (NULL, :order_id, :event_id, :total_price, :vat, '');");
             $baseQuery->bindValue(":order_id", $item->getOrderId(), PDO::PARAM_INT);
             $baseQuery->bindValue(":event_id", $item->getEventId(), PDO::PARAM_INT);
+            $item->setTotalPrice();
             $baseQuery->bindValue(":total_price", $item->getTotalPrice());
             $baseQuery->bindValue(":vat", $item->getVAT(), PDO::PARAM_INT);
-
             if (!$this->connection->beginTransaction()) {
                 throw new PDOException("Unable to start transaction!");
+            }
+            if ($item->getOrderId() == 0) {
+                if (false === $orderId = $this->getCartId($userId)) {
+                    $orderQuery = $this->connection->prepare("INSERT INTO `orders` (`id`, `user_id`, `time_payed`, `payment_status`) VALUES (NULL, :user_id, NULL, '0');");
+                    $orderQuery->bindValue(":user_id", $userId, PDO::PARAM_INT);
+                    $orderQuery->execute();
+                    $orderId = $this->connection->lastInsertId();
+                }
+                $baseQuery->bindValue(":order_id", $orderId, PDO::PARAM_INT);
             }
 
             $baseQuery->execute();
@@ -262,7 +271,6 @@ class CartRepository extends Repository
             if ($this->connection->inTransaction()) {
                 $this->connection->rollBack();
             }
-            var_dump($pdoe);
             return false;
         }
     }
@@ -272,6 +280,7 @@ class CartRepository extends Repository
             case $item instanceof Reservation:
                 $query = $this->connection->prepare("INSERT INTO `reservation` (`id`, `restaurant_id`, `final_check`, `item_id`, `nr_of_adults`, `nr_of_kids`, `datetime`) VALUES (NULL, :restaurant_id, :final_check, :item_id, :nr_of_adults, :nr_of_kids, :datetime)");
                 $query->bindValue(":restaurant_id", $item->getRestaurant()->getId(), PDO::PARAM_INT);
+                $item->setFinalCheck();
                 $query->bindValue(":final_check", $item->getFinalCheck());
                 $query->bindValue(":item_id", $itemId, PDO::PARAM_INT);
                 $query->bindValue(":nr_of_adults", $item->getNrOfAdults(), PDO::PARAM_INT);
@@ -295,6 +304,19 @@ class CartRepository extends Repository
 
             default:
                 throw new PDOException("Invalid item type!");
+        }
+    }
+
+    private function getCartId(int $userId) : int | bool {
+        try {
+            $query = $this->connection->prepare("SELECT id FROM `orders` WHERE `user_id` = :user_id AND time_payed IS NULL AND payment_status = 0;");
+            $query->bindParam(":user_id", $userId, PDO::PARAM_INT);
+
+            $query->execute();
+            $result = $query->fetch(PDO::FETCH_ASSOC);
+            return !$result ? false : $result['id'];
+        } catch(PDOException $pdoe) {
+            return false;
         }
     }
 }
