@@ -3,10 +3,10 @@ class Artist {
        private int $id;
        private string $name;
 
-       function __construct(int $id, string $name)
+       function __construct(int $id = null, string $name = null)
        {
-              $this->id = $id;
-              $this->name = $name;
+              $this->id = $id ?? 0;
+              $this->name = $name ?? "";
        }
 
        /**

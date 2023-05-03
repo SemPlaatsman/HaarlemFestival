@@ -20,9 +20,9 @@ class PageService
         return $this->pageRepository->updateContent($id, $body_markup);
     }
 
-    public function getContent()
+    public function getContent(string $url = NULL)
     {
-        return $this->pageRepository->getContent();
+        return $this->pageRepository->getContent($url);
     }
 
 }

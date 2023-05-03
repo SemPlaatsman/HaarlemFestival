@@ -33,7 +33,7 @@
               <a class="nav-link <?= $directory == "home" ? "active" : "" ?>" href="/home">HOME</a>
             </li>
             <li class="nav-item mx-0 mx-xxl-5">
-              <a class="nav-link <?= $directory == "yummy" ? "active" : "" ?>" href="#">YUMMY!</a>
+              <a class="nav-link <?= $directory == "yummy" ? "active" : "" ?>" href="/yummy">YUMMY!</a>
             </li>
             <li class="nav-item mx-0 mx-xxl-5">
               <a class="nav-link <?= $directory == "dance" ? "active" : "" ?>" href="/dance">DANCE!</a>
