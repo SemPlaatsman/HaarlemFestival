@@ -2,7 +2,9 @@ let tourschedule = document.getElementById('tourschedule');
 let ukButton = document.getElementById('ukflag');
 let nlButton = document.getElementById('dutchflag');
 let enButton = document.getElementById('chineseflag');
+let languageSelect = document.getElementById('language');
 Gettourschedule(0);
+fetchData(0);
 
 ukButton.addEventListener('click', function() {
     console.log("test");
@@ -14,6 +16,10 @@ nlButton.addEventListener('click', function() {
 enButton.addEventListener('click', function() {
     Gettourschedule(2);
 });
+languageSelect.addEventListener('change', () => {
+    let selectedLanguage = languageSelect.value;
+    fetchData(selectedLanguage);
+  });
 
 async function Gettourschedule(taal) {
 
@@ -79,5 +85,43 @@ function printSchedule(tabledata){
 
     }
     tourschedule.innerHTML = html;
+
+}
+
+
+async function fetchData(language) {
+    const formData = new FormData();
+    const dateSelect = document.getElementById('date');
+    const timeSelect = document.getElementById('time');
+    dateSelect.innerHTML = '';
+    timeSelect.innerHTML = '';
+    formData.append('language', language);
+    const response = await fetch("/history/schedule",{
+        method: 'post',
+        body: formData
+
+    }).then(response => response.json()).then(data =>{
+        const schedule=data;
+        console.log(schedule);
+    for (let i = 0; i < schedule.length; i++) {
+
+        const date = new Date(schedule[i].datetime.date);
+        const month = date.toLocaleString('default', { month: 'short' });
+        const monthday = date.toLocaleString('default', { day: '2-digit' });
+        const hour = date.toLocaleString('default', { hour: '2-digit' });
+        const minutes = date.toLocaleString('default', { minute: '2-digit' });
+        
+        const dateOption = document.createElement('option');
+        dateOption.value = month + monthday;
+        dateOption.textContent = month + monthday;
+        dateSelect.appendChild(dateOption);
+
+        const timeOption = document.createElement('option');
+        timeOption.value = hour + " " + minutes;
+        timeOption.textContent = hour + " " + minutes;
+        timeSelect.appendChild(timeOption);
+    }
+    
+});
 
 }

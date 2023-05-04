@@ -231,23 +231,20 @@ new breadcrumbcontroller();
             <fieldset class="form-group p-2 col-md-6 gx-100">
               <label class="text-tetiare-a fs-5  col-form-label" for="language">Language</label>
               <select class="form-control" id="language" name="language">
-                <option value="english">English</option>
-                <option value="dutch">Dutch</option>
-                <option value="chinese">Chinese</option>
+                <option value="0">English</option>
+                <option value="1">Dutch</option>
+                <option value="2">Chinese</option>
               </select>
             </fieldset>
 
             <fieldset class="form-group p-2 col-md-6 gx-100">
               <label class="text-tetiare-a fs-5 col-form-label" for="date">Date</label>
-              <input class="form-control" type="date" id="date" name="date">
+              <select class="form-control" class="col-md-4" id="date" name="date"></select>
             </fieldset>
 
             <fieldset class="form-group p-2 col-md-6">
               <label class="text-tetiare-a fs-5 col-form-label" for="time">Time</label>
               <select class="form-control" class="col-md-4" id="time" name="time">
-                <option value="10:00-13:30">10:00-13:30</option>
-                <option value="13:00-15:30">13:00-15:30</option>
-                <option value="16:00-18:30">16:00-18:30</option>
               </select>
             </fieldset>
 
