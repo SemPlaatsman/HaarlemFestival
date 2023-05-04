@@ -34,8 +34,14 @@ class ReservationService
         return $this->reservationRepository->getAllReservations();
     }
 
-    public function getReservationsForOrder(int $orderId) : Array{
+    public function getReservationsForOrder(int $orderId) : array
+    {
         return $this->reservationRepository->getReservationsForOrder($orderId);
+    }
+
+    public function getReservationForQR(string $QR_Code)
+    {
+        return $this->reservationRepository->getReservationForQR($QR_Code);
     }
 }
 ?>

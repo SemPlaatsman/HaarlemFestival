@@ -20,12 +20,12 @@ class RegistrationController extends Controller {
     public function index() {
         if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST)) {
             
-            $this->handlePost();
+            $this->register();
         }
         $this->displayView();
     }
 
-    public function handlePost() {
+    public function register() {
         if (!empty($_POST['email']) && !empty($_POST['name']) && !empty($_POST['password']) && !empty($_POST['confirmpassword']) && isset($_POST['email']) && isset($_POST['name']) && isset($_POST['password']) && isset($_POST['confirmpassword'])) {
             if ($this->Hcaptcha()){
                 $email = htmlspecialchars($_POST['email']);
@@ -38,6 +38,7 @@ class RegistrationController extends Controller {
                     $currentDatetime = date('Y-m-d H:i:s');
                     $time_created = DateTime::createFromFormat('Y-m-d H:i:s', $currentDatetime);
                     $this->userService->insertUser($email, $password, $time_created, $isAdmin, $name);
+                    //naar view
                     $output="<p>Dear ".$name.",</p>";
                     $output.='<p>Thank you for registrating at the haarlem festival site.</p>';
                     $output.='<p>You can login at:</p>';

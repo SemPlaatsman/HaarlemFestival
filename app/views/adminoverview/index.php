@@ -17,10 +17,10 @@ include __DIR__ . '/../adminSubheader.php';
                 <a href="/openinghour" class="btn bg-primary-b text-tetiare-a btn-lg btn-block">OPENING HOURS</a>
                 <a href="/restaurant" class="btn bg-primary-b text-tetiare-a btn-lg btn-block">RESTAURANTS</A>
                 <a href="/reservation" class="btn bg-primary-b text-tetiare-a btn-lg btn-block">RESERVATIONS</A>
+                <a href="/paymentOveview" class="btn bg-primary-b text-tetiare-a btn-lg btn-block mt-3">ORDERS</a>
             </div>
             <!-- temporarily -->
-            <a href="/download/income" class="btn bg-primary-b text-tetiare-a btn-lg btn-block mt-3">download a excel of
-                the earnings</a>
+           
 
 
         </div>
