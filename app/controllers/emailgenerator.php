@@ -69,6 +69,7 @@ class EmailGenerator {
         }
     }
 
+    //naar view
     function makeInvoicePdf(int $orderId)
     {
         $reservations = $this->reservationService->getReservationsForOrder($orderId);
