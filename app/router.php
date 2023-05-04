@@ -351,6 +351,26 @@ class router
                 }
                 break;
 
+            case 'dance/insertticket':
+                require_once __DIR__ . '/models/user.php';
+                require_once __DIR__ . '/models/ticketdance.php';
+                require_once __DIR__ . '/models/performance.php';
+                require_once __DIR__ . '/models/artist.php';
+                require_once __DIR__ . '/models/venue.php';
+                require_once __DIR__ . '/services/cartservice.php';
+                (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
+                $cartService = isset($_SESSION['user']) ? new CartService() : new GuestCartService($_SESSION['guest']->cart);
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+                if ((null !== $performanceId = $_POST['performance_id']) &&
+                (null !== $nrOfPeople = $_POST['nr_of_people'])) {
+                    $ticketDance = new TicketDance(null, null, 2, "DANCE!", null, 9, "", null, new Performance($performanceId, new Artist(null, null), new Venue(null, null, null, null), null, null, null), $nrOfPeople);
+                    $cartService->addToCart($ticketDance);
+                }
+
+                header("Location: /cart");
+                break;
+
             case 'history':
                 require_once __DIR__ . '/controllers/historycontroller.php';
                 $controller = new HistoryController();
