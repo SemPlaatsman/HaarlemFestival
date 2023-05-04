@@ -1,3 +1,21 @@
+window.addEventListener('load', function() {
+    var tourSelect = document.getElementById('tour_select');
+
+    tourSelect.addEventListener('change', function() {
+        var selectedTour = tourSelect.options[tourSelect.selectedIndex];
+
+        var singleTicketSpan = document.getElementById('historyFormSingleTicket');
+        var price = selectedTour.dataset.price;
+        singleTicketSpan.innerHTML = price;
+
+        var familyTicketSpan = document.getElementById('historyFormFamilyTicket');
+        var familyPrice = selectedTour.dataset.familyPrice;
+        familyTicketSpan.innerHTML = familyPrice;
+    });
+
+    tourSelect.dispatchEvent(new Event('change'));
+});
+
 let tourschedule = document.getElementById('tourschedule');
 let ukButton = document.getElementById('ukflag');
 let nlButton = document.getElementById('dutchflag');
