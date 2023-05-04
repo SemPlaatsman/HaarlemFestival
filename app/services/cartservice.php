@@ -58,10 +58,10 @@ class CartService {
                 $item->setRestaurant($this->getRestaurant($item->getRestaurant()->getId()));
                 break;
             case $item instanceof TicketDance:
-                $item->setPerformance($this->getRestaurant($item->getPerformance()->getId()));
+                $item->setPerformance($this->getPerformance($item->getPerformance()->getId()));
                 break;
             case $item instanceof TicketHistory:
-                $item->setTour($this->getRestaurant($item->getTour()->getId()));
+                $item->setTour($this->getTour($item->getTour()->getId()));
                 break;
         }
         return $this->cartRepository->addItemToCart($item, $userId);
