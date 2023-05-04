@@ -34,18 +34,20 @@ class HistoryController extends Controller
     public function index()
     {
         // $this->schedule = $this->getSchedule(0);
-
+        $model = [];
         try {
             $pages = $this->pageService->getContent();
             foreach ($pages as &$encodedPage) {
                 $encodedPage->setBody_markup(htmlspecialchars_decode($encodedPage->getBody_markup()));
             }
+            $model += ['pages' => $pages];
             if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST)) {
                 if (!empty($_POST['family_tickets']) && empty($_POST['single_tickets']) && isset($_POST['family_tickets']) && isset($_POST['single_tickets'])){
-                    $this->insertItem();
+                    // $this->insertItem();
                 }
             }
-            $this->displayView($pages);
+            $model += ['tours' => $this->historyService->getAllTours()];
+            $this->displayView($model);
         } catch (Exception $e) {
             echo 'Error: ' . $e->getMessage();
         }
