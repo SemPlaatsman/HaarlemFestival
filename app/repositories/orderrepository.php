@@ -14,6 +14,8 @@ class OrderRepository extends Repository
 
     public function getPayedOrderHistory(): array
     {
+
+
         $query = $this->connection->prepare("
         SELECT `orders`.`id`,`time_payed`,`payment_status`, `item`.`total_price` , `item`.`VAT`, 
 `restaurant`.`name` as 'where', '' as 'who', `reservation`.`datetime` as 'when'  FROM `orders` 
@@ -63,14 +65,14 @@ WHERE `payment_status` = TRUE;
         return $orders;
     }
 
-    public function getOrderPrice(int $orderId) : int {
+    public function getOrderPrice(int $orderId): int
+    {
         $stmnt = $this->connection->prepare("SELECT SUM(`item`.`total_price`) AS test FROM `orders` JOIN `item` ON `item`.`order_id` = `orders`.`id` WHERE `orders`.`id` = :id;");
         $stmnt->bindParam(":id", $orderId, PDO::PARAM_INT);
         $stmnt->setFetchMode(PDO::FETCH_NUM);
         $stmnt->execute();
-        
+
         $result = $stmnt->fetch();;
         return $result[0];
-
     }
 }
