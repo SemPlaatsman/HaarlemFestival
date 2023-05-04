@@ -62,7 +62,6 @@ class excelDownloadController
                         break;
                     case 'total':
                         array_push($fields, $order->getTotal_price());
-                        $totalPrice += $order->getTotal_price();
                         if (!in_array('<b><style font-size="12">Total Price</style></b>', $header)) {
                             array_push($header,'<b><style font-size="12">Total Price</style></b>');
                             
@@ -78,6 +77,8 @@ class excelDownloadController
                         }
                         break;
                 }
+                $totalPrice += $order->getTotal_price();
+
             }
 
             array_push($costs, $fields);
