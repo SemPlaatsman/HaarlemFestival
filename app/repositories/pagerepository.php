@@ -9,9 +9,11 @@ class PageRepository extends Repository
         try {
             $pages = array();
             $stmt = $this->connection->prepare("SELECT `id`, `url`, `body_markup` FROM `pages`" . (isset($url) ? " WHERE `url`=:url" : ""));
-            isset($url) ? $stmt->bindParam(":url", $url, PDO::PARAM_STR) : null;
-
+            if(isset($url)){
+                $stmt->bindParam(":url", $url, PDO::PARAM_STR);
+            }
             $stmt->execute();
+            
 
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -22,6 +24,7 @@ class PageRepository extends Repository
                 $page->setBody_markup($row['body_markup']);
                 array_push($pages, $page);
             }
+
             return $pages;
         } catch (PDOException $e) {
             return false;
