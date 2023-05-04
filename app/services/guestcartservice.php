@@ -66,5 +66,10 @@ class GuestCartService {
     public function getTour(int $tourId) : Tour {
         return $this->cartRepository->getTour($tourId);
     }
+
+    // TODO
+    public function addToCart(Item $item) : bool {
+        return false;
+    }
 }
 ?>

@@ -4,14 +4,14 @@ function openEditorModal(id) {
   const paragraph = document.querySelector(`[data-id="${id}"]`);
 
   // Extract the body_markup and URL from the paragraph
-  const bodyMarkup = paragraph.innerHTML.trim();
-  const url = paragraph.dataset.url;
+  const bodyMarkup = paragraph.getAttribute('data-body-markup');
+  // CKEditor editor
+  const editor = CKEDITOR.instances.editor;
 
   // Update the modal inputs with the paragraph data
   const modalIdInput = document.getElementById('editor-modal-id');
   modalIdInput.value = id;
-  const editorInput = document.getElementById('editor');
-  editorInput.textContent = bodyMarkup;
+  editor.setData(bodyMarkup);
 
   // Show the modal
   const modal = document.getElementById('editor-modal');

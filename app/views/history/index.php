@@ -29,7 +29,8 @@ new breadcrumbcontroller();
       <h1 class="title">WELCOME</h1>
       <?php foreach ($model as $page) { ?>
         <?php if ($page->getId() === 8) { ?>
-          <p data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>">
+          <p data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>"
+            data-body-markup="<?= $page->getBody_markup() ?>">
             <?= $page->getBody_markup(); ?>
           </p>
           <div class="text-center">
@@ -50,7 +51,8 @@ new breadcrumbcontroller();
         <h1 class="title text-tetiare-a">LOCATIONS</h1>
         <?php foreach ($model as $page) { ?>
           <?php if ($page->getId() === 9) { ?>
-            <p class="text-tetiare-a" data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>" data-paragraph="?">
+            <p class="text-tetiare-a" data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>"
+              data-body-markup="<?= $page->getBody_markup() ?>">
               <?= $page->getBody_markup(); ?>
             </p>
             <div class="text-center">
@@ -157,7 +159,8 @@ new breadcrumbcontroller();
       </ul>
       <?php foreach ($model as $page) { ?>
         <?php if ($page->getId() === 10) { ?>
-          <p data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>" data-paragraph="?">
+          <p data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>"
+            data-body-markup="<?= $page->getBody_markup() ?>">
             <?= $page->getBody_markup(); ?>
           </p>
           <div class="text-center">

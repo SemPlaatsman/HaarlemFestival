@@ -21,7 +21,7 @@
                 <?php foreach ($model['pages'] as $page) { ?>
                     <?php if ($page->getId() === 26) { ?>
                         <p class="text-acid-yellow mt-3 m-3 m1-3 fs-5" data-id="<?= $page->getId() ?>"
-                            data-url="<?= $page->getUrl() ?>">
+                            data-url="<?= $page->getUrl() ?>" data-body-markup="<?= $page->getBody_markup() ?>">
                             <?= $page->getBody_markup(); ?>
                         </p>
                         <div class="text-center">
@@ -56,7 +56,7 @@
                 <?php foreach ($model['pages'] as $page) { ?>
                     <?php if ($page->getId() === 27) { ?>
                         <p class="text-acid-yellow mt-3 m-3 text-end fs-5" data-id="<?= $page->getId() ?>"
-                            data-url="<?= $page->getUrl() ?>">
+                            data-url="<?= $page->getUrl() ?>" data-body-markup="<?= $page->getBody_markup() ?>">
                             <?= $page->getBody_markup(); ?>
                         </p>
                         <div class="text-center">

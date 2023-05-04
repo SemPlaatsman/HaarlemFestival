@@ -10,15 +10,15 @@ class Restaurant
     private float $kids_price;
     private float $reservation_fee;
 
-    public function __construct($id, $name, $seats, $location, $adult_price, $kids_price, $reservation_fee)
+    public function __construct($id = null, $name = null, $seats = null, $location = null, $adult_price = null, $kids_price = null, $reservation_fee = null)
     {
-        $this->id = $id;
-        $this->name = $name;
-        $this->seats = $seats;
-        $this->location = $location;
-        $this->adult_price = $adult_price;
-        $this->kids_price = $kids_price;
-        $this->reservation_fee = $reservation_fee;
+        $this->id = $id ?? 0;
+        $this->name = $name ?? "";
+        $this->seats = $seats ?? 0;
+        $this->location = $location ?? "";
+        $this->adult_price = $adult_price ?? 0;
+        $this->kids_price = $kids_price ?? 0;
+        $this->reservation_fee = $reservation_fee ?? 0;
     }
 
     /**

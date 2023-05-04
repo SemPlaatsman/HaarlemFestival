@@ -241,26 +241,81 @@ class CartRepository extends Repository
         }
     }
 
-    public function addReservationToCart(Reservation $reservation) : bool {
+    public function addItemToCart(Item $item, int $userId) : bool {
         try {
+            $baseQuery = $this->connection->prepare("INSERT INTO `item` (`id`, `order_id`, `event_id`, `total_price`, `VAT`, `QR_Code`) VALUES (NULL, :order_id, :event_id, :total_price, :vat, '');");
+            $baseQuery->bindValue(":order_id", $item->getOrderId(), PDO::PARAM_INT);
+            $baseQuery->bindValue(":event_id", $item->getEventId(), PDO::PARAM_INT);
+            $item->setTotalPrice();
+            $baseQuery->bindValue(":total_price", $item->getTotalPrice());
+            $baseQuery->bindValue(":vat", $item->getVAT(), PDO::PARAM_INT);
+            if (!$this->connection->beginTransaction()) {
+                throw new PDOException("Unable to start transaction!");
+            }
+            if ($item->getOrderId() == 0) {
+                if (false === $orderId = $this->getCartId($userId)) {
+                    $orderQuery = $this->connection->prepare("INSERT INTO `orders` (`id`, `user_id`, `time_payed`, `payment_status`) VALUES (NULL, :user_id, NULL, '0');");
+                    $orderQuery->bindValue(":user_id", $userId, PDO::PARAM_INT);
+                    $orderQuery->execute();
+                    $orderId = $this->connection->lastInsertId();
+                }
+                $baseQuery->bindValue(":order_id", $orderId, PDO::PARAM_INT);
+            }
 
+            $baseQuery->execute();
+            $itemQuery = $this->getItemQuery($item, $this->connection->lastInsertId());
+            $itemQuery->execute();
+            
+            return $this->connection->commit();
         } catch (PDOException $pdoe) {
+            if ($this->connection->inTransaction()) {
+                $this->connection->rollBack();
+            }
             return false;
         }
     }
 
-    public function addTicketDanceToCart(TicketDance $reservation) : bool {
-        try {
+    public function getItemQuery(Item $item, int $itemId) : PDOStatement {
+        switch ($item) {
+            case $item instanceof Reservation:
+                $query = $this->connection->prepare("INSERT INTO `reservation` (`id`, `restaurant_id`, `final_check`, `item_id`, `nr_of_adults`, `nr_of_kids`, `datetime`) VALUES (NULL, :restaurant_id, :final_check, :item_id, :nr_of_adults, :nr_of_kids, :datetime)");
+                $query->bindValue(":restaurant_id", $item->getRestaurant()->getId(), PDO::PARAM_INT);
+                $item->setFinalCheck();
+                $query->bindValue(":final_check", $item->getFinalCheck());
+                $query->bindValue(":item_id", $itemId, PDO::PARAM_INT);
+                $query->bindValue(":nr_of_adults", $item->getNrOfAdults(), PDO::PARAM_INT);
+                $query->bindValue(":nr_of_kids", $item->getNrOfKids(), PDO::PARAM_INT);
+                $query->bindValue(":datetime", date_format($item->getDatetime(), 'Y-m-d H:i:s'), PDO::PARAM_STR);
+                return $query;
 
-        } catch (PDOException $pdoe) {
-            return false;
+            case $item instanceof TicketDance:
+                $query = $this->connection->prepare("INSERT INTO `ticket_dance` (`id`, `item_id`, `performance_id`, `nr_of_people`) VALUES (NULL, :item_id, :performance_id, :nr_of_people)");
+                $query->bindValue(":item_id", $itemId, PDO::PARAM_INT);
+                $query->bindValue(":performance_id", $item->getPerformance()->getId(), PDO::PARAM_INT);
+                $query->bindValue(":nr_of_people", $item->getNrOfPeople(), PDO::PARAM_INT);
+                return $query;
+
+            case $item instanceof TicketHistory:
+                $query = $this->connection->prepare("INSERT INTO `ticket_history` (`id`, `item_id`, `tour_id`, `nr_of_people`) VALUES (NULL, :item_id, :tour_id, :nr_of_people)");
+                $query->bindValue(":item_id", $itemId, PDO::PARAM_INT);
+                $query->bindValue(":tour_id", $item->getTour()->getId(), PDO::PARAM_INT);
+                $query->bindValue(":nr_of_people", $item->getNrOfPeople(), PDO::PARAM_INT);
+                return $query;
+
+            default:
+                throw new PDOException("Invalid item type!");
         }
     }
 
-    public function addTicketHistoryToCart(TicketHistory $reservation) : bool {
+    private function getCartId(int $userId) : int | bool {
         try {
+            $query = $this->connection->prepare("SELECT id FROM `orders` WHERE `user_id` = :user_id AND time_payed IS NULL AND payment_status = 0;");
+            $query->bindParam(":user_id", $userId, PDO::PARAM_INT);
 
-        } catch (PDOException $pdoe) {
+            $query->execute();
+            $result = $query->fetch(PDO::FETCH_ASSOC);
+            return !$result ? false : $result['id'];
+        } catch(PDOException $pdoe) {
             return false;
         }
     }

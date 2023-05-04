@@ -10,16 +10,16 @@ class Tour {
     private float $price;
     private float $group_price;
 
-    public function __construct(int $id, string $language, string $datetime, string $gathering_location, int $employee_id, string $employee_name, int $capacity, float $price, float $group_price) {
-        $this->id = $id;
-        $this->language = $language;
-        $this->datetime = DateTime::createFromFormat('Y-m-d H:i:s', $datetime);
-        $this->gathering_location = $gathering_location;
-        $this->employee_id = $employee_id;
-        $this->employee_name = $employee_name;
-        $this->capacity = $capacity;
-        $this->price = $price;
-        $this->group_price = $group_price;
+    public function __construct(int $id = null, string $language = null, string $datetime = null, string $gathering_location = null, int $employee_id = null, string $employee_name = null, int $capacity = null, float $price = null, float $group_price = null) {
+        $this->id = $id ?? 0;
+        $this->language = $language ?? "";
+        $this->datetime = isset($datetime) ? DateTime::createFromFormat('Y-m-d H:i:s', $datetime) : new DateTime();
+        $this->gathering_location = $gathering_location ?? "";
+        $this->employee_id = $employee_id ?? 0;
+        $this->employee_name = $employee_name ?? "";
+        $this->capacity = $capacity ?? 0;
+        $this->price = $price ?? 0;
+        $this->group_price = $group_price ?? 0;
     }
 
     public function toObject(){
