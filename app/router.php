@@ -314,6 +314,20 @@ class router
                 $controller = new QrGeneratorcontroller();
                 $controller->generateQR();
 
+            case 'qr/scan':
+                require_once __DIR__ . '/controllers/qrscannercontroller.php';
+                $controller = new QrScannerController();
+                if(isset($_POST['ticket'])){
+                    $data = $_POST['ticket'];
+                    $controller->checkQRCode($data);
+                }else{
+                    $controller->index();
+                }
+                
+
+                break;
+    
+
             case 'pdf':
                 require __DIR__ . '/controllers/pdfcontroller.php';
                 $controller = new pdfcontroller();

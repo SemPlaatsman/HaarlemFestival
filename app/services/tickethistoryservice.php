@@ -38,5 +38,10 @@ class TicketHistoryService
     {
         return $this->ticketHistoryRepository->getTicketHistoryForOrder($orderId);
     }
+
+    public function getTicketHistoryForQR(string $QR_Code)
+    {
+        return $this->ticketHistoryRepository->getTicketHistoryForQR($QR_Code);
+    }
 }
 ?>

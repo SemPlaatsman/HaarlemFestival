@@ -12,7 +12,10 @@ define('EURO',chr(128));
 
 class EmailGenerator {
 
+    private $orderService;
     private $reservationService;
+    private $ticketDanceService;    
+    private $ticketHistoryService;
 
     function __construct() {
         $this->reservationService = new ReservationService();
@@ -66,6 +69,7 @@ class EmailGenerator {
         }
     }
 
+    //naar view
     function makeInvoicePdf(int $orderId)
     {
         $reservations = $this->reservationService->getReservationsForOrder($orderId);
