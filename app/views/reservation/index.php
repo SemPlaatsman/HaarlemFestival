@@ -1,22 +1,7 @@
 <?php
 include __DIR__ . '/../header.php';
+include __DIR__ . '/../adminSubheader.php';
 ?>
-<header class="d-flex justify-content-center py-3 bg-primary-b fs-5">
-    <ul class="nav nav-pills fw-bold">
-        <li><a href="/adminoverview" class="second-header nav-item nav-link text-tetiare-a bg-tetiare-a mx-0 mx-xxl-5"
-                aria-current="page">OVERVIEW</a>
-        </li>
-        <li><a href="/venue" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">VENUES</a></li>
-        <li><a href="/event" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">EVENTS</a></li>
-        <li><a href="/artist" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">ARTISTS</a></li>
-        <li><a href="/user" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">USERS</a></li>
-        <li><a href="/openinghour" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">OPENING
-                HOURS</a></li>
-        <li><a href="/restaurant" class="bg-light nav-item nav-link text-primary-b mx-0 mx-xxl-5">RESTAURANTS</a>
-        </li>
-        <li><a href="/reservation" class="second-header nav-item nav-link text-tetiare-a mx-0 mx-xxl-5">RESERVATIONS</a></li>
-    </ul>
-</header>
 
 <div class="row container">
     <div class="col-md-10 mx-auto">
@@ -66,7 +51,8 @@ include __DIR__ . '/../header.php';
                         </td>
                         <td class="col-1">
                             <div class="justify-content-center align-items-center">
-                                <form method="post" onsubmit="return confirm('Are you sure you wish to remove a reservation for <?= $reservation->getRestaurant()->getName(); ?> at <?= $reservation->getDatetimeFormatted(); ?>?');">
+                                <form method="post"
+                                    onsubmit="return confirm('Are you sure you wish to remove a reservation for <?= $reservation->getRestaurant()->getName(); ?> at <?= $reservation->getDatetimeFormatted(); ?>?');">
                                     <input type="hidden" name="deleteId" value="<?= $reservation->getId() ?>">
                                     <button type="submit"
                                         class="btn btn-danger bg-primary-a text-white border-0 text-center d-inline-block fs-5 m-2"><i

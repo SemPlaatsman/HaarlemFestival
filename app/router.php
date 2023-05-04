@@ -37,16 +37,110 @@ class router
                 $controller->index();
                 break;
 
+            case 'cart/reservation/edit':
+                require_once __DIR__ . '/services/cartservice.php';
+                (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
+                $cartService = isset($_SESSION['user']) ? new CartService() : new GuestCartService($_SESSION['guest']->cart);
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+                if (isset($_POST['editYummyId']) && isset($_POST['editYummyNrOfAdults']) && isset($_POST['editYummyNrOfKids']) && isset($_POST['editYummyDatetime'])) {
+                    $reservationId = $_POST['editYummyId'];
+                    $nrOfAdults = $_POST['editYummyNrOfAdults'];
+                    $nrOfKids = $_POST['editYummyNrOfKids'];
+                    $datetime = date_format(DateTime::createFromFormat('Y-m-d\TH:i', $_POST['editYummyDatetime']), 'Y-m-d H:i:s');
+                    $cartService->updateReservation($reservationId, $nrOfAdults, $nrOfKids, $datetime);
+                }
+
+                header("Location: /cart");
+                break;
+                
+            case 'cart/dance/edit':
+                require_once __DIR__ . '/services/cartservice.php';
+                (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
+                $cartService = isset($_SESSION['user']) ? new CartService() : new GuestCartService($_SESSION['guest']->cart);
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+                if (isset($_POST['editDanceId']) && isset($_POST['editDanceNrOfPeople'])) {
+                    $ticketDanceId = $_POST['editDanceId'];
+                    $nrOfPeople = $_POST['editDanceNrOfPeople'];
+                    $cartService->updateTicketDance($ticketDanceId, $nrOfPeople);
+                }
+
+                header("Location: /cart");
+                break;
+            
+            case 'cart/history/edit':
+                require_once __DIR__ . '/services/cartservice.php';
+                (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
+                $cartService = isset($_SESSION['user']) ? new CartService() : new GuestCartService($_SESSION['guest']->cart);
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+                if (isset($_POST['editHistoryId']) && isset($_POST['editHistoryNrOfPeople'])) {
+                    $ticketHistoryId = $_POST['editHistoryId'];
+                    $nrOfPeople = $_POST['editHistoryNrOfPeople'];
+                    $cartService->updateTicketHistory($ticketHistoryId, $nrOfPeople);
+                }
+
+                header("Location: /cart");
+                break;
+
+            case 'cart/item/delete':
+                require_once __DIR__ . '/services/cartservice.php';
+                (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
+                $cartService = isset($_SESSION['user']) ? new CartService() : new GuestCartService($_SESSION['guest']->cart);
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+                if (isset($_POST['deleteItemId'])) {
+                    $itemId = $_POST['deleteItemId'];
+                    $cartService->deleteItem($itemId);
+                }
+
+                header("Location: /cart");
+                break;
+
             case 'molliewebhook':
                 require_once __DIR__ . '/controllers/molliewebhookcontroller.php';
                 $controller = new MollieWebhookController();
                 $controller->index();
                 break;
+            
+            
+            case 'yummy':
+                require_once __DIR__ . '/controllers/yummycontroller.php';
+                $controller = new YummyController();
+                $controller->index();
+                break;
+
+            case 'yummy/addreservation':
+                require_once __DIR__ . '/models/user.php';
+                require_once __DIR__ . '/models/reservation.php';
+                require_once __DIR__ . '/models/restaurant.php';
+                require_once __DIR__ . '/services/cartservice.php';
+                (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
+                $cartService = isset($_SESSION['user']) ? new CartService() : new GuestCartService($_SESSION['guest']->cart);
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+                if ((null !== $restaurantId = $_POST['restaurant_id']) &&
+                (null !== $nrOfAdults = $_POST['adults']) &&
+                (null !== $nrOfKids = $_POST['kids']) &&
+                (null !== $date = $_POST['date']) &&
+                (null !== $time = $_POST['time'])) {
+                    $reservation = new Reservation(null, null, 1, "Yummy!", null, 9, "", null, new Restaurant($restaurantId, null, null, null, null, null, null), null, $nrOfAdults, $nrOfKids, ($date . ' ' . $time));
+                    $cartService->addToCart($reservation);
+                }
+
+                header("Location: /cart");
+                break;
 
             case 'adminoverview':
                 require_once __DIR__ . '/controllers/adminoverviewcontroller.php';
                 $controller = new AdminOverviewController();
-                $controller->index();
+                if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()) {
+                    $controller->index();
+                } else {
+                    http_response_code(404);
+                    echo "404 Not Found";
+                }
                 break;
 
             case 'venue':
@@ -61,7 +155,12 @@ class router
                         $controller->insertVenue();
                     }
                 } else {
-                    $controller->index();
+                    if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()) {
+                        $controller->index();
+                    } else {
+                        http_response_code(404);
+                        echo "404 Not Found";
+                    }
                 }
                 break;
 
@@ -77,7 +176,12 @@ class router
                         $controller->insertEvent();
                     }
                 } else {
-                    $controller->index();
+                    if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()) {
+                        $controller->index();
+                    } else {
+                        http_response_code(404);
+                        echo "404 Not Found";
+                    }
                 }
                 break;
 
@@ -93,7 +197,12 @@ class router
                         $controller->insertArtist();
                     }
                 } else {
-                    $controller->index();
+                    if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()) {
+                        $controller->index();
+                    } else {
+                        http_response_code(404);
+                        echo "404 Not Found";
+                    }
                 }
                 break;
 
@@ -109,7 +218,12 @@ class router
                         $controller->insertUser();
                     }
                 } else {
-                    $controller->index();
+                    if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()) {
+                        $controller->index();
+                    } else {
+                        http_response_code(404);
+                        echo "404 Not Found";
+                    }
                 }
                 break;
 
@@ -125,9 +239,13 @@ class router
                         $controller->insertOpeningHour();
                     }
                 } else {
-                    $controller->index();
+                    if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()) {
+                        $controller->index();
+                    } else {
+                        http_response_code(404);
+                        echo "404 Not Found";
+                    }
                 }
-                $controller->index();
                 break;
 
             case 'restaurant':
@@ -142,14 +260,28 @@ class router
                         $controller->insertRestaurant();
                     }
                 } else {
-                    $controller->index();
+                    if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()) {
+                        $controller->index();
+                    } else {
+                        http_response_code(404);
+                        echo "404 Not Found";
+                    }
                 }
-                $controller->index();
                 break;
-            
+
             case 'reservation':
                 require_once __DIR__ . '/controllers/reservationcontroller.php';
                 $controller = new ReservationController();
+                if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()) {
+                    $controller->index();
+                } else {
+                    http_response_code(404);
+                    echo "404 Not Found";
+                }
+                break;
+            case 'paymentOveview'   :
+                require_once __DIR__ . '/controllers/paymentOveviewController.php';
+                $controller = new PaymentOveviewController();
                 $controller->index();
                 break;
 
@@ -165,11 +297,11 @@ class router
                 $controller->Hcaptcha();
                 break;
 
-            case 'validate/Gcaptcha':
-                require_once __DIR__ . '/controllers/validatecontroller.php';
-                $controller = new validateController();
-                $controller->Gcaptcha();
-                break;
+            // case 'validate/Gcaptcha':
+            //     require_once __DIR__ . '/controllers/validatecontroller.php';
+            //     $controller = new validateController();
+            //     $controller->Gcaptcha();
+            //     break;
 
             case 'qr':
                 require_once __DIR__ . '/controllers/QrGeneratorScanner.php';
@@ -206,11 +338,6 @@ class router
                 $controller = new excelDownloadController();
                 $controller->downloadExcel();
                 break;
-
-            case 'api':
-                // require __DIR__ . '/apiControllers/apiController.php';
-                // $api = new api();
-                // break;
 
             case 'dance':
                 require_once __DIR__ . '/controllers/dancecontroller.php';

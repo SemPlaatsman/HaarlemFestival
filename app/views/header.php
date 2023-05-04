@@ -33,7 +33,7 @@
               <a class="nav-link <?= $directory == "home" ? "active" : "" ?>" href="/home">HOME</a>
             </li>
             <li class="nav-item mx-0 mx-xxl-5">
-              <a class="nav-link <?= $directory == "yummy" ? "active" : "" ?>" href="#">YUMMY!</a>
+              <a class="nav-link <?= $directory == "yummy" ? "active" : "" ?>" href="/yummy">YUMMY!</a>
             </li>
             <li class="nav-item mx-0 mx-xxl-5">
               <a class="nav-link <?= $directory == "dance" ? "active" : "" ?>" href="/dance">DANCE!</a>
@@ -42,6 +42,12 @@
               <a class="nav-link <?= $directory == "history" ? "active" : "" ?>" href="/history">A STROLL THROUGH
                 HISTORY</a>
             </li>
+            <?php if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()) { ?>
+              <li class="nav-item mx-0 mx-xxl-5">
+                <a class="nav-link <?= $directory == "adminoverview" ? "active" : "" ?>"
+                  href="/adminoverview">ADMINOVERVIEW</a>
+              </li>
+            <?php } ?>
           </section>
           <hr class="bg-tetiare-a d-flex d-xxl-none w-100">
           <li class="nav-item">

@@ -10,14 +10,14 @@ class Performance {
     private Datetime $end_date;
     private float $price;
 
-    public function __construct(int $id, Artist $artist, Venue $venue, string $start_date, string $end_date, float $price) 
+    public function __construct(int $id = null, Artist $artist, Venue $venue, string $start_date = null, string $end_date = null, float $price = null) 
     {
-        $this->id = $id;
+        $this->id = $id ?? 0;
         $this->artist = $artist;
         $this->venue = $venue;
-        $this->start_date = DateTime::createFromFormat('Y-m-d H:i:s', $start_date);
-        $this->end_date = DateTime::createFromFormat('Y-m-d H:i:s', $end_date);
-        $this->price = $price;
+        $this->start_date = isset($start_date) ? DateTime::createFromFormat('Y-m-d H:i:s', $start_date) : new DateTime();
+        $this->end_date = isset($end_date) ? DateTime::createFromFormat('Y-m-d H:i:s', $end_date) : new DateTime();
+        $this->price = $price ?? 0;
     }
 
     /**

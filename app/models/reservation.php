@@ -13,12 +13,12 @@ class Reservation extends Item {
     public function __construct(int $item_id = null, int $order_id = null, int $event_id = null, string $event_name = null, float $total_price = null, int $VAT = null, string $QR_Code = null, 
     int $id = null, Restaurant $restaurant = null, float $final_check = null, int $nr_of_adults = null, int $nr_of_kids = null, string $datetime = null) {
         parent::__construct($item_id, $order_id, $event_id, $event_name, $total_price, $VAT, $QR_Code);
-        isset($id) ? $this->id = $id : null;
+        $this->id = $id ?? 0;
         $this->restaurant = $restaurant;
-        isset($final_check) ? $this->final_check = $final_check : null;
-        isset($nr_of_adults) ? $this->nr_of_adults = $nr_of_adults : null;
-        isset($nr_of_kids) ? $this->nr_of_kids = $nr_of_kids : null;
-        $this->datetime = DateTime::createFromFormat('Y-m-d H:i:s', $datetime);
+        $this->final_check = $final_check ?? 0;
+        $this->nr_of_adults = $nr_of_adults ?? 0;
+        $this->nr_of_kids = $nr_of_kids ?? 0;
+        $this->datetime = DateTime::createFromFormat('Y-m-d H:i:s', $datetime); 
     }
 
     /**

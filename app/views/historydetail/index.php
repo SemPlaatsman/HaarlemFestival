@@ -1,6 +1,6 @@
 <?php
 include __DIR__ . '/../header.php';
-
+(session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
 ?>
 <html>
 
@@ -17,20 +17,18 @@ include __DIR__ . '/../header.php';
                 <h1>ABOUT THE JOPENKERK</h1>
                 <?php foreach ($model as $page) { ?>
                     <?php if ($page->getId() === 11) { ?>
-                        <p data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>">
+                        <p data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>"
+                            data-body-markup="<?= $page->getBody_markup() ?>">
                             <?= $page->getBody_markup(); ?>
                         </p>
                         <div class="text-center">
-                            <button type="button" class="btn btn-primary" onclick="openEditorModal(<?= $page->getId() ?>)">Open
-                                Editor</button>
+                            <?php if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()) { ?>
+                                <button type="button" class="btn btn-primary" onclick="openEditorModal(<?= $page->getId() ?>)">Open
+                                    Editor</button>
+                            <?php } ?>
                         </div>
                     <?php } ?>
                 <?php } ?>
-                <p>The Jopenkerk, located in the heart of Haarlem on the Gedempte Voldersgracht, offers a one-of-a-kind
-                    experience.
-                    This former church has been transformed into a brewery, café, and restaurant all in one. For an
-                    extra special visit, come during the week when you can watch the brewers in action while sipping on
-                    a craft beer or enjoying a meal.</p>
             </div>
             <div class="col">
                 <div class="ratio ratio-16x9">
@@ -49,19 +47,18 @@ include __DIR__ . '/../header.php';
                 <h1>HISTORY</h1>
                 <?php foreach ($model as $page) { ?>
                     <?php if ($page->getId() === 12) { ?>
-                        <p data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>">
+                        <p data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>"
+                            data-body-markup="<?= $page->getBody_markup() ?>">
                             <?= $page->getBody_markup(); ?>
                         </p>
                         <div class="text-center">
-                            <button type="button" class="btn btn-primary" onclick="openEditorModal(<?= $page->getId() ?>)">Open
-                                Editor</button>
+                            <?php if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()) { ?>
+                                <button type="button" class="btn btn-primary" onclick="openEditorModal(<?= $page->getId() ?>)">Open
+                                    Editor</button>
+                            <?php } ?>
                         </div>
                     <?php } ?>
                 <?php } ?>
-                <p>The Vestekerk, originally known as the "Vrijzinnig Hervormde Kerk," was built in 1910 on Vestestraat
-                    street. In 1958, it was renamed the Jacobskerk and served as a house of worship until 1975.</p>
-                <p>It was later saved from destruction by the Stichting de Hoeksteen in 2005 and converted into the
-                    Jopenkerk in 2010, now housing a brewery, café, and restaurant for visitors to enjoy.</p>
             </div>
         </div>
         <div class="row p-5">
@@ -69,19 +66,18 @@ include __DIR__ . '/../header.php';
                 <h1>RESTAURANT</h1>
                 <?php foreach ($model as $page) { ?>
                     <?php if ($page->getId() === 13) { ?>
-                        <p data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>">
+                        <p data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>"
+                            data-body-markup="<?= $page->getBody_markup() ?>">
                             <?= $page->getBody_markup(); ?>
                         </p>
                         <div class="text-center">
-                            <button type="button" class="btn btn-primary" onclick="openEditorModal(<?= $page->getId() ?>)">Open
-                                Editor</button>
+                            <?php if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()) { ?>
+                                <button type="button" class="btn btn-primary" onclick="openEditorModal(<?= $page->getId() ?>)">Open
+                                    Editor</button>
+                            <?php } ?>
                         </div>
                     <?php } ?>
                 <?php } ?>
-                <p>Experience a unique culinary journey at Jopenkerk's 1st-floor restaurant, where craft beer and food
-                    come together in perfect harmony. Enjoy specially crafted dishes expertly paired with the
-                    restaurant's selection of beers, or choose from a carefully curated wine list. Please note that the
-                    restaurant is not wheelchair accessible, so please call in advance for any special needs.</p>
             </div>
             <div class="col">
                 <div class="ratio ratio-16x9">
@@ -100,17 +96,18 @@ include __DIR__ . '/../header.php';
                 <h1>THE JOPENKERK</h1>
                 <?php foreach ($model as $page) { ?>
                     <?php if ($page->getId() === 14) { ?>
-                        <p data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>">
+                        <p data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>"
+                            data-body-markup="<?= $page->getBody_markup() ?>">
                             <?= $page->getBody_markup(); ?>
                         </p>
                         <div class="text-center">
-                            <button type="button" class="btn btn-primary" onclick="openEditorModal(<?= $page->getId() ?>)">Open
-                                Editor</button>
+                            <?php if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()) { ?>
+                                <button type="button" class="btn btn-primary" onclick="openEditorModal(<?= $page->getId() ?>)">Open
+                                    Editor</button>
+                            <?php } ?>
                         </div>
                     <?php } ?>
                 <?php } ?>
-                <p>This location is located at point E on the map and will be visited after visiting the Proveniershof
-                    in the tour. The next stop on the route will be the Waalse Kerk Haarlem.</p>
             </div>
         </div>
     </div>

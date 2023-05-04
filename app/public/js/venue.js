@@ -12,9 +12,9 @@ editButtonVenue.forEach((button) => {
         const seats = row.querySelector('td:nth-of-type(4)').innerText;
 
         document.getElementById('edit-id-venue').value = id;
-        document.getElementById('name-venue').value = name;
-        document.getElementById('location-venue').value = location;
-        document.getElementById('seats-venue').value = seats;
+        document.getElementById('update-name-venue').value = name;
+        document.getElementById('update-location-venue').value = location;
+        document.getElementById('update-seats-venue').value = seats;
 
         editModalVenue.style.display = 'block';
     });
