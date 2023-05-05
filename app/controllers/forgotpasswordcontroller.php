@@ -34,23 +34,16 @@ class ForgotPasswordController extends Controller {
         $addKey = substr(md5(uniqid(rand(),1)),3,10);
         $key = $key . $addKey;
         $this->userService->addResetTocken($email, $key, $expDate);
-        //naar view
-        $output='<p>Dear user,</p>';
-        $output.='<p>Please click on the following link to reset your password.</p>';
-        $output.='<p>-------------------------------------------------------------</p>';
-        $output.='<p><a href="localhost/resetpassword?key='.$key.'&email='.$email.'&action=reset" target="_blank">
-        localhost/resetpassword?key='.$key.'&email='.$email.'&action=reset</a></p>';		
-        $output.='<p>-------------------------------------------------------------</p>';
-        $output.='<p>Please be sure to copy the entire link into your browser.
-        The link will expire after 1 day for security reason.</p>';
-        $output.='<p>If you did not request this forgotten password email, no action 
-        is needed, your password will not be reset. However, you may want to log into 
-        your account and change your security password as someone may have guessed it.</p>';   	
-        $output.='<p>Thanks,</p>';
-        $output.='<p>The festival Team</p>';
-        $body = $output; 
+        // Start output buffering
+        ob_start();
+
+        // Include the view file
+        require_once __DIR__ . '/../views/forgotpassword/forgotpasswordemail.php';
+
+        // Get the output and clean the buffer
+        $body = ob_get_clean();
         $subject = "Password Recovery - visithaarlem.nl";
-        $this->emailGenerator->generate($body, $subject, $email);
+        $this->emailGenerator->sentEmail($body, $subject, $email, "");
         header('Location: login');
         exit();
     }
