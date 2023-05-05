@@ -25,5 +25,14 @@ class PageService
         return $this->pageRepository->getContent($url);
     }
 
+    public function getAllPages() : array
+    {
+        return $this->pageRepository->getPages();
+    }
+    // public function DeletePage(string $url)
+    // {
+    //     return $this->pageRepository->DeletePage($url);
+    // }
+
 }
 ?>

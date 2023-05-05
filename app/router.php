@@ -531,6 +531,7 @@ class router
                     $controller->index("HofBakenes");
                 }
                 break;
+           
 
             case '401':
                 http_response_code(401);
@@ -542,9 +543,29 @@ class router
                 break;
 
             default:
+           try{
+            $this->GoToCustomPage($uri);
+           }catch(Exception $e){
                 http_response_code(404);
-                echo "404 Not Found";
+                echo "404 Not Found $e";
+                
                 break;
+           }
+        }
+    }
+
+
+ 
+
+    function GoToCustomPage($uri){
+        require_once __DIR__ . '/controllers/CustomPageController.php';
+
+        try{
+        $controller = new CustomPageController();
+        $controller->index("/$uri");
+        }
+        catch(Exception $e){
+            throw new Exception($e);
         }
     }
     private function stripParameters($uri)
