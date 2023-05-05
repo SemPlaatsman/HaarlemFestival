@@ -39,6 +39,7 @@ class router
 
             case 'cart/reservation/edit':
                 require_once __DIR__ . '/services/cartservice.php';
+                require_once __DIR__ . '/services/guestcartservice.php';
                 (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
                 $cartService = isset($_SESSION['user']) ? new CartService() : new GuestCartService($_SESSION['guest']->cart);
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -56,6 +57,7 @@ class router
                 
             case 'cart/dance/edit':
                 require_once __DIR__ . '/services/cartservice.php';
+                require_once __DIR__ . '/services/guestcartservice.php';
                 (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
                 $cartService = isset($_SESSION['user']) ? new CartService() : new GuestCartService($_SESSION['guest']->cart);
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -71,6 +73,7 @@ class router
             
             case 'cart/history/edit':
                 require_once __DIR__ . '/services/cartservice.php';
+                require_once __DIR__ . '/services/guestcartservice.php';
                 (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
                 $cartService = isset($_SESSION['user']) ? new CartService() : new GuestCartService($_SESSION['guest']->cart);
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -86,6 +89,7 @@ class router
 
             case 'cart/item/delete':
                 require_once __DIR__ . '/services/cartservice.php';
+                require_once __DIR__ . '/services/guestcartservice.php';
                 (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
                 $cartService = isset($_SESSION['user']) ? new CartService() : new GuestCartService($_SESSION['guest']->cart);
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -117,6 +121,7 @@ class router
                     require_once __DIR__ . '/models/reservation.php';
                     require_once __DIR__ . '/models/restaurant.php';
                     require_once __DIR__ . '/services/cartservice.php';
+                    require_once __DIR__ . '/services/guestcartservice.php';
                     (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
                     $cartService = isset($_SESSION['user']) ? new CartService() : new GuestCartService($_SESSION['guest']->cart);
                     $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -363,6 +368,7 @@ class router
                     require_once __DIR__ . '/models/artist.php';
                     require_once __DIR__ . '/models/venue.php';
                     require_once __DIR__ . '/services/cartservice.php';
+                    require_once __DIR__ . '/services/guestcartservice.php';
                     (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
                     $cartService = isset($_SESSION['user']) ? new CartService() : new GuestCartService($_SESSION['guest']->cart);
                     $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -395,6 +401,7 @@ class router
                     require_once __DIR__ . '/models/tickethistory.php';
                     require_once __DIR__ . '/models/tour.php';
                     require_once __DIR__ . '/services/cartservice.php';
+                    require_once __DIR__ . '/services/guestcartservice.php';
                     (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
                     $cartService = isset($_SESSION['user']) ? new CartService() : new GuestCartService($_SESSION['guest']->cart);
                     $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
