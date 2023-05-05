@@ -460,7 +460,11 @@ class router
                     $controller->index("HofBakenes");
                 }
                 break;
-           
+           case 'pagesOverview' :
+                require_once __DIR__ . '/controllers/pageOverviewController.php';
+                $controller = new pageOverviewController();
+                $controller->index();
+                break;
 
             case '401':
                 http_response_code(401);
