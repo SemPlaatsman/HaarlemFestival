@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/item.php';
 require_once __DIR__ . '/performance.php';
 
 class TicketDance extends Item {
@@ -65,11 +66,35 @@ class TicketDance extends Item {
     }
 
     /**
+     * Set the value of id
+     *
+     * @return  self
+     */ 
+    public function setPerformance($performance) : self
+    {
+        $this->performance = $performance;
+
+        return $this;
+    }
+
+    /**
      * Get the value of nr_of_people
      */ 
     public function getNrOfPeople()
     {
         return $this->nr_of_people;
+    }
+
+    /**
+     * Set the value of id
+     *
+     * @return  self
+     */ 
+    public function setNrOfPeople($nr_of_people) : self
+    {
+        $this->nr_of_people = $nr_of_people;
+
+        return $this;
     }
 }
 ?>

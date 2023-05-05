@@ -27,6 +27,10 @@ class HistoryTourService
         return $this->HistoryRepository->getToursByLanguage($languages[$language]);
     }
 
+    public function getAllTours() {
+        return $this->HistoryRepository->getAllTours();
+    }
+
     // function getItems() : array 
     // {
     //     return $this->HistoryRepository->getAllItems();

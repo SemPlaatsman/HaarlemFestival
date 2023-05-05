@@ -27,7 +27,7 @@ new breadcrumbcontroller();
     </div> <!-- image replace whit actual map image-->
     <div class="col">
       <h1 class="title">WELCOME</h1>
-      <?php foreach ($model as $page) { ?>
+      <?php foreach ($model['pages'] as $page) { ?>
         <?php if ($page->getId() === 8) { ?>
           <p data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>"
             data-body-markup="<?= $page->getBody_markup() ?>">
@@ -49,7 +49,7 @@ new breadcrumbcontroller();
       <div class="col-sm-12 col-md-6 p-5">
 
         <h1 class="title text-tetiare-a">LOCATIONS</h1>
-        <?php foreach ($model as $page) { ?>
+        <?php foreach ($model['pages'] as $page) { ?>
           <?php if ($page->getId() === 9) { ?>
             <p class="text-tetiare-a" data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>"
               data-body-markup="<?= $page->getBody_markup() ?>">
@@ -157,7 +157,7 @@ new breadcrumbcontroller();
         <li>Regular Participant: € 17,50</li>
         <li>Family ticket (max. 4 participants): € 60, -</li>
       </ul>
-      <?php foreach ($model as $page) { ?>
+      <?php foreach ($model['pages'] as $page) { ?>
         <?php if ($page->getId() === 10) { ?>
           <p data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>"
             data-body-markup="<?= $page->getBody_markup() ?>">
@@ -226,55 +226,37 @@ new breadcrumbcontroller();
           <h5 class="modal-title p-2">Buy tickets</h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form class="modal-body" method="post">
+        <form class="modal-body" method="POST" action="/history/addticket">
           <div class="row">
-            <fieldset class="form-group p-2 col-md-6 gx-100">
-              <label class="text-tetiare-a fs-5  col-form-label" for="language">Language</label>
-              <select class="form-control" id="language" name="language">
-                <option value="0">English</option>
-                <option value="1">Dutch</option>
-                <option value="2">Chinese</option>
+
+            <fieldset class="form-group p-2 col-md-12 gx-100">
+              <label class="text-tetiare-a fs-5  col-form-label" for="tour_select">Tour*</label>
+              <select required class="form-control" id="tour_select" name="tour_id">
+                <?php foreach($model['tours'] as $tour) { ?>
+                  <option value="<?= $tour->getId(); ?>" data-price="<?= $tour->getPriceFormatted(); ?>" data-family-price="<?= $tour->getGroupPriceFormatted(); ?>"><?= $tour->getLanguage(); ?> tour at <?= $tour->getGatheringLocation(); ?> at <?= $tour->getDatetimeFormatted(); ?></option>
+                <?php } ?>
               </select>
             </fieldset>
 
-            <fieldset class="form-group p-2 col-md-6 gx-100">
-              <label class="text-tetiare-a fs-5 col-form-label" for="date">Date</label>
-              <select class="form-control" class="col-md-4" id="date" name="date"></select>
-            </fieldset>
+            <fieldset class="form-group row p-2 col-md-12 align-items-center">
+              <div class="col-md-4">
+                <label class="text-tetiare-a fs-5 col-form-label" for="nr_of_people">Nr of people*</label>
 
-            <fieldset class="form-group p-2 col-md-6">
-              <label class="text-tetiare-a fs-5 col-form-label" for="time">Time</label>
-              <select class="form-control" class="col-md-4" id="time" name="time">
-              </select>
-            </fieldset>
-
-            <fieldset class="form-group row p-2 col-md-12">
-              <div class="col-md-3">
-                <label class="text-tetiare-a fs-5 col-form-label" for="single_tickets">Single Ticket</label>
               </div>
-              <div class="col-md-2 offset-md-1">
-                <label class="text-tetiare-a fs-5 col-form-label text-right" for="single_tickets">€ 17,50</label>
+              <div class="col-md-4">
+                <label class="text-tetiare-a fs-5 col-form-label text-right" for="nr_of_people">
+                  <span id="historyFormSingleTicket"></span> per person <br>
+                  <span id="historyFormFamilyTicket"></span> per 4 people
+                </label>
               </div>
-              <div class="col-md-4 offset-md-2">
-                <input class="form-control" type="number" id="single_tickets" name="single_tickets" min="0" value="0">
+              <div class="col-md-4">
+                <input required class="form-control" type="number" id="nr_of_people" name="nr_of_people" min="1" max="12" value="1">
               </div>
 
-            </fieldset>
-
-            <fieldset class="form-group row p-2 col-md-12">
-              <div class="col-md-3">
-                <label class="text-tetiare-a fs-5 col-form-label" for="family_tickets">Family Ticket</label>
-              </div>
-              <div class="col-md-2 offset-md-1">
-                <label class="text-tetiare-a fs-5 col-form-label text-right" for="single_tickets">€ 60,00</label>
-              </div>
-              <div class="col-md-4 offset-md-2">
-                <input class="form-control" type="number" id="family_tickets" name="family_tickets" min="0" value="0">
-              </div>
             </fieldset>
 
             <input type="cancel" value="Cancel" class="btn btn-secondary col-md-4" data-bs-dismiss="modal">
-            <input type="submit" name="submit" value="Submit" class="btn btn-primary col-md-8">
+            <input type="submit" value="Submit" class="btn btn-primary col-md-8">
           </div>
         </form>
 
