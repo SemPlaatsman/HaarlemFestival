@@ -16,7 +16,7 @@
 
                 <fieldset class="form-group p-2 col-md-6 gx-100">
                   <label class="text-tetiare-a fs-5 col-form-label" for="adults">Adults*</label>
-                  <input required class="form-control" type="number" min="0" max="12" id="adults" name="adults" value="0">
+                  <input required class="form-control" type="number" min="1" max="12" id="adults" name="adults" value="1">
                 </fieldset>
 
                 <fieldset class="form-group p-2 col-md-6 gx-100">

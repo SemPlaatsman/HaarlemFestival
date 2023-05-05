@@ -52,7 +52,7 @@
                   <dd class="text-sm-start text-md-start col-md-10"><?= $reservation->getRestaurant()->getLocation(); ?></dd>
                   <hr class="form-hr">
                   <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" title="<?= $reservation->getRestaurant()->getAdultPriceFormatted(); ?> p.p.">Adults:</u></dt>
-                  <dd class="text-sm-start text-md-start col-md-4"><input required <?= isset($_GET['cart']) ? "readonly" : null ?> class="border border-2 border-tetiare-a" type="number" min="0" max="8" name="editYummyNrOfAdults" form="editYummyForm-<?= $reservation->getId(); ?>" value="<?= $reservation->getNrOfAdults(); ?>"></dd>
+                  <dd class="text-sm-start text-md-start col-md-4"><input required <?= isset($_GET['cart']) ? "readonly" : null ?> class="border border-2 border-tetiare-a" type="number" min="1" max="8" name="editYummyNrOfAdults" form="editYummyForm-<?= $reservation->getId(); ?>" value="<?= $reservation->getNrOfAdults(); ?>"></dd>
                   <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" title="<?= $reservation->getRestaurant()->getKidsPriceFormatted(); ?> p.p.">Kids:</u></dt>
                   <dd class="text-sm-start text-md-start col-md-4"><input required <?= isset($_GET['cart']) ? "readonly" : null ?> class="border border-2 border-tetiare-a" type="number" min="0" max="8" name="editYummyNrOfKids" form="editYummyForm-<?= $reservation->getId(); ?>" value="<?= $reservation->getNrOfKids(); ?>"></dd>
                   <dt class="text-sm-start text-md-end col-md-2">Date & time:</dt>
@@ -139,7 +139,7 @@
                   <dd class="text-sm-start text-md-start col-md-4"><?= $ticketDance->getPerformance()->getEndDateFormatted(); ?></dd>
                   <hr class="form-hr">
                   <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" title="<?= $ticketDance->getPerformance()->getPriceFormatted(); ?> p.p.">Nr of people:</u></dt>
-                  <dd class="text-sm-start text-md-start col-md-4"><input required <?= isset($_GET['cart']) ? "readonly" : null ?> class="border border-2 border-tetiare-a" type="number" min="0" max="24" name="editDanceNrOfPeople" form="editDanceForm-<?= $ticketDance->getId(); ?>" value="<?= $ticketDance->getNrOfPeople(); ?>"></dd>
+                  <dd class="text-sm-start text-md-start col-md-4"><input required <?= isset($_GET['cart']) ? "readonly" : null ?> class="border border-2 border-tetiare-a" type="number" min="1" max="24" name="editDanceNrOfPeople" form="editDanceForm-<?= $ticketDance->getId(); ?>" value="<?= $ticketDance->getNrOfPeople(); ?>"></dd>
                   <dt class="text-sm-start text-md-end col-md-2">VAT:</dt>
                   <dd class="text-sm-start text-md-start col-md-4"><?= $ticketDance->getVATFormatted(); ?></dd>
                   <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" title="<?= $ticketDance->getNrOfPeople(); ?> * <?= $ticketDance->getPerformance()->getPrice(); ?> = <?= $ticketDance->getTotalPriceFormatted(); ?>">Total price:</u></dt>
@@ -213,7 +213,7 @@
                   <dd class="text-sm-start text-md-start col-md-4"><?= $ticketHistory->getTour()->getLanguage(); ?></dd>
                   <hr class="form-hr">
                   <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="Individual price: <?= $ticketHistory->getTour()->getPriceFormatted(); ?><br>Group price: <?= $ticketHistory->getTour()->getGroupPriceFormatted(); ?>">Nr of people:</u></dt>
-                  <dd class="text-sm-start text-md-start col-md-4"><input required <?= isset($_GET['cart']) ? "readonly" : null ?> class="border border-2 border-tetiare-a" type="number" name="editHistoryNrOfPeople" min="0" max="12" form="editHistoryForm-<?= $ticketHistory->getId(); ?>" value="<?= $ticketHistory->getNrOfPeople(); ?>"></dd>
+                  <dd class="text-sm-start text-md-start col-md-4"><input required <?= isset($_GET['cart']) ? "readonly" : null ?> class="border border-2 border-tetiare-a" type="number" name="editHistoryNrOfPeople" min="1" max="12" form="editHistoryForm-<?= $ticketHistory->getId(); ?>" value="<?= $ticketHistory->getNrOfPeople(); ?>"></dd>
                   <dt class="text-sm-start text-md-end col-md-2">VAT:</dt>
                   <dd class="text-sm-start text-md-start col-md-4"><?= $ticketHistory->getVATFormatted(); ?></dd>
                   <dt class="text-sm-start text-md-end col-md-2"><u data-bs-toggle="tooltip" data-bs-placement="top" title="<?= $ticketHistory->getNrOfPeople() % 4; ?> * <?= $ticketHistory->getTour()->getPrice(); ?> + <?= floor($ticketHistory->getNrOfPeople() / 4); ?> * <?= $ticketHistory->getTour()->getGroupPrice(); ?> = <?= $ticketHistory->getTotalPriceFormatted(); ?>">Total price:</u></dt>
