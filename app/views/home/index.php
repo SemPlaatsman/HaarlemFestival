@@ -29,7 +29,6 @@ include __DIR__ . '/../header.php';
 // var_dump($cartService->addToCart($reservation, 2));
 // var_dump($cartService->addToCart($ticketDance, 1));
 // var_dump($cartService->addToCart($ticketHistory, 1));
-session_destroy();
 ?>
 
 <div class="col-lg-6 mx-auto">

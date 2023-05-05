@@ -248,7 +248,7 @@ new breadcrumbcontroller();
                 </label>
               </div>
               <div class="col-md-4">
-                <input required class="form-control" type="number" id="nr_of_people" name="nr_of_people" min="0" max="12" value="0">
+                <input required class="form-control" type="number" id="nr_of_people" name="nr_of_people" min="1" max="12" value="1">
               </div>
 
             </fieldset>
