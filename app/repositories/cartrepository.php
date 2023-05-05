@@ -29,7 +29,7 @@ class CartRepository extends Repository
             "history_tours.gathering_location, history_tours.employee_id, history_tours.employee_name, history_tours.capacity, " . 
             "history_tours.price, history_tours.group_price, ticket_history.nr_of_people " .
             "FROM `item` JOIN `ticket_history` ON ticket_history.item_id = item.id JOIN `history_tours` ON history_tours.id = ticket_history.tour_id " .
-            "WHERE order_id = (SELECT order_id FROM `orders` WHERE user_id = :user_id AND time_payed IS NULL AND payment_status = 0);");
+            "WHERE order_id = (SELECT id FROM `orders` WHERE user_id = :user_id AND time_payed IS NULL AND payment_status = 0);");
             $query->bindParam(":user_id", $userId, PDO::PARAM_INT);
             $query->execute();
             $query->setFetchMode(PDO::FETCH_CLASS, 'TicketHistory');
@@ -63,7 +63,7 @@ class CartRepository extends Repository
             "(SELECT venue.seats FROM `venue` WHERE venue.id = performance.venue_id) as 'venue_seats', " .
             "performance.start_date, performance.end_date, performance.price as 'ticket_price', ticket_dance.nr_of_people " .
             "FROM `item` JOIN ticket_dance ON ticket_dance.item_id = item.id JOIN `performance` ON performance.id = ticket_dance.performance_id " .
-            "WHERE order_id = (SELECT order_id FROM `orders` WHERE user_id = :user_id AND time_payed IS NULL AND payment_status = 0);");
+            "WHERE order_id = (SELECT id FROM `orders` WHERE user_id = :user_id AND time_payed IS NULL AND payment_status = 0);");
             $query->bindParam(":user_id", $userId, PDO::PARAM_INT);
             $query->execute();
             $query->setFetchMode(PDO::FETCH_CLASS, 'TicketDance');
@@ -95,7 +95,7 @@ class CartRepository extends Repository
             "restaurant.location as 'restaurant_location', restaurant.adult_price as 'restaurant_adult_price', restaurant.kids_price as 'restaurant_kids_price', " . 
             "restaurant.reservation_fee as 'restaurant_reservation_fee', reservation.final_check, reservation.nr_of_adults, reservation.nr_of_kids, reservation.datetime " . 
             "FROM `item` JOIN reservation ON reservation.item_id = item.id JOIN `restaurant` ON restaurant.id = reservation.restaurant_id " . 
-            "WHERE order_id = (SELECT order_id FROM `orders` WHERE user_id = :user_id AND time_payed IS NULL AND payment_status = 0);");
+            "WHERE order_id = (SELECT id FROM `orders` WHERE user_id = :user_id AND time_payed IS NULL AND payment_status = 0);");
             $query->bindParam(":user_id", $userId, PDO::PARAM_INT);
             $query->execute();
             $query->setFetchMode(PDO::FETCH_CLASS, 'Reservation');

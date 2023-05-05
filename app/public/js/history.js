@@ -20,7 +20,9 @@ let tourschedule = document.getElementById('tourschedule');
 let ukButton = document.getElementById('ukflag');
 let nlButton = document.getElementById('dutchflag');
 let enButton = document.getElementById('chineseflag');
+let languageSelect = document.getElementById('language');
 Gettourschedule(0);
+fetchData(0);
 
 ukButton.addEventListener('click', function() {
     console.log("test");
@@ -32,6 +34,10 @@ nlButton.addEventListener('click', function() {
 enButton.addEventListener('click', function() {
     Gettourschedule(2);
 });
+languageSelect.addEventListener('change', () => {
+    let selectedLanguage = languageSelect.value;
+    fetchData(selectedLanguage);
+  });
 
 async function Gettourschedule(taal) {
 
@@ -98,4 +104,6 @@ function printSchedule(tabledata){
     }
     tourschedule.innerHTML = html;
 
+
 }
+

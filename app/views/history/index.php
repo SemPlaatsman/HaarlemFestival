@@ -228,6 +228,7 @@ new breadcrumbcontroller();
         </div>
         <form class="modal-body" method="POST" action="/history/addticket">
           <div class="row">
+
             <fieldset class="form-group p-2 col-md-12 gx-100">
               <label class="text-tetiare-a fs-5  col-form-label" for="tour_select">Tour*</label>
               <select required class="form-control" id="tour_select" name="tour_id">
@@ -240,6 +241,7 @@ new breadcrumbcontroller();
             <fieldset class="form-group row p-2 col-md-12 align-items-center">
               <div class="col-md-4">
                 <label class="text-tetiare-a fs-5 col-form-label" for="nr_of_people">Nr of people*</label>
+
               </div>
               <div class="col-md-4">
                 <label class="text-tetiare-a fs-5 col-form-label text-right" for="nr_of_people">
