@@ -25,7 +25,7 @@ class EmailGenerator {
     }
 
 
-    function generate(string $body, string $subject, string $recipient){
+    function generate(string $body, string $subject, string $email, string $recipient){
         $mail = new PHPMailer();
         $mail->isSMTP();                                             
         $mail->Host       = 'smtp-relay.sendinblue.com';                        
@@ -38,35 +38,22 @@ class EmailGenerator {
         $mail->IsHTML(true);
         $mail->Subject = $subject;
         $mail->Body = $body;
-        $mail->AddAddress($recipient, 'Recipient Name');
+        $mail->AddAddress($email, $recipient);
+        return $mail;
+    }
+
+    function sentEmail(string $body, string $subject, string $email, string $recipient){
+        $mail = $this->generate($body, $subject, $email, $recipient);
         $mail->Send();
-        if(!$mail->Send()){
-            echo "Mailer Error: " . $mail->ErrorInfo;
-        }
     }
 
     function sentEmailWithTickets(string $email, string $recipient, int $orderId){
         $invoice = $this->makeInvoicePdf($orderId);
         $tickets = $this->makeTicketsPdf($orderId);
-        $mail = new PHPMailer();
-        $mail->isSMTP();                                             
-        $mail->Host       = 'smtp-relay.sendinblue.com';                        
-        $mail->SMTPAuth   = true;                                   
-        $mail->Username   = 'janjaapvanlaar@gmail.com';                   
-        $mail->Password   = 'V5JKvcpqUnz0GX6W';                     
-        $mail->SMTPSecure = 'tls';                                  
-        $mail->Port       = 587;                                    
-        $mail->setFrom('Haarlem@festival.nl', 'Haarlem festival');
-        $mail->IsHTML(true);
-        $mail->Subject = "Ticket haarlem festival";
-        $mail->Body = "your tickets";
-        $mail->AddAddress($email, $recipient);
+        $mail = $this->generate($body, $subject, $email, $recipient);
         $mail->addStringAttachment($invoice->Output("S",'invoice.pdf'), 'invoice.pdf', $encoding = 'base64', $type = 'application/pdf');
         $mail->addStringAttachment($tickets->Output("S",'tickets.pdf'), 'tickets.pdf', $encoding = 'base64', $type = 'application/pdf');
         $mail->Send();
-        if(!$mail->Send()){
-            echo "Mailer Error: " . $mail->ErrorInfo;
-        }
     }
 
     //naar view
