@@ -38,6 +38,7 @@ class RestaurantController extends Controller
 
             if ($result) {
                 // redirect to the same page with a success query parameter
+                $_SESSION['success_message'] = 'The restaurant: ' . $name . ' has been successfully inserted.';
                 header("Location: /restaurant");
                 exit;
             } else {
@@ -64,6 +65,7 @@ class RestaurantController extends Controller
 
             if ($result) {
                 // redirect to the same page with a success query parameter
+                $_SESSION['success_message'] = 'The restaurant with id: ' . $id . ' has been successfully changed.';
                 header("Location: /restaurant");
                 exit;
             } else {
@@ -83,6 +85,7 @@ class RestaurantController extends Controller
 
             if ($result) {
                 // return success response
+                $_SESSION['success_message'] = 'The restaurant with id: ' . $id . ' has been successfully inserted.';
                 header("Location: /restaurant");
             } else {
                 // return failed response

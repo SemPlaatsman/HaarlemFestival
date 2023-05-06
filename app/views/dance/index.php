@@ -1,6 +1,7 @@
 <?php include __DIR__ . '/../header.php';
 (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
 ?>
+<?php include __DIR__ . '/../subheaderdance.php'; ?>
 <div class="container-fluid bg-black">
     <div class="position-relative">
         <img src="img/png/dance/banner/Banner-Component.png" class="img-fluid w-100 h-100" alt="Banner Image">
@@ -83,10 +84,10 @@
         </div>
 
         <h1 class="text-center text-light-purple mt-5 display-2">SCHEDULE OF OUR TEAM</h1>
-        <h2 class="text-center text-warning">NOTE: All-Access pass for this day €125,00, All-Access pass for Fri, Sat,
+        <!--<h2 class="text-center text-warning">NOTE: All-Access pass for this day €125,00, All-Access pass for Fri, Sat,
             Sun:
             €250,00.
-        </h2>
+        </h2>-->
         <div class="row container align-items-center text-center mx-auto mt-3">
             <table>
                 <tbody>

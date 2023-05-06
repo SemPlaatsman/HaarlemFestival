@@ -54,7 +54,7 @@ class router
 
                 header("Location: /cart");
                 break;
-                
+
             case 'cart/dance/edit':
                 require_once __DIR__ . '/services/cartservice.php';
                 require_once __DIR__ . '/services/guestcartservice.php';
@@ -70,7 +70,7 @@ class router
 
                 header("Location: /cart");
                 break;
-            
+
             case 'cart/history/edit':
                 require_once __DIR__ . '/services/cartservice.php';
                 require_once __DIR__ . '/services/guestcartservice.php';
@@ -107,8 +107,8 @@ class router
                 $controller = new MollieWebhookController();
                 $controller->index();
                 break;
-            
-            
+
+
             case 'yummy':
                 require_once __DIR__ . '/controllers/yummycontroller.php';
                 $controller = new YummyController();
@@ -288,7 +288,7 @@ class router
                     echo "404 Not Found";
                 }
                 break;
-            case 'paymentOveview'   :
+            case 'paymentOveview':
                 require_once __DIR__ . '/controllers/paymentOveviewController.php';
                 $controller = new PaymentOveviewController();
                 $controller->index();
@@ -359,6 +359,24 @@ class router
                     $controller->index();
                 }
                 break;
+
+            case 'hardwell':
+                require_once __DIR__ . '/controllers/dancedetailhardwellcontroller.php';
+                $controller = new DanceDetailHardwellController();
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    $controller->updateContent();
+                } else {
+                    $controller->index();
+                }
+                break;
+
+            case 'afrojack':
+                require_once __DIR__ . '/controllers/dancedetailafrojackcontroller.php';
+                $controller = new DanceDetailAfrojackController();
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    $controller->updateContent();
+                } else {
+                    $controller->index();
 
             case 'dance/insertticket':
                 try {
