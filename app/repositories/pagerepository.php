@@ -92,5 +92,40 @@ class PageRepository extends Repository
             return false;
         }
     }
+
+    public function updatePage(int $id, string $url = NULL) : bool
+    {
+        try {
+            $stmt = $this->connection->prepare("UPDATE `pages` SET `url` = :url WHERE id = :id");
+
+            // Bind the parameters
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->bindParam(':url', $url, PDO::PARAM_STR);
+
+            $stmt->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    public function deletePage(string $url)
+    {
+        try {
+            $stmt = $this->connection->prepare("DELETE FROM `pages` WHERE `url` = :url");
+
+            // Bind the parameters
+            $stmt->bindParam(':url', $url, PDO::PARAM_STR);
+
+            $stmt->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+  
+    
 }
 ?>
