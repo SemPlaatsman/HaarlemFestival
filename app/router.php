@@ -125,16 +125,18 @@ class router
                     (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
                     $cartService = isset($_SESSION['user']) ? new CartService() : new GuestCartService($_SESSION['guest']->cart);
                     $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    
-                    if ((null !== $restaurantId = $_POST['restaurant_id']) &&
-                    (null !== $nrOfAdults = $_POST['adults']) &&
-                    (null !== $nrOfKids = $_POST['kids']) &&
-                    (null !== $date = $_POST['date']) &&
-                    (null !== $time = $_POST['time'])) {
+
+                    if (
+                        (null !== $restaurantId = $_POST['restaurant_id']) &&
+                        (null !== $nrOfAdults = $_POST['adults']) &&
+                        (null !== $nrOfKids = $_POST['kids']) &&
+                        (null !== $date = $_POST['date']) &&
+                        (null !== $time = $_POST['time'])
+                    ) {
                         $reservation = new Reservation(null, null, 1, "Yummy!", null, 9, "", null, new Restaurant($restaurantId), null, $nrOfAdults, $nrOfKids, ($date . ' ' . $time));
                         $cartService->addToCart($reservation);
                     }
-    
+
                     header("Location: /cart");
                 } catch (Exception $e) {
                     header("Location: /yummy");
@@ -293,7 +295,7 @@ class router
                 $controller = new PaymentOveviewController();
                 $controller->index();
                 break;
-            
+
 
             case 'captcha':
                 require_once __DIR__ . '/controllers/captchacontroller.php';
@@ -326,16 +328,16 @@ class router
             case 'qr/scan':
                 require_once __DIR__ . '/controllers/qrscannercontroller.php';
                 $controller = new QrScannerController();
-                if(isset($_POST['ticket'])){
+                if (isset($_POST['ticket'])) {
                     $data = $_POST['ticket'];
                     $controller->checkQRCode($data);
-                }else{
+                } else {
                     $controller->index();
                 }
-                
+
 
                 break;
-    
+
 
             case 'pdf':
                 require __DIR__ . '/controllers/pdfcontroller.php';
@@ -377,6 +379,8 @@ class router
                     $controller->updateContent();
                 } else {
                     $controller->index();
+                }
+                break;
 
             case 'dance/insertticket':
                 try {
@@ -390,13 +394,15 @@ class router
                     (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
                     $cartService = isset($_SESSION['user']) ? new CartService() : new GuestCartService($_SESSION['guest']->cart);
                     $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    
-                    if ((null !== $performanceId = $_POST['performance_id']) &&
-                    (null !== $nrOfPeople = $_POST['nr_of_people'])) {
+
+                    if (
+                        (null !== $performanceId = $_POST['performance_id']) &&
+                        (null !== $nrOfPeople = $_POST['nr_of_people'])
+                    ) {
                         $ticketDance = new TicketDance(null, null, 2, "DANCE!", null, 9, "", null, new Performance($performanceId, new Artist(), new Venue()), $nrOfPeople);
                         $cartService->addToCart($ticketDance);
                     }
-    
+
                     header("Location: /cart");
                 } catch (Exception $e) {
                     header("Location: /dance");
@@ -412,7 +418,7 @@ class router
                     $controller->index();
                 }
                 break;
-            
+
             case 'history/addticket':
                 try {
                     require_once __DIR__ . '/models/user.php';
@@ -423,13 +429,15 @@ class router
                     (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
                     $cartService = isset($_SESSION['user']) ? new CartService() : new GuestCartService($_SESSION['guest']->cart);
                     $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    
-                    if ((null !== $tourId = $_POST['tour_id']) &&
-                    (null !== $nrOfPeople = $_POST['nr_of_people'])) {
+
+                    if (
+                        (null !== $tourId = $_POST['tour_id']) &&
+                        (null !== $nrOfPeople = $_POST['nr_of_people'])
+                    ) {
                         $ticketHistory = new TicketHistory(null, null, 3, "A Stroll Through History", null, 9, "", null, new Tour($tourId), $nrOfPeople);
                         $cartService->addToCart($ticketHistory);
                     }
-    
+
                     header("Location: /cart");
                 } catch (Exception $e) {
                     header("Location: /history");
@@ -549,7 +557,7 @@ class router
                     $controller->index("HofBakenes");
                 }
                 break;
-           case 'pagesOverview' :
+            case 'pagesOverview':
                 require_once __DIR__ . '/controllers/pageOverviewController.php';
                 $controller = new pageOverviewController();
                 $controller->index();
@@ -565,28 +573,28 @@ class router
                 break;
 
             default:
-           try{
-            $this->GoToCustomPage($uri);
-           }catch(Exception $e){
-                http_response_code(404);
-                echo "404 Not Found $e";
-                
-                break;
-           }
+                try {
+                    $this->GoToCustomPage($uri);
+                } catch (Exception $e) {
+                    http_response_code(404);
+                    echo "404 Not Found $e";
+
+                    break;
+                }
         }
     }
 
 
- 
 
-    function GoToCustomPage($uri){
+
+    function GoToCustomPage($uri)
+    {
         require_once __DIR__ . '/controllers/CustomPageController.php';
 
-        try{
-        $controller = new CustomPageController();
-        $controller->index("/$uri");
-        }
-        catch(Exception $e){
+        try {
+            $controller = new CustomPageController();
+            $controller->index("/$uri");
+        } catch (Exception $e) {
             throw new Exception($e);
         }
     }
