@@ -29,10 +29,26 @@ class PageService
     {
         return $this->pageRepository->getPages();
     }
-    // public function DeletePage(string $url)
-    // {
-    //     return $this->pageRepository->DeletePage($url);
-    // }
+    
+    
+    public function addPage(string $url)
+    {
+        //check if page already exists
+        $pages = $this->pageRepository->getContent($url);
+        if(count($pages) > 0){
+            throw new Exception("Page already exists");
+        }
+        return $this->pageRepository->insertContent($url, "");
+    }
+
+    public function updatePage(int $id, string $url) : bool
+    {
+        return $this->pageRepository->updatePage($id, $url);
+    }
+    public function deletePage(string $url)
+    {
+        return $this->pageRepository->deletePage($url);
+    }
 
 }
 ?>
