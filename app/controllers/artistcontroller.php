@@ -33,6 +33,7 @@ class ArtistController extends Controller
 
             if ($result) {
                 // return success response
+                $_SESSION['success_message'] = 'The artist: ' . $name . ' has been successfully inserted.';
                 header("Location: /artist");
             } else {
                 // return failed response
@@ -53,6 +54,7 @@ class ArtistController extends Controller
 
             if ($result) {
                 // return succes response
+                $_SESSION['success_message'] = 'The artist with id: ' . $id . ' has been successfully changed.';
                 header("Location: /artist");
             } else {
                 // return failed response
@@ -72,6 +74,7 @@ class ArtistController extends Controller
             $result = $this->artistservice->deleteArtist($id);
             if ($result) {
                 // return success response
+                $_SESSION['success_message'] = 'The artist with id: ' . $id . ' has been successfully deleted.';
                 header("Location: /artist");
             } else {
                 // return failed response

@@ -37,6 +37,7 @@ class UserController extends Controller
 
             if ($result) {
                 // return success response
+                $_SESSION['success_message'] = 'The user: ' . $name . ' has been successfully inserted.';
                 header("Location: /user");
             } else {
                 // return failed response
@@ -60,6 +61,7 @@ class UserController extends Controller
 
             if ($result) {
                 // return succes response
+                $_SESSION['success_message'] = 'The user with id: ' . $id . ' has been successfully changed.';
                 header("Location: /user");
             } else {
                 // return failed response
@@ -79,6 +81,7 @@ class UserController extends Controller
             $result = $this->userservice->deleteUser($id);
             if ($result) {
                 // return success response
+                $_SESSION['success_message'] = 'The user with id: ' . $id . ' has been successfully deleted.';
                 header("Location: /user");
             } else {
                 // return failed response

@@ -53,7 +53,7 @@ class router
 
                 header("Location: /cart");
                 break;
-                
+
             case 'cart/dance/edit':
                 require_once __DIR__ . '/services/cartservice.php';
                 (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
@@ -68,7 +68,7 @@ class router
 
                 header("Location: /cart");
                 break;
-            
+
             case 'cart/history/edit':
                 require_once __DIR__ . '/services/cartservice.php';
                 (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
@@ -103,8 +103,8 @@ class router
                 $controller = new MollieWebhookController();
                 $controller->index();
                 break;
-            
-            
+
+
             case 'yummy':
                 require_once __DIR__ . '/controllers/yummycontroller.php';
                 $controller = new YummyController();
@@ -120,11 +120,13 @@ class router
                 $cartService = isset($_SESSION['user']) ? new CartService() : new GuestCartService($_SESSION['guest']->cart);
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-                if ((null !== $restaurantId = $_POST['restaurant_id']) &&
-                (null !== $nrOfAdults = $_POST['adults']) &&
-                (null !== $nrOfKids = $_POST['kids']) &&
-                (null !== $date = $_POST['date']) &&
-                (null !== $time = $_POST['time'])) {
+                if (
+                    (null !== $restaurantId = $_POST['restaurant_id']) &&
+                    (null !== $nrOfAdults = $_POST['adults']) &&
+                    (null !== $nrOfKids = $_POST['kids']) &&
+                    (null !== $date = $_POST['date']) &&
+                    (null !== $time = $_POST['time'])
+                ) {
                     $reservation = new Reservation(null, null, 1, "Yummy!", null, 9, "", null, new Restaurant($restaurantId, null, null, null, null, null, null), null, $nrOfAdults, $nrOfKids, ($date . ' ' . $time));
                     $cartService->addToCart($reservation);
                 }
@@ -279,7 +281,7 @@ class router
                     echo "404 Not Found";
                 }
                 break;
-            case 'paymentOveview'   :
+            case 'paymentOveview':
                 require_once __DIR__ . '/controllers/paymentOveviewController.php';
                 $controller = new PaymentOveviewController();
                 $controller->index();
@@ -328,6 +330,26 @@ class router
             case 'dance':
                 require_once __DIR__ . '/controllers/dancecontroller.php';
                 $controller = new DanceController();
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    $controller->updateContent();
+                } else {
+                    $controller->index();
+                }
+                break;
+
+            case 'hardwell':
+                require_once __DIR__ . '/controllers/dancedetailhardwellcontroller.php';
+                $controller = new DanceDetailHardwellController();
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    $controller->updateContent();
+                } else {
+                    $controller->index();
+                }
+                break;
+
+            case 'afrojack':
+                require_once __DIR__ . '/controllers/dancedetailafrojackcontroller.php';
+                $controller = new DanceDetailAfrojackController();
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $controller->updateContent();
                 } else {
