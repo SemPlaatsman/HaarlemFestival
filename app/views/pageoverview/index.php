@@ -52,6 +52,13 @@ include __DIR__ . '/../adminSubheader.php';
                                     <i class="fas fa-edit"></i>
                                 </button>
                             </div>
+
+                            <div class="justify-content-center align-items-center">
+                                <a href=" <?= $page->getUrl() ?>"><button  type="button" class="btn btn-primary-a edit-html-button bg-primary-a text-white border-0 text-center d-inline-block fs-5 m-2" >
+                                   <i class="fa-regular fa-file-code"></i>
+                                </button>
+                                </a>
+                            </div>
                         </td>
 
                         <!-- delete button  -->
