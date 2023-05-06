@@ -30,7 +30,7 @@ function updateContent($pageService)
         if (!$result) {
             throw new Exception('Something went wrong while trying to update the content!');
         }
-        header("Location: " . $_SERVER['HTTP_REFERER']);
+        header("Location: " . $_SERVER['HTTP_REFERER']);    
     } catch (Exception $e) {
         // Handle the exception here
         echo 'An error occurred: ' . $e->getMessage();

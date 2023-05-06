@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/item.php';
 require_once __DIR__ . '/tour.php';
 
 class TicketHistory extends Item {

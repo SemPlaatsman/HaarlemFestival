@@ -75,17 +75,25 @@ class HistoryTourRepository extends Repository
             throw new Exception($e->getMessage());
         }
     }
-    // public function getAllTours(): array
-    // {
-    //     try {
-    //         $stmnt = $this->connection->prepare("SELECT `language`,`datetime`,`employee_id`,`employee_name`,`capacity`,`price`,`group_price` FROM `history_tours`;");
-    //         $stmnt->setFetchMode(PDO::FETCH_ASSOC);
-    //         $stmnt->execute();
-    //         $data = $stmnt->fetch(PDO::FETCH_ASSOC);
-    //         $tour = new Tour($data['language'], $data['datetime'], $data['employee_id'], $data['employee_name'], $data['capacity'], $data['price'], $data['group_price']);
-    //         return $tour;
-    //     } catch (PDOException $e) {
-    //         return null;
-    //     }
-    // }
+    
+    public function getAllTours(): array
+    {
+        try {
+            $stmnt = $this->connection->prepare("SELECT `id`, `language`, `datetime`, `gathering_location`, `employee_id`, `employee_name`, `capacity`, `price`, `group_price` FROM `history_tours`;");
+            $stmnt->execute();
+            $stmnt->setFetchMode(PDO::FETCH_CLASS, 'Tour');
+    
+            // if rowMapper function is already loaded, don't load it again
+            if (!function_exists('rowMapperTour')) {
+                // rowMapper based on this stackoverflow post: https://stackoverflow.com/questions/12368035/pdo-fetch-class-pass-results-to-constructor-as-parameters
+                function rowMapperTour(int $id, string $language, string $datetime, string $gathering_location, int $employee_id, string $employee_name, int $capacity, float $price, float $group_price) {
+                    return new Tour($id, $language, $datetime, $gathering_location, $employee_id, $employee_name, $capacity, $price, $group_price);
+                }
+            }
+    
+            return $stmnt->fetchAll(PDO::FETCH_FUNC, 'rowMapperTour');
+        } catch (PDOException $e) {
+            return null;
+        }
+    }
 }

@@ -38,5 +38,10 @@ class TicketDanceService
     {
         return $this->ticketDanceRepository->getTicketDanceForOrder($orderId);
     }
+
+    public function getTicketDanceForQR(string $QR_Code) 
+    {
+        return $this->ticketDanceRepository->getTicketDanceForQR($QR_Code);
+    }
 }
 ?>

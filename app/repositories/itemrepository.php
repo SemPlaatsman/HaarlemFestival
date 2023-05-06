@@ -85,6 +85,5 @@ class ItemRepository extends Repository {
         } catch (PDOException $e) {
             return null;
         }
-        
     }
 }
