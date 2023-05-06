@@ -144,4 +144,38 @@ class TicketHistoryRepository extends ItemRepository {
             return null;
         }
     }
+
+    public function getTicketHistoryForQR(string $QR_Code) {
+        try {
+            $stmnt = $this->connection->prepare("SELECT ticket_history.item_id, item.order_id, item.event_id, " .
+            "(SELECT event.name FROM `event` WHERE event.id = item.event_id) as 'event_name', item.total_price, " .
+            "item.VAT, item.QR_Code, ticket_history.id, ticket_history.tour_id, history_tours.language, history_tours.datetime, " . 
+            "history_tours.gathering_location, history_tours.employee_id, history_tours.employee_name, " . 
+            "history_tours.capacity, history_tours.price, history_tours.group_price, ticket_history.nr_of_people " .
+            "FROM `item` JOIN `ticket_history` ON ticket_history.item_id = item.id JOIN `history_tours` ON history_tours.id = ticket_history.tour_id " .
+            "WHERE item.QR_Code = :QR_Code;");
+            $stmnt->bindParam(":QR_Code", $QR_Code, PDO::PARAM_STR);
+            $stmnt->execute();
+            $stmnt->setFetchMode(PDO::FETCH_CLASS, 'TicketHistory');
+
+            // if rowMapper function is already loaded, don't load it again
+            if (!function_exists('rowMapperTicketHistory')) {
+                // rowMapper based on this stackoverflow post: https://stackoverflow.com/questions/12368035/pdo-fetch-class-pass-results-to-constructor-as-parameters
+                function rowMapperTicketHistory(int $item_id, int $order_id, int $event_id, string $event_name, float $total_price, int $VAT, string $QR_Code,
+                    int $id, int $tour_id, string $language, string $datetime, string $gathering_location, int $employee_id, 
+                    string $employee_name, int $capacity, float $price, float $group_price, int $nr_of_people) {
+                    return new TicketHistory($item_id, $order_id, $event_id, $event_name, $total_price, $VAT, $QR_Code, $id, new Tour($tour_id, 
+                        $language, $datetime, $gathering_location, $employee_id, $employee_name, $capacity, $price, $group_price), $nr_of_people);
+                }
+            }
+
+            $ticketsHistory = $stmnt->fetchAll(PDO::FETCH_FUNC, 'rowMapperTicketHistory');
+            if(!empty($ticketsHistory)){
+                return $ticketsHistory[0];
+            }
+            return null;
+        } catch (PDOException $e) {
+            return null;
+        }
+    }
 }

@@ -8,8 +8,7 @@
   <title>
     <?= ucfirst($directory); ?>
   </title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/<?= strtolower($directory); ?>.css">
@@ -22,41 +21,58 @@
       <a class="navbar-brand ms-2" href="/">
         <img src="/img/png/haarlem-brand.png" alt="haarlem-brand" width="185" height="54">
       </a>
-      <button class="navbar-toggler border-0 p-0 me-2" type="button" data-bs-toggle="collapse"
-        data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler border-0 p-0 me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon fs-1"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarMain">
         <ul class="navbar-nav fs-1 w-100 d-flex justify-content-center">
           <section class="w-100 d-flex flex-column justify-content-center flex-xxl-row">
-            <li class="nav-item mx-0 mx-xxl-5">
+            <li class="nav-item mx-0 mx-xxl-4">
               <a class="nav-link <?= $directory == "home" ? "active" : "" ?>" href="/home">HOME</a>
             </li>
-            <li class="nav-item mx-0 mx-xxl-5">
+            <li class="nav-item mx-0 mx-xxl-4">
               <a class="nav-link <?= $directory == "yummy" ? "active" : "" ?>" href="/yummy">YUMMY!</a>
             </li>
-            <li class="nav-item mx-0 mx-xxl-5">
+            <li class="nav-item mx-0 mx-xxl-4">
               <a class="nav-link <?= $directory == "dance" ? "active" : "" ?>" href="/dance">DANCE!</a>
             </li>
-            <li class="nav-item mx-0 mx-xxl-5">
+            <li class="nav-item mx-0 mx-xxl-4">
               <a class="nav-link <?= $directory == "history" ? "active" : "" ?>" href="/history">A STROLL THROUGH
                 HISTORY</a>
             </li>
+            <li class="nav-item mx-0 mx-xxl-4">
+              <!-- custompages dropdown -->
+              <div class="dropdown">
+                <a class="nav-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Other Pages
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <!-- this method kinda uggo -->
+                  <?php 
+                  require_once __DIR__ . "/../controllers/CustomPageController.php";
+                  $CustomPageController = new CustomPageController();
+                  $pages = $CustomPageController->getAllPages();
+                  foreach ($pages as $custompage) { ?>
+                    <a class="dropdown-item" href="<?= $custompage->getUrl() ?>"><?= str_replace("/","",$custompage->getUrl()) ?></a>
+                  <?php } ?>
+                </div>
+              </div>
+              <!-- custompages dropdown -->
+            </li>
+
+            <!-- admin -->
             <?php if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()) { ?>
-              <li class="nav-item mx-0 mx-xxl-5">
-                <a class="nav-link <?= $directory == "adminoverview" ? "active" : "" ?>"
-                  href="/adminoverview">ADMINOVERVIEW</a>
+              <li class="nav-item mx-0 mx-xxl-4">
+                <a class="nav-link <?= $directory == "adminoverview" ? "active" : "" ?>" href="/adminoverview">ADMINOVERVIEW</a>
               </li>
             <?php } ?>
           </section>
           <hr class="bg-tetiare-a d-flex d-xxl-none w-100">
           <li class="nav-item">
-            <a class="nav-link <?= $directory == "cart" ? "active" : "" ?>" href="/cart"><i
-                class="fa-solid fa-cart-shopping"></i></a>
+            <a class="nav-link <?= $directory == "cart" ? "active" : "" ?>" href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
           </li>
           <li class="nav-item authBtn">
-            <a class="nav-link float-start float-xxl-end <?= $directory == "login" ? "active" : "" ?>"
-              href="/<?= isset($_SESSION['user']) ? "logout" : "login" ?>"><?= isset($_SESSION['user']) ? "LOGOUT" : "LOGIN" ?> <i class="fa-solid fa-arrow-right-from-bracket mx-2"></i></a>
+            <a class="nav-link float-start float-xxl-end <?= $directory == "login" ? "active" : "" ?>" href="/<?= isset($_SESSION['user']) ? "logout" : "login" ?>"><?= isset($_SESSION['user']) ? "LOGOUT" : "LOGIN" ?> <i class="fa-solid fa-arrow-right-from-bracket mx-2"></i></a>
           </li>
         </ul>
       </div>

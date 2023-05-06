@@ -1,8 +1,28 @@
+window.addEventListener('load', function() {
+    var tourSelect = document.getElementById('tour_select');
+
+    tourSelect.addEventListener('change', function() {
+        var selectedTour = tourSelect.options[tourSelect.selectedIndex];
+
+        var singleTicketSpan = document.getElementById('historyFormSingleTicket');
+        var price = selectedTour.dataset.price;
+        singleTicketSpan.innerHTML = price;
+
+        var familyTicketSpan = document.getElementById('historyFormFamilyTicket');
+        var familyPrice = selectedTour.dataset.familyPrice;
+        familyTicketSpan.innerHTML = familyPrice;
+    });
+
+    tourSelect.dispatchEvent(new Event('change'));
+});
+
 let tourschedule = document.getElementById('tourschedule');
 let ukButton = document.getElementById('ukflag');
 let nlButton = document.getElementById('dutchflag');
 let enButton = document.getElementById('chineseflag');
+let languageSelect = document.getElementById('language');
 Gettourschedule(0);
+fetchData(0);
 
 ukButton.addEventListener('click', function() {
     console.log("test");
@@ -14,6 +34,10 @@ nlButton.addEventListener('click', function() {
 enButton.addEventListener('click', function() {
     Gettourschedule(2);
 });
+languageSelect.addEventListener('change', () => {
+    let selectedLanguage = languageSelect.value;
+    fetchData(selectedLanguage);
+  });
 
 async function Gettourschedule(taal) {
 
@@ -80,4 +104,6 @@ function printSchedule(tabledata){
     }
     tourschedule.innerHTML = html;
 
+
 }
+

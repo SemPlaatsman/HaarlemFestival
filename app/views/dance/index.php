@@ -112,10 +112,13 @@
                                 <?= $performance->getPrice() ?>.-
                             </td>
                             <td colspan="7" class="text-center">
-                                <input type="submit" data-bs-toggle="modal" data-bs-target="#insertTicket"
+                                <input type="submit" data-bs-toggle="modal" data-bs-target="#insertTicket-<?= $performance->getId(); ?>"
                                     class="btn btn-primary insert-ticket bg-light-purple text-white border-0 text-center fs-5 m-2"
                                     value="ADD TO CART">
                             </td>
+                            <?php
+                                include __DIR__ . '/insertticketform.php';
+                            ?>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

@@ -1,15 +1,14 @@
 <?php
 include __DIR__ . '/../header.php';
-var_dump($_POST);
 ?>
 
 <section class="container-fluid px-0 bg-primary-b">
     <section class="position-relative">
         <img src="img/png/yummy/home/banner.png" class="img-fluid w-100 h-100" alt="Banner Image">
-        <h1 class="banner-title text-tetiare-a position-absolute bottom-0 start-0 ms-5 col-md-3 text-end">
+        <h1 class="banner-title text-tetiare-a position-absolute bottom-0 start-0 ms-5 col-md-3 text-end mb-0">
             YUMMY!
         </h1>
-        <p class="banner-title-text position-absolute bottom-0 start-0 text-white col-md-7 fs-2 pb-2">
+        <p class="banner-title-text position-absolute bottom-0 start-0 text-white col-md-7 fs-2 pb-2 mb-0">
             A charming and tasty food festival in the heart of Haarlem
         </p>
     </section>
