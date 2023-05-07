@@ -289,7 +289,7 @@ class router
                 }
                 break;
             case 'paymentOveview'   :
-                require_once __DIR__ . '/controllers/paymentOveviewController.php';
+                require_once __DIR__ . '/controllers/paymentoveviewcontroller.php';
                 $controller = new PaymentOveviewController();
                 $controller->index();
                 break;
@@ -344,7 +344,7 @@ class router
 
 
             case 'download/orders':
-                require_once __DIR__ . '/controllers/paymentOveviewController.php';
+                require_once __DIR__ . '/controllers/paymentoveviewcontroller.php';
                 $controller = new PaymentOveviewController();
                 $controller->Download();
                 break;
@@ -532,8 +532,8 @@ class router
                 }
                 break;
            case 'pagesOverview' :
-                require_once __DIR__ . '/controllers/pageOverviewController.php';
-                $controller = new pageOverviewController();
+                require_once __DIR__ . '/controllers/pageoverviewcontroller.php';
+                $controller = new pageoverviewcontroller();
                 $controller->index();
                 break;
 
@@ -562,10 +562,10 @@ class router
  
 
     function GoToCustomPage($uri){
-        require_once __DIR__ . '/controllers/CustomPageController.php';
+        require_once __DIR__ . '/controllers/custompagecontroller.php';
 
         try{
-        $controller = new CustomPageController();
+        $controller = new custompagecontroller();
         $controller->index("/$uri");
         }
         catch(Exception $e){
