@@ -16,7 +16,7 @@
             new subPageHeaderButton('RESTAURANTS', '/restaurant'),
             new subPageHeaderButton('RESERVATIONS', '/reservation'),
             new subPageHeaderButton('ORDERS', '/paymentOveview'),
-            new subPageHeaderButton('pagesOverview', '/pagesOverview')
+            new subPageHeaderButton('PAGEOVERVIEW', '/pagesOverview')
 
         );
 
