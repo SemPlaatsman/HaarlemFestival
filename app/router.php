@@ -550,8 +550,9 @@ class router
            try{
             $this->GoToCustomPage($uri);
            }catch(Exception $e){
+                echo "test";
                 http_response_code(404);
-                echo "404 Not Found $e";
+                echo "404 Not Found";
                 
                 break;
            }

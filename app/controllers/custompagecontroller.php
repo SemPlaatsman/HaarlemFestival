@@ -52,11 +52,15 @@ class custompagecontroller extends Controller
         return $this->pageService;
     }
 
-    public function getAllPages()
+    public function getAllPages() 
     {
+        try{
         $this->pageService = new PageService();
         $pages = $this->pageService->getAllPages();
         return $pages;
+        }catch(Exception $e){
+            throw new Exception("404 Not Found");
+        }
     }
 
     public function getPage($url)
