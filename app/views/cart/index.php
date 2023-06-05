@@ -263,7 +263,7 @@
       <?php } ?>
       <?php } else { ?>
         <p class="text-center text-primary-b font-druktext">Payment requires an account!</p>
-        <a href="/register" class="btn btn-primary-b rounded-0 fs-3 text-tetiare-a col-md-5">REGISTER</a>
+        <a href="/registration" class="btn btn-primary-b rounded-0 fs-3 text-tetiare-a col-md-5">REGISTER</a>
         <a href="/login" class="btn btn-primary-b rounded-0 fs-3 text-tetiare-a col-md-5">LOGIN</a>
       <?php } ?>
     <?php } ?>
