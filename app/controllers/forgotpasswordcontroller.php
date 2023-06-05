@@ -33,15 +33,13 @@ class ForgotPasswordController extends Controller {
         $key = md5($email);
         $addKey = substr(md5(uniqid(rand(),1)),3,10);
         $key = $key . $addKey;
+        $baseUrl = 'http://' . $_SERVER['HTTP_HOST'];
         $this->userService->addResetTocken($email, $key, $expDate);
-        // Start output buffering
+        //get view for body
         ob_start();
-
-        // Include the view file
         require_once __DIR__ . '/../views/forgotpassword/forgotpasswordemail.php';
-
-        // Get the output and clean the buffer
         $body = ob_get_clean();
+
         $subject = "Password Recovery - visithaarlem.nl";
         $this->emailGenerator->sentEmail($body, $subject, $email, "");
         header('Location: login');
