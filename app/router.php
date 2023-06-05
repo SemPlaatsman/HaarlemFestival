@@ -290,8 +290,9 @@ class router
                     echo "404 Not Found";
                 }
                 break;
-            case 'paymentOveview':
-                require_once __DIR__ . '/controllers/paymentOveviewController.php';
+
+            case 'paymentOveview'   :
+                require_once __DIR__ . '/controllers/paymentoveviewcontroller.php';
                 $controller = new PaymentOveviewController();
                 $controller->index();
                 break;
@@ -346,7 +347,7 @@ class router
 
 
             case 'download/orders':
-                require_once __DIR__ . '/controllers/paymentOveviewController.php';
+                require_once __DIR__ . '/controllers/paymentoveviewcontroller.php';
                 $controller = new PaymentOveviewController();
                 $controller->Download();
                 break;
@@ -557,9 +558,10 @@ class router
                     $controller->index("HofBakenes");
                 }
                 break;
-            case 'pagesOverview':
-                require_once __DIR__ . '/controllers/pageOverviewController.php';
-                $controller = new pageOverviewController();
+
+           case 'pagesOverview' :
+                require_once __DIR__ . '/controllers/pageoverviewcontroller.php';
+                $controller = new pageoverviewcontroller();
                 $controller->index();
                 break;
 
@@ -587,14 +589,14 @@ class router
 
 
 
-    function GoToCustomPage($uri)
-    {
-        require_once __DIR__ . '/controllers/CustomPageController.php';
+    function GoToCustomPage($uri){
+        require_once __DIR__ . '/controllers/custompagecontroller.php';
 
-        try {
-            $controller = new CustomPageController();
-            $controller->index("/$uri");
-        } catch (Exception $e) {
+        try{
+        $controller = new custompagecontroller();
+        $controller->index("/$uri");
+        }
+        catch(Exception $e){
             throw new Exception($e);
         }
     }

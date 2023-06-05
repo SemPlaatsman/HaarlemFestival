@@ -2,7 +2,7 @@
 require_once __DIR__ . '/controller.php';
 require_once __DIR__ . '/../services/pageservice.php';
 
-class CustomPageController extends Controller
+class custompagecontroller extends Controller
 {
     private  $pageService;
     public $markup = "test";
