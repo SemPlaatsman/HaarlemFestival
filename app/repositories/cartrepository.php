@@ -243,12 +243,13 @@ class CartRepository extends Repository
 
     public function addItemToCart(Item $item, int $userId) : bool {
         try {
-            $baseQuery = $this->connection->prepare("INSERT INTO `item` (`id`, `order_id`, `event_id`, `total_price`, `VAT`, `QR_Code`) VALUES (NULL, :order_id, :event_id, :total_price, :vat, '');");
+            $baseQuery = $this->connection->prepare("INSERT INTO `item` (`id`, `order_id`, `event_id`, `total_price`, `VAT`, `QR_Code`) VALUES (NULL, :order_id, :event_id, :total_price, :vat, :QR_Code);");
             $baseQuery->bindValue(":order_id", $item->getOrderId(), PDO::PARAM_INT);
             $baseQuery->bindValue(":event_id", $item->getEventId(), PDO::PARAM_INT);
             $item->setTotalPrice();
             $baseQuery->bindValue(":total_price", $item->getTotalPrice());
             $baseQuery->bindValue(":vat", $item->getVAT(), PDO::PARAM_INT);
+            $baseQuery->bindValue(":QR_Code", $item->getQRCode());
             if (!$this->connection->beginTransaction()) {
                 throw new PDOException("Unable to start transaction!");
             }
