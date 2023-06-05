@@ -26,7 +26,7 @@ include __DIR__ . '/../adminSubheader.php';
                 </tr>
             </thead>
 
-            <body class="text-center" id="table">
+            <tbody class="text-center" id="table">
                 <?php
                 foreach ($model["pages"] as $page) :
                 ?>
@@ -65,6 +65,7 @@ include __DIR__ . '/../adminSubheader.php';
                         <td class="col-1">
                             <div class="justify-content-center align-items-center">
                                 <form method="post" action="/pagesOverview">
+                                    <input type="hidden" name="id" value="<?= $page->getId() ?>">
                                     <input type="hidden" name="url" value="<?= $page->getUrl() ?>">
                                     <input type="hidden" name="_editMethod" value="DELETE">
                                     <button type="submit" class="btn btn-danger bg-primary-a text-white border-0 text-center d-inline-block fs-5 m-2"><i class="fas fa-trash-alt"></i></button>
@@ -76,39 +77,40 @@ include __DIR__ . '/../adminSubheader.php';
                 <?php
                 endforeach;
                 ?>
-
-            </body>
+                <td colspan="7" class="text-center">
+                    <input type="submit" data-bs-toggle="modal" data-bs-target="#insertModal"
+                        class="btn btn-primary insert-button-venue bg-primary-a text-white border-0 text-center text-decoration-none d-inline-block fs-5 m-2 w-50"
+                        value="INSERT">
+                </td>
+            </tbody>
         </table>
     </div>
 </div>
 
 <!-- Modal Insert page -->
 <div id="insertModal" class="modal fade" tabindex="-1" aria-labelledby="pageModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered text-white">
+<div class="modal-dialog modal-dialog-centered text-white">
         <div class="modal-content bg-primary-a border border-white">
+
+            <!-- header form -->
             <div class="modal-header">
-                <h5 class="modal-title">add page</h5>
+                <h5 class="modal-title">add Page</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="insertFormVenue" method="post" action="/pagesOverview" class="d-flex justify-content-between">
+
+            <!-- form  -->
+            <form id="createForm" method="post" action="/pagesOverview" class="d-flex justify-content-between">
                 <div class="modal-body">
+                    <input type="hidden" name="id" id="update-id">
                     <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" class="form-control" id="insert-name-venue" name="name" required>
+                        <label for="url">url</label>
+                        <input type="text" class="form-control" id="update-url" name="url" required>
                     </div>
-                    <div class="form-group">
-                        <label for="location">Location</label>
-                        <input type="text" class="form-control" id="insert-location-venue" name="location" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="seats">Number of Seats</label>
-                        <input type="number" class="form-control" id="insert-seats-venue" name="seats" required>
-                    </div>
-                    <input type="hidden" name="_venueMethod" value="POST">
+                    <input type="hidden" name="_editMethod" value="POST">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary fs-5" data-bs-dismiss="modal">Close</button>
-                    <input type="submit" class="btn btn-primary bg-primary-b border-0 text-center text-decoration-none d-inline-block fs-5 m-2" value="Insert">
+                    <input type="submit" class="btn btn-primary bg-primary-b border-0 text-center text-decoration-none d-inline-block fs-5 m-2" value="Save">
                 </div>
             </form>
         </div>
