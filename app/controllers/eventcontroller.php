@@ -39,6 +39,7 @@ class EventController extends Controller
 
             if ($result) {
                 // return success response
+                $_SESSION['success_message'] = 'The event: ' . $name . ' has been successfully inserted.';
                 header("Location: /event");
             } else {
                 // return failed response
@@ -65,6 +66,7 @@ class EventController extends Controller
 
             if ($result) {
                 // return succes response
+                $_SESSION['success_message'] = 'The event with id: ' . $id . ' has been successfully changed.';
                 header("Location: /event");
             } else {
                 // return failed response
@@ -83,6 +85,7 @@ class EventController extends Controller
             $result = $this->eventService->deleteEvent($id);
             if ($result) {
                 // return success response
+                $_SESSION['success_message'] = 'The event with id: ' . $id . ' has been successfully deleted.';
                 header("Location: /event");
             } else {
                 // return failed response

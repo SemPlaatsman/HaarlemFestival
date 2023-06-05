@@ -15,8 +15,9 @@
             new subPageHeaderButton('OPENING HOURS', '/openinghour'),
             new subPageHeaderButton('RESTAURANTS', '/restaurant'),
             new subPageHeaderButton('RESERVATIONS', '/reservation'),
-            new subPageHeaderButton('ORDERS', '/paymentOveview')
-    
+            new subPageHeaderButton('ORDERS', '/paymentOveview'),
+            new subPageHeaderButton('PAGEOVERVIEW', '/pagesOverview')
+
         );
 
    foreach ($adminpages as  $page){

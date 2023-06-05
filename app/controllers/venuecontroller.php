@@ -35,6 +35,7 @@ class VenueController extends Controller
 
             if ($result) {
                 // redirect to the same page with a success query parameter
+                $_SESSION['success_message'] = 'The venue: ' . $name . ' has been successfully inserted.';
                 header("Location: /venue");
                 exit;
             } else {
@@ -58,6 +59,7 @@ class VenueController extends Controller
 
             if ($result) {
                 // return succes response
+                $_SESSION['success_message'] = 'The venue with id: ' . $id . ' has been successfully changed.';
                 header("Location: /venue");
             } else {
                 // return failed response
@@ -76,6 +78,7 @@ class VenueController extends Controller
             $result = $this->venueService->deleteVenue($id);
             if ($result) {
                 // return success response
+                $_SESSION['success_message'] = 'The venue with id: ' . $id . ' has been successfully deleted.';
                 header("Location: /venue");
             } else {
                 // return failed response
