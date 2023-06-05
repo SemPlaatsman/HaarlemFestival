@@ -137,16 +137,16 @@
         },
         {
             "name": "mollie/mollie-api-php",
-            "version": "v2.54.0",
+            "version": "v2.56.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mollie/mollie-api-php.git",
-                "reference": "c4e3f6c01c73f3c56a4f4819f10fa175743ac895"
+                "reference": "a14c294cfefbe91cc14a59809032fc95ee994645"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mollie/mollie-api-php/zipball/c4e3f6c01c73f3c56a4f4819f10fa175743ac895",
-                "reference": "c4e3f6c01c73f3c56a4f4819f10fa175743ac895",
+                "url": "https://api.github.com/repos/mollie/mollie-api-php/zipball/a14c294cfefbe91cc14a59809032fc95ee994645",
+                "reference": "a14c294cfefbe91cc14a59809032fc95ee994645",
                 "shasum": ""
             },
             "require": {
@@ -223,9 +223,9 @@
             ],
             "support": {
                 "issues": "https://github.com/mollie/mollie-api-php/issues",
-                "source": "https://github.com/mollie/mollie-api-php/tree/v2.54.0"
+                "source": "https://github.com/mollie/mollie-api-php/tree/v2.56.0"
             },
-            "time": "2023-05-04T08:32:44+00:00"
+            "time": "2023-05-30T13:11:03+00:00"
         },
         {
             "name": "mpdf/mpdf",

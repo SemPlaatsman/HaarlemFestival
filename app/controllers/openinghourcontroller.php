@@ -45,6 +45,7 @@ class OpeningHourController extends Controller
 
             if ($result) {
                 // redirect to the same page with a success query parameter
+                $_SESSION['success_message'] = 'The openinghour with restaurant id: ' . $restaurantId . ' has been successfully inserted.';
                 header("Location: /openinghour");
                 exit;
             } else {
@@ -72,6 +73,7 @@ class OpeningHourController extends Controller
 
             if ($result) {
                 // redirect to the same page with a success query parameter
+                $_SESSION['success_message'] = 'The openinghour with id: ' . $id . ' has been successfully changed.';
                 header("Location: /openinghour");
                 exit;
             } else {
@@ -90,6 +92,7 @@ class OpeningHourController extends Controller
             $result = $this->openinghourservice->deleteOpeningHour($id);
             if ($result) {
                 // return success response
+                $_SESSION['success_message'] = 'The openinghour with id: ' . $id . ' has been successfully deleted.';
                 header("Location: /openinghour");
             } else {
                 // return failed response

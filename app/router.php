@@ -54,7 +54,7 @@ class router
 
                 header("Location: /cart");
                 break;
-                
+
             case 'cart/dance/edit':
                 require_once __DIR__ . '/services/cartservice.php';
                 require_once __DIR__ . '/services/guestcartservice.php';
@@ -70,7 +70,7 @@ class router
 
                 header("Location: /cart");
                 break;
-            
+
             case 'cart/history/edit':
                 require_once __DIR__ . '/services/cartservice.php';
                 require_once __DIR__ . '/services/guestcartservice.php';
@@ -107,8 +107,8 @@ class router
                 $controller = new MollieWebhookController();
                 $controller->index();
                 break;
-            
-            
+
+
             case 'yummy':
                 require_once __DIR__ . '/controllers/yummycontroller.php';
                 $controller = new YummyController();
@@ -125,16 +125,18 @@ class router
                     (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
                     $cartService = isset($_SESSION['user']) ? new CartService() : new GuestCartService($_SESSION['guest']->cart);
                     $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    
-                    if ((null !== $restaurantId = $_POST['restaurant_id']) &&
-                    (null !== $nrOfAdults = $_POST['adults']) &&
-                    (null !== $nrOfKids = $_POST['kids']) &&
-                    (null !== $date = $_POST['date']) &&
-                    (null !== $time = $_POST['time'])) {
+
+                    if (
+                        (null !== $restaurantId = $_POST['restaurant_id']) &&
+                        (null !== $nrOfAdults = $_POST['adults']) &&
+                        (null !== $nrOfKids = $_POST['kids']) &&
+                        (null !== $date = $_POST['date']) &&
+                        (null !== $time = $_POST['time'])
+                    ) {
                         $reservation = new Reservation(null, null, 1, "Yummy!", null, 9, "", null, new Restaurant($restaurantId), null, $nrOfAdults, $nrOfKids, ($date . ' ' . $time));
                         $cartService->addToCart($reservation);
                     }
-    
+
                     header("Location: /cart");
                 } catch (Exception $e) {
                     header("Location: /yummy");
@@ -288,12 +290,13 @@ class router
                     echo "404 Not Found";
                 }
                 break;
+
             case 'paymentOveview'   :
                 require_once __DIR__ . '/controllers/paymentoveviewcontroller.php';
                 $controller = new PaymentOveviewController();
                 $controller->index();
                 break;
-            
+
 
             case 'captcha':
                 require_once __DIR__ . '/controllers/captchacontroller.php';
@@ -326,16 +329,16 @@ class router
             case 'qr/scan':
                 require_once __DIR__ . '/controllers/qrscannercontroller.php';
                 $controller = new QrScannerController();
-                if(isset($_POST['ticket'])){
+                if (isset($_POST['ticket'])) {
                     $data = $_POST['ticket'];
                     $controller->checkQRCode($data);
-                }else{
+                } else {
                     $controller->index();
                 }
-                
+
 
                 break;
-    
+
 
             case 'pdf':
                 require __DIR__ . '/controllers/pdfcontroller.php';
@@ -360,6 +363,26 @@ class router
                 }
                 break;
 
+            case 'hardwell':
+                require_once __DIR__ . '/controllers/dancedetailhardwellcontroller.php';
+                $controller = new DanceDetailHardwellController();
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    $controller->updateContent();
+                } else {
+                    $controller->index();
+                }
+                break;
+
+            case 'afrojack':
+                require_once __DIR__ . '/controllers/dancedetailafrojackcontroller.php';
+                $controller = new DanceDetailAfrojackController();
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    $controller->updateContent();
+                } else {
+                    $controller->index();
+                }
+                break;
+
             case 'dance/insertticket':
                 try {
                     require_once __DIR__ . '/models/user.php';
@@ -372,13 +395,15 @@ class router
                     (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
                     $cartService = isset($_SESSION['user']) ? new CartService() : new GuestCartService($_SESSION['guest']->cart);
                     $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    
-                    if ((null !== $performanceId = $_POST['performance_id']) &&
-                    (null !== $nrOfPeople = $_POST['nr_of_people'])) {
+
+                    if (
+                        (null !== $performanceId = $_POST['performance_id']) &&
+                        (null !== $nrOfPeople = $_POST['nr_of_people'])
+                    ) {
                         $ticketDance = new TicketDance(null, null, 2, "DANCE!", null, 9, "", null, new Performance($performanceId, new Artist(), new Venue()), $nrOfPeople);
                         $cartService->addToCart($ticketDance);
                     }
-    
+
                     header("Location: /cart");
                 } catch (Exception $e) {
                     header("Location: /dance");
@@ -394,7 +419,7 @@ class router
                     $controller->index();
                 }
                 break;
-            
+
             case 'history/addticket':
                 try {
                     require_once __DIR__ . '/models/user.php';
@@ -405,13 +430,15 @@ class router
                     (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
                     $cartService = isset($_SESSION['user']) ? new CartService() : new GuestCartService($_SESSION['guest']->cart);
                     $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    
-                    if ((null !== $tourId = $_POST['tour_id']) &&
-                    (null !== $nrOfPeople = $_POST['nr_of_people'])) {
+
+                    if (
+                        (null !== $tourId = $_POST['tour_id']) &&
+                        (null !== $nrOfPeople = $_POST['nr_of_people'])
+                    ) {
                         $ticketHistory = new TicketHistory(null, null, 3, "A Stroll Through History", null, 9, "", null, new Tour($tourId), $nrOfPeople);
                         $cartService->addToCart($ticketHistory);
                     }
-    
+
                     header("Location: /cart");
                 } catch (Exception $e) {
                     header("Location: /history");
@@ -531,6 +558,7 @@ class router
                     $controller->index("HofBakenes");
                 }
                 break;
+
            case 'pagesOverview' :
                 require_once __DIR__ . '/controllers/pageoverviewcontroller.php';
                 $controller = new pageoverviewcontroller();
@@ -547,19 +575,19 @@ class router
                 break;
 
             default:
-           try{
-            $this->GoToCustomPage($uri);
-           }catch(Exception $e){
-                http_response_code(404);
-                echo "404 Not Found $e";
-                
-                break;
-           }
+                try {
+                    $this->GoToCustomPage($uri);
+                } catch (Exception $e) {
+                    http_response_code(404);
+                    echo "404 Not Found $e";
+
+                    break;
+                }
         }
     }
 
 
- 
+
 
     function GoToCustomPage($uri){
         require_once __DIR__ . '/controllers/custompagecontroller.php';
