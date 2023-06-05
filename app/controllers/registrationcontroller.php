@@ -40,14 +40,11 @@ class RegistrationController extends Controller {
                     $this->userService->insertUser($email, $password, $time_created, $isAdmin, $name);
                     
                     $subject = "Registration - visithaarlem.nl";
-                    // Start output buffering
+                    //get view for body
                     ob_start();
-
-                    // Include the view file
                     require_once __DIR__ . '/../views/registration/confirmregistrationemail.php';
-
-                    // Get the output and clean the buffer
                     $body = ob_get_clean();
+                    
                     $this->emailGenerator->setntEmail($body, $subject, $email, $name);
                     $user = $this->loginService->validateUser($email, $password);
                     if ($user != null) {

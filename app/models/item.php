@@ -15,7 +15,12 @@ class Item {
         $this->event_name = $event_name ?? "";
         $this->total_price = $total_price ?? 0;
         $this->VAT = $VAT ?? 0;
-        $this->QR_Code = $QR_Code ?? "";
+        if (empty($QR_Code)) {
+            // Generate a new QR code if it's not already set
+            $this->QR_Code = 'QR-' . uniqid();
+        } else {
+            $this->QR_Code = $QR_Code;
+        }
     }
 
     /**

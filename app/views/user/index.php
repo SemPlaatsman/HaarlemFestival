@@ -156,6 +156,16 @@ include __DIR__ . '/../adminSubheader.php';
     </div>
 </div>
 
+<?php if (isset($_SESSION['success_message'])): ?>
+    <?php include __DIR__ . '/../successModal.php'; ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            showSuccessModalAndRedirect('/user');
+        });
+    </script>
+    <?php unset($_SESSION['success_message']); ?>
+<?php endif; ?>
+
 <?php
 include __DIR__ . '/../footer.php';
 ?>

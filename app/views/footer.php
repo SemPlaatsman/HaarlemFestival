@@ -25,6 +25,7 @@
 <script src="js/main.js"></script>
 <script>CKEDITOR.replace('editor');</script>
 <script src="js/wysiwyg.js"></script>
+<script src="js/successModal.js"></script>
 
 </body>
 
