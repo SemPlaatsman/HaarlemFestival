@@ -45,7 +45,7 @@ class RegistrationController extends Controller {
                     require_once __DIR__ . '/../views/registration/confirmregistrationemail.php';
                     $body = ob_get_clean();
                     
-                    $this->emailGenerator->setntEmail($body, $subject, $email, $name);
+                    $this->emailGenerator->sentEmail($body, $subject, $email, $name);
                     $user = $this->loginService->validateUser($email, $password);
                     if ($user != null) {
                         // start session if it hasn't been started 
