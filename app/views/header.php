@@ -49,8 +49,8 @@
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <!-- this method kinda uggo -->
                   <?php 
-                  require_once __DIR__ . "/../controllers/CustomPageController.php";
-                  $CustomPageController = new CustomPageController();
+                  require_once __DIR__ . "/../controllers/custompagecontroller.php";
+                  $CustomPageController = new custompagecontroller();
                   $pages = $CustomPageController->getAllPages();
                   foreach ($pages as $custompage) { ?>
                     <a class="dropdown-item" href="<?= $custompage->getUrl() ?>"><?= str_replace("/","",$custompage->getUrl()) ?></a>

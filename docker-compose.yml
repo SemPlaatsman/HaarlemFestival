@@ -27,9 +27,6 @@ services:
                 composer install &&
                 composer update &&
                 php-fpm"
-
-                 
-     
         
     mysql:
         image: mariadb:latest
