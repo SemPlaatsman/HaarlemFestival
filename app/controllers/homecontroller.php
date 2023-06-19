@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '/controller.php';
-require_once __DIR__ . '/../handler/contenthandler.php';
 require_once __DIR__ . '/../services/pageservice.php';
 
 class HomeController extends Controller
@@ -25,10 +24,20 @@ class HomeController extends Controller
         }
     }
 
-    public function updateContent()
+    function updateContent()
     {
-        updateContent($this->pageService);
-    }
+        try {
+            $id = intval($_POST['id']);
+            $new_body_markup = htmlspecialchars($_POST['body_markup']);
 
+            $result = $this->pageService->updateContent($id, $new_body_markup);
+            if (!$result) {
+                throw new Exception('Something went wrong while trying to update the content!');
+            }
+            header("Location: " . $_SERVER['HTTP_REFERER']);
+        } catch (Exception $e) {
+            echo 'An error occurred: ' . $e->getMessage();
+        }
+    }
 }
 ?>
