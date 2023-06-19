@@ -320,5 +320,19 @@ class CartRepository extends Repository
             return false;
         }
     }
+
+    public function validateRestaurantOpeningHours(int $restaurantId, string $datetime) {
+        try {
+            $query = $this->connection->prepare("SELECT id FROM opening_hours WHERE restaurant_id=:restaurant_id AND day_of_week=(DAYOFWEEK(:datetime) - 1) 
+                AND opening_time<TIME(:datetime) AND closing_time>TIME(:datetime) LIMIT 1");
+            $query->bindParam(":restaurant_id", $restaurantId, PDO::PARAM_INT);
+            $query->bindParam(":datetime", $datetime, PDO::PARAM_STR);
+
+            $query->execute();
+            return $query->rowCount() > 0;
+        } catch(PDOException $pdoe) {
+            return false;
+        }
+    }
 }
 ?>
