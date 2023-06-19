@@ -134,7 +134,9 @@ class router
                         (null !== $time = $_POST['time'])
                     ) {
                         $reservation = new Reservation(null, null, 1, "Yummy!", null, 9, "", null, new Restaurant($restaurantId), null, $nrOfAdults, $nrOfKids, ($date . ' ' . $time));
-                        $cartService->addToCart($reservation);
+                        if(!$cartService->addToCart($reservation)) {
+                            throw new Exception("Couldn't add reservation to cart!");
+                        }
                     }
 
                     header("Location: /cart");
