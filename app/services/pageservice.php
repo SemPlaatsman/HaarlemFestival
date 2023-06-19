@@ -22,12 +22,21 @@ class PageService
 
     public function getContent(string $url = NULL)
     {
+        try{
         return $this->pageRepository->getContent($url);
+        } catch (PDOException) {
+            throw new Exception("Error getting content");
+        }
     }
 
     public function getAllPages() : array
     {
+        try{
         return $this->pageRepository->getPages();
+        }
+        catch (PDOException) {
+            throw new Exception("Error getting pages");
+        }
     }
     
     

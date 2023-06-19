@@ -23,7 +23,7 @@ class PageRepository extends Repository
             }
             return $pages;
         } catch (PDOException $e) {
-            return false;
+            throw $e;
         }
     }
 
