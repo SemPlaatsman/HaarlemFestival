@@ -15,8 +15,8 @@ class Performance {
         $this->id = $id ?? 0;
         $this->artist = $artist;
         $this->venue = $venue;
-        $this->start_date = isset($start_date) ? DateTime::createFromFormat('Y-m-d H:i:s', $start_date) : new DateTime();
-        $this->end_date = isset($end_date) ? DateTime::createFromFormat('Y-m-d H:i:s', $end_date) : new DateTime();
+        if (isset($start_date)) $this->start_date = (DateTime::createFromFormat('Y-m-d H:i:s', $start_date) == false) ? DateTime::createFromFormat('Y-m-d H:i', $start_date) : DateTime::createFromFormat('Y-m-d H:i:s', $start_date);
+        if (isset($end_date)) $this->end_date = (DateTime::createFromFormat('Y-m-d H:i:s', $end_date) == false) ? DateTime::createFromFormat('Y-m-d H:i', $end_date) : DateTime::createFromFormat('Y-m-d H:i:s', $end_date);
         $this->price = $price ?? 0;
     }
 

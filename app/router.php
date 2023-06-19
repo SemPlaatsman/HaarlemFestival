@@ -134,11 +134,13 @@ class router
                         (null !== $time = $_POST['time'])
                     ) {
                         $reservation = new Reservation(null, null, 1, "Yummy!", null, 9, "", null, new Restaurant($restaurantId), null, $nrOfAdults, $nrOfKids, ($date . ' ' . $time));
-                        $cartService->addToCart($reservation);
+                        if(!$cartService->addToCart($reservation)) {
+                            throw new Exception("Couldn't add reservation to cart!");
+                        }
                     }
 
                     header("Location: /cart");
-                } catch (Exception $e) {
+                } catch (Exception | Error $e) {
                     header("Location: /yummy");
                 }
                 break;
@@ -578,8 +580,9 @@ class router
                 try {
                     $this->GoToCustomPage($uri);
                 } catch (Exception $e) {
-                    http_response_code(404);
-                    echo "404 Not Found $e";
+                    echo "test";
+                http_response_code(404);
+                    echo "404 Not Found";
 
                     break;
                 }
