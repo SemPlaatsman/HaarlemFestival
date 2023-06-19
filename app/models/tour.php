@@ -13,7 +13,7 @@ class Tour {
     public function __construct(int $id = null, string $language = null, string $datetime = null, string $gathering_location = null, int $employee_id = null, string $employee_name = null, int $capacity = null, float $price = null, float $group_price = null) {
         $this->id = $id ?? 0;
         $this->language = $language ?? "";
-        $this->datetime = isset($datetime) ? DateTime::createFromFormat('Y-m-d H:i:s', $datetime) : new DateTime();
+        if (isset($datetime)) $this->datetime = (DateTime::createFromFormat('Y-m-d H:i:s', $datetime) == false) ? DateTime::createFromFormat('Y-m-d H:i', $datetime) : DateTime::createFromFormat('Y-m-d H:i:s', $datetime);
         $this->gathering_location = $gathering_location ?? "";
         $this->employee_id = $employee_id ?? 0;
         $this->employee_name = $employee_name ?? "";

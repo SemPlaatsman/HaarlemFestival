@@ -138,7 +138,7 @@ class router
                     }
 
                     header("Location: /cart");
-                } catch (Exception $e) {
+                } catch (Exception | Error $e) {
                     header("Location: /yummy");
                 }
                 break;
