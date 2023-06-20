@@ -1,7 +1,6 @@
 <?php
 require_once __DIR__ . '/controller.php';
 require_once __DIR__ . '/../services/pageservice.php';
-require_once __DIR__ . '/../handler/contenthandler.php';
 require_once 'imageslidercontroller.php';
 require_once 'breadcrumbcontroller.php';
 
@@ -34,11 +33,6 @@ class HistoryDetailController extends Controller
         }
 
 
-    }
-
-    public function updateContent()
-    {
-        updateContent($this->pageService);
     }
 
 }
