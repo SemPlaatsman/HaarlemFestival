@@ -23,21 +23,5 @@ class HomeController extends Controller
             echo 'Error: ' . $e->getMessage();
         }
     }
-
-    function updateContent()
-    {
-        try {
-            $id = intval($_POST['id']);
-            $new_body_markup = htmlspecialchars($_POST['body_markup']);
-
-            $result = $this->pageService->updateContent($id, $new_body_markup);
-            if (!$result) {
-                throw new Exception('Something went wrong while trying to update the content!');
-            }
-            header("Location: " . $_SERVER['HTTP_REFERER']);
-        } catch (Exception $e) {
-            echo 'An error occurred: ' . $e->getMessage();
-        }
-    }
 }
 ?>

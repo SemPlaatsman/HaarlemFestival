@@ -24,11 +24,7 @@ class router
             case 'home':
                 require_once __DIR__ . '/controllers/homecontroller.php';
                 $controller = new HomeController();
-                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    $controller->updateContent();
-                } else {
-                    $controller->index();
-                }
+                $controller->index();
                 break;
 
             case 'cart':
@@ -522,6 +518,23 @@ class router
                 require_once __DIR__ . '/controllers/pageoverviewcontroller.php';
                 $controller = new pageoverviewcontroller();
                 $controller->index();
+                break;
+
+            case 'pages/update':
+                try {
+                    require_once __DIR__ . '/services/pageservice.php';
+                    $pageService = new PageService();
+                    $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                    if ((null !== $id = $_POST['id']) && (null !== $new_body_markup = $_POST['body_markup'])) {
+                        $result = $pageService->updateContent($id, $new_body_markup);
+                        if (!$result) {
+                            throw new Exception('Something went wrong while trying to update the content!');
+                        }
+                    }
+                    header("Location: " . $_SERVER['HTTP_REFERER'] ?? "/home");
+                } catch (Exception $e) {
+                    header("Location: " . $_SERVER['HTTP_REFERER'] ?? "/home");
+                }
                 break;
 
             case '401':
