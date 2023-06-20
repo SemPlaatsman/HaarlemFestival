@@ -55,20 +55,20 @@ class PageRepository extends Repository
     }
 
 
-    public function insertContent(string $url, string $body_markup)
+    public function insertContent(string $url, string $body_markup, bool $custom=false)
     {
         try {
-            $stmt = $this->connection->prepare("INSERT INTO `pages` (`url`, `body_markup`) VALUES ( :url, :body_markup)");
+            $stmt = $this->connection->prepare("INSERT INTO `pages` (`url`, `body_markup`,`IsCustom`) VALUES ( :url, :body_markup, :custom)");
 
             // Bind the parameters
             $stmt->bindParam(':url', $url, PDO::PARAM_STR);
             $stmt->bindParam(':body_markup', $body_markup, PDO::PARAM_STR);
+            $stmt->bindParam(':custom', $custom, PDO::PARAM_BOOL);
 
             $stmt->execute();
 
-            return true;
         } catch (PDOException $e) {
-            return false;
+            throw new Exception("Page whas not created because:".$e->getMessage());
         }
     }
 
