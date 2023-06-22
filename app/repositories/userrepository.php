@@ -209,4 +209,25 @@ class UserRepository extends Repository
             return false;
         }
     }
+
+    public function getUserForOrder(int $orderId)
+    {
+    try {
+        $stmt = $this->connection->prepare("SELECT u.`id`, u.`email`, u.`time_created`, u.`is_admin`, u.`name` 
+                                           FROM `users` u
+                                           INNER JOIN `orders` o ON u.`id` = o.`user_id`
+                                           WHERE o.`id` = :orderId");
+        $stmt->bindParam(':orderId', $orderId, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($result) {
+            return new User($result['id'], $result['email'], boolval($result['is_admin']), $result['name']);
+        }
+        return null;
+    } catch (PDOException $e) {
+        // Handle the exception
+        return null;
+    }
+}
+
 }

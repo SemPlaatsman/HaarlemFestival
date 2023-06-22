@@ -4,6 +4,7 @@ require_once __DIR__ . '/../services/reservationservice.php';
 require_once __DIR__ . '/../services/ticketdanceservice.php';
 require_once __DIR__ . '/../services/tickethistoryservice.php';
 require_once __DIR__ . '/../services/orderservice.php';
+require_once __DIR__ . '/../services/userservice.php';
 require_once "../lib/phpqrcode/qrlib.php";
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -16,12 +17,14 @@ class EmailGenerator {
     private $reservationService;
     private $ticketDanceService;    
     private $ticketHistoryService;
+    private $userService;
 
     function __construct() {
         $this->reservationService = new ReservationService();
         $this->ticketDanceService = new TicketDanceService();
         $this->ticketHistoryService = new TicketHistoryService();
         $this->orderService = new OrderService();
+        $this->userService = new UserService();
     }
 
 
@@ -55,6 +58,22 @@ class EmailGenerator {
         require_once __DIR__ . '/../views/email/tickets.php';
         $body = ob_get_clean();
         $subject = "your tickets";
+        $mail = $this->generate($body, $subject, $email, $recipient);
+        $mail->addStringAttachment($invoice->Output("S",'invoice.pdf'), 'invoice.pdf', $encoding = 'base64', $type = 'application/pdf');
+        $mail->addStringAttachment($tickets->Output("S",'tickets.pdf'), 'tickets.pdf', $encoding = 'base64', $type = 'application/pdf');
+        $mail->Send();
+    }
+
+    function sentEmailWithTicketsByOrder(int $orderId){
+        $invoice = $this->makeInvoicePdf($orderId);
+        $tickets = $this->makeTicketsPdf($orderId);
+        $user = $this->userService->getUserForOrder($orderId);
+        $email = $user->getEmail();
+        $recipient = $user->getName();
+        ob_start();
+        require_once __DIR__ . '/../views/email/tickets.php';
+        $body = ob_get_clean();
+        $subject = "yours tickets";
         $mail = $this->generate($body, $subject, $email, $recipient);
         $mail->addStringAttachment($invoice->Output("S",'invoice.pdf'), 'invoice.pdf', $encoding = 'base64', $type = 'application/pdf');
         $mail->addStringAttachment($tickets->Output("S",'tickets.pdf'), 'tickets.pdf', $encoding = 'base64', $type = 'application/pdf');
