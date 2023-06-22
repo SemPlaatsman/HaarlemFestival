@@ -22,26 +22,42 @@ class PageService
 
     public function getContent(string $url = NULL)
     {
-        return $this->pageRepository->getContent($url);
+        try {
+            return $this->pageRepository->getContent($url);
+        } catch (PDOException) {
+            throw new Exception("Error getting content");
+        }
     }
 
-    public function getAllPages() : array
+    public function getAllPages(): array
     {
-        return $this->pageRepository->getPages();
+        try {
+            return $this->pageRepository->getPages();
+        } catch (PDOException) {
+            throw new Exception("Error getting pages");
+        }
     }
-    
-    
+
+
     public function addPage(string $url)
     {
         //check if page already exists
-        $pages = $this->pageRepository->getContent($url);
-        if(count($pages) > 0){
-            throw new Exception("Page already exists");
+        try {
+            $pages = $this->pageRepository->getContent($url);
+            var_dump($url, $pages);
+            if (count($pages) > 0 || is_null($pages)) {
+                throw new Exception("Page already exists");
+            }
+            if (!str_contains($url, "/")) {
+                throw new Exception("Invalid url");
+            }
+            return $this->pageRepository->insertContent($url, "", true);
+        } catch (Exception $e) {
+            throw $e;
         }
-        return $this->pageRepository->insertContent($url, "");
     }
 
-    public function updatePage(int $id, string $url) : bool
+    public function updatePage(int $id, string $url): bool
     {
         return $this->pageRepository->updatePage($id, $url);
     }

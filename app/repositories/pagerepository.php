@@ -8,7 +8,7 @@ class PageRepository extends Repository
     {
         try {
             $pages = array();
-            $stmt = $this->connection->prepare("SELECT `id`, `url`, `body_markup`, `container_id` FROM `pages`" . (isset($url) ? " WHERE `url`=:url" : ""));
+            $stmt = $this->connection->prepare("SELECT `id`, `url`, `body_markup` FROM `pages`" . (isset($url) ? " WHERE `url`=:url" : ""));
             if(isset($url)){
                 $stmt->bindParam(":url", $url, PDO::PARAM_STR);
             }
@@ -22,13 +22,11 @@ class PageRepository extends Repository
                 $page->setId($row['id']);
                 $page->setUrl($row['url']);
                 $page->setBody_markup($row['body_markup']);
-                $page->setContainerId($row['container_id'] ?: "");
                 array_push($pages, $page);
             }
-
             return $pages;
         } catch (PDOException $e) {
-            return false;
+            throw $e;
         }
     }
 
@@ -36,7 +34,7 @@ class PageRepository extends Repository
     {
         try {
             $pages = array();
-            $stmt = $this->connection->prepare("SELECT `id`, `url`, `body_markup`, `container_id` FROM `pages` WHERE `url` !='' AND `url` IS NOT NULL");
+            $stmt = $this->connection->prepare("SELECT `id`, `url`, `body_markup` FROM `pages` WHERE `url` !='' AND `IsCustom` = 1");
             $stmt->execute();
             
 
@@ -47,11 +45,9 @@ class PageRepository extends Repository
                 $page->setId($row['id']);
                 $page->setUrl($row['url']);
                 $page->setBody_markup($row['body_markup']);
-                $page->setContainerId($row['container_id'] ?: "");
                 array_push($pages, $page);
 
             }
-
             return $pages;
         } catch (PDOException $e) {
             return $pages;
@@ -59,20 +55,20 @@ class PageRepository extends Repository
     }
 
 
-    public function insertContent(string $url, string $body_markup)
+    public function insertContent(string $url, string $body_markup, bool $custom=false)
     {
         try {
-            $stmt = $this->connection->prepare("INSERT INTO `pages` (`url`, `body_markup`) VALUES ( :url, :body_markup)");
+            $stmt = $this->connection->prepare("INSERT INTO `pages` (`url`, `body_markup`,`IsCustom`) VALUES ( :url, :body_markup, :custom)");
 
             // Bind the parameters
             $stmt->bindParam(':url', $url, PDO::PARAM_STR);
             $stmt->bindParam(':body_markup', $body_markup, PDO::PARAM_STR);
+            $stmt->bindParam(':custom', $custom, PDO::PARAM_BOOL);
 
             $stmt->execute();
 
-            return true;
         } catch (PDOException $e) {
-            return false;
+            throw new Exception("Page whas not created because:".$e->getMessage());
         }
     }
 

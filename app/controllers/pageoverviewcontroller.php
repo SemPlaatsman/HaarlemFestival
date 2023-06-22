@@ -1,15 +1,18 @@
 <?php
 require_once __DIR__ . '/controller.php';
 require_once __DIR__ . '/../services/pageservice.php';
+
 class pageoverviewcontroller extends Controller {
+    public string $error ="";
+
     public function index()
     {
 
         $pageService = new PageService();
-        try{
-             if(isset($_POST['id']) && isset($_POST['url']) && isset($_POST['_editMethod']) ){
+        try {
+            if (isset($_POST['id']) && isset($_POST['url']) && isset($_POST['_editMethod'])) {
 
-                switch($_POST['_editMethod']){
+                switch ($_POST['_editMethod']) {
                     case "PUT":
                         $pageService->updatePage($_POST['id'], $_POST['url']);
                         break;
@@ -21,18 +24,19 @@ class pageoverviewcontroller extends Controller {
                         break;
                 }
             }
-            $_POST= null;
+            $_POST = null;
+
 
         }catch(Exception $e){
-            echo 'Error: ' . $e->getMessage();
+             $this->error ='Error: ' . $e->getMessage();
         }
-          
 
-        
 
-    
 
-        try{
+
+
+
+        try {
             $model = [
                 'pages' => $pageService->getAllPages()
             ];
@@ -45,4 +49,3 @@ class pageoverviewcontroller extends Controller {
 
 }
 ?>
-

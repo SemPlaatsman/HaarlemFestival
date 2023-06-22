@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '/controller.php';
-require_once __DIR__ . '/../handler/contenthandler.php';
 require_once __DIR__ . '/../services/pageservice.php';
 
 class HomeController extends Controller
@@ -24,11 +23,5 @@ class HomeController extends Controller
             echo 'Error: ' . $e->getMessage();
         }
     }
-
-    public function updateContent()
-    {
-        updateContent($this->pageService);
-    }
-
 }
 ?>

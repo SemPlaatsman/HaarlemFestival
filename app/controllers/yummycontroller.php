@@ -2,7 +2,6 @@
 require_once __DIR__ . '/controller.php';
 require_once __DIR__ . '/../services/pageservice.php';
 require_once __DIR__ . '/../services/restaurantservice.php';
-require_once __DIR__ . '/../handler/contenthandler.php';
 
 class YummyController extends Controller
 {
@@ -31,13 +30,9 @@ class YummyController extends Controller
         }
     }
 
-    public function updateContent()
+    public function addTicket()
     {
-        updateContent($this->pageService);
-    }
 
-    public function addTicket(){
-        
     }
 }
 ?>

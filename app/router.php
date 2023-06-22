@@ -24,11 +24,7 @@ class router
             case 'home':
                 require_once __DIR__ . '/controllers/homecontroller.php';
                 $controller = new HomeController();
-                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    $controller->updateContent();
-                } else {
-                    $controller->index();
-                }
+                $controller->index();
                 break;
 
             case 'cart':
@@ -134,11 +130,13 @@ class router
                         (null !== $time = $_POST['time'])
                     ) {
                         $reservation = new Reservation(null, null, 1, "Yummy!", null, 9, "", null, new Restaurant($restaurantId), null, $nrOfAdults, $nrOfKids, ($date . ' ' . $time));
-                        $cartService->addToCart($reservation);
+                        if (!$cartService->addToCart($reservation)) {
+                            throw new Exception("Couldn't add reservation to cart!");
+                        }
                     }
 
                     header("Location: /cart");
-                } catch (Exception $e) {
+                } catch (Exception | Error $e) {
                     header("Location: /yummy");
                 }
                 break;
@@ -291,7 +289,7 @@ class router
                 }
                 break;
 
-            case 'paymentOveview'   :
+            case 'paymentOveview':
                 require_once __DIR__ . '/controllers/paymentoveviewcontroller.php';
                 $controller = new PaymentOveviewController();
                 $controller->index();
@@ -356,31 +354,19 @@ class router
             case 'dance':
                 require_once __DIR__ . '/controllers/dancecontroller.php';
                 $controller = new DanceController();
-                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    $controller->updateContent();
-                } else {
-                    $controller->index();
-                }
+                $controller->index();
                 break;
 
             case 'hardwell':
                 require_once __DIR__ . '/controllers/dancedetailhardwellcontroller.php';
                 $controller = new DanceDetailHardwellController();
-                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    $controller->updateContent();
-                } else {
-                    $controller->index();
-                }
+                $controller->index();
                 break;
 
             case 'afrojack':
                 require_once __DIR__ . '/controllers/dancedetailafrojackcontroller.php';
                 $controller = new DanceDetailAfrojackController();
-                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    $controller->updateContent();
-                } else {
-                    $controller->index();
-                }
+                $controller->index();
                 break;
 
             case 'dance/insertticket':
@@ -413,11 +399,7 @@ class router
             case 'history':
                 require_once __DIR__ . '/controllers/historycontroller.php';
                 $controller = new HistoryController();
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])) {
-                    $controller->updateContent();
-                } else {
-                    $controller->index();
-                }
+                $controller->index();
                 break;
 
             case 'history/addticket':
@@ -480,89 +462,79 @@ class router
             case 'history/StBravo':
                 require_once __DIR__ . '/controllers/historydetailcontroller.php';
                 $controller = new HistoryDetailController();
-                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    $controller->updateContent();
-                } else {
-                    $controller->index("StBravo");
-                }
+                $controller->index("StBravo");
+
                 break;
             case 'history/GroteMarkt':
                 require_once __DIR__ . '/controllers/historydetailcontroller.php';
                 $controller = new HistoryDetailController();
-                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    $controller->updateContent();
-                } else {
-                    $controller->index("GroteMarkt");
-                }
+                $controller->index("GroteMarkt");
+
                 break;
             case 'history/DeHallen':
                 require_once __DIR__ . '/controllers/historydetailcontroller.php';
                 $controller = new HistoryDetailController();
-                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    $controller->updateContent();
-                } else {
-                    $controller->index("DeHallen");
-                }
+                $controller->index("DeHallen");
+
                 break;
             case 'history/ProveniersHof':
                 require_once __DIR__ . '/controllers/historydetailcontroller.php';
                 $controller = new HistoryDetailController();
-                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    $controller->updateContent();
-                } else {
-                    $controller->index("Proveniershof");
-                }
+                $controller->index("Proveniershof");
+
                 break;
             case 'history/JopenKerk':
                 require_once __DIR__ . '/controllers/historydetailcontroller.php';
                 $controller = new HistoryDetailController();
-                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    $controller->updateContent();
-                } else {
-                    $controller->index("Jopenkerk");
-                }
+                $controller->index("Jopenkerk");
+
                 break;
             case 'history/WaalseKerk':
                 require_once __DIR__ . '/controllers/historydetailcontroller.php';
                 $controller = new HistoryDetailController();
-                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    $controller->updateContent();
-                } else {
-                    $controller->index("WaalseKerk");
-                }
+                $controller->index("WaalseKerk");
+
                 break;
             case 'history/MolenAdriaan':
                 require_once __DIR__ . '/controllers/historydetailcontroller.php';
                 $controller = new HistoryDetailController();
-                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    $controller->updateContent();
-                } else {
-                    $controller->index("MolenAdriaan");
-                }
+                $controller->index("MolenAdriaan");
+
                 break;
             case 'history/AmsterdamPoort':
                 require_once __DIR__ . '/controllers/historydetailcontroller.php';
                 $controller = new HistoryDetailController();
-                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    $controller->updateContent();
-                } else {
-                    $controller->index("AmsterdamPoort");
-                }
+                $controller->index("AmsterdamPoort");
+
                 break;
             case 'history/HofBakenes':
                 require_once __DIR__ . '/controllers/historydetailcontroller.php';
                 $controller = new HistoryDetailController();
-                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    $controller->updateContent();
-                } else {
-                    $controller->index("HofBakenes");
-                }
+                $controller->index("HofBakenes");
+
                 break;
 
-           case 'pagesOverview' :
+            case 'pagesOverview':
                 require_once __DIR__ . '/controllers/pageoverviewcontroller.php';
                 $controller = new pageoverviewcontroller();
                 $controller->index();
+                break;
+
+            case 'pages/update':
+                try {
+                    require_once __DIR__ . '/services/pageservice.php';
+                    $pageService = new PageService();
+                    $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                    if ((null !== $id = $_POST['id']) && (null !== $new_body_markup = $_POST['body_markup'])) {
+                        $result = $pageService->updateContent($id, $new_body_markup);
+                        if (!$result) {
+                            throw new Exception('Something went wrong while trying to update the content!');
+                        }
+                    }
+                    header("Location: " . $_SERVER['HTTP_REFERER'] ?? "/home");
+                } catch (Exception $e) {
+                    header("Location: " . $_SERVER['HTTP_REFERER'] ?? "/home");
+                }
                 break;
 
             case '401':
@@ -586,8 +558,9 @@ class router
                 try {
                     $this->GoToCustomPage($uri);
                 } catch (Exception $e) {
+                    echo "test";
                     http_response_code(404);
-                    echo "404 Not Found $e";
+                    echo "404 Not Found";
 
                     break;
                 }
@@ -597,14 +570,14 @@ class router
 
 
 
-    function GoToCustomPage($uri){
+    function GoToCustomPage($uri)
+    {
         require_once __DIR__ . '/controllers/custompagecontroller.php';
 
-        try{
-        $controller = new custompagecontroller();
-        $controller->index("/$uri");
-        }
-        catch(Exception $e){
+        try {
+            $controller = new custompagecontroller();
+            $controller->index("/$uri");
+        } catch (Exception $e) {
             throw new Exception($e);
         }
     }
