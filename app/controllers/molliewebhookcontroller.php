@@ -29,7 +29,7 @@ class MollieWebhookController {
                     throw new \Mollie\Api\Exceptions\ApiException('Something went wrong while completing the order!');
                 }
                 else{
-                    $this->emailGenerator->sentEmailWithTickets(unserialize($_SESSION['user'])->getEmail(), unserialize($_SESSION['user'])->getName(), $orderId);
+                    $emailGenerator->sentEmailWithTicketsByOrder($orderId);
                 }
             } else {
                 throw new \Mollie\Api\Exceptions\ApiException('Unpaid payment!');
