@@ -69,6 +69,7 @@ class RegistrationController extends Controller {
                         (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
                         $_SESSION['user'] = serialize($user);
                         $this->saveCartForUser();
+                        session_destroy();
                         // redirect to dashboard
                         header('Location: home');
                         exit();
