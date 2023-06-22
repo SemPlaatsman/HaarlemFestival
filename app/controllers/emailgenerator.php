@@ -64,7 +64,7 @@ class EmailGenerator {
     function makeInvoicePdf(int $orderId)
     {
         $reservations = $this->reservationService->getReservationsForOrder($orderId);
-        $ticketsDance = $this->ticketDanceService->getAllTicketsDance($orderId);
+        $ticketsDance = $this->ticketDanceService->getTicketDanceForOrder($orderId);
         $ticketsHistory = $this->ticketHistoryService->getTicketHistoryForOrder($orderId);
         $pdf = new Fpdf();
         $pdf->AddPage();
@@ -151,7 +151,7 @@ class EmailGenerator {
     function makeTicketsPdf(int $orderId)
     {
         $reservations = $this->reservationService->getReservationsForOrder($orderId);
-        $ticketsDance = $this->ticketDanceService->getAllTicketsDance($orderId);
+        $ticketsDance = $this->ticketDanceService->getTicketDanceForOrder($orderId);
         $ticketsHistory = $this->ticketHistoryService->getTicketHistoryForOrder($orderId);
         $qrCodeCounter = 0;
         $pdf = new Fpdf();
