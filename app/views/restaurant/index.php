@@ -104,17 +104,17 @@ include __DIR__ . '/../adminSubheader.php';
                     </div>
                     <div class="form-group">
                         <label for="adult_price">Adult price</label>
-                        <input type="number" class="form-control" id="insert-restaurant-adult-price" name="adult_price"
+                        <input type="text" class="form-control" id="insert-restaurant-adult-price" name="adult_price"
                             required>
                     </div>
                     <div class="form-group">
                         <label for="kids_price">Kids price</label>
-                        <input type="number" class="form-control" id="insert-restaurant-kids-price" name="kids_price"
+                        <input type="text" class="form-control" id="insert-restaurant-kids-price" name="kids_price"
                             required>
                     </div>
                     <div class="form-group">
                         <label for="reservation_fee">Reservation fee</label>
-                        <input type="number" class="form-control" id="insert-restaurant-reservation-fee"
+                        <input type="text" class="form-control" id="insert-restaurant-reservation-fee"
                             name="reservation_fee" required>
                     </div>
                     <input type="hidden" name="_restaurantMethod" value="CREATE">
@@ -157,17 +157,17 @@ include __DIR__ . '/../adminSubheader.php';
                     </div>
                     <div class="form-group">
                         <label for="adult_price">Adult price</label>
-                        <input type="number" class="form-control" id="update-restaurant-adult-price" name="adult_price"
+                        <input type="text" class="form-control" id="update-restaurant-adult-price" name="adult_price"
                             required>
                     </div>
                     <div class="form-group">
                         <label for="kids_price">Kids price</label>
-                        <input type="number" class="form-control" id="update-restaurant-kids-price" name="kids_price"
+                        <input type="text" class="form-control" id="update-restaurant-kids-price" name="kids_price"
                             required>
                     </div>
                     <div class="form-group">
                         <label for="reservation_fee">Reservation fee</label>
-                        <input type="number" class="form-control" id="update-restaurant-reservation-fee"
+                        <input type="text" class="form-control" id="update-restaurant-reservation-fee"
                             name="reservation_fee" required>
                     </div>
                     <input type="hidden" name="_restaurantMethod" value="PUT">

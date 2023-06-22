@@ -128,7 +128,7 @@ class GuestCartService {
     private function fillItem(Item &$item) {
         switch ($item) {
             case $item instanceof Reservation:
-                if ($item->getNrOfAdults() < 1 || $item->getNrOfKids() < 0 || $item->getDatetime() < new DateTime()) {
+                if ($item->getNrOfAdults() < 1 || $item->getNrOfKids() < 0 || $item->getDatetime() < new DateTime() || !$this->cartRepository->validateRestaurantOpeningHours($item->getRestaurant()->getId(), date_format($item->getDatetime(), 'Y-m-d H:i:s'))) {
                     throw new Exception("Invalid input!");
                 }
                 $item->setId((count($this->cart['reservations']) <= 0) ? 1 : (end($this->cart['reservations'])->getId() + 1));

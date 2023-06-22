@@ -6,7 +6,6 @@ class Page
     private string $url;
     private string $body_markup;
 
-    private string $containerId;
 
     /**
      * @return int
@@ -70,23 +69,7 @@ class Page
     //might use this to get  the container of the body_markup
     // instead of using the id of the page
 
-    /**
-     * get the id of the container that the markup belongs too
-     * @return string
-     */
-    public function getContainerId(): string
-    {
-        return $this->containerId;
-    }
 
-    /**
-     * set the id of the container that the markup belongs too
-     * @param string  $containerId
-     */
-    public function setContainerId(String $containerId)
-    {
-        $this->containerId =  $containerId;
-    }
 
 }
 

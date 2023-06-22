@@ -18,7 +18,7 @@ class Reservation extends Item {
         $this->final_check = $final_check ?? 0;
         $this->nr_of_adults = $nr_of_adults ?? 0;
         $this->nr_of_kids = $nr_of_kids ?? 0;
-        $this->datetime = DateTime::createFromFormat('Y-m-d H:i:s', $datetime); 
+        $this->datetime = (DateTime::createFromFormat('Y-m-d H:i:s', $datetime) == false) ? DateTime::createFromFormat('Y-m-d H:i', $datetime) : DateTime::createFromFormat('Y-m-d H:i:s', $datetime);
     }
 
     /**
@@ -169,7 +169,7 @@ class Reservation extends Item {
      */ 
     public function setDatetime($datetime) : self
     {
-        $this->datetime = DateTime::createFromFormat('Y-m-d H:i:s', $datetime);
+        $this->datetime = (DateTime::createFromFormat('Y-m-d H:i:s', $datetime) == false) ? DateTime::createFromFormat('Y-m-d H:i', $datetime) : DateTime::createFromFormat('Y-m-d H:i:s', $datetime);;
 
         return $this;
     }

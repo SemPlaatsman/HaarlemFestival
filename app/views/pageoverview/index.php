@@ -8,7 +8,7 @@ include __DIR__ . '/../adminSubheader.php';
         <table class="table table-bordered w-100 bg-primary-b mt-3 mb-3 border border-white text-tetiare-a">
             <thead class="text-center" id="SelectableColumns">
                 <tr>
-                    <th colspan="7" class="fs-3">ORDERS</th>
+                    <th colspan="7" class="fs-3">PAGES</th>
                 </tr>
                 <tr>
                     <th class="col-1" id="IdColumn">
@@ -77,10 +77,12 @@ include __DIR__ . '/../adminSubheader.php';
                 <?php
                 endforeach;
                 ?>
+                <!-- insert button -->
                 <td colspan="7" class="text-center">
                     <input type="submit" data-bs-toggle="modal" data-bs-target="#insertModal"
                         class="btn btn-primary insert-button-venue bg-primary-a text-white border-0 text-center text-decoration-none d-inline-block fs-5 m-2 w-50"
                         value="INSERT">
+                        <div class="text-danger"><?=$this->error?></div>
                 </td>
             </tbody>
         </table>
