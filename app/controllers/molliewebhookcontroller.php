@@ -20,17 +20,15 @@ class MollieWebhookController {
             require_once __DIR__ . '/../vendor/autoload.php';
             $mollie = new \Mollie\Api\MollieApiClient();
             $mollie->setApiKey($mollieAPIKey);
-        
+            
             $payment = $mollie->payments->get($_POST["id"]);
             $orderId = $payment->metadata->orderId;
             
-            if ($payment->isPaid() && ! $payment->hasRefunds() && ! $payment->hasChargebacks()) {
+            if ($payment->isPaid() && !$payment->hasRefunds() && !$payment->hasChargebacks()) {
                 if (!$this->orderService->completeOrder($orderId)) {
                     throw new \Mollie\Api\Exceptions\ApiException('Something went wrong while completing the order!');
                 }
-                else{
-                    $this->emailGenerator->sentEmailWithTickets(unserialize($_SESSION['user'])->getEmail(), unserialize($_SESSION['user'])->getName(), $orderId);
-                }
+                $this->emailGenerator->sentEmailWithTickets(unserialize($_SESSION['user'])->getEmail(), unserialize($_SESSION['user'])->getName(), $orderId);
             } else {
                 throw new \Mollie\Api\Exceptions\ApiException('Unpaid payment!');
             }

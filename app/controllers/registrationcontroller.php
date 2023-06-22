@@ -2,27 +2,44 @@
 require_once __DIR__ . '/controller.php';
 require_once __DIR__ . '/../services/userservice.php';
 require_once __DIR__ . '/../services/loginservice.php';
+require_once __DIR__ . '/../services/cartservice.php';
 require_once __DIR__ . '/emailgenerator.php';
 
 class RegistrationController extends Controller {
     private $userService;
     private $emailGenerator;
     private $loginService;
+    private $cartService;
     public $inputError;
 
     function __construct() {
         $this->userService = new UserService();
         $this->loginService = new LoginService();
         $this->emailGenerator = new EmailGenerator();
+        $this->cartService = new CartService();
         $this->inputError = "";
     }
 
     public function index() {
+        
         if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST)) {
             
             $this->register();
         }
         $this->displayView();
+    }
+
+    public function saveCartForUser() {
+        $cart = unserialize($_SESSION['guest']->cart);
+        foreach ($cart['reservations'] as $ticketDance) {
+            $this->cartService->addToCart($ticketDance);
+        }
+        foreach ($cart['ticketsDance'] as $ticketDance) {
+            $this->cartService->addToCart($ticketDance);
+        }
+        foreach ($cart['ticketsHistory'] as $ticketDance) {
+            $this->cartService->addToCart($ticketDance);
+        }
     }
 
     public function register() {
@@ -51,6 +68,8 @@ class RegistrationController extends Controller {
                         // start session if it hasn't been started 
                         (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
                         $_SESSION['user'] = serialize($user);
+                        $this->saveCartForUser();
+                        session_destroy();
                         // redirect to dashboard
                         header('Location: home');
                         exit();

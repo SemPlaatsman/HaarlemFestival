@@ -44,7 +44,7 @@ class PageService
         //check if page already exists
         try {
             $pages = $this->pageRepository->getContent($url);
-            var_dump($url, $pages);
+            // var_dump($url, $pages);
             if (count($pages) > 0 || is_null($pages)) {
                 throw new Exception("Page already exists");
             }
@@ -65,6 +65,5 @@ class PageService
     {
         return $this->pageRepository->deletePage($url);
     }
-
 }
 ?>
