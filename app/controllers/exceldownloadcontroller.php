@@ -83,9 +83,9 @@ class excelDownloadController
 
             array_push($costs, $fields);
         }
-
         array_unshift($costs, $header);
         array_push($costs, array('Total Price', '', '', $totalPrice . ' €', ''));
+
         $xlsx = SimpleXLSXGen::fromArray($costs);
         $xlsx->downloadAs('orderHistory.xlsx');
     }
