@@ -50,6 +50,10 @@ class EmailGenerator {
     function sentEmailWithTickets(string $email, string $recipient, int $orderId){
         $invoice = $this->makeInvoicePdf($orderId);
         $tickets = $this->makeTicketsPdf($orderId);
+        ob_start();
+        require_once __DIR__ . '/../views/email/tickets.php';
+        $body = ob_get_clean();
+        $subject = "yours tickets";
         $mail = $this->generate($body, $subject, $email, $recipient);
         $mail->addStringAttachment($invoice->Output("S",'invoice.pdf'), 'invoice.pdf', $encoding = 'base64', $type = 'application/pdf');
         $mail->addStringAttachment($tickets->Output("S",'tickets.pdf'), 'tickets.pdf', $encoding = 'base64', $type = 'application/pdf');
