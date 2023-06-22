@@ -32,18 +32,7 @@ class RestaurantService
         }
     }
 
-    /*function createRestaurant(Restaurant $Restaurant): Restaurant
-    {
-    try {
-    $restaurantId = $this->repository->insert($Restaurant->getName(), $Restaurant->getSeats(), $Restaurant->getLocation(), $Restaurant->getAdultPrice(), $Restaurant->getKidsPrice(), $Restaurant->getReservationFee());
-    $Restaurant->id = $restaurantId;
-    return $Restaurant;
-    } catch (Exception $e) {
-    throw new Exception('Failed to create restaurant: ' . $e->getMessage());
-    }
-    }*/
-
-    function createRestaurant(string $name, int $seats, string $location, int $adultPrice, int $kidsPrice, int $reservationFee)
+    function createRestaurant(string $name, int $seats, string $location, float $adultPrice, float $kidsPrice, float $reservationFee)
     {
         try {
             return $this->repository->insert($name, $seats, $location, $adultPrice, $kidsPrice, $reservationFee);
@@ -52,17 +41,7 @@ class RestaurantService
         }
     }
 
-    /*function updateRestaurant(int $id, Restaurant $updatedRestaurant): Restaurant
-    {
-    try {
-    $this->repository->update($id, $updatedRestaurant->getName(), $updatedRestaurant->getSeats(), $updatedRestaurant->getLocation(), $updatedRestaurant->getAdultPrice(), $updatedRestaurant->getKidsPrice(), $updatedRestaurant->getReservationFee());
-    return $this->repository->get($id);
-    } catch (Exception $e) {
-    throw new ServiceException('Failed to update restaurant: ' . $e->getMessage());
-    }
-    }*/
-
-    function updateRestaurant(int $id, string $name, int $seats, string $location, int $adultPrice, int $kidsPrice, int $reservationFee)
+    function updateRestaurant(int $id, string $name, int $seats, string $location, float $adultPrice, float $kidsPrice, float $reservationFee)
     {
         try {
             return $this->repository->update($id, $name, $seats, $location, $adultPrice, $kidsPrice, $reservationFee);

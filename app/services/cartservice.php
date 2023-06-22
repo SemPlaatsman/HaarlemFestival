@@ -97,7 +97,7 @@ class CartService {
             $userId = unserialize($_SESSION['user'])->getId();
             switch ($item) {
                 case $item instanceof Reservation:
-                    if ($item->getNrOfAdults() < 1 || $item->getNrOfKids() < 0 || $item->getDatetime() < new DateTime()) {
+                    if ($item->getNrOfAdults() < 1 || $item->getNrOfKids() < 0 || $item->getDatetime() < new DateTime() || !$this->cartRepository->validateRestaurantOpeningHours($item->getRestaurant()->getId(), date_format($item->getDatetime(), 'Y-m-d H:i:s'))) {
                         throw new Exception("Invalid input!");
                     }
                     $item->setRestaurant($this->getRestaurant($item->getRestaurant()->getId()));

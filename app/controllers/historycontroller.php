@@ -10,8 +10,6 @@ require_once __DIR__ . '/../services/itemservice.php';
 require_once __DIR__ . '/../services/pageservice.php';
 require_once __DIR__ . '/../services/tickethistoryservice.php';
 
-require_once __DIR__ . '/../handler/contenthandler.php';
-
 require_once 'imageslidercontroller.php';
 require_once 'breadcrumbcontroller.php';
 
@@ -42,7 +40,7 @@ class HistoryController extends Controller
             }
             $model += ['pages' => $pages];
             if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST)) {
-                if (!empty($_POST['family_tickets']) && empty($_POST['single_tickets']) && isset($_POST['family_tickets']) && isset($_POST['single_tickets'])){
+                if (!empty($_POST['family_tickets']) && empty($_POST['single_tickets']) && isset($_POST['family_tickets']) && isset($_POST['single_tickets'])) {
                     // $this->insertItem();
                 }
             }
@@ -70,7 +68,7 @@ class HistoryController extends Controller
 
         foreach ($tours as $tour) {
 
-           array_push($data,$tour->toObject());
+            array_push($data, $tour->toObject());
         }
 
         echo json_encode($data);
@@ -85,15 +83,11 @@ class HistoryController extends Controller
         }
     }
 
-    public function updateContent()
+    public function addTicket()
     {
-        updateContent($this->pageService);
-    }
-
-    public function addTicket(){
         $singleTickets = htmlspecialchars($_POST['single_tickets']);
         $familyTickets = htmlspecialchars($_POST['family_tickets']);
-        if($singleTickets >= 0 || $familyTickets >= 0) {
+        if ($singleTickets >= 0 || $familyTickets >= 0) {
 
         }
         if (isset($_SESSION['user'])) {
