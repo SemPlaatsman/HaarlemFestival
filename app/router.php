@@ -546,6 +546,14 @@ class router
                 echo "403 Forbidden";
                 break;
 
+            case 'senttickets':
+                require_once __DIR__ . '/controllers/emailgenerator.php';
+                require_once __DIR__ . '/models/user.php';
+                $emailGenerator = new EmailGenerator();
+                $orderId = 2;
+                $emailGenerator->sentEmailWithTicketsByOrder($orderId);
+                break;
+
             default:
                 try {
                     $this->GoToCustomPage($uri);

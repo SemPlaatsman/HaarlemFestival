@@ -4,6 +4,7 @@ require_once __DIR__ . '/../services/reservationservice.php';
 require_once __DIR__ . '/../services/ticketdanceservice.php';
 require_once __DIR__ . '/../services/tickethistoryservice.php';
 require_once __DIR__ . '/../services/orderservice.php';
+require_once __DIR__ . '/../services/userservice.php';
 require_once "../lib/phpqrcode/qrlib.php";
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -16,22 +17,25 @@ class EmailGenerator {
     private $reservationService;
     private $ticketDanceService;    
     private $ticketHistoryService;
+    private $userService;
 
     function __construct() {
         $this->reservationService = new ReservationService();
         $this->ticketDanceService = new TicketDanceService();
         $this->ticketHistoryService = new TicketHistoryService();
         $this->orderService = new OrderService();
+        $this->userService = new UserService();
     }
 
 
     function generate(string $body, string $subject, string $email, string $recipient){
+        include_once __DIR__ . '/../config/dbconfig.php';
         $mail = new PHPMailer();
         $mail->isSMTP();                                             
         $mail->Host       = 'smtp-relay.sendinblue.com';                        
         $mail->SMTPAuth   = true;                                   
         $mail->Username   = 'janjaapvanlaar@gmail.com';                   
-        $mail->Password   = 'V5JKvcpqUnz0GX6W';                     
+        $mail->Password   = $emailPassword;
         $mail->SMTPSecure = 'tls';                                  
         $mail->Port       = 587;                                    
         $mail->setFrom('Haarlem@festival.nl', 'Haarlem festival');
@@ -50,6 +54,26 @@ class EmailGenerator {
     function sentEmailWithTickets(string $email, string $recipient, int $orderId){
         $invoice = $this->makeInvoicePdf($orderId);
         $tickets = $this->makeTicketsPdf($orderId);
+        ob_start();
+        require_once __DIR__ . '/../views/email/tickets.php';
+        $body = ob_get_clean();
+        $subject = "your tickets";
+        $mail = $this->generate($body, $subject, $email, $recipient);
+        $mail->addStringAttachment($invoice->Output("S",'invoice.pdf'), 'invoice.pdf', $encoding = 'base64', $type = 'application/pdf');
+        $mail->addStringAttachment($tickets->Output("S",'tickets.pdf'), 'tickets.pdf', $encoding = 'base64', $type = 'application/pdf');
+        $mail->Send();
+    }
+
+    function sentEmailWithTicketsByOrder(int $orderId){
+        $invoice = $this->makeInvoicePdf($orderId);
+        $tickets = $this->makeTicketsPdf($orderId);
+        $user = $this->userService->getUserForOrder($orderId);
+        $email = $user->getEmail();
+        $recipient = $user->getName();
+        ob_start();
+        require_once __DIR__ . '/../views/email/tickets.php';
+        $body = ob_get_clean();
+        $subject = "yours tickets";
         $mail = $this->generate($body, $subject, $email, $recipient);
         $mail->addStringAttachment($invoice->Output("S",'invoice.pdf'), 'invoice.pdf', $encoding = 'base64', $type = 'application/pdf');
         $mail->addStringAttachment($tickets->Output("S",'tickets.pdf'), 'tickets.pdf', $encoding = 'base64', $type = 'application/pdf');
@@ -60,7 +84,7 @@ class EmailGenerator {
     function makeInvoicePdf(int $orderId)
     {
         $reservations = $this->reservationService->getReservationsForOrder($orderId);
-        $ticketsDance = $this->ticketDanceService->getAllTicketsDance($orderId);
+        $ticketsDance = $this->ticketDanceService->getTicketDanceForOrder($orderId);
         $ticketsHistory = $this->ticketHistoryService->getTicketHistoryForOrder($orderId);
         $pdf = new Fpdf();
         $pdf->AddPage();
@@ -147,7 +171,7 @@ class EmailGenerator {
     function makeTicketsPdf(int $orderId)
     {
         $reservations = $this->reservationService->getReservationsForOrder($orderId);
-        $ticketsDance = $this->ticketDanceService->getAllTicketsDance($orderId);
+        $ticketsDance = $this->ticketDanceService->getTicketDanceForOrder($orderId);
         $ticketsHistory = $this->ticketHistoryService->getTicketHistoryForOrder($orderId);
         $qrCodeCounter = 0;
         $pdf = new Fpdf();

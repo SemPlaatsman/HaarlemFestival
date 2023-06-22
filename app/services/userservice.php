@@ -53,6 +53,11 @@ class UserService
     {
         return $this->userRepository->deleteKey($email);
     }
+
+    public function getUserForOrder(int $orderId)
+    {
+        return $this->userRepository->getUserForOrder($orderId);
+    }
 }
 
 ?>
