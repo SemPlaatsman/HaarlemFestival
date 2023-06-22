@@ -119,7 +119,7 @@ include __DIR__ . '/../adminSubheader.php';
                     </div>
                     <input type="hidden" name="_restaurantMethod" value="CREATE">
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer border-0">
                     <button type="button" class="btn btn-secondary fs-5" data-bs-dismiss="modal">Close</button>
                     <input type="submit"
                         class="btn btn-primary bg-primary-b border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
@@ -172,7 +172,7 @@ include __DIR__ . '/../adminSubheader.php';
                     </div>
                     <input type="hidden" name="_restaurantMethod" value="PUT">
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer border-0">
                     <button type="button" class="btn btn-secondary fs-5" data-bs-dismiss="modal">Close</button>
                     <input type="submit"
                         class="btn btn-primary bg-primary-b border-0 text-center text-decoration-none d-inline-block fs-5 m-2"
