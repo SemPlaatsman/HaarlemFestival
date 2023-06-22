@@ -2,7 +2,7 @@
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <form action="/home" method="POST">
+            <form action="/pages/update" method="POST">
                 <div class="modal-header">
                     <h5 class="modal-title" id="editor-modal-label">WYSIWYG Editor</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">

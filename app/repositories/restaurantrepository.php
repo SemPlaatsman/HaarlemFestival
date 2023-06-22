@@ -6,21 +6,21 @@ require_once __DIR__ . '/../models/restaurant.php';
 class RestaurantRepository extends Repository
 {
 
-    public function insert(string $name, int $seats, string $location, int $adultPrice, int $kidsPrice, int $reservation_fee): int
+    public function insert(string $name, int $seats, string $location, float $adultPrice, float $kidsPrice, float $reservation_fee): float
     {
         $stmnt = $this->connection->prepare("INSERT INTO `restaurant`(`name`, `seats`, `location`, `adult_price`, `kids_price`, `reservation_fee`) VALUES (:name,:seats,:location,:aPrice,:kPrice,:rFee);");
         $stmnt->bindParam(':name', $name, PDO::PARAM_STR);
         $stmnt->bindParam(':seats', $seats, PDO::PARAM_INT);
         $stmnt->bindParam(':location', $location, PDO::PARAM_STR);
-        $stmnt->bindParam(':aPrice', $adultPrice, PDO::PARAM_INT);
-        $stmnt->bindParam(':kPrice', $kidsPrice, PDO::PARAM_INT);
-        $stmnt->bindParam(':rFee', $reservation_fee, PDO::PARAM_INT);
+        $stmnt->bindParam(':aPrice', $adultPrice, PDO::PARAM_STR);
+        $stmnt->bindParam(':kPrice', $kidsPrice, PDO::PARAM_STR);
+        $stmnt->bindParam(':rFee', $reservation_fee, PDO::PARAM_STR);
 
         $stmnt->execute();
         return $this->connection->lastInsertId();
     }
 
-    public function update(int $id, string $name, int $seats, string $location, int $adultPrice, int $kidsPrice, int $reservation_fee): int
+    public function update(int $id, string $name, int $seats, string $location, float $adultPrice, float $kidsPrice, float $reservation_fee): float
     {
         try {
             $stmnt = $this->connection->prepare("UPDATE `restaurant` SET `name`=:name,`seats`=:seats,`location`=:location,`adult_price`=:aPrice,`kids_price`=:kPrice,`reservation_fee`=:rFee WHERE id = :id;");
@@ -28,9 +28,9 @@ class RestaurantRepository extends Repository
             $stmnt->bindParam(':name', $name, PDO::PARAM_STR);
             $stmnt->bindParam(':seats', $seats, PDO::PARAM_INT);
             $stmnt->bindParam(':location', $location, PDO::PARAM_STR);
-            $stmnt->bindParam(':aPrice', $adultPrice, PDO::PARAM_INT);
-            $stmnt->bindParam(':kPrice', $kidsPrice, PDO::PARAM_INT);
-            $stmnt->bindParam(':rFee', $reservation_fee, PDO::PARAM_INT);
+            $stmnt->bindParam(':aPrice', $adultPrice, PDO::PARAM_STR);
+            $stmnt->bindParam(':kPrice', $kidsPrice, PDO::PARAM_STR);
+            $stmnt->bindParam(':rFee', $reservation_fee, PDO::PARAM_STR);
             $stmnt->execute();
             //return $this->connection->lastInsertId();
             return true;

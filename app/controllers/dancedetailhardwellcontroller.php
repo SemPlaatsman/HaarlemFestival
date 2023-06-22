@@ -1,8 +1,6 @@
 <?php
 require_once __DIR__ . '/controller.php';
 require_once __DIR__ . '/../services/pageservice.php';
-require_once __DIR__ . '/../services/performanceservice.php';
-require_once __DIR__ . '/../handler/contenthandler.php';
 
 class DanceDetailHardwellController extends Controller
 {
@@ -29,11 +27,5 @@ class DanceDetailHardwellController extends Controller
         } catch (Exception $e) {
             echo 'Error: ' . $e->getMessage();
         }
-    }
-
-
-    public function updateContent()
-    {
-        updateContent($this->pageService);
     }
 }
