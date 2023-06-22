@@ -2,7 +2,7 @@
 class validateController{
 
         function Hcaptcha(){
-            require_once __DIR__ . '/../dbconfig.php';
+            require_once __DIR__ . '/../config/dbconfig.php';
 
             $data = array(
                 'secret' => $hCaptchaSecret,
@@ -26,7 +26,7 @@ class validateController{
 
 
         function Gcaptcha(){
-            require_once __DIR__ . '/../dbconfig.php';
+            require_once __DIR__ . '/../config/dbconfig.php';
 
 
             $data = array(

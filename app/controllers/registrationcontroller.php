@@ -83,7 +83,7 @@ class RegistrationController extends Controller {
     }
 
     function Hcaptcha(){
-        include __DIR__ . '/../dbconfig.php';
+        include __DIR__ . '/../config/dbconfig.php';
         $data = array(
             'secret' => $hCaptchaSecret,
             'response' => $_POST['h-captcha-response']
