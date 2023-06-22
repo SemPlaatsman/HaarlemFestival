@@ -74,11 +74,13 @@ class CartController extends Controller {
                     "value" => number_format(($model['paymentTotals']['reservations'] ?? 0) + ($model['paymentTotals']['ticketsDance'] ?? 0) + ($model['paymentTotals']['ticketsHistory'] ?? 0), 2)
                 ],
                 "description" => $description,
-                "cancelUrl" => "https://9610-2a02-a464-38e2-1-9905-e724-fc6b-1d60.ngrok-free.app/cart",
-                "redirectUrl" => "https://9610-2a02-a464-38e2-1-9905-e724-fc6b-1d60.ngrok-free.app/cart",
-                "webhookUrl" => "https://9610-2a02-a464-38e2-1-9905-e724-fc6b-1d60.ngrok-free.app/molliewebhook",
+                "cancelUrl" => "https://2437-2a02-a464-38e2-1-9905-e724-fc6b-1d60.ngrok-free.app/cart",
+                "redirectUrl" => "https://2437-2a02-a464-38e2-1-9905-e724-fc6b-1d60.ngrok-free.app/cart",
+                "webhookUrl" => "https://2437-2a02-a464-38e2-1-9905-e724-fc6b-1d60.ngrok-free.app/molliewebhook",
                 "metadata" => [
-                    "orderId" => $orderId
+                    "orderId" => $orderId,
+                    "email" => unserialize($_SESSION['user'])->getEmail(),
+                    "name" => unserialize($_SESSION['user'])->getName()
                 ],
 	            "method" => \Mollie\Api\Types\PaymentMethod::IDEAL
             ]);
