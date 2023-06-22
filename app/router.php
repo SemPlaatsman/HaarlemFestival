@@ -550,7 +550,7 @@ class router
                 require_once __DIR__ . '/controllers/emailgenerator.php';
                 require_once __DIR__ . '/models/user.php';
                 $emailGenerator = new EmailGenerator();
-                $orderId = 3;
+                $orderId = 2;
                 $emailGenerator->sentEmailWithTickets(unserialize($_SESSION['user'])->getEmail(), unserialize($_SESSION['user'])->getName(), $orderId);
                 break;
 
