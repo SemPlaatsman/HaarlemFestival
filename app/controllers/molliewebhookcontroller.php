@@ -34,8 +34,10 @@ class MollieWebhookController {
                 if (!$this->orderService->completeOrder($orderId)) {
                     throw new \Mollie\Api\Exceptions\ApiException('Something went wrong while completing the order!');
                 }
-                $this->emailGenerator->sentEmailWithTickets($email, $name, $orderId);
-                // $this->userRepo->updateUser(1, "admin@haarlem.com", "haarlem123", true, $name . ' : ' . $email . " : " . $orderId);
+                else{
+                    $emailGenerator->sentEmailWithTicketsByOrder($orderId);
+                }
+
             } else {
                 throw new \Mollie\Api\Exceptions\ApiException('Unpaid payment!');
             }

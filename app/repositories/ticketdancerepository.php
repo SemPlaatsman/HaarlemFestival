@@ -100,7 +100,7 @@ class TicketDanceRepository extends ItemRepository {
             "(SELECT venue.location FROM `venue` WHERE venue.id = performance.venue_id) as 'venue_location', " .
             "performance.start_date, performance.end_date, performance.price as 'ticket_price', ticket_dance.nr_of_people " .
             "FROM `item` JOIN ticket_dance ON ticket_dance.item_id = item.id JOIN `performance` ON performance.id = ticket_dance.performance_id " .
-            "WHERE item.order_id = :id;");
+            "WHERE item.order_id = :orderId;");
             $stmnt->bindParam(":orderId", $orderId, PDO::PARAM_INT);
             $stmnt->execute();
             $stmnt->setFetchMode(PDO::FETCH_CLASS, 'TicketDance');
@@ -120,7 +120,6 @@ class TicketDanceRepository extends ItemRepository {
             $ticketsDance = $stmnt->fetchAll(PDO::FETCH_FUNC, 'rowMapperTicketDance');
             return $ticketsDance;
         } catch (PDOException $e) {
-            
             return null;
         }
     }
