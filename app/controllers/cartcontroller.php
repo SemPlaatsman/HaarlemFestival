@@ -64,7 +64,7 @@ class CartController extends Controller {
         $mollie = new \Mollie\Api\MollieApiClient();
         $mollie->setApiKey($mollieAPIKey);
 
-        $orderId = count($model['reservations'] ?? []) > 0 ? $model['reservations'][0]->getItemId() : (count($model['ticketsDance'] ?? []) > 0 ? $model['ticketsDance'][0]->getItemId() : (count($model['ticketsHistory'] ?? []) > 0 ? $model['ticketsHistory'][0]->getItemId() : null));
+        $orderId = count($model['reservations'] ?? []) > 0 ? $model['reservations'][0]->getOrderId() : (count($model['ticketsDance'] ?? []) > 0 ? $model['ticketsDance'][0]->getOrderId() : (count($model['ticketsHistory'] ?? []) > 0 ? $model['ticketsHistory'][0]->getOrderId() : null));
         $description = (count($model['reservations'] ?? []) > 0 ? count($model['reservations']) . "x Yummy! " : "") . (count($model['ticketsDance'] ?? []) > 0 ? count($model['ticketsDance']) . "x DANCE! " : "") . (count($model['ticketsHistory'] ?? []) > 0 ? count($model['ticketsHistory']) . "x A Stroll Through History " : "");
 
         if (!is_null($orderId)) {
@@ -74,9 +74,9 @@ class CartController extends Controller {
                     "value" => number_format(($model['paymentTotals']['reservations'] ?? 0) + ($model['paymentTotals']['ticketsDance'] ?? 0) + ($model['paymentTotals']['ticketsHistory'] ?? 0), 2)
                 ],
                 "description" => $description,
-                "cancelUrl" => "https://83e6-2a02-a464-38e2-1-943e-d42e-7520-1733.ngrok-free.app/cart",
-                "redirectUrl" => "https://83e6-2a02-a464-38e2-1-943e-d42e-7520-1733.ngrok-free.app/cart",
-                "webhookUrl" => "https://83e6-2a02-a464-38e2-1-943e-d42e-7520-1733.ngrok-free.app/molliewebhook",
+                "cancelUrl" => "https://2493-2a02-a464-38e2-1-9905-e724-fc6b-1d60.ngrok-free.app/cart",
+                "redirectUrl" => "https://2493-2a02-a464-38e2-1-9905-e724-fc6b-1d60.ngrok-free.app/cart",
+                "webhookUrl" => "https://2493-2a02-a464-38e2-1-9905-e724-fc6b-1d60.ngrok-free.app/molliewebhook",
                 "metadata" => [
                     "orderId" => $orderId
                 ],
