@@ -20,21 +20,45 @@ include __DIR__ . '/../header.php';
         </section>
         <section class="bg-tetiare-a col-md-6 p-5">
             <h1 class="display-1 text-center">WHY HAARLEM?</h1>
-            <p class="fs-3">
-                <?= $model['pages'][0]->getBody_markup(); ?>
-            </p>
+            <?php foreach ($model['pages'] as $page) { ?>
+                <?php if ($page->getId() === 19) { ?>
+                    <p class="fs-3" data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>"
+                        data-body-markup="<?= $page->getBody_markup() ?>">
+                        <?= $page->getBody_markup(); ?>
+                    </p>
+                    <div class="text-center">
+                        <?php if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()) { ?>
+                            <button type="button" class="btn btn-primary" onclick="openEditorModal(<?= $page->getId() ?>)">Open
+                                Editor</button>
+                        <?php } ?>
+                    </div>
+                <?php } ?>
+            <?php } ?>
         </section>
     </section>
     <section class="col-md-8 mx-auto pt-5 container-fluid row mb-5">
         <h1 class="text-tetiare-a display-1 text-center">RESTAURANTS TO VISIT</h1>
-        <p class="text-danger text-center fs-4">
-            <?= $model['pages'][1]->getBody_markup(); ?>
-        </p>
-        <?php foreach($model['restaurants'] as $restaurant) { ?>
+        <?php foreach ($model['pages'] as $page) { ?>
+            <?php if ($page->getId() === 39) { ?>
+                <p class="text-danger text-center fs-4" data-id="<?= $page->getId() ?>" data-url="<?= $page->getUrl() ?>"
+                    data-body-markup="<?= $page->getBody_markup() ?>">
+                    <?= $page->getBody_markup(); ?>
+                </p>
+                <div class="text-center">
+                    <?php if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()) { ?>
+                        <button type="button" class="btn btn-primary" onclick="openEditorModal(<?= $page->getId() ?>)">Open
+                            Editor</button>
+                    <?php } ?>
+                </div>
+            <?php } ?>
+        <?php } ?>
+        <?php foreach ($model['restaurants'] as $restaurant) { ?>
             <section class="col-md-6 py-3 position-relative">
-                <img role="button" data-bs-toggle="modal" data-bs-target="#reservationForm-<?= $restaurant->getId(); ?>" src="img/png/yummy/restaurants/<?= $restaurant->getName(); ?>/cardbanner.png" class="img-fluid border border-tetiare-a border-4" alt="Why Haarlem? image">
+                <img role="button" data-bs-toggle="modal" data-bs-target="#reservationForm-<?= $restaurant->getId(); ?>"
+                    src="img/png/yummy/restaurants/<?= $restaurant->getName(); ?>/cardbanner.png"
+                    class="img-fluid border border-tetiare-a border-4" alt="Why Haarlem? image">
                 <?php
-                    include __DIR__ . '/reservationform.php';
+                include __DIR__ . '/reservationform.php';
                 ?>
                 <p class="text-white position-absolute bottom-0 start-25 pb-4 display-3 text-uppercase font-druk ps-2">
                     <?= $restaurant->getName(); ?>
@@ -47,9 +71,11 @@ include __DIR__ . '/../header.php';
                 </p>
             </section>
         <?php } ?>
-    </section>  
+    </section>
 </section>
-
+<?php
+include __DIR__ . '/../modalwysiwyg.php';
+?>
 <?php
 include __DIR__ . '/../footer.php';
 ?>

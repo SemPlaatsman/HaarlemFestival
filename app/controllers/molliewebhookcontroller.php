@@ -29,13 +29,12 @@ class MollieWebhookController {
             $orderId = $payment->metadata->orderId;
             $email = $payment->metadata->email;
             $name = $payment->metadata->name;
-            
             if ($payment->isPaid() && !$payment->hasRefunds() && !$payment->hasChargebacks()) {
                 if (!$this->orderService->completeOrder($orderId)) {
                     throw new \Mollie\Api\Exceptions\ApiException('Something went wrong while completing the order!');
                 }
                 else{
-                    $emailGenerator->sentEmailWithTicketsByOrder($orderId);
+                    $this->emailGenerator->sentEmailWithTicketsByOrder($orderId);
                 }
 
             } else {

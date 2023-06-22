@@ -35,7 +35,7 @@ class EmailGenerator {
         $mail->Host       = 'smtp-relay.sendinblue.com';                        
         $mail->SMTPAuth   = true;                                   
         $mail->Username   = 'janjaapvanlaar@gmail.com';                   
-        $mail->Password   = $emailPassword;
+        $mail->Password   = "V5JKvcpqUnz0GX6W";
         $mail->SMTPSecure = 'tls';                                  
         $mail->Port       = 587;                                    
         $mail->setFrom('Haarlem@festival.nl', 'Haarlem festival');
